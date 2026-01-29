@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { 
   DropdownMenu, 
@@ -18,6 +19,7 @@ type Role = 'admin' | 'user';
 
 export function RoleSwitcher({ userId, currentRole }: { userId: string, currentRole: Role }) {
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
     const { toast } = useToast();
     const effectiveRole = currentRole || 'user';
 
@@ -40,6 +42,7 @@ export function RoleSwitcher({ userId, currentRole }: { userId: string, currentR
                 title: 'Role updated',
                 description: `User is now an ${newRole}.`,
             });
+            router.refresh();
         }
     };
 
