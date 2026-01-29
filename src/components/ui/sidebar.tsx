@@ -71,8 +71,6 @@ const SidebarProvider = React.forwardRef<
     const isMobile = useIsMobile()
     const [openMobile, setOpenMobile] = React.useState(false)
 
-    // This is the internal state of the sidebar.
-    // We use openProp and setOpenProp for control from outside the component.
     const [_open, _setOpen] = React.useState(defaultOpen)
     const [hoverOpen, setHoverOpen] = React.useState(false)
 
@@ -83,8 +81,10 @@ const SidebarProvider = React.forwardRef<
             ?.split('=')[1];
         if (cookieValue !== undefined) {
             _setOpen(cookieValue === 'true');
+        } else {
+            _setOpen(defaultOpen);
         }
-    }, []);
+    }, [defaultOpen]);
 
     const open = openProp ?? _open
     const setOpen = React.useCallback(
@@ -96,20 +96,17 @@ const SidebarProvider = React.forwardRef<
           _setOpen(openState)
         }
 
-        // This sets the cookie to keep the sidebar state.
         document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
       },
       [setOpenProp, open]
     )
 
-    // Helper to toggle the sidebar.
     const toggleSidebar = React.useCallback(() => {
       return isMobile
         ? setOpenMobile((open) => !open)
         : setOpen((open) => !open)
     }, [isMobile, setOpen, setOpenMobile])
 
-    // Adds a keyboard shortcut to toggle the sidebar.
     React.useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
         if (
@@ -126,8 +123,6 @@ const SidebarProvider = React.forwardRef<
     }, [toggleSidebar])
 
     const finalOpen = open || hoverOpen
-    // We add a state so that we can do data-state="expanded" or "collapsed".
-    // This makes it easier to style the sidebar with Tailwind classes.
     const state = finalOpen ? "expanded" : "collapsed"
 
     const contextValue = React.useMemo<SidebarContext>(
@@ -145,27 +140,27 @@ const SidebarProvider = React.forwardRef<
     )
 
     return (
-      <SidebarContext.Provider value={contextValue}>
-        <TooltipProvider delayDuration={0}>
-          <div
-            style={
-              {
-                "--sidebar-width": SIDEBAR_WIDTH,
-                "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
-                ...style,
-              } as React.CSSProperties
-            }
-            className={cn(
-              "group/sidebar-wrapper flex h-screen w-full flex-col has-[[data-variant=inset]]:bg-sidebar",
-              className
-            )}
-            ref={ref}
-            {...props}
-          >
-            {children}
-          </div>
-        </TooltipProvider>
-      </SidebarContext.Provider>
+      <TooltipProvider delayDuration={0}>
+          <SidebarContext.Provider value={contextValue}>
+            <div
+                style={
+                {
+                    "--sidebar-width": SIDEBAR_WIDTH,
+                    "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
+                    ...style,
+                } as React.CSSProperties
+                }
+                className={cn(
+                "group/sidebar-wrapper flex h-screen flex-col has-[[data-variant=inset]]:bg-sidebar",
+                className
+                )}
+                ref={ref}
+                {...props}
+            >
+                {children}
+            </div>
+        </SidebarContext.Provider>
+      </TooltipProvider>
     )
   }
 )
@@ -232,7 +227,7 @@ const Sidebar = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "group/sidebar relative hidden h-full shrink-0 text-sidebar-foreground transition-[width] duration-200 ease-linear md:block",
+          "group/sidebar fixed z-40 hidden bg-sidebar text-sidebar-foreground transition-[width] duration-200 ease-linear md:block top-14 bottom-0 lg:top-[60px]",
           "data-[collapsible=offcanvas]:w-0",
            "data-[side=left]:border-r data-[side=right]:border-l",
            state === 'expanded' && 'w-[var(--sidebar-width)]',
@@ -326,11 +321,13 @@ const SidebarInset = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"main">
 >(({ className, ...props }, ref) => {
+    const { isMobile } = useSidebar()
   return (
     <main
       ref={ref}
       className={cn(
-        "flex flex-1 flex-col bg-background",
+        "bg-background",
+        !isMobile && "pl-[var(--sidebar-width-icon)]",
         className
       )}
       {...props}

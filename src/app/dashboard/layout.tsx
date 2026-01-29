@@ -72,8 +72,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const handleFocus = async () => {
-      // When the window regains focus, refresh the session to get the latest user data.
-      // This will trigger the onAuthStateChange listener if data has changed.
       await supabase.auth.refreshSession();
     };
 
@@ -115,7 +113,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   return (
     <SidebarProvider>
-        <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-30">
+        <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-50">
           <div className="flex items-center gap-2">
             <SidebarTrigger />
             <Link href="/">
@@ -147,7 +145,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </DropdownMenu>
         </header>
 
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex-1 overflow-hidden">
             <Sidebar collapsible="icon">
                 <SidebarContent>
                 <SidebarMenu>
@@ -228,8 +226,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 </SidebarContent>
             </Sidebar>
 
-            <SidebarInset>
-                <main className="flex-1 p-4 sm:p-6 overflow-y-auto">{children}</main>
+            <SidebarInset className="h-full overflow-y-auto">
+                <div className="p-4 sm:p-6">{children}</div>
             </SidebarInset>
         </div>
     </SidebarProvider>
