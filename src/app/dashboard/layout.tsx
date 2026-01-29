@@ -45,24 +45,13 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
-    const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        router.push('/login');
-      } else {
-        setUser(user);
-        setLoading(false);
-      }
-    };
-
-    checkUser();
-
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_OUT' || !session) {
         router.push('/login');
-      } else if (session) {
+      } else {
         setUser(session.user);
       }
+      setLoading(false);
     });
 
     return () => {
