@@ -61,6 +61,16 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     };
   }, [router]);
 
+  useEffect(() => {
+    if (user) {
+      const userRole = user.user_metadata?.role;
+      const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/home-section';
+      if (isAdminRoute && userRole !== 'admin') {
+        router.push('/dashboard');
+      }
+    }
+  }, [user, pathname, router]);
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
   };
@@ -76,6 +86,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   if (!user) {
     return null; // Redirecting...
   }
+
+  const userRole = user.user_metadata?.role;
 
   return (
     <SidebarProvider>
@@ -127,22 +139,26 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={pathname === '/dashboard/home-section'}>
-                <Link href="/dashboard/home-section">
-                  <LayoutTemplate />
-                  Home Section
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={pathname === '/dashboard/users'}>
-                <Link href="/dashboard/users">
-                  <UserCog />
-                  Manage Users
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            {userRole === 'admin' && (
+              <>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={pathname === '/dashboard/home-section'}>
+                    <Link href="/dashboard/home-section">
+                      <LayoutTemplate />
+                      Home Section
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={pathname === '/dashboard/users'}>
+                    <Link href="/dashboard/users">
+                      <UserCog />
+                      Manage Users
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </>
+            )}
           </SidebarMenu>
         </SidebarContent>
       </Sidebar>
