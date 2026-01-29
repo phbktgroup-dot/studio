@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "mobile_app_mockup",
+      "description": "A 3D mockup of a mobile application on a smartphone.",
+      "imageUrl": "https://images.unsplash.com/photo-1601972602237-8c79241e468b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtb2JpbGUlMjBhcHB8ZW58MHx8fHwxNzY5NTk0NjIxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mobile app"
+    },
+    {
+      "id": "network_graph",
+      "description": "An abstract visualization of a glowing network graph.",
+      "imageUrl": "https://images.unsplash.com/photo-1738082956220-a1f20a8632ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhYnN0cmFjdCUyMG5ldHdvcmt8ZW58MHx8fHwxNzY5NjQ1ODE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract network"
+    },
+    {
+      "id": "legal_seal",
+      "description": "A minimalist 3D icon of a legal seal or stamp.",
+      "imageUrl": "https://images.unsplash.com/photo-1587738972117-c12f8389f1d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxsZWdhbCUyMHNlYWx8ZW58MHx8fHwxNzY5Njg0NzA0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "legal seal"
+    },
+    {
+      "id": "building_blocks",
+      "description": "Geometric 3D blocks arranged to look like a building under construction.",
+      "imageUrl": "https://images.unsplash.com/photo-1633469924738-52101af51d87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxidWlsZGluZyUyMGJsb2Nrc3xlbnwwfHx8fDE3Njk2MTQ5MTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "building blocks"
+    }
+  ]
 }
