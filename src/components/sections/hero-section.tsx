@@ -76,7 +76,7 @@ export default function HeroSection() {
         </div>
       )}
       
-      <div className="absolute inset-0 bg-background/30 backdrop-blur-[2px]"></div>
+      <div className="absolute inset-0 bg-background/10 backdrop-blur-[2px]"></div>
 
       <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center">
         <AnimatedText
