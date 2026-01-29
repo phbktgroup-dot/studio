@@ -96,21 +96,21 @@ export default function HeroSectionPage() {
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      <h1 className="text-3xl font-bold font-headline">Hero Section</h1>
+    <div className="flex flex-col gap-4">
+      <h1 className="text-2xl font-bold font-headline">Hero Section</h1>
       <Card>
         <CardHeader>
-          <CardTitle>Hero Section Background Video</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-lg">Hero Section Background Video</CardTitle>
+          <CardDescription className="text-xs">
             Upload a video to display in the background of the hero section on your homepage. The video will be muted and will loop automatically.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-3">
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="video">Video File (MP4 recommended)</Label>
-            <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} />
+            <Label htmlFor="video" className="text-xs">Video File (MP4 recommended)</Label>
+            <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-9 text-sm" />
           </div>
-          <Button onClick={handleUpload} disabled={loading || !file}>
+          <Button onClick={handleUpload} disabled={loading || !file} size="sm">
             {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
             Upload Video
           </Button>
