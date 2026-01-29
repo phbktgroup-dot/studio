@@ -19,7 +19,6 @@ import {
   SidebarProvider,
   Sidebar,
   SidebarContent,
-  SidebarTrigger,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
@@ -104,7 +103,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     <SidebarProvider>
         <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-50 fixed top-0 left-0 right-0">
           <div className="flex items-center gap-2">
-            <SidebarTrigger />
             <Link href="/">
               <Logo />
             </Link>
@@ -123,7 +121,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>{user.user_metadata?.full_name || user.email}</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/settings">Settings</Link>
+              </DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
