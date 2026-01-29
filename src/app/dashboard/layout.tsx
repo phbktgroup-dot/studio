@@ -1,13 +1,18 @@
+'use client';
+
 import type { ReactNode } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
+import type { User } from "@supabase/supabase-js";
 import {
-  Bell,
   Home,
   LineChart,
-  Package2,
   Users,
   Briefcase,
   FileText,
+  LogOut,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -18,7 +23,6 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarFooter,
   SidebarInset,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
@@ -30,12 +34,57 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Logo } from "@/components/shared/logo";
+import { Loader2 } from "lucide-react";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setUser(session.user);
+      } else {
+        router.push('/login');
+      }
+      setLoading(false);
+    };
+
+    fetchUser();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_OUT') {
+        router.push('/login');
+      } else {
+        setUser(session?.user ?? null);
+      }
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, [router]);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
+
+  if (loading) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null; // Redirecting...
+  }
+
   return (
     <SidebarProvider>
       <Sidebar>
@@ -90,19 +139,22 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
                 <Avatar>
-                  <AvatarImage src="https://picsum.photos/seed/avatar/100/100" />
-                  <AvatarFallback>U</AvatarFallback>
+                  <AvatarImage src={user.user_metadata?.avatar_url} />
+                  <AvatarFallback>{user.user_metadata?.full_name?.[0] || user.email?.[0].toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>{user.user_metadata?.full_name || user.email}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

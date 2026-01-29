@@ -5,8 +5,20 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/logo";
 import { cn } from "@/lib/utils";
-import { Menu } from "lucide-react";
+import { Menu, LogOut } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase';
+import type { User } from '@supabase/supabase-js';
 
 const navLinks = [
   { href: "#services", label: "Services" },
@@ -17,6 +29,9 @@ const navLinks = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +41,31 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      setLoading(false);
+    };
+
+    fetchUser();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+      if (event === 'SIGNED_OUT') {
+        router.refresh();
+      }
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, [router]);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
+  
   const NavMenu = ({ className }: { className?: string }) => (
     <nav className={cn("flex items-center gap-6 text-sm font-medium", className)}>
       {navLinks.map((link) => (
@@ -55,9 +95,38 @@ export default function Header() {
         </div>
         <NavMenu className="hidden md:flex" />
         <div className="ml-auto flex items-center gap-4">
-          <Button asChild>
-            <Link href="/login">Client Login</Link>
-          </Button>
+          {loading ? (
+            <div className="w-[105px] h-[40px]" /> // Placeholder to prevent layout shift
+          ) : user ? (
+             <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="secondary" size="icon" className="rounded-full">
+                    <Avatar>
+                      <AvatarImage src={user.user_metadata?.avatar_url} />
+                      <AvatarFallback>{user.user_metadata?.full_name?.[0] || user.email?.[0].toUpperCase()}</AvatarFallback>
+                    </Avatar>
+                    <span className="sr-only">Toggle user menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>{user.user_metadata?.full_name || user.email}</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/dashboard">Dashboard</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>Support</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+          ) : (
+            <Button asChild>
+              <Link href="/login">Client Login</Link>
+            </Button>
+          )}
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
