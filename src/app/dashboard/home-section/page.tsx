@@ -36,7 +36,7 @@ export default function HomeSectionPage() {
       // 1. Upload video to Supabase Storage
       const fileName = `${Date.now()}-${file.name}`;
       const { error: uploadError } = await supabase.storage
-        .from('public-assets') // Assumes a public bucket named 'public-assets'
+        .from('public-assets') 
         .upload(fileName, file, {
           cacheControl: '3600',
           upsert: false,
@@ -58,7 +58,7 @@ export default function HomeSectionPage() {
       // 3. Upsert the public URL to the 'settings' table
       const { error: dbError } = await supabase
         .from('settings')
-        .upsert({ id: 1, hero_video_url: urlData.publicUrl });
+        .upsert({ id: 1, hero_video_url: urlData.publicUrl }, { onConflict: 'id' });
         
       if (dbError) {
         throw dbError;
@@ -70,13 +70,14 @@ export default function HomeSectionPage() {
       });
 
     } catch (error: any) {
-        let description = error.message || 'An unexpected error occurred.';
+        let description = `An unexpected error occurred: ${error.message}`;
+
         if (error.message === 'Bucket not found') {
             description = "The 'public-assets' storage bucket was not found. Please create a public bucket with this name in your Supabase project's Storage section.";
         } else if (error.message?.includes('relation "public.settings" does not exist')) {
             description = "The 'settings' table does not exist. Please create it in your Supabase project. It should have an 'id' column (number, primary key) and a 'hero_video_url' column (text).";
         } else if (error.message?.includes('violates row-level security policy')) {
-            description = "Row-level security is preventing the upload. Please go to Authentication > Policies in your Supabase dashboard and disable RLS for the 'settings' table."
+            description = `Row-level security is preventing the upload. Full error: "${error.message}". Please go to Authentication > Policies in your Supabase dashboard and ensure RLS is disabled for the 'settings' table.`
         }
 
       toast({
