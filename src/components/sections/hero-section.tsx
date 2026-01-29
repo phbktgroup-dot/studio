@@ -10,13 +10,13 @@ import { ArrowDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 export default function HeroSection() {
-  const [blurAmount, setBlurAmount] = useState(16);
+  const [blurAmount, setBlurAmount] = useState(2);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const newBlur = Math.max(0, 16 - scrollY / 20);
+      const newBlur = Math.max(0, 2 - scrollY / 50);
       setBlurAmount(newBlur);
     };
 
@@ -76,7 +76,7 @@ export default function HeroSection() {
         </div>
       )}
       
-      <div className="absolute inset-0 bg-background/10 backdrop-blur-[2px]"></div>
+      <div className="absolute inset-0 bg-background/10"></div>
 
       <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center">
         <AnimatedText
