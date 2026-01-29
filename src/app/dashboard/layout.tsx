@@ -13,7 +13,7 @@ import {
   Briefcase,
   FileText,
   LogOut,
-  LayoutTemplate,
+  Film,
   UserCog,
 } from "lucide-react";
 import {
@@ -78,7 +78,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (user) {
       const userRole = user.user_metadata?.role;
-      const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/home-section';
+      const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/hero-section';
       if (isAdminRoute && userRole !== 'admin') {
         router.push('/dashboard');
       }
@@ -156,10 +156,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             {userRole === 'admin' && (
               <>
                 <SidebarMenuItem>
-                  <SidebarMenuButton asChild isActive={pathname === '/dashboard/home-section'}>
-                    <Link href="/dashboard/home-section">
-                      <LayoutTemplate />
-                      Home Section
+                  <SidebarMenuButton asChild isActive={pathname === '/dashboard/hero-section'}>
+                    <Link href="/dashboard/hero-section">
+                      <Film />
+                      Hero Section
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
