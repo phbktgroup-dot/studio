@@ -55,25 +55,12 @@ export default function HomeSectionPage() {
           throw new Error("Could not get public URL for the uploaded file.");
       }
       
-      // 3. Save the public URL to the 'settings' table
-      // This logic will update the row if it exists, or insert it if it doesn't.
+      // 3. Upsert the public URL to the 'settings' table
       const { error: dbError } = await supabase
         .from('settings')
-        .update({ hero_video_url: urlData.publicUrl })
-        .eq('id', 1)
-        .single(); // Use single() to ensure we're targeting one row.
-
-      // 'PGRST116' is the code for "Not a single row was returned"
-      if (dbError && dbError.code === 'PGRST116') {
-         const { error: insertError } = await supabase
-            .from('settings')
-            .insert({ id: 1, hero_video_url: urlData.publicUrl });
-        if (insertError) {
-            // If the insert also fails, throw that error.
-            throw insertError;
-        }
-      } else if (dbError) {
-        // If there was a different error during the update, throw it.
+        .upsert({ id: 1, hero_video_url: urlData.publicUrl });
+        
+      if (dbError) {
         throw dbError;
       }
 
@@ -88,6 +75,8 @@ export default function HomeSectionPage() {
             description = "The 'public-assets' storage bucket was not found. Please create a public bucket with this name in your Supabase project's Storage section.";
         } else if (error.message?.includes('relation "public.settings" does not exist')) {
             description = "The 'settings' table does not exist. Please create it in your Supabase project. It should have an 'id' column (number, primary key) and a 'hero_video_url' column (text).";
+        } else if (error.message?.includes('violates row-level security policy')) {
+            description = "Row-level security is preventing the upload. Please go to Authentication > Policies in your Supabase dashboard and disable RLS for the 'settings' table."
         }
 
       toast({
