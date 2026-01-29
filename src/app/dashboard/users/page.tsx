@@ -18,12 +18,13 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle } from "lucide-react";
 import { format } from 'date-fns';
+import { RoleSwitcher } from './role-switcher';
 
 export default async function UsersPage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  if (!supabaseUrl || !serviceRoleKey) {
+  if (!supabaseUrl || !serviceRoleKey || serviceRoleKey === 'YOUR_SERVICE_ROLE_KEY_HERE') {
     return (
       <div className="flex flex-col gap-6">
         <h1 className="text-3xl font-bold font-headline">Manage Users</h1>
@@ -31,7 +32,7 @@ export default async function UsersPage() {
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Configuration Error</AlertTitle>
           <AlertDescription>
-            Supabase admin credentials are not configured correctly. Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your environment variables.
+            Supabase admin credentials are not configured correctly. Please set SUPABASE_SERVICE_ROLE_KEY in your .env file.
           </AlertDescription>
         </Alert>
       </div>
@@ -76,6 +77,7 @@ export default async function UsersPage() {
               <TableRow>
                 <TableHead>Full Name</TableHead>
                 <TableHead>Email</TableHead>
+                <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Last Sign In</TableHead>
                 <TableHead>Joined</TableHead>
@@ -86,6 +88,9 @@ export default async function UsersPage() {
                 <TableRow key={user.id}>
                   <TableCell className="font-medium">{user.user_metadata?.full_name || 'N/A'}</TableCell>
                   <TableCell>{user.email}</TableCell>
+                  <TableCell>
+                    <RoleSwitcher userId={user.id} currentRole={user.user_metadata?.role || 'user'} />
+                  </TableCell>
                   <TableCell>
                     <Badge variant={user.email_confirmed_at ? "default" : "secondary"}>
                       {user.email_confirmed_at ? "Verified" : "Unverified"}
