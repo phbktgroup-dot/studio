@@ -1,13 +1,13 @@
 // @ts-nocheck
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import { handleGenerateRoadmap, type RoadmapState } from "@/lib/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2, Wand2, PartyPopper, AlertTriangle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
@@ -54,7 +54,7 @@ function Milestone({ milestone, description, index, isActive }) {
 
 export default function RoadmapSection() {
   const initialState: RoadmapState = { message: null, errors: {} };
-  const [state, dispatch] = useFormState(handleGenerateRoadmap, initialState);
+  const [state, dispatch] = useActionState(handleGenerateRoadmap, initialState);
   const { toast } = useToast();
   const [activeMilestone, setActiveMilestone] = useState(0);
   const roadmapRef = useRef<HTMLDivElement>(null);
