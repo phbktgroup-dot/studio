@@ -13,16 +13,8 @@ import {
   Briefcase,
   FileText,
   LogOut,
-  Film,
-  UserCog,
   Settings,
-  ChevronRight,
 } from "lucide-react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import {
   SidebarProvider,
   Sidebar,
@@ -31,9 +23,6 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarMenuSub,
-  SidebarMenuSubItem,
-  SidebarMenuSubButton,
   SidebarInset,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
@@ -85,7 +74,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (user) {
       const userRole = user.user_metadata?.role;
-      const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/hero-section';
+      const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/hero-section' || pathname === '/dashboard/settings';
       if (isAdminRoute && userRole !== 'admin') {
         router.push('/dashboard');
       }
@@ -109,11 +98,11 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   }
 
   const userRole = user.user_metadata?.role;
-  const isSettingsActive = pathname === '/dashboard/hero-section' || pathname === '/dashboard/users';
+  const isSettingsActive = ['/dashboard/settings', '/dashboard/hero-section', '/dashboard/users'].includes(pathname);
 
   return (
     <SidebarProvider>
-        <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-50">
+        <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-50 fixed top-0 left-0 right-0">
           <div className="flex items-center gap-2">
             <SidebarTrigger />
             <Link href="/">
@@ -145,7 +134,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </DropdownMenu>
         </header>
 
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-hidden pt-14 lg:pt-[60px]">
             <Sidebar collapsible="icon">
                 <SidebarContent>
                 <SidebarMenu>
@@ -190,37 +179,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     </SidebarMenuButton>
                     </SidebarMenuItem>
                     {userRole === 'admin' && (
-                    <Collapsible asChild defaultOpen={isSettingsActive}>
-                        <SidebarMenuItem>
-                        <CollapsibleTrigger asChild>
-                            <SidebarMenuButton isActive={isSettingsActive} className="justify-between">
-                            <div className="flex items-center gap-2">
-                                <Settings />
-                                <span>Settings</span>
-                            </div>
-                            <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90 group-data-[state=collapsed]:hidden" />
-                            </SidebarMenuButton>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent>
-                            <SidebarMenuSub>
-                            <SidebarMenuSubItem>
-                                <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/hero-section'}>
-                                <Link href="/dashboard/hero-section">
-                                    Hero Section
-                                </Link>
-                                </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                            <SidebarMenuSubItem>
-                                <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/users'}>
-                                <Link href="/dashboard/users">
-                                    Manage Users
-                                </Link>
-                                </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                            </SidebarMenuSub>
-                        </CollapsibleContent>
-                        </SidebarMenuItem>
-                    </Collapsible>
+                      <SidebarMenuItem>
+                        <SidebarMenuButton asChild isActive={isSettingsActive}>
+                          <Link href="/dashboard/settings">
+                            <Settings />
+                            <span>Settings</span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
                     )}
                 </SidebarMenu>
                 </SidebarContent>
