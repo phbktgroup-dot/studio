@@ -151,7 +151,7 @@ const SidebarProvider = React.forwardRef<
                 } as React.CSSProperties
                 }
                 className={cn(
-                "group/sidebar-wrapper flex h-screen flex-col has-[[data-variant=inset]]:bg-sidebar",
+                "group/sidebar-wrapper flex h-screen flex-col",
                 className
                 )}
                 ref={ref}
@@ -230,8 +230,8 @@ const Sidebar = React.forwardRef<
           "group/sidebar fixed z-40 hidden bg-sidebar text-sidebar-foreground transition-[width] duration-200 ease-linear md:block top-14 bottom-0 lg:top-[60px]",
           "data-[collapsible=offcanvas]:w-0",
            "data-[side=left]:border-r data-[side=right]:border-l",
-           state === 'expanded' && 'w-[var(--sidebar-width)]',
-           state === 'collapsed' && 'w-[var(--sidebar-width-icon)]',
+           "data-[state=expanded]:w-[var(--sidebar-width)]",
+           "data-[state=collapsed]:w-[var(--sidebar-width-icon)]",
           className
         )}
         data-state={state}
@@ -321,13 +321,14 @@ const SidebarInset = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"main">
 >(({ className, ...props }, ref) => {
-    const { isMobile } = useSidebar()
+    const { isMobile, state } = useSidebar()
   return (
     <main
       ref={ref}
       className={cn(
-        "bg-background",
-        !isMobile && "pl-[var(--sidebar-width-icon)]",
+        "bg-background transition-[padding-left] duration-200 ease-linear",
+        !isMobile && state === "expanded" && "pl-[var(--sidebar-width)]",
+        !isMobile && state === "collapsed" && "pl-[var(--sidebar-width-icon)]",
         className
       )}
       {...props}
@@ -505,14 +506,28 @@ SidebarMenu.displayName = "SidebarMenu"
 const SidebarMenuItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<"li">
->(({ className, ...props }, ref) => (
-  <li
-    ref={ref}
-    data-sidebar="menu-item"
-    className={cn("group/menu-item relative", className)}
-    {...props}
-  />
-))
+>(({ className, onClick, ...props }, ref) => {
+  const { isMobile, setOpenMobile, setOpen } = useSidebar()
+
+  const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
+    if (isMobile) {
+      setOpenMobile(false)
+    } else {
+      setOpen(false)
+    }
+    onClick?.(event)
+  }
+
+  return (
+    <li
+      ref={ref}
+      data-sidebar="menu-item"
+      className={cn("group/menu-item relative", className)}
+      onClick={handleClick}
+      {...props}
+    />
+  )
+})
 SidebarMenuItem.displayName = "SidebarMenuItem"
 
 const sidebarMenuButtonVariants = cva(
