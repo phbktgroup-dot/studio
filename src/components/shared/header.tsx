@@ -42,16 +42,9 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-      setLoading(false);
-    };
-
-    fetchUser();
-
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
+      setLoading(false);
       if (event === 'SIGNED_OUT') {
         router.refresh();
       }
