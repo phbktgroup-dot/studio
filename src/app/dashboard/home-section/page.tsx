@@ -56,25 +56,25 @@ export default function HomeSectionPage() {
       }
       
       // 3. Save the public URL to the 'settings' table
-      // Assumes a table 'settings' with a single row (id=1)
+      // This logic will update the row if it exists, or insert it if it doesn't.
       const { error: dbError } = await supabase
         .from('settings')
         .update({ hero_video_url: urlData.publicUrl })
         .eq('id', 1)
-        .single(); // Use single() if you expect only one row to be updated.
+        .single(); // Use single() to ensure we're targeting one row.
 
-      if (dbError) {
-        // If the row doesn't exist, insert it.
-        if (dbError.code === 'PGRST116') { // 'PGRST116' is the code for "Not a single row was returned"
-             const { error: insertError } = await supabase
-                .from('settings')
-                .insert({ id: 1, hero_video_url: urlData.publicUrl });
-            if (insertError) {
-                throw insertError;
-            }
-        } else {
-            throw dbError;
+      // 'PGRST116' is the code for "Not a single row was returned"
+      if (dbError && dbError.code === 'PGRST116') {
+         const { error: insertError } = await supabase
+            .from('settings')
+            .insert({ id: 1, hero_video_url: urlData.publicUrl });
+        if (insertError) {
+            // If the insert also fails, throw that error.
+            throw insertError;
         }
+      } else if (dbError) {
+        // If there was a different error during the update, throw it.
+        throw dbError;
       }
 
       toast({
