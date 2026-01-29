@@ -58,7 +58,7 @@ const SidebarProvider = React.forwardRef<
 >(
   (
     {
-      defaultOpen = true,
+      defaultOpen = false,
       open: openProp,
       onOpenChange: setOpenProp,
       className,
@@ -75,6 +75,16 @@ const SidebarProvider = React.forwardRef<
     // We use openProp and setOpenProp for control from outside the component.
     const [_open, _setOpen] = React.useState(defaultOpen)
     const [hoverOpen, setHoverOpen] = React.useState(false)
+
+    React.useEffect(() => {
+        const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith(`${SIDEBAR_COOKIE_NAME}=`))
+            ?.split('=')[1];
+        if (cookieValue !== undefined) {
+            _setOpen(cookieValue === 'true');
+        }
+    }, []);
 
     const open = openProp ?? _open
     const setOpen = React.useCallback(
@@ -180,7 +190,7 @@ const Sidebar = React.forwardRef<
     },
     ref
   ) => {
-    const { isMobile, state, openMobile, setOpenMobile, setHoverOpen } = useSidebar()
+    const { isMobile, state, open, openMobile, setOpenMobile, setHoverOpen } = useSidebar()
 
     if (collapsible === "none") {
       return (
@@ -226,7 +236,7 @@ const Sidebar = React.forwardRef<
         data-variant={variant}
         data-side={side}
         onMouseEnter={() => {
-          if (collapsible === "icon") {
+          if (collapsible === "icon" && !open) {
             setHoverOpen(true)
           }
         }}
