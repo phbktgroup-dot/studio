@@ -62,6 +62,20 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   }, [router]);
 
   useEffect(() => {
+    const handleFocus = async () => {
+      // When the window regains focus, refresh the session to get the latest user data.
+      // This will trigger the onAuthStateChange listener if data has changed.
+      await supabase.auth.refreshSession();
+    };
+
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, []);
+
+  useEffect(() => {
     if (user) {
       const userRole = user.user_metadata?.role;
       const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/home-section';
