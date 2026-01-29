@@ -14,6 +14,7 @@ import {
   FileText,
   LogOut,
   LayoutTemplate,
+  UserCog,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -131,6 +132,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 <Link href="/dashboard/home-section">
                   <LayoutTemplate />
                   Home Section
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild isActive={pathname === '/dashboard/users'}>
+                <Link href="/dashboard/users">
+                  <UserCog />
+                  Manage Users
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
