@@ -83,10 +83,17 @@ export default function HomeSectionPage() {
       });
 
     } catch (error: any) {
+        let description = error.message || 'An unexpected error occurred.';
+        if (error.message === 'Bucket not found') {
+            description = "The 'public-assets' storage bucket was not found. Please create a public bucket with this name in your Supabase project's Storage section.";
+        } else if (error.message?.includes('relation "public.settings" does not exist')) {
+            description = "The 'settings' table does not exist. Please create it in your Supabase project. It should have an 'id' column (number, primary key) and a 'hero_video_url' column (text).";
+        }
+
       toast({
         variant: 'destructive',
         title: 'Upload Failed',
-        description: error.message || 'An unexpected error occurred. Make sure the storage bucket and settings table are configured correctly in Supabase.',
+        description: description,
       });
     } finally {
       setLoading(false);
