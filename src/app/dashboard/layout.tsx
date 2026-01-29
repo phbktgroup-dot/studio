@@ -15,7 +15,14 @@ import {
   LogOut,
   Film,
   UserCog,
+  Settings,
+  ChevronRight,
 } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import {
   SidebarProvider,
   Sidebar,
@@ -25,6 +32,9 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
   SidebarInset,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
@@ -102,6 +112,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   }
 
   const userRole = user.user_metadata?.role;
+  const isSettingsActive = pathname === '/dashboard/hero-section' || pathname === '/dashboard/users';
 
   return (
     <SidebarProvider>
@@ -154,24 +165,39 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               </SidebarMenuButton>
             </SidebarMenuItem>
             {userRole === 'admin' && (
-              <>
+              <Collapsible asChild defaultOpen={isSettingsActive}>
                 <SidebarMenuItem>
-                  <SidebarMenuButton asChild isActive={pathname === '/dashboard/hero-section'}>
-                    <Link href="/dashboard/hero-section">
-                      <Film />
-                      Hero Section
-                    </Link>
-                  </SidebarMenuButton>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton isActive={isSettingsActive} className="justify-between">
+                      <div className="flex items-center gap-2">
+                        <Settings />
+                        Settings
+                      </div>
+                      <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/hero-section'}>
+                          <Link href="/dashboard/hero-section">
+                            <Film />
+                            Hero Section
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/users'}>
+                          <Link href="/dashboard/users">
+                            <UserCog />
+                            Manage Users
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
                 </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild isActive={pathname === '/dashboard/users'}>
-                    <Link href="/dashboard/users">
-                      <UserCog />
-                      Manage Users
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </>
+              </Collapsible>
             )}
           </SidebarMenu>
         </SidebarContent>
