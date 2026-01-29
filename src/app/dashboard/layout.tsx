@@ -116,19 +116,20 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   return (
     <SidebarProvider>
-      <Sidebar>
+      <Sidebar collapsible="icon">
         <SidebarContent>
-          <SidebarHeader className="border-b">
+          <SidebarHeader className="flex-row items-center justify-between border-b">
             <Link href="/" className="flex items-center gap-2 font-semibold">
               <Logo />
             </Link>
+            <SidebarTrigger className="hidden md:flex" />
           </SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={pathname === '/dashboard'}>
                 <Link href="/dashboard">
                   <Home />
-                  Dashboard
+                  <span>Dashboard</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -136,7 +137,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                <SidebarMenuButton asChild isActive={pathname === '/dashboard/services'}>
                 <Link href="#">
                   <Briefcase />
-                  Services
+                  <span>Services</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -144,7 +145,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               <SidebarMenuButton asChild isActive={pathname === '/dashboard/clients'}>
                 <Link href="#">
                   <Users />
-                  Clients
+                  <span>Clients</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -152,7 +153,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               <SidebarMenuButton asChild isActive={pathname === '/dashboard/invoices'}>
                 <Link href="#">
                   <FileText />
-                  Invoices
+                  <span>Invoices</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -160,7 +161,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               <SidebarMenuButton asChild isActive={pathname === '/dashboard/analytics'}>
                 <Link href="#">
                   <LineChart />
-                  Analytics
+                  <span>Analytics</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -171,9 +172,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SidebarMenuButton isActive={isSettingsActive} className="justify-between">
                       <div className="flex items-center gap-2">
                         <Settings />
-                        Settings
+                        <span>Settings</span>
                       </div>
-                      <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90" />
+                      <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90 group-data-[state=collapsed]:hidden" />
                     </SidebarMenuButton>
                   </CollapsibleTrigger>
                   <CollapsibleContent>
