@@ -13,6 +13,7 @@ import {
   Briefcase,
   FileText,
   LogOut,
+  LayoutTemplate,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -44,13 +45,24 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        router.push('/login');
+      } else {
+        setUser(user);
+        setLoading(false);
+      }
+    };
+
+    checkUser();
+
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_OUT' || !session) {
         router.push('/login');
-      } else {
+      } else if (session) {
         setUser(session.user);
       }
-      setLoading(false);
     });
 
     return () => {
@@ -112,6 +124,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               <SidebarMenuButton href="#">
                 <LineChart />
                 Analytics
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton href="/dashboard/home-section">
+                <LayoutTemplate />
+                Home Section
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

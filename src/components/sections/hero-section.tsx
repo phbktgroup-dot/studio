@@ -7,9 +7,11 @@ import { AnimatedText } from "@/components/shared/animated-text";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowDown } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function HeroSection() {
   const [blurAmount, setBlurAmount] = useState(16);
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,17 +24,57 @@ export default function HeroSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const fetchVideoUrl = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('settings')
+          .select('hero_video_url')
+          .eq('id', 1)
+          .single();
+
+        if (error && error.code !== 'PGRST116') { // PGRST116 = no rows found
+          console.error("Error fetching hero video URL:", error.message);
+          return;
+        }
+
+        if (data && data.hero_video_url) {
+          setVideoUrl(data.hero_video_url);
+        }
+      } catch (error) {
+        // This can happen if the table doesn't exist yet.
+        console.warn("Could not fetch hero video URL. The 'settings' table might not exist.");
+      }
+    };
+
+    fetchVideoUrl();
+  }, []);
+
   return (
     <section className="relative h-[100svh] min-h-[700px] w-full overflow-hidden">
-      <div
-        className="absolute inset-0 z-0 transition-all duration-300 ease-out"
-        style={{ filter: `blur(${blurAmount}px)` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"></div>
-        <div className="w-full h-full opacity-30">
-          <Sphere />
+      {videoUrl ? (
+        <video
+          key={videoUrl}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 z-0 h-full w-full object-cover transition-all duration-300 ease-out"
+          style={{ filter: `blur(${blurAmount}px)` }}
+        >
+          <source src={videoUrl} type="video/mp4" />
+        </video>
+      ) : (
+        <div
+          className="absolute inset-0 z-0 transition-all duration-300 ease-out"
+          style={{ filter: `blur(${blurAmount}px)` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"></div>
+          <div className="w-full h-full opacity-30">
+            <Sphere />
+          </div>
         </div>
-      </div>
+      )}
       
       <div className="absolute inset-0 bg-background/30 backdrop-blur-[2px]"></div>
 
