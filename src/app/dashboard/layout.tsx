@@ -118,10 +118,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     <SidebarProvider>
       <Sidebar collapsible="icon">
         <SidebarContent>
-          <SidebarHeader className="flex-row items-center justify-between border-b">
-            <Link href="/" className="flex items-center gap-2 font-semibold overflow-hidden">
-              <Logo />
-            </Link>
+          <SidebarHeader className="flex-row items-center justify-center border-b h-14 lg:h-[60px]">
             <SidebarTrigger className="hidden md:flex" />
           </SidebarHeader>
           <SidebarMenu>
@@ -203,11 +200,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       </Sidebar>
 
       <SidebarInset>
-        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 sticky top-0 z-30 bg-background/95 backdrop-blur-sm">
-          <SidebarTrigger className="md:hidden" />
-          <div className="w-full flex-1">
-            {/* Can add breadcrumbs or search here */}
+        <header className="flex h-14 items-center justify-between gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 sticky top-0 z-30 bg-background/95 backdrop-blur-sm">
+          <div className="flex items-center gap-4">
+              <SidebarTrigger className="md:hidden" />
+              <Link href="/">
+                <Logo />
+              </Link>
           </div>
+          
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
