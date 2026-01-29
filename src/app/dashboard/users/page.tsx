@@ -89,7 +89,7 @@ export default async function UsersPage() {
                   <TableCell>
                     <Badge variant={user.email_confirmed_at ? "default" : "secondary"}>
                       {user.email_confirmed_at ? "Verified" : "Unverified"}
-                    </badge>
+                    </Badge>
                   </TableCell>
                   <TableCell>
                     {user.last_sign_in_at ? format(new Date(user.last_sign_in_at), 'PPp') : 'Never'}
