@@ -34,16 +34,16 @@ export default function HeroSection() {
           .single();
 
         if (error && error.code !== 'PGRST116') { // PGRST116 = no rows found
-          console.error("Error fetching hero video URL:", error.message);
+          console.warn("Could not fetch hero video URL:", error.message);
           return;
         }
 
         if (data && data.hero_video_url) {
           setVideoUrl(data.hero_video_url);
         }
-      } catch (error) {
-        // This can happen if the table doesn't exist yet.
-        console.warn("Could not fetch hero video URL. The 'settings' table might not exist.");
+      } catch (error: any) {
+        // This can happen if the table doesn't exist yet or on network errors.
+        console.warn("Could not fetch hero video URL:", error.message);
       }
     };
 
