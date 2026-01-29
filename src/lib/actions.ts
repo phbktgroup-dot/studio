@@ -55,6 +55,90 @@ export async function handleGenerateRoadmap(prevState: RoadmapState, formData: F
 }
 
 
+const SignupSchema = z.object({
+  fullName: z.string().min(2, { message: "Full name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email." }),
+  password: z.string().min(6, { message: "Password must be at least 6 characters." }),
+});
+
+export type SignupState = {
+  message?: string | null;
+  errors?: {
+    fullName?: string[];
+    email?: string[];
+    password?: string[];
+    _form?: string[];
+  };
+  isSuccess?: boolean;
+};
+
+export async function handleSignup(prevState: SignupState, formData: FormData): Promise<SignupState> {
+  const validatedFields = SignupSchema.safeParse({
+    fullName: formData.get("fullName"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Validation failed. Please check your input.",
+    };
+  }
+  
+  const { fullName, email, password } = validatedFields.data;
+  
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    return { errors: { _form: ["Server is not configured for authentication."] } };
+  }
+
+  const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  });
+
+  const { data: { users }, error: listError } = await supabaseAdmin.auth.admin.listUsers();
+  
+  if (listError) {
+      return { errors: { _form: [`Database error: ${listError.message}`] } };
+  }
+
+  const role = users.length === 0 ? 'admin' : 'user';
+
+  const { error } = await supabaseAdmin.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+      user_metadata: {
+          full_name: fullName,
+          role: role,
+      }
+  });
+
+  if (error) {
+    if (error.message.includes('User with this email already exists')) {
+      return {
+        errors: {
+          email: ['A user with this email already exists.'],
+        },
+      };
+    }
+    return { errors: { _form: [`Signup failed: ${error.message}`] } };
+  }
+  
+  const successMessage = role === 'admin' 
+    ? 'Signup successful! As the first user, you have been assigned the admin role. Please log in.' 
+    : 'Signup successful! Please log in.';
+
+  return { isSuccess: true, message: successMessage };
+}
+
+
 export async function updateUserRole(userId: string, role: 'admin' | 'user'): Promise<{ error?: string; success?: boolean }> {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;

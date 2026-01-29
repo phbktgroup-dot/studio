@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
-import { useState, type FormEvent } from 'react';
+import { useActionState, useEffect } from 'react';
+import { useFormStatus } from 'react-dom';
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,55 +15,37 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/shared/logo";
-import { ArrowLeft, Loader2 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { ArrowLeft, Loader2, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { handleSignup, type SignupState } from "@/lib/actions";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" className="w-full" disabled={pending}>
+      {pending ? <Loader2 className="animate-spin" /> : "Create Account"}
+    </Button>
+  );
+}
 
 export default function SignupPage() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+  const initialState: SignupState = { message: null, errors: {} };
+  const [state, dispatch] = useActionState(handleSignup, initialState);
 
-  const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-        }
-      }
-    });
-
-    setLoading(false);
-
-    if (error) {
-      toast({
-        variant: "destructive",
-        title: "Signup failed",
-        description: error.message,
-      });
-    } else if (data.user && data.user.identities && data.user.identities.length === 0) {
-        toast({
-            variant: "destructive",
-            title: "Signup failed",
-            description: "User with this email already exists.",
-        });
-    }
-    else {
+  useEffect(() => {
+    if (state.isSuccess) {
       toast({
         title: "Signup successful!",
-        description: "Please check your email to verify your account.",
+        description: state.message || "Please log in to continue.",
+        duration: 5000,
       });
       router.push('/login');
     }
-  };
+  }, [state, router, toast]);
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-background p-4">
@@ -81,50 +64,67 @@ export default function SignupPage() {
           </div>
           <CardTitle className="text-2xl font-headline">Sign Up</CardTitle>
           <CardDescription>
-            Create an account to get started
+            Create an account to get started. The first user will become an admin.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSignup} className="grid gap-4">
+          <form action={dispatch} className="grid gap-4">
+            {state.errors?._form && (
+                <Alert variant="destructive">
+                    <AlertTriangle className="h-4 w-4" />
+                    <AlertTitle>Signup Failed</AlertTitle>
+                    <AlertDescription>{state.errors._form[0]}</AlertDescription>
+                </Alert>
+            )}
             <div className="grid gap-2">
-              <Label htmlFor="full-name">Full Name</Label>
+              <Label htmlFor="fullName">Full Name</Label>
               <Input
-                id="full-name"
+                id="fullName"
+                name="fullName"
                 type="text"
                 placeholder="John Doe"
                 required
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                disabled={loading}
+                aria-describedby="fullName-error"
               />
+               {state.errors?.fullName && (
+                    <p id="fullName-error" className="text-sm text-destructive mt-1">
+                        {state.errors.fullName[0]}
+                    </p>
+                )}
             </div>
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
+                name="email"
                 type="email"
                 placeholder="m@example.com"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={loading}
+                aria-describedby="email-error"
               />
+              {state.errors?.email && (
+                    <p id="email-error" className="text-sm text-destructive mt-1">
+                        {state.errors.email[0]}
+                    </p>
+                )}
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
               <Input 
                 id="password" 
+                name="password"
                 type="password" 
                 required 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={loading}
                 minLength={6}
+                aria-describedby="password-error"
               />
+              {state.errors?.password && (
+                    <p id="password-error" className="text-sm text-destructive mt-1">
+                        {state.errors.password[0]}
+                    </p>
+                )}
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? <Loader2 className="animate-spin" /> : "Create Account"}
-            </Button>
+            <SubmitButton />
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
               <Link href="/login" className="underline">
