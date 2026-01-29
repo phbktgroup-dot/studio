@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import type { User } from "@supabase/supabase-js";
 import {
@@ -43,6 +43,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -86,39 +87,51 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton href="/dashboard" isActive>
-                <Home />
-                Dashboard
+              <SidebarMenuButton asChild isActive={pathname === '/dashboard'}>
+                <Link href="/dashboard">
+                  <Home />
+                  Dashboard
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton href="#">
-                <Briefcase />
-                Services
+               <SidebarMenuButton asChild isActive={pathname === '/dashboard/services'}>
+                <Link href="#">
+                  <Briefcase />
+                  Services
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton href="#">
-                <Users />
-                Clients
+              <SidebarMenuButton asChild isActive={pathname === '/dashboard/clients'}>
+                <Link href="#">
+                  <Users />
+                  Clients
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton href="#">
-                <FileText />
-                Invoices
+              <SidebarMenuButton asChild isActive={pathname === '/dashboard/invoices'}>
+                <Link href="#">
+                  <FileText />
+                  Invoices
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton href="#">
-                <LineChart />
-                Analytics
+              <SidebarMenuButton asChild isActive={pathname === '/dashboard/analytics'}>
+                <Link href="#">
+                  <LineChart />
+                  Analytics
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton href="/dashboard/home-section">
-                <LayoutTemplate />
-                Home Section
+              <SidebarMenuButton asChild isActive={pathname === '/dashboard/home-section'}>
+                <Link href="/dashboard/home-section">
+                  <LayoutTemplate />
+                  Home Section
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
