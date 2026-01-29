@@ -26,7 +26,6 @@ import {
 import {
   SidebarProvider,
   Sidebar,
-  SidebarHeader,
   SidebarContent,
   SidebarTrigger,
   SidebarMenu,
@@ -116,96 +115,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   return (
     <SidebarProvider>
-      <Sidebar collapsible="icon">
-        <SidebarContent>
-          <SidebarHeader className="flex-row items-center justify-center border-b h-14 lg:h-[60px]">
-            <SidebarTrigger className="hidden md:flex" />
-          </SidebarHeader>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={pathname === '/dashboard'}>
-                <Link href="/dashboard">
-                  <Home />
-                  <span>Dashboard</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-               <SidebarMenuButton asChild isActive={pathname === '/dashboard/services'}>
-                <Link href="#">
-                  <Briefcase />
-                  <span>Services</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={pathname === '/dashboard/clients'}>
-                <Link href="#">
-                  <Users />
-                  <span>Clients</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={pathname === '/dashboard/invoices'}>
-                <Link href="#">
-                  <FileText />
-                  <span>Invoices</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={pathname === '/dashboard/analytics'}>
-                <Link href="#">
-                  <LineChart />
-                  <span>Analytics</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            {userRole === 'admin' && (
-              <Collapsible asChild defaultOpen={isSettingsActive}>
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton isActive={isSettingsActive} className="justify-between">
-                      <div className="flex items-center gap-2">
-                        <Settings />
-                        <span>Settings</span>
-                      </div>
-                      <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90 group-data-[state=collapsed]:hidden" />
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <SidebarMenuSub>
-                      <SidebarMenuSubItem>
-                        <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/hero-section'}>
-                          <Link href="/dashboard/hero-section">
-                            Hero Section
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                      <SidebarMenuSubItem>
-                        <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/users'}>
-                          <Link href="/dashboard/users">
-                            Manage Users
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
-                </SidebarMenuItem>
-              </Collapsible>
-            )}
-          </SidebarMenu>
-        </SidebarContent>
-      </Sidebar>
-
-      <SidebarInset>
-        <header className="flex h-14 items-center justify-between gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 sticky top-0 z-30 bg-background/95 backdrop-blur-sm">
-          <div className="flex items-center gap-4">
-              <SidebarTrigger className="md:hidden" />
-              <Link href="/">
-                <Logo />
-              </Link>
+        <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-30">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger />
+            <Link href="/">
+              <Logo />
+            </Link>
           </div>
           
           <DropdownMenu>
@@ -231,8 +146,92 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <main className="flex-1 p-4 sm:p-6">{children}</main>
-      </SidebarInset>
+
+        <div className="flex flex-1 overflow-hidden">
+            <Sidebar collapsible="icon">
+                <SidebarContent>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={pathname === '/dashboard'}>
+                        <Link href="/dashboard">
+                        <Home />
+                        <span>Dashboard</span>
+                        </Link>
+                    </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={pathname === '/dashboard/services'}>
+                        <Link href="#">
+                        <Briefcase />
+                        <span>Services</span>
+                        </Link>
+                    </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={pathname === '/dashboard/clients'}>
+                        <Link href="#">
+                        <Users />
+                        <span>Clients</span>
+                        </Link>
+                    </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={pathname === '/dashboard/invoices'}>
+                        <Link href="#">
+                        <FileText />
+                        <span>Invoices</span>
+                        </Link>
+                    </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={pathname === '/dashboard/analytics'}>
+                        <Link href="#">
+                        <LineChart />
+                        <span>Analytics</span>
+                        </Link>
+                    </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    {userRole === 'admin' && (
+                    <Collapsible asChild defaultOpen={isSettingsActive}>
+                        <SidebarMenuItem>
+                        <CollapsibleTrigger asChild>
+                            <SidebarMenuButton isActive={isSettingsActive} className="justify-between">
+                            <div className="flex items-center gap-2">
+                                <Settings />
+                                <span>Settings</span>
+                            </div>
+                            <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90 group-data-[state=collapsed]:hidden" />
+                            </SidebarMenuButton>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                            <SidebarMenuSub>
+                            <SidebarMenuSubItem>
+                                <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/hero-section'}>
+                                <Link href="/dashboard/hero-section">
+                                    Hero Section
+                                </Link>
+                                </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                            <SidebarMenuSubItem>
+                                <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/users'}>
+                                <Link href="/dashboard/users">
+                                    Manage Users
+                                </Link>
+                                </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                            </SidebarMenuSub>
+                        </CollapsibleContent>
+                        </SidebarMenuItem>
+                    </Collapsible>
+                    )}
+                </SidebarMenu>
+                </SidebarContent>
+            </Sidebar>
+
+            <SidebarInset>
+                <main className="flex-1 p-4 sm:p-6 overflow-y-auto">{children}</main>
+            </SidebarInset>
+        </div>
     </SidebarProvider>
   );
 }
