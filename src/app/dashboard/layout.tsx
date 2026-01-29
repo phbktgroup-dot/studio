@@ -182,7 +182,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                       <SidebarMenuSubItem>
                         <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/hero-section'}>
                           <Link href="/dashboard/hero-section">
-                            <Film />
                             Hero Section
                           </Link>
                         </SidebarMenuSubButton>
@@ -190,7 +189,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                       <SidebarMenuSubItem>
                         <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/users'}>
                           <Link href="/dashboard/users">
-                            <UserCog />
                             Manage Users
                           </Link>
                         </SidebarMenuSubButton>
