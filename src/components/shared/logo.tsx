@@ -42,7 +42,7 @@ export function Logo({ className }: { className?: string }) {
           strokeLinejoin="round"
         />
       </svg>
-      <span className="tracking-tighter whitespace-nowrap group-data-[state=collapsed]:hidden">PHBKT Group</span>
+      <span className="tracking-tighter whitespace-nowrap">PHBKT Group</span>
     </div>
   );
 }

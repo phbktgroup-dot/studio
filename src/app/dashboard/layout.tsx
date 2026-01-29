@@ -119,7 +119,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <Sidebar collapsible="icon">
         <SidebarContent>
           <SidebarHeader className="flex-row items-center justify-between border-b">
-            <Link href="/" className="flex items-center gap-2 font-semibold">
+            <Link href="/" className="flex items-center gap-2 font-semibold overflow-hidden">
               <Logo />
             </Link>
             <SidebarTrigger className="hidden md:flex" />
