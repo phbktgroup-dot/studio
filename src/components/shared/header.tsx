@@ -32,6 +32,7 @@ export default function Header() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -43,10 +44,19 @@ export default function Header() {
       setScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
-  useEffect(() => {
+    const fetchLogoUrl = async () => {
+        const { data } = await supabase
+            .from('settings')
+            .select('logo_url')
+            .eq('id', 1)
+            .single();
+        if (data?.logo_url) {
+            setLogoUrl(data.logo_url);
+        }
+    };
+    fetchLogoUrl();
+    
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
       setLoading(false);
@@ -56,6 +66,7 @@ export default function Header() {
     });
 
     return () => {
+      window.removeEventListener("scroll", handleScroll);
       authListener.subscription.unsubscribe();
     };
   }, [router]);
@@ -88,7 +99,7 @@ export default function Header() {
       <div className="container flex h-16 items-center">
         <div className="mr-auto flex items-center">
           <Link href="/">
-            <Logo />
+            {logoUrl ? <img src={logoUrl} alt="PHBKT Group" className="h-8 w-auto" /> : <Logo />}
           </Link>
         </div>
         <NavMenu className="hidden md:flex" />

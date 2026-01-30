@@ -14,7 +14,7 @@ import {
   FileText,
   LogOut,
   UserCog,
-  Film,
+  Paintbrush,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -199,10 +199,10 @@ function DashboardUI({ children }: { children: ReactNode }) {
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                        <SidebarMenuItem>
-                        <SidebarMenuButton asChild isActive={pathname === '/dashboard/hero-section'} size="sm" tooltip="Home section Update">
+                        <SidebarMenuButton asChild isActive={pathname === '/dashboard/hero-section'} size="sm" tooltip="Site Customization">
                           <Link href="/dashboard/hero-section">
-                            <Film />
-                            <span>Home section Update</span>
+                            <Paintbrush />
+                            <span>Site Customization</span>
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>

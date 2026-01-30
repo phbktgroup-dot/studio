@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { UserCog, Film } from 'lucide-react';
+import { UserCog, Paintbrush } from 'lucide-react';
 
 export default function SettingsPage() {
   return (
@@ -21,10 +21,10 @@ export default function SettingsPage() {
         <Link href="/dashboard/hero-section" className="block">
            <Card className="hover:border-primary transition-colors h-full">
             <CardHeader className="flex flex-row items-center gap-4">
-                <Film className="h-8 w-8 text-primary flex-shrink-0" />
+                <Paintbrush className="h-8 w-8 text-primary flex-shrink-0" />
                 <div>
-                    <CardTitle className="text-sm">Hero Section</CardTitle>
-                    <CardDescription className="mt-1 text-xs">Customize the background video of your homepage.</CardDescription>
+                    <CardTitle className="text-sm">Site Customization</CardTitle>
+                    <CardDescription className="mt-1 text-xs">Customize your site logo and hero section.</CardDescription>
                 </div>
             </CardHeader>
           </Card>
