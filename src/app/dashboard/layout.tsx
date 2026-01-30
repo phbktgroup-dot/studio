@@ -23,6 +23,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarInset,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,11 +38,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Logo } from "@/components/shared/logo";
 import { Loader2 } from "lucide-react";
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+function DashboardUI({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
+  const { isMobile, toggleSidebar } = useSidebar();
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -84,6 +86,13 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     await supabase.auth.signOut();
   };
 
+  const handleAvatarClick = (e: React.MouseEvent) => {
+    if (isMobile) {
+      e.preventDefault();
+      toggleSidebar();
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
@@ -100,102 +109,110 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const isSettingsActive = ['/dashboard/settings', '/dashboard/hero-section', '/dashboard/users'].includes(pathname);
 
   return (
-    <SidebarProvider>
-        <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-50 fixed top-0 left-0 right-0">
-          <div className="flex items-center gap-2">
-            <Link href="/">
-              <Logo />
-            </Link>
-          </div>
-          
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <Avatar>
-                  <AvatarImage src={user.user_metadata?.avatar_url} />
-                  <AvatarFallback>{user.user_metadata?.full_name?.[0] || user.email?.[0].toUpperCase()}</AvatarFallback>
-                </Avatar>
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>{user.user_metadata?.full_name || user.email}</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link href="/dashboard/settings">Settings</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout}>
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </header>
-
-        <div className="flex-1 overflow-hidden pt-14 lg:pt-[60px]">
-            <Sidebar collapsible="icon">
-                <SidebarContent>
-                <SidebarMenu>
-                    <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === '/dashboard'}>
-                        <Link href="/dashboard">
-                        <Home />
-                        <span>Dashboard</span>
-                        </Link>
-                    </SidebarMenuButton>
-                    </SidebarMenuItem>
-                    <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === '/dashboard/services'}>
-                        <Link href="#">
-                        <Briefcase />
-                        <span>Services</span>
-                        </Link>
-                    </SidebarMenuButton>
-                    </SidebarMenuItem>
-                    <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === '/dashboard/clients'}>
-                        <Link href="#">
-                        <Users />
-                        <span>Clients</span>
-                        </Link>
-                    </SidebarMenuButton>
-                    </SidebarMenuItem>
-                    <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === '/dashboard/invoices'}>
-                        <Link href="#">
-                        <FileText />
-                        <span>Invoices</span>
-                        </Link>
-                    </SidebarMenuButton>
-                    </SidebarMenuItem>
-                    <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === '/dashboard/analytics'}>
-                        <Link href="#">
-                        <LineChart />
-                        <span>Analytics</span>
-                        </Link>
-                    </SidebarMenuButton>
-                    </SidebarMenuItem>
-                    {userRole === 'admin' && (
-                      <SidebarMenuItem>
-                        <SidebarMenuButton asChild isActive={isSettingsActive}>
-                          <Link href="/dashboard/settings">
-                            <Settings />
-                            <span>Settings</span>
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    )}
-                </SidebarMenu>
-                </SidebarContent>
-            </Sidebar>
-
-            <SidebarInset className="h-full overflow-y-auto">
-                <div className="p-4 sm:p-6">{children}</div>
-            </SidebarInset>
+    <>
+      <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-50 fixed top-0 left-0 right-0">
+        <div className="flex items-center gap-2">
+          <Link href="/">
+            <Logo />
+          </Link>
         </div>
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="icon" className="rounded-full" onClick={handleAvatarClick}>
+              <Avatar>
+                <AvatarImage src={user.user_metadata?.avatar_url} />
+                <AvatarFallback>{user.user_metadata?.full_name?.[0] || user.email?.[0].toUpperCase()}</AvatarFallback>
+              </Avatar>
+              <span className="sr-only">Toggle user menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>{user.user_metadata?.full_name || user.email}</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href="/dashboard/settings">Settings</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>Support</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleLogout}>
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </header>
+
+      <div className="flex-1 overflow-hidden pt-14 lg:pt-[60px]">
+          <Sidebar collapsible="icon">
+              <SidebarContent>
+              <SidebarMenu>
+                  <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={pathname === '/dashboard'} size="sm" tooltip="Dashboard">
+                      <Link href="/dashboard">
+                      <Home />
+                      <span>Dashboard</span>
+                      </Link>
+                  </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={pathname === '/dashboard/services'} size="sm" tooltip="Services">
+                      <Link href="#">
+                      <Briefcase />
+                      <span>Services</span>
+                      </Link>
+                  </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={pathname === '/dashboard/clients'} size="sm" tooltip="Clients">
+                      <Link href="#">
+                      <Users />
+                      <span>Clients</span>
+                      </Link>
+                  </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={pathname === '/dashboard/invoices'} size="sm" tooltip="Invoices">
+                      <Link href="#">
+                      <FileText />
+                      <span>Invoices</span>
+                      </Link>
+                  </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={pathname === '/dashboard/analytics'} size="sm" tooltip="Analytics">
+                      <Link href="#">
+                      <LineChart />
+                      <span>Analytics</span>
+                      </Link>
+                  </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  {userRole === 'admin' && (
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild isActive={isSettingsActive} size="sm" tooltip="Settings">
+                        <Link href="/dashboard/settings">
+                          <Settings />
+                          <span>Settings</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )}
+              </SidebarMenu>
+              </SidebarContent>
+          </Sidebar>
+
+          <SidebarInset className="h-full overflow-y-auto">
+              <div className="p-4 sm:p-6">{children}</div>
+          </SidebarInset>
+      </div>
+    </>
+  );
+}
+
+export default function DashboardLayout({ children }: { children: ReactNode }) {
+  return (
+    <SidebarProvider>
+      <DashboardUI>{children}</DashboardUI>
     </SidebarProvider>
   );
 }
