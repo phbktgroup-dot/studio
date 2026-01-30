@@ -110,15 +110,15 @@ export default function Header() {
         scrolled ? "border-b bg-background/80 backdrop-blur-lg" : "bg-transparent"
       )}
     >
-      <div className="container flex h-16 items-center">
+      <div className="container flex h-16 items-center px-4">
         <div className="mr-auto flex items-center">
           <Link href="/" className="flex h-full items-center">
             {logoLoading ? (
-              <div className="h-full w-[200px]" />
+              <div className="h-8 w-[100px]" />
             ) : logoUrl ? (
-              <img src={logoUrl} alt="PHBKT Group" className="h-full w-auto py-2" />
+              <img src={logoUrl} alt="PHBKT Group" className="h-8 w-auto" />
             ) : (
-              <Logo className="h-full py-2"/>
+              <Logo />
             )}
           </Link>
         </div>
