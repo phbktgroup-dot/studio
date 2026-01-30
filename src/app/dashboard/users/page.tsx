@@ -10,14 +10,11 @@ import {
 import {
   Card,
   CardContent,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle } from "lucide-react";
 import { RoleSwitcher } from './role-switcher';
 import { Badge } from '@/components/ui/badge';
-import { UserActions } from './user-actions';
 
 export default async function UsersPage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -77,7 +74,6 @@ export default async function UsersPage() {
                 <TableHead className="h-8 py-0 px-2">Role</TableHead>
                 <TableHead className="h-8 py-0 px-2">Created At</TableHead>
                 <TableHead className="h-8 py-0 px-2">Last Login</TableHead>
-                <TableHead className="h-8 py-0 px-2 text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -98,9 +94,6 @@ export default async function UsersPage() {
                   </TableCell>
                   <TableCell className="py-0 px-2">{new Date(user.created_at).toLocaleDateString()}</TableCell>
                   <TableCell className="py-0 px-2">{user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : 'Never'}</TableCell>
-                  <TableCell className="py-0 px-2 text-right">
-                    <UserActions user={user} />
-                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
