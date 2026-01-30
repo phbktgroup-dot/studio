@@ -33,6 +33,7 @@ export default function Header() {
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [logoLoading, setLogoLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -46,6 +47,7 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
 
     const fetchLogoUrl = async () => {
+        setLogoLoading(true);
         try {
           const { data, error } = await supabase
               .from('settings')
@@ -63,6 +65,8 @@ export default function Header() {
         } catch (error: any) {
           // It's okay if this fails, we'll just fall back to the default logo.
           console.warn("Could not fetch site logo:", error.message);
+        } finally {
+            setLogoLoading(false);
         }
       };
     fetchLogoUrl();
@@ -108,8 +112,14 @@ export default function Header() {
     >
       <div className="container flex h-16 items-center">
         <div className="mr-auto flex items-center">
-          <Link href="/">
-            {logoUrl ? <img src={logoUrl} alt="PHBKT Group" className="h-14 w-auto" /> : <Logo />}
+          <Link href="/" className="flex h-full items-center">
+            {logoLoading ? (
+              <div className="h-full w-[200px]" />
+            ) : logoUrl ? (
+              <img src={logoUrl} alt="PHBKT Group" className="h-full w-auto py-2" />
+            ) : (
+              <Logo className="h-full py-2"/>
+            )}
           </Link>
         </div>
         <NavMenu className="hidden md:flex" />
