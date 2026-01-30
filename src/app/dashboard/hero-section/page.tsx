@@ -228,7 +228,7 @@ export default function HeroSectionPage() {
 
                     {videoUrl && (
                         <div className="relative group">
-                            <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-video" />
+                            <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-[4/3]" />
                             
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
