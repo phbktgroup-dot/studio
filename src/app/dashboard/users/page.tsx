@@ -10,8 +10,6 @@ import {
 import {
   Card,
   CardContent,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -73,10 +71,7 @@ export default async function UsersPage() {
     <div className="flex flex-col gap-4">
       <h1 className="text-lg font-bold font-headline">Manage Users</h1>
       <Card>
-        <CardHeader>
-          <CardTitle className="text-base">User List</CardTitle>
-        </CardHeader>
-        <CardContent>
+        <CardContent className="p-0">
           <Table className="text-xs">
             <TableHeader>
               <TableRow className="bg-muted/50 hover:bg-muted/50">
