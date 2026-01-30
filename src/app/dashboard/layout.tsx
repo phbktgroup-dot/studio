@@ -14,6 +14,7 @@ import {
   FileText,
   LogOut,
   Settings,
+  ChevronRight,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -24,6 +25,9 @@ import {
   SidebarMenuButton,
   SidebarInset,
   useSidebar,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,6 +41,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Logo } from "@/components/shared/logo";
 import { Loader2 } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 function DashboardUI({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -100,6 +109,11 @@ function DashboardUI({ children }: { children: ReactNode }) {
 
   const userRole = user.user_metadata?.role;
   const isSettingsActive = ['/dashboard/settings', '/dashboard/hero-section', '/dashboard/users'].includes(pathname);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(isSettingsActive);
+
+  useEffect(() => {
+    setIsSettingsOpen(isSettingsActive);
+  }, [isSettingsActive]);
   
   const UserAvatarButton = () => (
       <Avatar>
@@ -192,14 +206,45 @@ function DashboardUI({ children }: { children: ReactNode }) {
                   </SidebarMenuButton>
                   </SidebarMenuItem>
                   {userRole === 'admin' && (
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isSettingsActive} size="sm" tooltip="Settings">
-                        <Link href="/dashboard/settings">
-                          <Settings />
-                          <span>Settings</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
+                    <Collapsible asChild open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
+                        <SidebarMenuItem className="flex flex-col !p-0">
+                            <div className="w-full">
+                                <CollapsibleTrigger asChild>
+                                    <SidebarMenuButton
+                                        isActive={isSettingsActive}
+                                        size="sm"
+                                        tooltip="Settings"
+                                        className="w-full justify-between"
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <Settings />
+                                            <span>Settings</span>
+                                        </div>
+                                        <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90" />
+                                    </SidebarMenuButton>
+                                </CollapsibleTrigger>
+                            </div>
+                            <CollapsibleContent asChild>
+                                <SidebarMenuSub>
+                                    <SidebarMenuSubItem>
+                                        <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/settings'}>
+                                            <Link href="/dashboard/settings">General</Link>
+                                        </SidebarMenuSubButton>
+                                    </SidebarMenuSubItem>
+                                    <SidebarMenuSubItem>
+                                        <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/users'}>
+                                            <Link href="/dashboard/users">Manage Users</Link>
+                                        </SidebarMenuSubButton>
+                                    </SidebarMenuSubItem>
+                                    <SidebarMenuSubItem>
+                                        <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/hero-section'}>
+                                            <Link href="/dashboard/hero-section">Hero Section</Link>
+                                        </SidebarMenuSubButton>
+                                    </SidebarMenuSubItem>
+                                </SidebarMenuSub>
+                            </CollapsibleContent>
+                        </SidebarMenuItem>
+                    </Collapsible>
                   )}
               </SidebarMenu>
               </SidebarContent>
