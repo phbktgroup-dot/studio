@@ -10,19 +10,7 @@ import { ArrowDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 export default function HeroSection() {
-  const [blurAmount, setBlurAmount] = useState(2);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const newBlur = Math.max(0, 2 - scrollY / 50);
-      setBlurAmount(newBlur);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const fetchVideoUrl = async () => {
@@ -59,15 +47,13 @@ export default function HeroSection() {
           loop
           muted
           playsInline
-          className="absolute inset-0 z-0 h-full w-full object-cover transition-all duration-300 ease-out"
-          style={{ filter: `blur(${blurAmount}px)` }}
+          className="absolute inset-0 z-0 h-full w-full object-cover"
         >
           <source src={videoUrl} type="video/mp4" />
         </video>
       ) : (
         <div
-          className="absolute inset-0 z-0 transition-all duration-300 ease-out"
-          style={{ filter: `blur(${blurAmount}px)` }}
+          className="absolute inset-0 z-0"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"></div>
           <div className="w-full h-full opacity-30">
