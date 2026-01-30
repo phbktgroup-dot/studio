@@ -14,11 +14,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertTriangle } from "lucide-react";
-import { format } from 'date-fns';
-import { RoleSwitcher } from './role-switcher';
+import { AlertTriangle, FilePen, Trash2 } from "lucide-react";
 
 export default async function UsersPage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -26,8 +24,8 @@ export default async function UsersPage() {
 
   if (!supabaseUrl || !serviceRoleKey || serviceRoleKey === 'YOUR_SERVICE_ROLE_KEY_HERE') {
     return (
-      <div className="flex flex-col gap-6">
-        <h1 className="text-3xl font-bold font-headline">Manage Users</h1>
+      <div className="flex flex-col gap-4">
+        <h1 className="text-2xl font-bold font-headline">Manage Users</h1>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Configuration Error</AlertTitle>
@@ -50,8 +48,8 @@ export default async function UsersPage() {
 
   if (error) {
      return (
-      <div className="flex flex-col gap-6">
-        <h1 className="text-3xl font-bold font-headline">Manage Users</h1>
+      <div className="flex flex-col gap-4">
+        <h1 className="text-2xl font-bold font-headline">Manage Users</h1>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Error Fetching Users</AlertTitle>
@@ -64,43 +62,42 @@ export default async function UsersPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <h1 className="text-3xl font-bold font-headline">Manage Users</h1>
+    <div className="flex flex-col gap-4">
+      <h1 className="text-2xl font-bold font-headline">Manage Users</h1>
       <Card>
         <CardHeader>
-          <CardTitle>User List</CardTitle>
-          <CardDescription>A list of all registered users in your application.</CardDescription>
+          <CardTitle className="text-lg">User List</CardTitle>
+          <CardDescription className="text-xs">A list of all registered users in your application.</CardDescription>
         </CardHeader>
         <CardContent>
-          <Table>
+          <Table className="text-xs">
             <TableHeader>
               <TableRow>
-                <TableHead>Full Name</TableHead>
+                <TableHead>Employee ID</TableHead>
+                <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Role</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Last Sign In</TableHead>
-                <TableHead>Joined</TableHead>
+                <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {users.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell className="font-medium">{user.user_metadata?.full_name || 'N/A'}</TableCell>
+                  <TableCell className="font-medium">{user.id.substring(0, 7).toUpperCase()}</TableCell>
+                  <TableCell>{user.user_metadata?.full_name || 'N/A'}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    <RoleSwitcher userId={user.id} currentRole={user.user_metadata?.role || 'user'} />
+                    {user.user_metadata?.role || 'user'}
                   </TableCell>
                   <TableCell>
-                    <Badge variant={user.email_confirmed_at ? "default" : "secondary"}>
-                      {user.email_confirmed_at ? "Verified" : "Unverified"}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    {user.last_sign_in_at ? format(new Date(user.last_sign_in_at), 'PPp') : 'Never'}
-                  </TableCell>
-                   <TableCell>
-                    {user.created_at ? format(new Date(user.created_at), 'PP') : 'N/A'}
+                    <div className="flex items-center gap-2">
+                      <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <FilePen className="h-4 w-4" />
+                      </Button>
+                      <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive hover:text-destructive">
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
