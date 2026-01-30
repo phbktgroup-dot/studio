@@ -82,30 +82,30 @@ export default async function UsersPage() {
           <Table className="text-xs">
             <TableHeader>
               <TableRow>
-                <TableHead className="p-2">User</TableHead>
-                <TableHead className="p-2">Role</TableHead>
-                <TableHead className="p-2">Status</TableHead>
-                <TableHead className="p-2">Created At</TableHead>
-                <TableHead className="p-2 text-right">Actions</TableHead>
+                <TableHead className="py-1 px-2">User</TableHead>
+                <TableHead className="py-1 px-2">Role</TableHead>
+                <TableHead className="py-1 px-2">Status</TableHead>
+                <TableHead className="py-1 px-2">Created At</TableHead>
+                <TableHead className="py-1 px-2 text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {users.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell className="p-2">
+                  <TableCell className="py-1 px-2">
                      <div className="font-semibold">{user.user_metadata?.full_name || 'N/A'}</div>
                     <div className="text-muted-foreground">{user.email}</div>
                   </TableCell>
-                  <TableCell className="p-2">
+                  <TableCell className="py-1 px-2">
                     <RoleSwitcher userId={user.id} currentRole={user.user_metadata?.role || 'user'} />
                   </TableCell>
-                  <TableCell className="p-2">
+                  <TableCell className="py-1 px-2">
                      <Badge variant={user.email_confirmed_at ? "default" : "secondary"} className="text-xs font-normal">
                         {user.email_confirmed_at ? 'Active' : 'Invited'}
                      </Badge>
                   </TableCell>
-                  <TableCell className="p-2">{new Date(user.created_at).toLocaleDateString()}</TableCell>
-                  <TableCell className="p-2 text-right">
+                  <TableCell className="py-1 px-2">{new Date(user.created_at).toLocaleDateString()}</TableCell>
+                  <TableCell className="py-1 px-2 text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
