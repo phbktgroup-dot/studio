@@ -216,7 +216,6 @@ export default function HeroSectionPage() {
             <CardContent className="p-4">
                 <div className={`grid ${videoUrl ? 'md:grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
                     <div className="space-y-3">
-                        <Label className="text-xs">Upload a new video</Label>
                         <div className="grid w-full items-center gap-1.5">
                             <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
                             <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
@@ -228,8 +227,7 @@ export default function HeroSectionPage() {
                     </div>
 
                     {videoUrl && (
-                        <div className="space-y-3">
-                           <Label className="text-xs">Current Video</Label>
+                        <div className="space-y-2 max-w-xs">
                             <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-video" />
                             
                             <AlertDialog>
