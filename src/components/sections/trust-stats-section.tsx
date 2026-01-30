@@ -16,7 +16,7 @@ function StatItem({ end, label, Icon }: { end: number; label: string; Icon: Reac
 
 export default function TrustStatsSection() {
   return (
-    <section className="py-20 md:py-32 bg-muted/30">
+    <section className="py-12 md:py-16 bg-muted/30">
       <div className="container text-center">
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
             तज्ञांचे मार्गदर्शन, ५००+ उद्योजकांचा विश्वास.
