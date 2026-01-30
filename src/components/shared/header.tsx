@@ -46,15 +46,25 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
 
     const fetchLogoUrl = async () => {
-        const { data } = await supabase
-            .from('settings')
-            .select('logo_url')
-            .eq('id', 1)
-            .single();
-        if (data?.logo_url) {
-            setLogoUrl(data.logo_url);
+        try {
+          const { data, error } = await supabase
+              .from('settings')
+              .select('logo_url')
+              .eq('id', 1)
+              .single();
+          
+          if (error && error.code !== 'PGRST116') {
+              throw error;
+          }
+  
+          if (data?.logo_url) {
+              setLogoUrl(data.logo_url);
+          }
+        } catch (error: any) {
+          // It's okay if this fails, we'll just fall back to the default logo.
+          console.warn("Could not fetch site logo:", error.message);
         }
-    };
+      };
     fetchLogoUrl();
     
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {

@@ -56,8 +56,12 @@ export default function HeroSectionPage() {
           setVideoUrl(data.hero_video_url);
         }
       } catch (error: any) {
-        // Do not show a toast on initial load failure
-        console.error("Could not fetch hero video URL:", error.message);
+        if (error.message?.includes('column "hero_video_url" of relation "settings" does not exist')) {
+            console.warn("Could not fetch hero video URL:", error.message);
+        } else {
+            // Do not show a toast on initial load failure
+            console.error("Could not fetch hero video URL:", error.message);
+        }
       } finally {
         setIsFetching(false);
       }
@@ -80,7 +84,13 @@ export default function HeroSectionPage() {
             setLogoUrl(data.logo_url);
           }
         } catch (error: any) {
-          console.error("Could not fetch logo URL:", error.message);
+          if (error.message?.includes('column "logo_url" of relation "settings" does not exist')) {
+            // This is a common setup issue, we can ignore it on fetch.
+            // The upload function will guide the user.
+            console.warn("Could not fetch logo URL:", error.message);
+          } else {
+            console.error("Could not fetch logo URL:", error.message);
+          }
         } finally {
           setIsFetchingLogo(false);
         }
