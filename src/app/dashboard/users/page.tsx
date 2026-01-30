@@ -10,19 +10,14 @@ import {
 import {
   Card,
   CardContent,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertTriangle, MoreHorizontal, FilePen, Trash2 } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 import { RoleSwitcher } from './role-switcher';
 import { Badge } from '@/components/ui/badge';
-import { 
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { UserActions } from './user-actions';
 
 export default async function UsersPage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -74,7 +69,7 @@ export default async function UsersPage() {
         <CardContent className="p-0">
           <Table className="text-xs">
             <TableHeader>
-              <TableRow className="bg-muted/50 hover:bg-muted/50">
+              <TableRow className="bg-muted/50 hover:bg-muted/50 h-8">
                 <TableHead className="h-8 py-0 px-2">User name</TableHead>
                 <TableHead className="h-8 py-0 px-2">Email ID</TableHead>
                 <TableHead className="h-8 py-0 px-2">Mobile Number</TableHead>
@@ -104,30 +99,7 @@ export default async function UsersPage() {
                   <TableCell className="py-0 px-2">{new Date(user.created_at).toLocaleDateString()}</TableCell>
                   <TableCell className="py-0 px-2">{user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : 'Never'}</TableCell>
                   <TableCell className="py-0 px-2 text-right">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          aria-haspopup="true"
-                          size="icon"
-                          variant="ghost"
-                          className="h-6 w-6"
-                        >
-                          <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>
-                          <FilePen className="mr-2 h-3.5 w-3.5" />
-                          Edit
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="text-destructive focus:text-destructive focus:bg-destructive/10">
-                          <Trash2 className="mr-2 h-3.5 w-3.5" />
-                          Delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <UserActions user={user} />
                   </TableCell>
                 </TableRow>
               ))}

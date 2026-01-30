@@ -172,3 +172,63 @@ export async function updateUserRole(userId: string, role: 'admin' | 'user'): Pr
   revalidatePath('/dashboard/users');
   return { success: true };
 }
+
+export async function updateUserName(userId: string, fullName: string): Promise<{ error?: string; success?: boolean }> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    return { error: 'Supabase admin credentials are not configured.' };
+  }
+
+  const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  });
+
+  const { data: { user }, error: fetchError } = await supabaseAdmin.auth.admin.getUserById(userId);
+
+  if (fetchError) {
+    return { error: `Failed to fetch user: ${fetchError.message}` };
+  }
+
+  const { error } = await supabaseAdmin.auth.admin.updateUserById(
+    userId,
+    { user_metadata: { ...user.user_metadata, full_name: fullName } }
+  );
+
+  if (error) {
+    return { error: `Failed to update user name: ${error.message}` };
+  }
+
+  revalidatePath('/dashboard/users');
+  return { success: true };
+}
+
+
+export async function deleteUser(userId: string): Promise<{ error?: string; success?: boolean }> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    return { error: 'Supabase admin credentials are not configured.' };
+  }
+
+  const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  });
+
+  const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
+
+  if (error) {
+    return { error: `Failed to delete user: ${error.message}` };
+  }
+
+  revalidatePath('/dashboard/users');
+  return { success: true };
+}
