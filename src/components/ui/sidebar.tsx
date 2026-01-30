@@ -21,8 +21,8 @@ import {
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "16rem"
-const SIDEBAR_WIDTH_MOBILE = "18rem"
+const SIDEBAR_WIDTH = "14rem"
+const SIDEBAR_WIDTH_MOBILE = "16rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
@@ -151,7 +151,7 @@ const SidebarProvider = React.forwardRef<
                 } as React.CSSProperties
                 }
                 className={cn(
-                "group/sidebar-wrapper flex h-screen flex-col",
+                "group/sidebar-wrapper flex flex-col",
                 className
                 )}
                 ref={ref}
@@ -326,8 +326,8 @@ const SidebarInset = React.forwardRef<
     <main
       ref={ref}
       className={cn(
-        "bg-background transition-[padding-left] duration-200 ease-linear",
-        !isMobile && "pl-[var(--sidebar-width-icon)]",
+        "bg-background transition-all duration-200 ease-linear",
+        !isMobile && (state === 'expanded' ? "pl-[var(--sidebar-width)]" : "pl-[var(--sidebar-width-icon)]"),
         className
       )}
       {...props}
@@ -506,13 +506,11 @@ const SidebarMenuItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<"li">
 >(({ className, onClick, ...props }, ref) => {
-  const { isMobile, setOpenMobile, open } = useSidebar()
+  const { isMobile, setOpenMobile, open, setOpen } = useSidebar()
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
     if (isMobile) {
       setOpenMobile(false)
-    } else if (open) {
-      // do nothing, let hover control it
     }
     onClick?.(event)
   }
