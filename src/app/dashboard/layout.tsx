@@ -28,9 +28,6 @@ import {
   SidebarMenuButton,
   SidebarInset,
   useSidebar,
-  SidebarMenuSub,
-  SidebarMenuSubItem,
-  SidebarMenuSubButton,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,11 +41,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Logo } from "@/components/shared/logo";
 import { Loader2 } from "lucide-react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
 
 function DashboardUI({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -57,8 +50,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { isMobile, toggleSidebar } = useSidebar();
   const isSettingsActive = ['/dashboard/settings', '/dashboard/hero-section', '/dashboard/users'].includes(pathname);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(isSettingsActive);
-
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -96,10 +87,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
       }
     }
   }, [user, pathname, router]);
-
-  useEffect(() => {
-    setIsSettingsOpen(isSettingsActive);
-  }, [isSettingsActive]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -210,45 +197,47 @@ function DashboardUI({ children }: { children: ReactNode }) {
                   </SidebarMenuButton>
                   </SidebarMenuItem>
                   {userRole === 'admin' && (
-                    <Collapsible asChild open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
-                        <SidebarMenuItem className="flex flex-col !p-0">
-                            <div className="w-full">
-                                <CollapsibleTrigger asChild>
-                                    <SidebarMenuButton
-                                        isActive={isSettingsActive}
-                                        size="sm"
-                                        tooltip="Settings"
-                                        className="w-full justify-between"
-                                    >
-                                        <div className="flex items-center gap-2">
-                                            <Settings />
-                                            <span>Settings</span>
-                                        </div>
-                                        <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90" />
-                                    </SidebarMenuButton>
-                                </CollapsibleTrigger>
+                    <DropdownMenu>
+                      <SidebarMenuItem>
+                        <DropdownMenuTrigger asChild>
+                          <SidebarMenuButton
+                            isActive={isSettingsActive}
+                            size="sm"
+                            tooltip="Settings"
+                            className="w-full justify-between"
+                          >
+                            <div className="flex items-center gap-2">
+                              <Settings />
+                              <span>Settings</span>
                             </div>
-                            <CollapsibleContent asChild>
-                                <SidebarMenuSub>
-                                    <SidebarMenuSubItem>
-                                        <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/settings'}>
-                                            <Link href="/dashboard/settings"><SlidersHorizontal /><span>General</span></Link>
-                                        </SidebarMenuSubButton>
-                                    </SidebarMenuSubItem>
-                                    <SidebarMenuSubItem>
-                                        <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/users'}>
-                                            <Link href="/dashboard/users"><UserCog /><span>Manage Users</span></Link>
-                                        </SidebarMenuSubButton>
-                                    </SidebarMenuSubItem>
-                                    <SidebarMenuSubItem>
-                                        <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/hero-section'}>
-                                            <Link href="/dashboard/hero-section"><Film /><span>Hero Section</span></Link>
-                                        </SidebarMenuSubButton>
-                                    </SidebarMenuSubItem>
-                                </SidebarMenuSub>
-                            </CollapsibleContent>
-                        </SidebarMenuItem>
-                    </Collapsible>
+                            <ChevronRight className="h-4 w-4" />
+                          </SidebarMenuButton>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent side="right" align="start" sideOffset={5}>
+                          <DropdownMenuItem
+                            onClick={() => router.push('/dashboard/settings')}
+                            className={cn(pathname === '/dashboard/settings' && 'bg-accent/50')}
+                          >
+                            <SlidersHorizontal className="mr-2" />
+                            <span>General</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => router.push('/dashboard/users')}
+                            className={cn(pathname === '/dashboard/users' && 'bg-accent/50')}
+                          >
+                            <UserCog className="mr-2" />
+                            <span>Manage Users</span>
+                          </DropdownMenuItem>
+                           <DropdownMenuItem
+                            onClick={() => router.push('/dashboard/hero-section')}
+                            className={cn(pathname === '/dashboard/hero-section' && 'bg-accent/50')}
+                          >
+                            <Film className="mr-2" />
+                            <span>Hero Section</span>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </SidebarMenuItem>
+                    </DropdownMenu>
                   )}
               </SidebarMenu>
               </SidebarContent>
