@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -110,15 +111,15 @@ export default function Header() {
         scrolled ? "border-b bg-background/80 backdrop-blur-lg" : "bg-transparent"
       )}
     >
-      <div className="container flex h-16 items-center px-4">
+      <div className="container flex h-16 items-center px-2">
         <div className="mr-auto flex items-center">
           <Link href="/" className="flex items-center">
             {logoLoading ? (
-              <div className="h-14 w-[160px]" />
+              <div className="h-[58px] w-[180px]" />
             ) : logoUrl ? (
-              <img src={logoUrl} alt="PHBKT Group" className="h-14 w-auto" />
+              <img src={logoUrl} alt="PHBKT Group" className="h-[58px] w-auto object-contain" />
             ) : (
-              <Logo className="h-14" />
+              <Logo className="h-[58px]" />
             )}
           </Link>
         </div>
