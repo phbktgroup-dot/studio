@@ -22,7 +22,7 @@ export default async function UsersPage() {
 
   if (!supabaseUrl || !serviceRoleKey || serviceRoleKey === 'YOUR_SERVICE_ROLE_KEY_HERE') {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2 -mt-4 sm:-mt-6">
         <h1 className="text-lg font-bold font-headline">Manage Users</h1>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
@@ -46,7 +46,7 @@ export default async function UsersPage() {
 
   if (error) {
      return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2 -mt-4 sm:-mt-6">
         <h1 className="text-lg font-bold font-headline">Manage Users</h1>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
@@ -60,7 +60,7 @@ export default async function UsersPage() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2 -mt-4 sm:-mt-6">
       <h1 className="text-lg font-bold font-headline">Manage Users</h1>
       <Card>
         <CardContent className="p-0">
