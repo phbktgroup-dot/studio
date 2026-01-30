@@ -90,7 +90,7 @@ export default function HeroSection() {
         <AnimatedText
           text={text[language].h1}
           el="h1"
-          className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl"
+          className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl"
         />
         <AnimatedText
           text={text[language].p}
