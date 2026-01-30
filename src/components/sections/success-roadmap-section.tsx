@@ -3,6 +3,18 @@
 import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { Milestone as MilestoneIcon, Rocket, Flag, Award } from 'lucide-react';
+import { useLanguage } from '@/context/language-provider';
+
+const text = {
+  mr: {
+    h2: "तुमच्या यशाची प्रत्येक पायरी, आमची साथ.",
+    p: "Guided growth from day one to the global stage.",
+  },
+  en: {
+    h2: "We are with you at every step of your success.",
+    p: "Guided growth from day one to the global stage.",
+  },
+};
 
 const milestones = [
   { title: "Idea & Registration", icon: MilestoneIcon, description: "Solidify your concept and handle all legal registration." },
@@ -35,6 +47,7 @@ function Milestone({ title, description, icon: Icon, isActive }) {
 
 
 export default function SuccessRoadmapSection() {
+    const { language } = useLanguage();
     const [activeMilestone, setActiveMilestone] = useState(-1);
     const roadmapRef = useRef<HTMLDivElement>(null);
 
@@ -73,10 +86,10 @@ export default function SuccessRoadmapSection() {
     <section className="py-8 md:py-12 bg-background">
       <div className="container max-w-6xl text-center">
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
-            तुमच्या यशाची प्रत्येक पायरी, आमची साथ.
+            {text[language].h2}
         </h2>
         <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-xl">
-            Guided growth from day one to the global stage.
+            {text[language].p}
         </p>
         <div ref={roadmapRef} className="mt-20 relative">
             <div className="absolute top-6 left-0 w-full h-0.5 bg-border"></div>

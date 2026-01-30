@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/logo";
 import { cn } from "@/lib/utils";
-import { Menu, LogOut } from "lucide-react";
+import { Menu, LogOut, Globe } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   DropdownMenu,
@@ -20,6 +20,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import type { User } from '@supabase/supabase-js';
+import { useLanguage } from "@/context/language-provider";
 
 const navLinks = [
   { href: "#services", label: "Services" },
@@ -36,6 +37,7 @@ export default function Header() {
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [logoLoading, setLogoLoading] = useState(true);
   const router = useRouter();
+  const { language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     setMounted(true);
@@ -124,7 +126,11 @@ export default function Header() {
           </Link>
         </div>
         <NavMenu className="hidden md:flex" />
-        <div className="ml-auto flex items-center gap-4">
+        <div className="ml-auto flex items-center gap-2">
+          <Button variant="ghost" onClick={toggleLanguage} size="sm">
+            <Globe className="mr-2 h-4 w-4" />
+            <span>{language === 'mr' ? 'English' : 'मराठी'}</span>
+          </Button>
           {loading ? (
             <div className="w-[105px] h-[40px]" /> // Placeholder to prevent layout shift
           ) : user ? (

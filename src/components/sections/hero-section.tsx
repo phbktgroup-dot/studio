@@ -8,8 +8,21 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { useLanguage } from "@/context/language-provider";
+
+const text = {
+  mr: {
+    h1: "तुमचा व्यवसाय करा डिजिटल, तुमची प्रगती आमचे ध्येय.",
+    p: "शून्यातून विश्व निर्माण करणाऱ्या जिद्दी उद्योजकांसाठी.",
+  },
+  en: {
+    h1: "Digitize your business, your progress is our goal.",
+    p: "For determined entrepreneurs who create a universe from nothing.",
+  },
+};
 
 export default function HeroSection() {
+  const { language } = useLanguage();
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -75,12 +88,12 @@ export default function HeroSection() {
 
       <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center">
         <AnimatedText
-          text="तुमचा व्यवसाय करा डिजिटल, तुमची प्रगती आमचे ध्येय."
+          text={text[language].h1}
           el="h1"
           className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl"
         />
         <AnimatedText
-          text="शून्यातून विश्व निर्माण करणाऱ्या जिद्दी उद्योजकांसाठी."
+          text={text[language].p}
           className="mt-6 max-w-2xl text-lg text-foreground/80 md:text-xl"
           stagger={0.01}
         />

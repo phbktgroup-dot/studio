@@ -1,5 +1,19 @@
+'use client';
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/context/language-provider";
+
+const text = {
+  mr: {
+    h2: "क्लिष्ट कायदे आणि कर आमची जबाबदारी, तुमचा वेळ फक्त तुमच्या प्रगतीसाठी.",
+    p: "Complexity managed. Growth secured. Compliance simplified.",
+  },
+  en: {
+    h2: "Complex laws and taxes are our responsibility, your time is only for your progress.",
+    p: "Complexity managed. Growth secured. Compliance simplified.",
+  },
+};
 
 const LegalSealIcon = () => (
     <div className="relative w-48 h-48 group">
@@ -21,15 +35,16 @@ const LegalSealIcon = () => (
   );
 
 export default function ComplianceShieldSection() {
+  const { language } = useLanguage();
   return (
     <section className="py-8 md:py-12 bg-background overflow-hidden">
       <div className="container grid md:grid-cols-2 gap-12 items-center">
         <div className="max-w-md">
           <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
-            क्लिष्ट कायदे आणि कर आमची जबाबदारी, तुमचा वेळ फक्त तुमच्या प्रगतीसाठी.
+            {text[language].h2}
           </h2>
           <p className="mt-4 text-muted-foreground md:text-xl">
-            Complexity managed. Growth secured. Compliance simplified.
+            {text[language].p}
           </p>
           <Button size="lg" variant="outline" className="mt-8">
             Simplify Your Compliance

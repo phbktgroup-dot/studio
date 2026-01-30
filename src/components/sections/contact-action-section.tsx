@@ -4,16 +4,30 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useLanguage } from "@/context/language-provider";
+
+const text = {
+  mr: {
+    h2: "चला, सोबत मिळून यशाचे नवीन शिखर गाठूया.",
+    p: "Let's turn your vision into a reality. Submit your inquiry to start your digital journey.",
+  },
+  en: {
+    h2: "Come, let's reach new peaks of success together.",
+    p: "Let's turn your vision into a reality. Submit your inquiry to start your digital journey.",
+  },
+};
+
 
 export default function ContactActionSection() {
+  const { language } = useLanguage();
   return (
     <section className="py-8 md:py-12 bg-background">
       <div className="container max-w-3xl text-center">
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
-            चला, सोबत मिळून यशाचे नवीन शिखर गाठूया.
+            {text[language].h2}
         </h2>
         <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-xl">
-            Let's turn your vision into a reality. Submit your inquiry to start your digital journey.
+            {text[language].p}
         </p>
         <form className="mt-12 text-left space-y-6">
             <div className="grid md:grid-cols-2 gap-6">

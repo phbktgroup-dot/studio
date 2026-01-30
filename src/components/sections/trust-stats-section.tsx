@@ -2,6 +2,19 @@
 
 import { useCountUp } from "@/hooks/use-count-up";
 import { Users } from "lucide-react";
+import { useLanguage } from "@/context/language-provider";
+
+const text = {
+  mr: {
+    h2: "तज्ञांचे मार्गदर्शन, ५००+ उद्योजकांचा विश्वास.",
+    p: "Join a community of successful founders backed by technical and legal expertise.",
+  },
+  en: {
+    h2: "Expert guidance, trusted by 500+ entrepreneurs.",
+    p: "Join a community of successful founders backed by technical and legal expertise.",
+  },
+};
+
 
 function StatItem({ end, label, Icon }: { end: number; label: string; Icon: React.ElementType }) {
   const { count, ref } = useCountUp(end);
@@ -15,14 +28,15 @@ function StatItem({ end, label, Icon }: { end: number; label: string; Icon: Reac
 }
 
 export default function TrustStatsSection() {
+  const { language } = useLanguage();
   return (
     <section className="py-8 md:py-12 bg-muted/30">
       <div className="container text-center">
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
-            तज्ञांचे मार्गदर्शन, ५००+ उद्योजकांचा विश्वास.
+            {text[language].h2}
         </h2>
         <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-xl">
-            Join a community of successful founders backed by technical and legal expertise.
+            {text[language].p}
         </p>
         <div className="mt-12 flex justify-center">
             <StatItem end={500} label="Successful Founders" Icon={Users} />
