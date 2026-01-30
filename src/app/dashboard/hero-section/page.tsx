@@ -227,14 +227,13 @@ export default function HeroSectionPage() {
                     </div>
 
                     {videoUrl && (
-                        <div className="space-y-2">
+                        <div className="relative">
                             <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-video" />
-                            
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
-                                    <Button variant="destructive" size="sm" className="w-full">
-                                        <Trash2 className="h-4 w-4 mr-2" />
-                                        Delete Video
+                                    <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8">
+                                        <Trash2 className="h-4 w-4" />
+                                        <span className="sr-only">Delete Video</span>
                                     </Button>
                                 </AlertDialogTrigger>
                                 <AlertDialogContent>
