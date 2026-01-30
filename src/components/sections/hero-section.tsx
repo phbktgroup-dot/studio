@@ -43,7 +43,9 @@ export default function HeroSection() {
 
   return (
     <section className="relative h-[75vh] min-h-[550px] w-full overflow-hidden bg-background">
-      {!loading && (
+      {loading ? (
+        <div className="absolute inset-0 z-0 flex items-center justify-center bg-background" />
+      ) : (
         <>
           {videoUrl ? (
             <video
@@ -73,12 +75,12 @@ export default function HeroSection() {
 
       <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center">
         <AnimatedText
-          text="Innovative Solutions for Modern Business"
+          text="तुमच्या महत्त्वाकांक्षेला द्या डिजिटल साम्राज्याचे स्वरूप."
           el="h1"
           className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl"
         />
         <AnimatedText
-          text="We provide expert financial, compliance, and technological services to propel your growth."
+          text="शून्यातून विश्व निर्माण करणाऱ्या जिद्दी उद्योजकांसाठी."
           className="mt-6 max-w-2xl text-lg text-foreground/80 md:text-xl"
           stagger={0.01}
         />
