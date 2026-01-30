@@ -114,11 +114,11 @@ export default function Header() {
         <div className="mr-auto flex items-center">
           <Link href="/" className="flex items-center">
             {logoLoading ? (
-              <div className="h-12 w-[140px]" />
+              <div className="h-14 w-[160px]" />
             ) : logoUrl ? (
-              <img src={logoUrl} alt="PHBKT Group" className="h-12 w-auto" />
+              <img src={logoUrl} alt="PHBKT Group" className="h-14 w-auto" />
             ) : (
-              <Logo className="h-12" />
+              <Logo className="h-14" />
             )}
           </Link>
         </div>
