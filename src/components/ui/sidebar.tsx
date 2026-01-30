@@ -21,7 +21,7 @@ import {
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "14rem"
+const SIDEBAR_WIDTH = "12rem"
 const SIDEBAR_WIDTH_MOBILE = "16rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
@@ -151,7 +151,7 @@ const SidebarProvider = React.forwardRef<
                 } as React.CSSProperties
                 }
                 className={cn(
-                "group/sidebar-wrapper flex flex-col",
+                "group/sidebar-wrapper",
                 className
                 )}
                 ref={ref}
@@ -227,7 +227,7 @@ const Sidebar = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "group/sidebar fixed z-40 hidden bg-sidebar text-sidebar-foreground transition-[width] duration-200 ease-linear md:block top-14 bottom-0 lg:top-[60px]",
+          "group/sidebar fixed z-40 hidden bg-sidebar text-sidebar-foreground transition-[width] duration-200 ease-linear md:block top-14 lg:top-[60px] bottom-0",
           "data-[collapsible=offcanvas]:w-0",
            "data-[side=left]:border-r data-[side=right]:border-l",
            "data-[state=expanded]:w-[var(--sidebar-width)]",
@@ -319,15 +319,15 @@ SidebarRail.displayName = "SidebarRail"
 
 const SidebarInset = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"main">
+  React.ComponentProps<"div">
 >(({ className, ...props }, ref) => {
-    const { isMobile, state } = useSidebar()
+    const { isMobile } = useSidebar()
   return (
-    <main
+    <div
       ref={ref}
       className={cn(
         "bg-background transition-all duration-200 ease-linear",
-        !isMobile && (state === 'expanded' ? "pl-[var(--sidebar-width)]" : "pl-[var(--sidebar-width-icon)]"),
+        !isMobile && "pl-[var(--sidebar-width-icon)]",
         className
       )}
       {...props}
@@ -506,7 +506,7 @@ const SidebarMenuItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<"li">
 >(({ className, onClick, ...props }, ref) => {
-  const { isMobile, setOpenMobile, open, setOpen } = useSidebar()
+  const { isMobile, setOpenMobile } = useSidebar()
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
     if (isMobile) {
