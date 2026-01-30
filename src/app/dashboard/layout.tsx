@@ -53,6 +53,12 @@ function DashboardUI({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const { isMobile, toggleSidebar } = useSidebar();
+  const isSettingsActive = ['/dashboard/settings', '/dashboard/hero-section', '/dashboard/users'].includes(pathname);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(isSettingsActive);
+
+  useEffect(() => {
+    setIsSettingsOpen(isSettingsActive);
+  }, [isSettingsActive]);
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -108,12 +114,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
   }
 
   const userRole = user.user_metadata?.role;
-  const isSettingsActive = ['/dashboard/settings', '/dashboard/hero-section', '/dashboard/users'].includes(pathname);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(isSettingsActive);
-
-  useEffect(() => {
-    setIsSettingsOpen(isSettingsActive);
-  }, [isSettingsActive]);
   
   const UserAvatarButton = () => (
       <Avatar>
