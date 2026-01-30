@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { MoreHorizontal, FilePen, Trash2, Loader2 } from 'lucide-react';
 import type { User } from '@supabase/supabase-js';
 
@@ -43,6 +44,7 @@ export function UserActions({ user }: { user: User }) {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [fullName, setFullName] = useState(user.user_metadata?.full_name || '');
   const { toast } = useToast();
+  const router = useRouter();
 
   const handleDelete = async () => {
     setIsDeleting(true);
@@ -61,6 +63,7 @@ export function UserActions({ user }: { user: User }) {
         description: 'The user has been successfully deleted.',
       });
       setShowDeleteAlert(false);
+      router.refresh();
     }
   };
 
@@ -82,6 +85,7 @@ export function UserActions({ user }: { user: User }) {
             description: "The user's name has been updated.",
         });
         setShowEditDialog(false);
+        router.refresh();
     }
   };
 
