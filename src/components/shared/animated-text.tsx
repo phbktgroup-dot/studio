@@ -14,7 +14,7 @@ export function AnimatedText({
   text,
   el: Wrapper = 'p',
   className,
-  stagger = 0.02,
+  stagger = 0.05,
 }: AnimatedTextProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -33,23 +33,23 @@ export function AnimatedText({
       observer.observe(ref.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+        if (ref.current) {
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            observer.unobserve(ref.current);
+        }
+    };
   }, []);
 
   return (
     <Wrapper ref={ref} className={cn('overflow-hidden', className)}>
       {text.split(' ').map((word, wordIndex) => (
-        <span key={wordIndex} className="inline-block">
-          {word.split('').map((char, charIndex) => (
-            <span
-              key={charIndex}
-              className="inline-block text-reveal"
-              style={{ '--reveal-delay': `${wordIndex * (stagger * 5) + charIndex * stagger}s` } as React.CSSProperties}
-            >
-              {char}
-            </span>
-          ))}
-          &nbsp;
+        <span
+          key={wordIndex}
+          className="inline-block text-reveal"
+          style={{ '--reveal-delay': `${wordIndex * stagger}s` } as React.CSSProperties}
+        >
+          {word}&nbsp;
         </span>
       ))}
     </Wrapper>
