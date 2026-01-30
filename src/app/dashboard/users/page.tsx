@@ -82,29 +82,34 @@ export default async function UsersPage() {
           <Table className="text-xs">
             <TableHeader>
               <TableRow>
-                <TableHead className="py-1 px-2">User</TableHead>
-                <TableHead className="py-1 px-2">Role</TableHead>
+                <TableHead className="py-1 px-2">User name</TableHead>
+                <TableHead className="py-1 px-2">Email ID</TableHead>
+                <TableHead className="py-1 px-2">Mobile Number</TableHead>
                 <TableHead className="py-1 px-2">Status</TableHead>
+                <TableHead className="py-1 px-2">Role</TableHead>
                 <TableHead className="py-1 px-2">Created At</TableHead>
-                <TableHead className="py-1 px-2 text-right">Actions</TableHead>
+                <TableHead className="py-1 px-2">Last Login</TableHead>
+                <TableHead className="py-1 px-2 text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {users.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell className="py-1 px-2">
-                     <div className="font-semibold">{user.user_metadata?.full_name || 'N/A'}</div>
-                    <div className="text-muted-foreground">{user.email}</div>
+                  <TableCell className="py-1 px-2 font-semibold">
+                    {user.user_metadata?.full_name || 'N/A'}
                   </TableCell>
-                  <TableCell className="py-1 px-2">
-                    <RoleSwitcher userId={user.id} currentRole={user.user_metadata?.role || 'user'} />
-                  </TableCell>
+                  <TableCell className="py-1 px-2">{user.email}</TableCell>
+                  <TableCell className="py-1 px-2">{user.phone || 'N/A'}</TableCell>
                   <TableCell className="py-1 px-2">
                      <Badge variant={user.email_confirmed_at ? "default" : "secondary"} className="text-xs font-normal">
                         {user.email_confirmed_at ? 'Active' : 'Invited'}
                      </Badge>
                   </TableCell>
+                  <TableCell className="py-1 px-2">
+                    <RoleSwitcher userId={user.id} currentRole={user.user_metadata?.role || 'user'} />
+                  </TableCell>
                   <TableCell className="py-1 px-2">{new Date(user.created_at).toLocaleDateString()}</TableCell>
+                  <TableCell className="py-1 px-2">{user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : 'Never'}</TableCell>
                   <TableCell className="py-1 px-2 text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
