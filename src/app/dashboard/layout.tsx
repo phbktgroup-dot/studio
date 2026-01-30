@@ -13,11 +13,8 @@ import {
   Briefcase,
   FileText,
   LogOut,
-  Settings,
-  ChevronRight,
   UserCog,
   Film,
-  SlidersHorizontal,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -41,7 +38,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Logo } from "@/components/shared/logo";
 import { Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 function DashboardUI({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -49,7 +45,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const { isMobile, toggleSidebar } = useSidebar();
-  const isSettingsActive = ['/dashboard/settings', '/dashboard/hero-section', '/dashboard/users'].includes(pathname);
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -81,7 +76,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (user) {
       const userRole = user.user_metadata?.role;
-      const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/hero-section' || pathname === '/dashboard/settings';
+      const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/hero-section';
       if (isAdminRoute && userRole !== 'admin') {
         router.push('/dashboard');
       }
@@ -138,9 +133,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>{user.user_metadata?.full_name || user.email}</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link href="/dashboard/settings">Settings</Link>
-              </DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
@@ -197,47 +189,24 @@ function DashboardUI({ children }: { children: ReactNode }) {
                   </SidebarMenuButton>
                   </SidebarMenuItem>
                   {userRole === 'admin' && (
-                    <DropdownMenu>
+                    <>
                       <SidebarMenuItem>
-                        <DropdownMenuTrigger asChild>
-                          <SidebarMenuButton
-                            isActive={isSettingsActive}
-                            size="sm"
-                            tooltip="Settings"
-                            className="w-full justify-between"
-                          >
-                            <div className="flex items-center gap-2">
-                              <Settings />
-                              <span>Settings</span>
-                            </div>
-                            <ChevronRight className="h-4 w-4" />
-                          </SidebarMenuButton>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent side="right" align="start" sideOffset={5}>
-                          <DropdownMenuItem
-                            onClick={() => router.push('/dashboard/settings')}
-                            className={cn(pathname === '/dashboard/settings' && 'bg-accent/50')}
-                          >
-                            <SlidersHorizontal className="mr-2" />
-                            <span>General</span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => router.push('/dashboard/users')}
-                            className={cn(pathname === '/dashboard/users' && 'bg-accent/50')}
-                          >
-                            <UserCog className="mr-2" />
+                        <SidebarMenuButton asChild isActive={pathname === '/dashboard/users'} size="sm" tooltip="Manage Users">
+                          <Link href="/dashboard/users">
+                            <UserCog />
                             <span>Manage Users</span>
-                          </DropdownMenuItem>
-                           <DropdownMenuItem
-                            onClick={() => router.push('/dashboard/hero-section')}
-                            className={cn(pathname === '/dashboard/hero-section' && 'bg-accent/50')}
-                          >
-                            <Film className="mr-2" />
-                            <span>Hero Section</span>
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
+                          </Link>
+                        </SidebarMenuButton>
                       </SidebarMenuItem>
-                    </DropdownMenu>
+                       <SidebarMenuItem>
+                        <SidebarMenuButton asChild isActive={pathname === '/dashboard/hero-section'} size="sm" tooltip="Hero Section">
+                          <Link href="/dashboard/hero-section">
+                            <Film />
+                            <span>Hero Section</span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    </>
                   )}
               </SidebarMenu>
               </SidebarContent>
