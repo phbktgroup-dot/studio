@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Trash2 } from 'lucide-react';
 import {
@@ -210,8 +210,10 @@ export default function HeroSectionPage() {
         </div>
       ) : (
         <Card>
-            <CardContent className="p-6">
-              <CardTitle className="text-sm mb-4">Hero Section Background Video</CardTitle>
+            <CardHeader>
+                <CardTitle className="text-sm">Hero Section Background Video</CardTitle>
+            </CardHeader>
+            <CardContent>
                 <div className={`grid ${videoUrl ? 'md:grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
                     <div className="space-y-3">
                         <div className="grid w-full items-center gap-1.5">
