@@ -213,7 +213,7 @@ export default function HeroSectionPage() {
             <CardHeader className="p-4 border-b-0 pb-0">
                 <CardTitle className="text-sm">Hero Section Background Video</CardTitle>
             </CardHeader>
-            <CardContent className="p-4 pt-4">
+            <CardContent className="p-4 pt-0">
                 <div className={`grid ${videoUrl ? 'md:grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
                     <div className="space-y-3">
                         <div className="grid w-full items-center gap-1.5">
@@ -228,7 +228,7 @@ export default function HeroSectionPage() {
 
                     {videoUrl && (
                         <div className="relative">
-                            <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-[16/10]" />
+                            <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-video" />
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
                                     <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
