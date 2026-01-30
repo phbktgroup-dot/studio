@@ -2,10 +2,10 @@ import { cn } from "@/lib/utils";
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <div className={cn("flex items-center justify-center font-headline text-xl font-bold text-primary", className)}>
+    <div className={cn("flex items-center justify-center font-headline text-2xl font-bold text-primary", className)}>
       <svg
-        width="28"
-        height="28"
+        width="32"
+        height="32"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
