@@ -15,6 +15,9 @@ import {
   LogOut,
   Settings,
   ChevronRight,
+  UserCog,
+  Film,
+  SlidersHorizontal,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -56,9 +59,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
   const isSettingsActive = ['/dashboard/settings', '/dashboard/hero-section', '/dashboard/users'].includes(pathname);
   const [isSettingsOpen, setIsSettingsOpen] = useState(isSettingsActive);
 
-  useEffect(() => {
-    setIsSettingsOpen(isSettingsActive);
-  }, [isSettingsActive]);
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -96,6 +96,10 @@ function DashboardUI({ children }: { children: ReactNode }) {
       }
     }
   }, [user, pathname, router]);
+
+  useEffect(() => {
+    setIsSettingsOpen(isSettingsActive);
+  }, [isSettingsActive]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -228,17 +232,17 @@ function DashboardUI({ children }: { children: ReactNode }) {
                                 <SidebarMenuSub>
                                     <SidebarMenuSubItem>
                                         <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/settings'}>
-                                            <Link href="/dashboard/settings">General</Link>
+                                            <Link href="/dashboard/settings"><SlidersHorizontal /><span>General</span></Link>
                                         </SidebarMenuSubButton>
                                     </SidebarMenuSubItem>
                                     <SidebarMenuSubItem>
                                         <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/users'}>
-                                            <Link href="/dashboard/users">Manage Users</Link>
+                                            <Link href="/dashboard/users"><UserCog /><span>Manage Users</span></Link>
                                         </SidebarMenuSubButton>
                                     </SidebarMenuSubItem>
                                     <SidebarMenuSubItem>
                                         <SidebarMenuSubButton asChild isActive={pathname === '/dashboard/hero-section'}>
-                                            <Link href="/dashboard/hero-section">Hero Section</Link>
+                                            <Link href="/dashboard/hero-section"><Film /><span>Hero Section</span></Link>
                                         </SidebarMenuSubButton>
                                     </SidebarMenuSubItem>
                                 </SidebarMenuSub>
