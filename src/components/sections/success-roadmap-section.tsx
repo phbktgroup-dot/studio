@@ -70,7 +70,7 @@ export default function SuccessRoadmapSection() {
     }, []);
 
   return (
-    <section className="py-12 md:py-16 bg-background">
+    <section className="py-8 md:py-12 bg-background">
       <div className="container max-w-6xl text-center">
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
             तुमच्या यशाची प्रत्येक पायरी, आमची साथ.

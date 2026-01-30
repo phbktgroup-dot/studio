@@ -22,7 +22,7 @@ const LegalSealIcon = () => (
 
 export default function ComplianceShieldSection() {
   return (
-    <section className="py-12 md:py-16 bg-background overflow-hidden">
+    <section className="py-8 md:py-12 bg-background overflow-hidden">
       <div className="container grid md:grid-cols-2 gap-12 items-center">
         <div className="max-w-md">
           <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">

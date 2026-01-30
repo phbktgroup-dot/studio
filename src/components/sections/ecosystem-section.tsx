@@ -30,7 +30,7 @@ const services = [
 
 export default function EcosystemSection() {
   return (
-    <section className="py-12 md:py-16 bg-muted/30">
+    <section className="py-8 md:py-12 bg-muted/30">
       <div className="container text-center">
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
           एकाच छताखाली पूर्ण व्यावसायिक समाधान.
