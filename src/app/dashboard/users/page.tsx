@@ -79,20 +79,20 @@ export default async function UsersPage() {
         <CardContent>
           <Table className="text-xs">
             <TableHeader>
-              <TableRow>
-                <TableHead className="py-0 px-2">User name</TableHead>
-                <TableHead className="py-0 px-2">Email ID</TableHead>
-                <TableHead className="py-0 px-2">Mobile Number</TableHead>
-                <TableHead className="py-0 px-2">Status</TableHead>
-                <TableHead className="py-0 px-2">Role</TableHead>
-                <TableHead className="py-0 px-2">Created At</TableHead>
-                <TableHead className="py-0 px-2">Last Login</TableHead>
-                <TableHead className="py-0 px-2 text-right">Action</TableHead>
+              <TableRow className="bg-muted/50 hover:bg-muted/50">
+                <TableHead className="h-8 py-0 px-2">User name</TableHead>
+                <TableHead className="h-8 py-0 px-2">Email ID</TableHead>
+                <TableHead className="h-8 py-0 px-2">Mobile Number</TableHead>
+                <TableHead className="h-8 py-0 px-2">Status</TableHead>
+                <TableHead className="h-8 py-0 px-2">Role</TableHead>
+                <TableHead className="h-8 py-0 px-2">Created At</TableHead>
+                <TableHead className="h-8 py-0 px-2">Last Login</TableHead>
+                <TableHead className="h-8 py-0 px-2 text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {users.map((user) => (
-                <TableRow key={user.id}>
+                <TableRow key={user.id} className="h-8">
                   <TableCell className="py-0 px-2 font-semibold">
                     {user.user_metadata?.full_name || 'N/A'}
                   </TableCell>
