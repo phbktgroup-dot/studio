@@ -118,7 +118,7 @@ export default function Header() {
             ) : logoUrl ? (
               <img src={logoUrl} alt="PHBKT Group" className="h-8 w-auto" />
             ) : (
-              <Logo />
+              <Logo className="h-8" />
             )}
           </Link>
         </div>
