@@ -11,6 +11,7 @@ import { supabase } from "@/lib/supabase";
 
 export default function HeroSection() {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchVideoUrl = async () => {
@@ -32,6 +33,8 @@ export default function HeroSection() {
       } catch (error: any) {
         // This can happen if the table doesn't exist yet or on network errors.
         console.warn("Could not fetch hero video URL:", error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -39,27 +42,31 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-[75vh] min-h-[550px] w-full overflow-hidden">
-      {videoUrl ? (
-        <video
-          key={videoUrl}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 z-0 h-full w-full object-cover"
-        >
-          <source src={videoUrl} type="video/mp4" />
-        </video>
-      ) : (
-        <div
-          className="absolute inset-0 z-0"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"></div>
-          <div className="w-full h-full opacity-30">
-            <Sphere />
-          </div>
-        </div>
+    <section className="relative h-[75vh] min-h-[550px] w-full overflow-hidden bg-background">
+      {!loading && (
+        <>
+          {videoUrl ? (
+            <video
+              key={videoUrl}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 z-0 h-full w-full object-cover"
+            >
+              <source src={videoUrl} type="video/mp4" />
+            </video>
+          ) : (
+            <div
+              className="absolute inset-0 z-0"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"></div>
+              <div className="w-full h-full opacity-30">
+                <Sphere />
+              </div>
+            </div>
+          )}
+        </>
       )}
       
       <div className="absolute inset-0 bg-background/10"></div>
