@@ -210,14 +210,15 @@ export default function HeroSectionPage() {
         </div>
       ) : (
         <Card>
-            <CardHeader className="p-4">
+            <CardHeader className="p-4 border-b">
                 <CardTitle className="text-sm">Hero Section Background Video</CardTitle>
             </CardHeader>
-            <CardContent className="p-4 pt-2">
+            <CardContent className="p-4">
                 <div className={`grid ${videoUrl ? 'md:grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
                     <div className="space-y-3">
+                        <Label className="text-xs">Upload a new video</Label>
                         <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="video" className="text-xs">Video File (MP4 recommended)</Label>
+                            <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
                             <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
                         </div>
                         <Button onClick={handleUpload} disabled={loading || !file} size="sm">
@@ -227,13 +228,15 @@ export default function HeroSectionPage() {
                     </div>
 
                     {videoUrl && (
-                        <div className="relative group">
-                            <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-[4/3]" />
+                        <div className="space-y-3">
+                           <Label className="text-xs">Current Video</Label>
+                            <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-video" />
                             
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
-                                    <Button variant="destructive" size="icon" className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <Trash2 className="h-4 w-4" />
+                                    <Button variant="destructive" size="sm" className="w-full">
+                                        <Trash2 className="h-4 w-4 mr-2" />
+                                        Delete Video
                                     </Button>
                                 </AlertDialogTrigger>
                                 <AlertDialogContent>
