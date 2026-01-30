@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Trash2 } from 'lucide-react';
 import {
@@ -212,9 +212,6 @@ export default function HeroSectionPage() {
         <Card>
             <CardHeader>
             <CardTitle className="text-sm">Hero Section Background Video</CardTitle>
-            <CardDescription className="text-xs">
-                Upload a video to display in the background of your homepage. Uploading a new video will replace the current one.
-            </CardDescription>
             </CardHeader>
             <CardContent>
                 <div className={`grid ${videoUrl ? 'md:grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
