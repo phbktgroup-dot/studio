@@ -211,6 +211,9 @@ export default function HeroSectionPage() {
       ) : (
         <Card>
             <CardContent className="p-4 flex gap-4">
+                <div className="flex items-center justify-center border-r pr-4">
+                    <CardTitle className="text-sm [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">Hero Section Background Video</CardTitle>
+                </div>
                 <div className="flex-grow">
                     <div className={`grid ${videoUrl ? 'md:grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
                         <div className="space-y-3">
@@ -253,9 +256,6 @@ export default function HeroSectionPage() {
                             </div>
                         )}
                     </div>
-                </div>
-                 <div className="flex items-center justify-center border-l pl-4">
-                    <CardTitle className="text-sm [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">Hero Section Background Video</CardTitle>
                 </div>
             </CardContent>
         </Card>
