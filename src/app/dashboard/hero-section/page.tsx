@@ -210,6 +210,25 @@ export default function HeroSectionPage() {
         </div>
       ) : (
         <div className="grid lg:grid-cols-2 gap-4 items-start">
+            <Card>
+                <CardHeader>
+                <CardTitle className="text-sm">{videoUrl ? 'Upload a New Video' : 'Hero Section Background Video'}</CardTitle>
+                <CardDescription className="text-xs">
+                    {videoUrl ? 'Uploading a new video will replace the current one.' : 'Upload a video to display in the background of the hero section on your homepage.'}
+                </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                <div className="grid w-full items-center gap-1.5">
+                    <Label htmlFor="video" className="text-xs">Video File (MP4 recommended)</Label>
+                    <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
+                </div>
+                <Button onClick={handleUpload} disabled={loading || !file} size="sm">
+                    {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                    {videoUrl ? 'Upload and Replace' : 'Upload Video'}
+                </Button>
+                </CardContent>
+            </Card>
+
             {videoUrl && (
                 <Card>
                     <CardHeader>
@@ -245,25 +264,6 @@ export default function HeroSectionPage() {
                     </CardContent>
                 </Card>
             )}
-
-            <Card>
-                <CardHeader>
-                <CardTitle className="text-sm">{videoUrl ? 'Upload a New Video' : 'Hero Section Background Video'}</CardTitle>
-                <CardDescription className="text-xs">
-                    {videoUrl ? 'Uploading a new video will replace the current one.' : 'Upload a video to display in the background of the hero section on your homepage.'}
-                </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                <div className="grid w-full items-center gap-1.5">
-                    <Label htmlFor="video" className="text-xs">Video File (MP4 recommended)</Label>
-                    <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
-                </div>
-                <Button onClick={handleUpload} disabled={loading || !file} size="sm">
-                    {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                    {videoUrl ? 'Upload and Replace' : 'Upload Video'}
-                </Button>
-                </CardContent>
-            </Card>
         </div>
       )}
     </div>
