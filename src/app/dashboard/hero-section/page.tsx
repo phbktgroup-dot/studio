@@ -202,7 +202,7 @@ export default function HeroSectionPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-lg font-bold font-headline">Hero Section</h1>
+      <h1 className="text-lg font-bold font-headline">Home section Update</h1>
       
       {isFetching ? (
         <div className="flex items-center justify-center p-8">
@@ -235,7 +235,7 @@ export default function HeroSectionPage() {
                         <CardTitle className="text-sm">Current Video</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="relative group">
+                        <div className="relative group max-w-md mx-auto">
                             <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-video" />
                             
                             <AlertDialog>
