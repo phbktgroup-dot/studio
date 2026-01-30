@@ -94,7 +94,7 @@ export default function HeroSection() {
         />
         <AnimatedText
           text={text[language].p}
-          className="mt-6 max-w-2xl text-lg text-foreground/80 md:text-xl"
+          className="mt-6 max-w-2xl text-base text-foreground/80 md:text-lg"
           stagger={0.01}
         />
         <div className="mt-8 flex gap-4">
