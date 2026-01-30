@@ -86,7 +86,7 @@ export default function HeroSection() {
           text={text[language].h1}
           el="h1"
           className="font-headline text-4xl font-bold tracking-tighter sm:text-6xl"
-          spanClassName="py-1"
+          spanClassName="py-2"
         />
         <AnimatedText
           text={text[language].p}
