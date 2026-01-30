@@ -42,7 +42,7 @@ export default function ContactActionSection() {
             </div>
             <div className="space-y-2">
                 <Label htmlFor="message">Your Vision</Label>
-                <Textarea id="message" placeholder="Tell us about your project..." />
+                <Textarea id="message" placeholder="Tell us about your project..." className="min-h-[120px]" />
             </div>
             <div className="text-center">
                 <Button type="submit" size="lg" className="group relative overflow-hidden">
