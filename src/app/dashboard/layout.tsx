@@ -100,10 +100,17 @@ function DashboardUI({ children }: { children: ReactNode }) {
 
   const userRole = user.user_metadata?.role;
   const isSettingsActive = ['/dashboard/settings', '/dashboard/hero-section', '/dashboard/users'].includes(pathname);
+  
+  const UserAvatarButton = () => (
+      <Avatar>
+        <AvatarImage src={user.user_metadata?.avatar_url} />
+        <AvatarFallback>{user.user_metadata?.full_name?.[0] || user.email?.[0].toUpperCase()}</AvatarFallback>
+      </Avatar>
+  )
 
   return (
     <>
-      <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-50 fixed top-0 left-0 right-0">
+      <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-[51] fixed top-0 left-0 right-0">
         <div className="flex items-center gap-2">
           <Link href="/">
             <Logo />
@@ -111,21 +118,15 @@ function DashboardUI({ children }: { children: ReactNode }) {
         </div>
         
         {isMobile ? (
-          <Button variant="secondary" size="icon" className="rounded-full" onClick={toggleSidebar}>
-            <Avatar>
-              <AvatarImage src={user.user_metadata?.avatar_url} />
-              <AvatarFallback>{user.user_metadata?.full_name?.[0] || user.email?.[0].toUpperCase()}</AvatarFallback>
-            </Avatar>
+          <Button variant="ghost" size="icon" className="rounded-full" onClick={toggleSidebar}>
+            <UserAvatarButton />
             <span className="sr-only">Toggle sidebar</span>
           </Button>
         ) : (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
-                <Avatar>
-                  <AvatarImage src={user.user_metadata?.avatar_url} />
-                  <AvatarFallback>{user.user_metadata?.full_name?.[0] || user.email?.[0].toUpperCase()}</AvatarFallback>
-                </Avatar>
+                <UserAvatarButton />
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
