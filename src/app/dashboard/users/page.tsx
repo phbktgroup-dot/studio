@@ -33,7 +33,7 @@ export default async function UsersPage() {
   if (!supabaseUrl || !serviceRoleKey || serviceRoleKey === 'YOUR_SERVICE_ROLE_KEY_HERE') {
     return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-xl font-bold font-headline">Manage Users</h1>
+        <h1 className="text-lg font-bold font-headline">Manage Users</h1>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Configuration Error</AlertTitle>
@@ -57,7 +57,7 @@ export default async function UsersPage() {
   if (error) {
      return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-xl font-bold font-headline">Manage Users</h1>
+        <h1 className="text-lg font-bold font-headline">Manage Users</h1>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Error Fetching Users</AlertTitle>
@@ -71,7 +71,7 @@ export default async function UsersPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-xl font-bold font-headline">Manage Users</h1>
+      <h1 className="text-lg font-bold font-headline">Manage Users</h1>
       <Card>
         <CardHeader>
           <CardTitle className="text-base">User List</CardTitle>
@@ -80,42 +80,42 @@ export default async function UsersPage() {
           <Table className="text-xs">
             <TableHeader>
               <TableRow>
-                <TableHead className="py-1 px-2">User name</TableHead>
-                <TableHead className="py-1 px-2">Email ID</TableHead>
-                <TableHead className="py-1 px-2">Mobile Number</TableHead>
-                <TableHead className="py-1 px-2">Status</TableHead>
-                <TableHead className="py-1 px-2">Role</TableHead>
-                <TableHead className="py-1 px-2">Created At</TableHead>
-                <TableHead className="py-1 px-2">Last Login</TableHead>
-                <TableHead className="py-1 px-2 text-right">Action</TableHead>
+                <TableHead className="py-0 px-2">User name</TableHead>
+                <TableHead className="py-0 px-2">Email ID</TableHead>
+                <TableHead className="py-0 px-2">Mobile Number</TableHead>
+                <TableHead className="py-0 px-2">Status</TableHead>
+                <TableHead className="py-0 px-2">Role</TableHead>
+                <TableHead className="py-0 px-2">Created At</TableHead>
+                <TableHead className="py-0 px-2">Last Login</TableHead>
+                <TableHead className="py-0 px-2 text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {users.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell className="py-1 px-2 font-semibold">
+                  <TableCell className="py-0 px-2 font-semibold">
                     {user.user_metadata?.full_name || 'N/A'}
                   </TableCell>
-                  <TableCell className="py-1 px-2">{user.email}</TableCell>
-                  <TableCell className="py-1 px-2">{user.phone || 'N/A'}</TableCell>
-                  <TableCell className="py-1 px-2">
+                  <TableCell className="py-0 px-2">{user.email}</TableCell>
+                  <TableCell className="py-0 px-2">{user.phone || 'N/A'}</TableCell>
+                  <TableCell className="py-0 px-2">
                      <Badge variant={user.email_confirmed_at ? "default" : "secondary"} className="text-xs font-normal">
                         {user.email_confirmed_at ? 'Active' : 'Invited'}
                      </Badge>
                   </TableCell>
-                  <TableCell className="py-1 px-2">
+                  <TableCell className="py-0 px-2">
                     <RoleSwitcher userId={user.id} currentRole={user.user_metadata?.role || 'user'} />
                   </TableCell>
-                  <TableCell className="py-1 px-2">{new Date(user.created_at).toLocaleDateString()}</TableCell>
-                  <TableCell className="py-1 px-2">{user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : 'Never'}</TableCell>
-                  <TableCell className="py-1 px-2 text-right">
+                  <TableCell className="py-0 px-2">{new Date(user.created_at).toLocaleDateString()}</TableCell>
+                  <TableCell className="py-0 px-2">{user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : 'Never'}</TableCell>
+                  <TableCell className="py-0 px-2 text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
                           aria-haspopup="true"
                           size="icon"
                           variant="ghost"
-                          className="h-7 w-7"
+                          className="h-6 w-6"
                         >
                           <MoreHorizontal className="h-4 w-4" />
                           <span className="sr-only">Toggle menu</span>
