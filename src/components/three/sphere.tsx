@@ -27,7 +27,7 @@ export default function Sphere() {
     // Sphere
     const geometry = new THREE.SphereGeometry(1, 64, 64);
     const material = new THREE.MeshStandardMaterial({
-      color: '#4169E1',
+      color: '#B91C1C',
       roughness: 0.4,
       metalness: 0.2,
     });
