@@ -90,11 +90,11 @@ export default function HeroSection() {
         <AnimatedText
           text={text[language].h1}
           el="h1"
-          className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl"
+          className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl"
         />
         <AnimatedText
           text={text[language].p}
-          className="mt-6 max-w-2xl text-base text-foreground/80 md:text-lg"
+          className="mt-6 max-w-2xl text-foreground/80 md:text-lg"
           stagger={0.01}
         />
         <div className="mt-8 flex gap-4">
