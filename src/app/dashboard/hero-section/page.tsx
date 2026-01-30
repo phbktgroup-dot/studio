@@ -210,10 +210,10 @@ export default function HeroSectionPage() {
         </div>
       ) : (
         <Card>
-            <CardHeader>
+            <CardHeader className="p-4">
                 <CardTitle className="text-sm">Hero Section Background Video</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 pt-2">
                 <div className={`grid ${videoUrl ? 'md:grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
                     <div className="space-y-3">
                         <div className="grid w-full items-center gap-1.5">
