@@ -39,7 +39,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-[100svh] min-h-[700px] w-full overflow-hidden">
+    <section className="relative h-[85vh] min-h-[600px] w-full overflow-hidden">
       {videoUrl ? (
         <video
           key={videoUrl}
