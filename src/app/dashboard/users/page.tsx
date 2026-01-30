@@ -15,6 +15,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle } from "lucide-react";
 import { RoleSwitcher } from './role-switcher';
 import { Badge } from '@/components/ui/badge';
+import { DeleteUserButton } from './DeleteUserButton';
 
 export default async function UsersPage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -22,7 +23,7 @@ export default async function UsersPage() {
 
   if (!supabaseUrl || !serviceRoleKey || serviceRoleKey === 'YOUR_SERVICE_ROLE_KEY_HERE') {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 pt-2">
         <h1 className="text-lg font-bold font-headline">Manage Users</h1>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
@@ -46,7 +47,7 @@ export default async function UsersPage() {
 
   if (error) {
      return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 pt-2">
         <h1 className="text-lg font-bold font-headline">Manage Users</h1>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
@@ -60,7 +61,7 @@ export default async function UsersPage() {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 pt-2">
       <h1 className="text-lg font-bold font-headline">Manage Users</h1>
       <Card>
         <CardContent className="p-0">
@@ -93,7 +94,10 @@ export default async function UsersPage() {
                     <RoleSwitcher userId={user.id} currentRole={user.user_metadata?.role || 'user'} />
                   </TableCell>
                   <TableCell className="py-0 px-2">{new Date(user.created_at).toLocaleDateString()}</TableCell>
-                  <TableCell className="py-0 px-2">{user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : 'Never'}</TableCell>
+                  <TableCell className="py-0 px-2 flex items-center">
+                    <span>{user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : 'Never'}</span>
+                    <DeleteUserButton userId={user.id} />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
