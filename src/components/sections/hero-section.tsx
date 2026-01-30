@@ -12,10 +12,14 @@ const text = {
   mr: {
     h1: "तुमचा व्यवसाय करा डिजिटल, तुमची प्रगती आमचे ध्येय.",
     p: "शून्यातून विश्व निर्माण करणाऱ्या जिद्दी उद्योजकांसाठी.",
+    ourServices: "आमच्या सेवा",
+    contactUs: "आमच्याशी संपर्क साधा",
   },
   en: {
     h1: "Digitize your business, your progress is our goal.",
     p: "For determined entrepreneurs who create a universe from nothing.",
+    ourServices: "Our Services",
+    contactUs: "Contact Us",
   },
 };
 
@@ -85,20 +89,20 @@ export default function HeroSection() {
         <AnimatedText
           text={text[language].h1}
           el="h1"
-          className="font-headline text-4xl font-bold tracking-tighter sm:text-6xl"
-          spanClassName="py-2"
+          className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl"
+          spanClassName="py-4"
         />
         <AnimatedText
           text={text[language].p}
-          className="mt-4 max-w-2xl text-foreground/80 text-base md:text-lg"
+          className="mt-4 max-w-2xl text-foreground/80 text-base"
           stagger={0.01}
         />
         <div className="mt-8 flex gap-4">
           <Button size="lg" asChild>
-            <Link href="#services">Our Services</Link>
+            <Link href="#services">{text[language].ourServices}</Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <Link href="#contact">Contact Us</Link>
+            <Link href="#contact">{text[language].contactUs}</Link>
           </Button>
         </div>
       </div>
