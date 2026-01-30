@@ -56,7 +56,7 @@ export default function HeroSectionPage() {
           setVideoUrl(data.hero_video_url);
         }
       } catch (error: any) {
-        if (error.message?.includes('column "hero_video_url" of relation "settings" does not exist')) {
+        if (error.message?.includes('column "hero_video_url" does not exist')) {
             console.warn("Could not fetch hero video URL:", error.message);
         } else {
             // Do not show a toast on initial load failure
@@ -84,7 +84,7 @@ export default function HeroSectionPage() {
             setLogoUrl(data.logo_url);
           }
         } catch (error: any) {
-          if (error.message?.includes('column "logo_url" of relation "settings" does not exist')) {
+          if (error.message?.includes('column "logo_url" does not exist')) {
             // This is a common setup issue, we can ignore it on fetch.
             // The upload function will guide the user.
             console.warn("Could not fetch logo URL:", error.message);
@@ -275,7 +275,7 @@ export default function HeroSectionPage() {
             description = "The 'settings' table does not exist. Please create it with 'id' and 'logo_url' columns.";
         } else if (error.message?.includes('violates row-level security policy')) {
             description = `Row-level security is preventing the upload. Please disable RLS for the 'settings' table.`
-        } else if (error.message?.includes('column "logo_url" of relation "settings" does not exist')) {
+        } else if (error.message?.includes('column "logo_url" does not exist')) {
             description = "The 'logo_url' column does not exist in your 'settings' table. Please add a column named 'logo_url' of type 'text'.";
         }
 
