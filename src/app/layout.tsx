@@ -10,7 +10,7 @@ const fontBody = Inter({
 });
 
 const fontHeadline = Mukta({
-  subsets: ["latin"],
+  subsets: ["latin", "devanagari"],
   weight: ["400", "700"],
   variable: "--font-headline",
 });
