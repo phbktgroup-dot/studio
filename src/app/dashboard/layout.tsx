@@ -199,10 +199,10 @@ function DashboardUI({ children }: { children: ReactNode }) {
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                        <SidebarMenuItem>
-                        <SidebarMenuButton asChild isActive={pathname === '/dashboard/hero-section'} size="sm" tooltip="Hero Section">
+                        <SidebarMenuButton asChild isActive={pathname === '/dashboard/hero-section'} size="sm" tooltip="Home section Update">
                           <Link href="/dashboard/hero-section">
                             <Film />
-                            <span>Hero Section</span>
+                            <span>Home section Update</span>
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
