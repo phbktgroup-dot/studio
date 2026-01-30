@@ -75,7 +75,7 @@ export default function HeroSection() {
 
       <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center">
         <AnimatedText
-          text="तुमच्या महत्त्वाकांक्षेला द्या डिजिटल साम्राज्याचे स्वरूप."
+          text="तुमचा व्यवसाय करा डिजिटल, तुमची प्रगती आमचे ध्येय."
           el="h1"
           className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl"
         />
