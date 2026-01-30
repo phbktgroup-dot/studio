@@ -49,7 +49,7 @@ export function RoleSwitcher({ userId, currentRole }: { userId: string, currentR
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="capitalize w-20 justify-between" disabled={loading}>
+                <Button variant="ghost" size="sm" className="capitalize w-20 justify-between text-xs" disabled={loading}>
                     {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <span>{effectiveRole}</span>}
                     <ChevronDown className="h-4 w-4" />
                 </Button>
