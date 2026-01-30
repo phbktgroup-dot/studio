@@ -2,9 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import Sphere from "@/components/three/sphere";
 import { AnimatedText } from "@/components/shared/animated-text";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
@@ -28,6 +26,7 @@ export default function HeroSection() {
 
   useEffect(() => {
     const fetchVideoUrl = async () => {
+      setLoading(true); // Start loading
       try {
         const { data, error } = await supabase
           .from('settings')
@@ -73,12 +72,8 @@ export default function HeroSection() {
             </video>
           ) : (
             <div
-              className="absolute inset-0 z-0"
+              className="absolute inset-0 z-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"></div>
-              <div className="w-full h-full opacity-30">
-                <Sphere />
-              </div>
             </div>
           )}
         </>
@@ -90,11 +85,12 @@ export default function HeroSection() {
         <AnimatedText
           text={text[language].h1}
           el="h1"
-          className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl"
+          className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl"
+          spanClassName="py-1"
         />
         <AnimatedText
           text={text[language].p}
-          className="mt-6 max-w-2xl text-foreground/80 md:text-lg"
+          className="mt-4 max-w-2xl text-foreground/80 text-base md:text-lg"
           stagger={0.01}
         />
         <div className="mt-8 flex gap-4">

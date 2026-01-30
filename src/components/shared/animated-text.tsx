@@ -8,6 +8,7 @@ type AnimatedTextProps = {
   el?: keyof JSX.IntrinsicElements;
   className?: string;
   stagger?: number;
+  spanClassName?: string;
 };
 
 export function AnimatedText({
@@ -15,6 +16,7 @@ export function AnimatedText({
   el: Wrapper = 'p',
   className,
   stagger = 0.05,
+  spanClassName,
 }: AnimatedTextProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -46,7 +48,7 @@ export function AnimatedText({
       {text.split(' ').map((word, wordIndex) => (
         <span
           key={wordIndex}
-          className="inline-block text-reveal"
+          className={cn("inline-block text-reveal", spanClassName)}
           style={{ '--reveal-delay': `${wordIndex * stagger}s` } as React.CSSProperties}
         >
           {word}&nbsp;
