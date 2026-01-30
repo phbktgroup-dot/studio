@@ -10,7 +10,6 @@ import {
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -76,7 +75,6 @@ export default async function UsersPage() {
       <Card>
         <CardHeader>
           <CardTitle className="text-lg">User List</CardTitle>
-          <CardDescription className="text-xs">A list of all registered users in your application.</CardDescription>
         </CardHeader>
         <CardContent>
           <Table className="text-xs">
