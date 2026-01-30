@@ -1,5 +1,9 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
+import { supabase } from '@/lib/supabase';
 
 const MailboxIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -22,11 +26,49 @@ const MailboxIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export default function Footer() {
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [logoLoading, setLogoLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLogoUrl = async () => {
+        setLogoLoading(true);
+        try {
+          const { data, error } = await supabase
+              .from('settings')
+              .select('logo_url')
+              .eq('id', 1)
+              .single();
+          
+          if (error && error.code !== 'PGRST116') {
+              throw error;
+          }
+  
+          if (data?.logo_url) {
+              setLogoUrl(data.logo_url);
+          }
+        } catch (error: any) {
+          // It's okay if this fails, we'll just fall back to the default logo.
+          console.warn("Could not fetch site logo for footer:", error.message);
+        } finally {
+            setLogoLoading(false);
+        }
+      };
+    fetchLogoUrl();
+  }, []);
+
   return (
     <footer id="contact" className="border-t bg-muted/30">
       <div className="container grid items-start gap-8 py-12 md:grid-cols-3">
         <div className="flex flex-col gap-4">
-          <Logo />
+          <Link href="/">
+            {logoLoading ? (
+              <div className="h-[48px] w-[180px]" />
+            ) : logoUrl ? (
+              <img src={logoUrl} alt="PHBKT Group" className="h-[48px] w-auto object-contain" />
+            ) : (
+              <Logo className="h-[48px]" />
+            )}
+          </Link>
           <p className="text-sm text-muted-foreground">
             Empowering your business with innovative financial and technological solutions.
           </p>
