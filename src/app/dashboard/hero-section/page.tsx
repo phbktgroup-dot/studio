@@ -210,50 +210,52 @@ export default function HeroSectionPage() {
         </div>
       ) : (
         <Card>
-            <CardHeader className="p-4 border-b-0 pb-0">
-                <CardTitle className="text-sm">Hero Section Background Video</CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 pt-0">
-                <div className={`grid ${videoUrl ? 'md:grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
-                    <div className="space-y-3">
-                        <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
-                            <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
+            <CardContent className="p-4 flex gap-4">
+                <div className="flex-grow">
+                    <div className={`grid ${videoUrl ? 'md:grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
+                        <div className="space-y-3">
+                            <div className="grid w-full items-center gap-1.5">
+                                <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
+                                <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
+                            </div>
+                            <Button onClick={handleUpload} disabled={loading || !file} size="sm">
+                                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                                {videoUrl ? 'Upload and Replace' : 'Upload Video'}
+                            </Button>
                         </div>
-                        <Button onClick={handleUpload} disabled={loading || !file} size="sm">
-                            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                            {videoUrl ? 'Upload and Replace' : 'Upload Video'}
-                        </Button>
-                    </div>
 
-                    {videoUrl && (
-                        <div className="relative">
-                            <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-video" />
-                            <AlertDialog>
-                                <AlertDialogTrigger asChild>
-                                    <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
-                                        <Trash2 className="h-4 w-4" />
-                                        <span className="sr-only">Delete Video</span>
-                                    </Button>
-                                </AlertDialogTrigger>
-                                <AlertDialogContent>
-                                    <AlertDialogHeader>
-                                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                                    <AlertDialogDescription>
-                                        This action will permanently delete the hero section video. This cannot be undone.
-                                    </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                    <AlertDialogFooter>
-                                    <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
-                                    <AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-destructive hover:bg-destructive/90">
-                                        {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                                        Delete
-                                    </AlertDialogAction>
-                                    </AlertDialogFooter>
-                                </AlertDialogContent>
-                            </AlertDialog>
-                        </div>
-                    )}
+                        {videoUrl && (
+                            <div className="relative">
+                                <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-[16/10]" />
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
+                                            <Trash2 className="h-4 w-4" />
+                                            <span className="sr-only">Delete Video</span>
+                                        </Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            This action will permanently delete the hero section video. This cannot be undone.
+                                        </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                        <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+                                        <AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-destructive hover:bg-destructive/90">
+                                            {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                            Delete
+                                        </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+                            </div>
+                        )}
+                    </div>
+                </div>
+                 <div className="flex items-center justify-center border-l pl-4">
+                    <CardTitle className="text-sm [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">Hero Section Background Video</CardTitle>
                 </div>
             </CardContent>
         </Card>
