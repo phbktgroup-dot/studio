@@ -215,7 +215,7 @@ export default function HeroSectionPage() {
                     <CardTitle className="text-sm [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">Hero Section Background Video</CardTitle>
                 </div>
                 <div className="flex-grow">
-                    <div className={`grid ${videoUrl ? 'grid-cols-1' : 'grid-cols-1'} gap-6 items-start`}>
+                    <div className={`grid ${videoUrl ? 'grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
                         <div className="space-y-3">
                             <div className="grid w-full items-center gap-1.5">
                                 <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
@@ -229,7 +229,7 @@ export default function HeroSectionPage() {
 
                         {videoUrl && (
                             <div className="relative">
-                                <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-video" />
+                                <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-[16/9]" />
                                 <AlertDialog>
                                     <AlertDialogTrigger asChild>
                                         <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
