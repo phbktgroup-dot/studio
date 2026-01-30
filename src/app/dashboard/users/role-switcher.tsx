@@ -49,12 +49,12 @@ export function RoleSwitcher({ userId, currentRole }: { userId: string, currentR
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="capitalize w-24 justify-between" disabled={loading}>
+                <Button variant="ghost" size="sm" className="capitalize w-20 justify-between" disabled={loading}>
                     {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <span>{effectiveRole}</span>}
                     <ChevronDown className="h-4 w-4" />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-24">
+            <DropdownMenuContent align="end" className="w-20">
                 <DropdownMenuLabel>Change Role</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => handleRoleChange('admin')} disabled={effectiveRole === 'admin' || loading}>
