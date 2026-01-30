@@ -109,7 +109,7 @@ export default function Header() {
       <div className="container flex h-16 items-center">
         <div className="mr-auto flex items-center">
           <Link href="/">
-            {logoUrl ? <img src={logoUrl} alt="PHBKT Group" className="h-10 w-auto" /> : <Logo />}
+            {logoUrl ? <img src={logoUrl} alt="PHBKT Group" className="h-14 w-auto" /> : <Logo />}
           </Link>
         </div>
         <NavMenu className="hidden md:flex" />
