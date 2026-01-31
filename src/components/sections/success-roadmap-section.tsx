@@ -7,6 +7,7 @@ import { useLanguage } from '@/context/language-provider';
 
 const text = {
   mr: {
+    subheading: "यशाचा मार्ग",
     h2: "तुमच्या यशाची प्रत्येक पायरी, आमची साथ.",
     milestones: [
       { title: "कल्पना आणि नोंदणी", icon: MilestoneIcon, description: "एक मजबूत पाया तयार करण्यासाठी तुमची संकल्पना मजबूत करा आणि सर्व कायदेशीर नोंदणी हाताळा." },
@@ -17,6 +18,7 @@ const text = {
     ]
   },
   en: {
+    subheading: "The Success Roadmap",
     h2: "We are with you at every step of your success.",
     milestones: [
       { title: "Idea & Registration", icon: MilestoneIcon, description: "Solidify your concept and handle all legal registration to create a firm foundation." },
@@ -94,6 +96,9 @@ export default function SuccessRoadmapSection() {
   return (
     <section className="py-8 md:py-12 bg-background overflow-x-hidden">
       <div className="container text-center">
+        <h3 className="text-lg font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+            {text[language].subheading}
+        </h3>
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
             {text[language].h2}
         </h2>
