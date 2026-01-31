@@ -8,7 +8,7 @@ import { ArrowDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/context/language-provider";
 
-const text = {
+const defaultText = {
   mr: {
     h1: "तुमचा व्यवसाय करा डिजिटल, तुमची प्रगती आमचे ध्येय.",
     p: "शून्यातून विश्व निर्माण करणाऱ्या जिद्दी उद्योजकांसाठी.",
@@ -26,35 +26,49 @@ const text = {
 export default function HeroSection() {
   const { language } = useLanguage();
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [heroText, setHeroText] = useState(defaultText);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchVideoUrl = async () => {
-      setLoading(true); // Start loading
+    const fetchHeroData = async () => {
+      setLoading(true);
       try {
         const { data, error } = await supabase
           .from('settings')
-          .select('hero_video_url')
+          .select('hero_video_url, hero_h1_en, hero_p_en, hero_button1_en, hero_button2_en, hero_h1_mr, hero_p_mr, hero_button1_mr, hero_button2_mr')
           .eq('id', 1)
           .single();
 
-        if (error && error.code !== 'PGRST116') { // PGRST116 = no rows found
-          console.warn("Could not fetch hero video URL:", error.message);
+        if (error && error.code !== 'PGRST116') {
+          console.warn("Could not fetch hero data:", error.message);
           return;
         }
 
-        if (data && data.hero_video_url) {
-          setVideoUrl(data.hero_video_url);
+        if (data) {
+          setVideoUrl(data.hero_video_url || null);
+          setHeroText({
+            en: {
+              h1: data.hero_h1_en || defaultText.en.h1,
+              p: data.hero_p_en || defaultText.en.p,
+              ourServices: data.hero_button1_en || defaultText.en.ourServices,
+              contactUs: data.hero_button2_en || defaultText.en.contactUs,
+            },
+            mr: {
+              h1: data.hero_h1_mr || defaultText.mr.h1,
+              p: data.hero_p_mr || defaultText.mr.p,
+              ourServices: data.hero_button1_mr || defaultText.mr.ourServices,
+              contactUs: data.hero_button2_mr || defaultText.mr.contactUs,
+            },
+          });
         }
       } catch (error: any) {
-        // This can happen if the table doesn't exist yet or on network errors.
-        console.warn("Could not fetch hero video URL:", error.message);
+        console.warn("Could not fetch hero data, using defaults:", error.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchVideoUrl();
+    fetchHeroData();
   }, []);
 
   return (
@@ -87,22 +101,22 @@ export default function HeroSection() {
 
       <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center">
         <AnimatedText
-          text={text[language].h1}
+          text={heroText[language].h1}
           el="h1"
           className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl"
           spanClassName="py-4"
         />
         <AnimatedText
-          text={text[language].p}
+          text={heroText[language].p}
           className="mt-4 max-w-2xl text-foreground/80 text-base"
           stagger={0.01}
         />
         <div className="mt-8 flex gap-4">
           <Button size="lg" asChild>
-            <Link href="#services">{text[language].ourServices}</Link>
+            <Link href="#services">{heroText[language].ourServices}</Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <Link href="#contact">{text[language].contactUs}</Link>
+            <Link href="#contact">{heroText[language].contactUs}</Link>
           </Button>
         </div>
       </div>
