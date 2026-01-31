@@ -81,10 +81,10 @@ export default function PremiumServicesSection() {
   return (
     <section id="services" className="bg-[#F8F9FA] py-20 md:py-32">
         <div className="container text-center mb-8">
-            <h3 className="text-lg font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+            <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {sectionTitleText[language]}
             </h3>
-            <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary mt-2">
+            <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary mt-2">
                 {headingText[language]}
             </h2>
         </div>

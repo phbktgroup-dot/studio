@@ -96,10 +96,10 @@ export default function SuccessRoadmapSection() {
   return (
     <section className="py-8 md:py-12 bg-background overflow-x-hidden">
       <div className="container text-center">
-        <h3 className="text-lg font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+        <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
             {text[language].subheading}
         </h3>
-        <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
+        <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
             {text[language].h2}
         </h2>
         <div ref={roadmapRef} className="mt-12 relative">
