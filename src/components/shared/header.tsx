@@ -22,12 +22,22 @@ import { supabase } from '@/lib/supabase';
 import type { User } from '@supabase/supabase-js';
 import { useLanguage } from "@/context/language-provider";
 
-const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#marketing", label: "About" },
-  { href: "#roadmap", label: "Roadmap" },
-  { href: "#contact", label: "Contact" },
-];
+const text = {
+  mr: {
+      services: "सेवा",
+      about: "माहिती",
+      roadmap: "रोडमॅप",
+      contact: "संपर्क",
+      clientLogin: "ग्राहक लॉगिन",
+  },
+  en: {
+      services: "Services",
+      about: "About",
+      roadmap: "Roadmap",
+      contact: "Contact",
+      clientLogin: "Client Login",
+  },
+};
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -38,6 +48,13 @@ export default function Header() {
   const [logoLoading, setLogoLoading] = useState(true);
   const router = useRouter();
   const { language, toggleLanguage } = useLanguage();
+
+  const navLinks = [
+    { href: "#services", label: text[language].services },
+    { href: "#marketing", label: text[language].about },
+    { href: "#roadmap", label: text[language].roadmap },
+    { href: "#contact", label: text[language].contact },
+  ];
 
   useEffect(() => {
     setMounted(true);
@@ -160,7 +177,7 @@ export default function Header() {
               </DropdownMenu>
           ) : (
             <Button asChild>
-              <Link href="/login">Client Login</Link>
+              <Link href="/login">{text[language].clientLogin}</Link>
             </Button>
           )}
           {mounted && (
