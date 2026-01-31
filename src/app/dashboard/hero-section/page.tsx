@@ -396,106 +396,110 @@ export default function HeroSectionPage() {
         </div>
       ) : (
         <>
-            <Card>
-                <CardHeader>
-                    <CardTitle>Hero Section Background Video</CardTitle>
-                </CardHeader>
-                <CardContent className="grid md:grid-cols-2 gap-6 items-start">
-                     <div className="space-y-3">
-                        <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
-                            <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
-                        </div>
-                        <Button onClick={handleUpload} disabled={loading || !file} size="sm">
-                            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                            {videoUrl ? 'Upload and Replace' : 'Upload Video'}
-                        </Button>
+            <Card className="overflow-hidden">
+                <div className="flex">
+                    <div className="p-6 flex items-center justify-center bg-muted/30">
+                        <CardTitle className="[writing-mode:vertical-rl] rotate-180 whitespace-nowrap text-muted-foreground tracking-widest uppercase text-sm">Hero Section Background Video</CardTitle>
                     </div>
-                     <div>
-                        {videoUrl ? (
-                            <div className="relative">
-                                <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-[16/9]" />
-                                <AlertDialog>
-                                    <AlertDialogTrigger asChild>
-                                        <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
-                                            <Trash2 className="h-4 w-4" />
-                                            <span className="sr-only">Delete Video</span>
-                                        </Button>
-                                    </AlertDialogTrigger>
-                                    <AlertDialogContent>
-                                        <AlertDialogHeader>
-                                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                                        <AlertDialogDescription>
-                                            This action will permanently delete the hero section video. This cannot be undone.
-                                        </AlertDialogDescription>
-                                        </AlertDialogHeader>
-                                        <AlertDialogFooter>
-                                        <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
-                                        <AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-destructive hover:bg-destructive/90">
-                                            {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                                            Delete
-                                        </AlertDialogAction>
-                                        </AlertDialogFooter>
-                                    </AlertDialogContent>
-                                </AlertDialog>
-                            </div>
-                        ) : (
-                            <div className="flex items-center justify-center bg-muted rounded-md aspect-[16/9]">
-                                <p className="text-sm text-muted-foreground">No video uploaded</p>
-                            </div>
-                        )}
-                    </div>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardHeader>
-                    <CardTitle>Logo</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div className={`grid ${logoUrl ? 'grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
-                        <div className="space-y-3">
+                    <CardContent className="grid md:grid-cols-2 gap-6 items-start flex-grow p-6">
+                         <div className="space-y-3">
                             <div className="grid w-full items-center gap-1.5">
-                                <Label htmlFor="logo" className="text-xs font-normal text-muted-foreground">Logo File (PNG, JPG, SVG)</Label>
-                                <Input id="logo" type="file" accept="image/png, image/jpeg, image/svg+xml" onChange={handleLogoFileChange} className="h-8 text-xs" />
+                                <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
+                                <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
                             </div>
-                            <Button onClick={handleLogoUpload} disabled={logoLoading || !logoFile} size="sm">
-                                {logoLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                                {logoUrl ? 'Upload and Replace' : 'Upload Logo'}
+                            <Button onClick={handleUpload} disabled={loading || !file} size="sm">
+                                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                                {videoUrl ? 'Upload and Replace' : 'Upload Video'}
                             </Button>
                         </div>
-
-                        {logoUrl && (
-                            <div className="relative">
-                                <div className="p-4 bg-muted/30 rounded-md flex items-center justify-center">
-                                   <Image src={logoUrl} alt="Logo preview" width={150} height={50} className="object-contain" />
+                         <div>
+                            {videoUrl ? (
+                                <div className="relative">
+                                    <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-[16/9]" />
+                                    <AlertDialog>
+                                        <AlertDialogTrigger asChild>
+                                            <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
+                                                <Trash2 className="h-4 w-4" />
+                                                <span className="sr-only">Delete Video</span>
+                                            </Button>
+                                        </AlertDialogTrigger>
+                                        <AlertDialogContent>
+                                            <AlertDialogHeader>
+                                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                This action will permanently delete the hero section video. This cannot be undone.
+                                            </AlertDialogDescription>
+                                            </AlertDialogHeader>
+                                            <AlertDialogFooter>
+                                            <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+                                            <AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-destructive hover:bg-destructive/90">
+                                                {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                                Delete
+                                            </AlertDialogAction>
+                                            </AlertDialogFooter>
+                                        </AlertDialogContent>
+                                    </AlertDialog>
                                 </div>
-                                <AlertDialog>
-                                    <AlertDialogTrigger asChild>
-                                        <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
-                                            <Trash2 className="h-4 w-4" />
-                                            <span className="sr-only">Delete Logo</span>
-                                        </Button>
-                                    </AlertDialogTrigger>
-                                    <AlertDialogContent>
-                                        <AlertDialogHeader>
-                                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                                        <AlertDialogDescription>
-                                            This action will permanently delete the site logo. This cannot be undone.
-                                        </AlertDialogDescription>
-                                        </AlertDialogHeader>
-                                        <AlertDialogFooter>
-                                        <AlertDialogCancel disabled={isDeletingLogo}>Cancel</AlertDialogCancel>
-                                        <AlertDialogAction onClick={handleLogoDelete} disabled={isDeletingLogo} className="bg-destructive hover:bg-destructive/90">
-                                            {isDeletingLogo && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                                            Delete
-                                        </AlertDialogAction>
-                                        </AlertDialogFooter>
-                                    </AlertDialogContent>
-                                </AlertDialog>
-                            </div>
-                        )}
+                            ) : (
+                                <div className="flex items-center justify-center bg-muted rounded-md aspect-[16/9]">
+                                    <p className="text-sm text-muted-foreground">No video uploaded</p>
+                                </div>
+                            )}
+                        </div>
+                    </CardContent>
+                </div>
+            </Card>
+            <Card className="overflow-hidden">
+                <div className="flex">
+                    <div className="p-6 flex items-center justify-center bg-muted/30">
+                        <CardTitle className="[writing-mode:vertical-rl] rotate-180 whitespace-nowrap text-muted-foreground tracking-widest uppercase text-sm">Logo</CardTitle>
                     </div>
-                </CardContent>
+                    <CardContent className="flex-grow p-6">
+                        <div className={`grid ${logoUrl ? 'grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
+                            <div className="space-y-3">
+                                <div className="grid w-full items-center gap-1.5">
+                                    <Label htmlFor="logo" className="text-xs font-normal text-muted-foreground">Logo File (PNG, JPG, SVG)</Label>
+                                    <Input id="logo" type="file" accept="image/png, image/jpeg, image/svg+xml" onChange={handleLogoFileChange} className="h-8 text-xs" />
+                                </div>
+                                <Button onClick={handleLogoUpload} disabled={logoLoading || !logoFile} size="sm">
+                                    {logoLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                                    {logoUrl ? 'Upload and Replace' : 'Upload Logo'}
+                                </Button>
+                            </div>
+
+                            {logoUrl && (
+                                <div className="relative">
+                                    <div className="p-4 bg-muted/30 rounded-md flex items-center justify-center">
+                                       <Image src={logoUrl} alt="Logo preview" width={150} height={50} className="object-contain" />
+                                    </div>
+                                    <AlertDialog>
+                                        <AlertDialogTrigger asChild>
+                                            <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
+                                                <Trash2 className="h-4 w-4" />
+                                                <span className="sr-only">Delete Logo</span>
+                                            </Button>
+                                        </AlertDialogTrigger>
+                                        <AlertDialogContent>
+                                            <AlertDialogHeader>
+                                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                This action will permanently delete the site logo. This cannot be undone.
+                                            </AlertDialogDescription>
+                                            </AlertDialogHeader>
+                                            <AlertDialogFooter>
+                                            <AlertDialogCancel disabled={isDeletingLogo}>Cancel</AlertDialogCancel>
+                                            <AlertDialogAction onClick={handleLogoDelete} disabled={isDeletingLogo} className="bg-destructive hover:bg-destructive/90">
+                                                {isDeletingLogo && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                                Delete
+                                            </AlertDialogAction>
+                                            </AlertDialogFooter>
+                                        </AlertDialogContent>
+                                    </AlertDialog>
+                                </div>
+                            )}
+                        </div>
+                    </CardContent>
+                </div>
             </Card>
         </>
       )}
