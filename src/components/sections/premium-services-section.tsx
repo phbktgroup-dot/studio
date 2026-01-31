@@ -43,6 +43,11 @@ const headingText = {
   mr: "शक्तिशाली तंत्रज्ञान आणि अजेय रणनीतीसह तुमच्या स्टार्टअपला देऊया यशाची नवी भरारी!",
 };
 
+const sectionTitleText = {
+    en: "Empowerment Tools",
+    mr: "सक्षमीकरण साधने"
+};
+
 
 const ServiceCard = ({ service }: { service: Service }) => {
   const { title, description, imageId } = service;
@@ -76,6 +81,9 @@ export default function PremiumServicesSection() {
   return (
     <section id="services" className="bg-[#F8F9FA] py-20 md:py-32">
         <div className="container text-center mb-12">
+            <h3 className="text-lg font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                {sectionTitleText[language]}
+            </h3>
             <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
                 {headingText[language]}
             </h2>
