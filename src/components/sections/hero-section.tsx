@@ -90,19 +90,39 @@ export default function HeroSection() {
       )}
       
       <div className="absolute inset-0 z-5 pointer-events-none hidden md:block">
-            <div className="absolute top-8 left-8 text-white/80 text-xs font-medium animate-bob drop-shadow-lg" style={{ animationDelay: '0s' }}>
-                {animatedCornerText[0]}
+            <div className="absolute top-8 left-8 animate-bob" style={{ animationDelay: '0.5s', animationDuration: '4s' }}>
+                <div className="border border-white/30 rounded-md p-2 bg-black/30 backdrop-blur-sm drop-shadow-lg">
+                    <p className="typewriter-text font-bold text-xs text-white" style={{ animationDelay: '0.5s' }}>
+                        {animatedCornerText[0]}
+                    </p>
+                </div>
             </div>
-            <div className="absolute top-8 right-8 text-white/80 text-xs font-medium text-right animate-bob drop-shadow-lg" style={{ animationDelay: '0.5s' }}>
-                {animatedCornerText[1]}
+
+            <div className="absolute top-8 right-8 animate-bob" style={{ animationDelay: '1.0s', animationDuration: '4s' }}>
+                 <div className="border border-white/30 rounded-md p-2 bg-black/30 backdrop-blur-sm drop-shadow-lg">
+                    <p className="typewriter-text font-bold text-xs text-white" style={{ animationDelay: '1.0s' }}>
+                        {animatedCornerText[1]}
+                    </p>
+                </div>
             </div>
-            <div className="absolute bottom-20 left-8 text-white/80 text-xs font-medium animate-bob drop-shadow-lg" style={{ animationDelay: '1s' }}>
-                {animatedCornerText[2]}
+
+            <div className="absolute bottom-20 left-8 animate-bob" style={{ animationDelay: '1.5s', animationDuration: '4s' }}>
+                 <div className="border border-white/30 rounded-md p-2 bg-black/30 backdrop-blur-sm drop-shadow-lg">
+                    <p className="typewriter-text font-bold text-xs text-white" style={{ animationDelay: '1.5s' }}>
+                        {animatedCornerText[2]}
+                    </p>
+                </div>
             </div>
-            <div className="absolute bottom-20 right-8 text-white/80 text-xs font-medium text-right animate-bob drop-shadow-lg" style={{ animationDelay: '1.5s' }}>
-                {animatedCornerText[3]}
+            
+            <div className="absolute bottom-20 right-8 animate-bob" style={{ animationDelay: '2.0s', animationDuration: '4s' }}>
+                 <div className="border border-white/30 rounded-md p-2 bg-black/30 backdrop-blur-sm drop-shadow-lg">
+                    <p className="typewriter-text font-bold text-xs text-white" style={{ animationDelay: '2.0s' }}>
+                        {animatedCornerText[3]}
+                    </p>
+                </div>
             </div>
-        </div>
+      </div>
+
 
       <div className="absolute inset-0 bg-black/40"></div>
 
