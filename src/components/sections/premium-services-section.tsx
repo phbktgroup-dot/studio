@@ -79,12 +79,12 @@ export default function PremiumServicesSection() {
   const services = servicesData[language];
 
   return (
-    <section id="services" className="bg-[#F8F9FA] pt-8 md:pt-12 pb-20 md:pb-32">
+    <section id="services" className="bg-[#F8F9FA] pt-4 md:pt-6 pb-20 md:pb-32">
         <div className="container text-center mb-8">
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {sectionTitleText[language]}
             </h3>
-            <h2 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl text-primary mt-2">
+            <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary mt-2">
                 {headingText[language]}
             </h2>
         </div>
