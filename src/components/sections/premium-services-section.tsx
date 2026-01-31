@@ -74,13 +74,10 @@ const services: Service[] = [
   },
 ];
 
-const ServiceCard = ({ service, index }: { service: Service; index: number }) => {
+const ServiceCard = ({ service }: { service: Service }) => {
   const { title, description, icon: Icon } = service;
   return (
     <Card className="group flex h-full transform flex-col bg-white p-12 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-gray-200">
-      <div className="mb-6 text-left text-sm font-medium text-gray-400">
-        {String(index + 1).padStart(2, '0')}
-      </div>
       <div className="flex flex-grow flex-col items-center text-center">
         <div className="mb-6 flex h-20 w-20 items-center justify-center">
           <Icon className="h-12 w-12 text-primary transition-transform duration-300 group-hover:scale-110" />
@@ -96,12 +93,23 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
 export default function PremiumServicesSection() {
   return (
     <section id="services" className="bg-[#F8F9FA] py-20 md:py-32">
-      <div className="container">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div
+        className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
+      >
+        <ul className="flex items-center justify-center animate-scroll hover:[animation-play-state:paused] md:justify-start [&_li]:mx-4">
           {services.map((service, index) => (
-            <ServiceCard key={index} service={service} index={index} />
+            <li key={index} className="flex-shrink-0 w-80">
+              <ServiceCard service={service} />
+            </li>
           ))}
-        </div>
+        </ul>
+        <ul className="flex items-center justify-center animate-scroll hover:[animation-play-state:paused] md:justify-start [&_li]:mx-4" aria-hidden="true">
+          {services.map((service, index) => (
+            <li key={index} className="flex-shrink-0 w-80">
+              <ServiceCard service={service} />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
