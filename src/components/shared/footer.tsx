@@ -76,20 +76,19 @@ export default function Footer() {
             Empowering your business with innovative financial and technological solutions.
           </p>
         </div>
-        <div className="w-full max-w-sm">
+        <div className="w-full max-w-sm ml-auto">
             <Card>
                 <CardContent className="p-6">
-                    <h3 className="font-semibold text-lg mb-4">Get in Touch</h3>
                     <div className="flex items-center justify-between">
                         <div className="animate-bob">
                         <MailboxIcon className="h-10 w-10 text-primary" />
                         </div>
                         <div className="text-right">
-                        <p className="font-medium">Contact Us</p>
-                        <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
-                            info@phbkt.com
-                        </a>
-                        <p className="text-sm text-muted-foreground mt-1">+91 9552256325</p>
+                            <h3 className="font-semibold text-lg">Get in Touch</h3>
+                            <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
+                                info@phbkt.com
+                            </a>
+                            <p className="text-sm text-muted-foreground mt-1">+91 9552256325</p>
                         </div>
                     </div>
                 </CardContent>
