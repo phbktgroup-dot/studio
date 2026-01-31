@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
 import { supabase } from '@/lib/supabase';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const MailboxIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -75,20 +76,24 @@ export default function Footer() {
             Empowering your business with innovative financial and technological solutions.
           </p>
         </div>
-        <div className="grid gap-4">
-          <h3 className="font-semibold">Get in Touch</h3>
-          <div className="flex items-start gap-4">
-             <div className="animate-bob">
-                <MailboxIcon className="h-10 w-10 text-primary" />
-             </div>
-            <div>
-                <p className="font-medium">Contact Us</p>
-                <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
-                info@phbkt.com
-                </a>
-                <p className="text-sm text-muted-foreground mt-1">+91 9552256325</p>
-            </div>
-          </div>
+        <div className="md:justify-self-end w-full max-w-sm">
+            <Card>
+                <CardContent className="p-6">
+                    <h3 className="font-semibold text-lg mb-4">Get in Touch</h3>
+                    <div className="flex items-start gap-4">
+                        <div className="animate-bob">
+                        <MailboxIcon className="h-10 w-10 text-primary" />
+                        </div>
+                        <div>
+                        <p className="font-medium">Contact Us</p>
+                        <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
+                            info@phbkt.com
+                        </a>
+                        <p className="text-sm text-muted-foreground mt-1">+91 9552256325</p>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
         </div>
       </div>
       <div className="border-t bg-muted/50">
