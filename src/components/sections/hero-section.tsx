@@ -74,18 +74,21 @@ export default function HeroSection() {
             />
           ) : (
             <div
-              className="absolute inset-0 z-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"
+              className="absolute inset-0 z-0"
             >
             </div>
           )}
         </>
       )}
       
-      <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
+      <div className="absolute inset-0 bg-black/0"></div>
+
+      <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center">
         <AnimatedText
           text={heroText[language].h1}
           el="h1"
-          className="font-headline text-4xl font-bold tracking-tighter sm:text-6xl drop-shadow-md"
+          className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl text-white drop-shadow-md"
+          spanClassName="py-2"
         />
         <AnimatedText
           text={heroText[language].p}
