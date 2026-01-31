@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Inter, Mukta } from "next/font/google";
 import "./globals.css";
@@ -27,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth no-scrollbar">
       <body
         className={cn(
           "font-body antialiased no-scrollbar",
