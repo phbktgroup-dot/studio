@@ -9,21 +9,27 @@ const text = {
   mr: {
     h2: "तुमच्या यशाची प्रत्येक पायरी, आमची साथ.",
     p: "Guided growth from day one to the global stage.",
+    milestones: [
+      { title: "कल्पना आणि नोंदणी", icon: MilestoneIcon, description: "तुमची संकल्पना मजबूत करा आणि सर्व कायदेशीर नोंदणी हाताळा." },
+      { title: "निर्मिती आणि विकास", icon: Rocket, description: "आमच्या तज्ञ विकास टीमसोबत तुमच्या दूरदृष्टीला जीवंत करा." },
+      { title: "प्रक्षेपण आणि विपणन", icon: Flag, description: "तुमचे उत्पादन एका धोरणात्मक प्रक्षेपणासह जगासमोर सादर करा." },
+      { title: "विस्तार आणि वाढ", icon: Award, description: "तुमची पोहोच वाढवा आणि तुमचे कार्य जागतिक स्तरावर मोजा." },
+    ]
   },
   en: {
     h2: "We are with you at every step of your success.",
     p: "Guided growth from day one to the global stage.",
+    milestones: [
+      { title: "Idea & Registration", icon: MilestoneIcon, description: "Solidify your concept and handle all legal registration." },
+      { title: "Build & Develop", icon: Rocket, description: "Bring your vision to life with our expert development team." },
+      { title: "Launch & Market", icon: Flag, description: "Introduce your product to the world with a strategic launch." },
+      { title: "Scale & Grow", icon: Award, description: "Expand your reach and scale your operations globally." },
+    ]
   },
 };
 
-const milestones = [
-  { title: "Idea & Registration", icon: MilestoneIcon, description: "Solidify your concept and handle all legal registration." },
-  { title: "Build & Develop", icon: Rocket, description: "Bring your vision to life with our expert development team." },
-  { title: "Launch & Market", icon: Flag, description: "Introduce your product to the world with a strategic launch." },
-  { title: "Scale & Grow", icon: Award, description: "Expand your reach and scale your operations globally." },
-];
 
-function Milestone({ title, description, icon: Icon, isActive }) {
+function Milestone({ title, description, icon: Icon, isActive }: {title: string, description: string, icon: React.ElementType, isActive: boolean}) {
     return (
         <div className="flex flex-col items-center text-center relative z-10">
              <div className={cn(
@@ -50,8 +56,11 @@ export default function SuccessRoadmapSection() {
     const { language } = useLanguage();
     const [activeMilestone, setActiveMilestone] = useState(-1);
     const roadmapRef = useRef<HTMLDivElement>(null);
+    const milestones = text[language].milestones;
 
     useEffect(() => {
+        setActiveMilestone(-1); // Reset animation on change
+
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -80,7 +89,7 @@ export default function SuccessRoadmapSection() {
                 observer.unobserve(roadmapRef.current);
             }
         };
-    }, []);
+    }, [milestones]);
 
   return (
     <section className="py-8 md:py-12 bg-background">
