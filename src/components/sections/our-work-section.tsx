@@ -1,0 +1,121 @@
+
+'use client';
+
+import { useState } from 'react';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { cn } from '@/lib/utils';
+import { useLanguage } from '@/context/language-provider';
+
+const sectionText = {
+  en: {
+    heading: "Our Recent Work",
+    subheading: "Take a look at some of the projects we're proud of.",
+    all: "All",
+    apps: "Apps",
+    automation: "Automation",
+    websites: "Websites",
+    viewDemo: "View Demo",
+  },
+  mr: {
+    heading: "आमचे अलीकडील काम",
+    subheading: "आम्हाला अभिमान असलेल्या काही प्रकल्पांवर एक नजर टाका.",
+    all: "सर्व",
+    apps: "अ‍ॅप्स",
+    automation: "ऑटोमेशन",
+    websites: "वेबसाइट्स",
+    viewDemo: "डेमो पहा",
+  }
+};
+
+const projects = [
+  {
+    category: 'apps',
+    titleEn: "Fitness Tracker App",
+    titleMr: "फिटनेस ट्रॅकर ॲप",
+    descriptionEn: "A mobile app to track workouts, set goals, and monitor progress with social features.",
+    descriptionMr: "वर्कआउट्सचा मागोवा घेण्यासाठी, ध्येय निश्चित करण्यासाठी आणि सामाजिक वैशिष्ट्यांसह प्रगतीचे निरीक्षण करण्यासाठी एक मोबाइल अॅप.",
+    imageId: 'work_fitness_app'
+  },
+  {
+    category: 'automation',
+    titleEn: "Data Analytics Dashboard",
+    titleMr: "डेटा ॲनालिटिक्स डॅशबोर्ड",
+    descriptionEn: "A real-time dashboard for visualizing sales data and customer behavior.",
+    descriptionMr: "विक्री डेटा आणि ग्राहक वर्तनाचे व्हिज्युअलायझेशन करण्यासाठी एक रिअल-टाइम डॅशबोर्ड.",
+    imageId: 'work_analytics_dashboard'
+  },
+  {
+    category: 'websites',
+    titleEn: "E-commerce Platform",
+    titleMr: "ई-कॉमर्स प्लॅटफॉर्म",
+    descriptionEn: "A full-featured online store with a custom CMS and payment gateway integration.",
+    descriptionMr: "एक सानुकूल सीएमएस आणि पेमेंट गेटवे एकत्रीकरणासह एक संपूर्ण-वैशिष्ट्यीकृत ऑनलाइन स्टोअर.",
+    imageId: 'work_ecommerce_platform'
+  },
+  {
+    category: 'apps',
+    titleEn: "Branding for 'Company'",
+    titleMr: "'कंपनी' साठी ब्रँडिंग",
+    descriptionEn: "Complete branding package for a new tech startup, including logo, and style guide.",
+    descriptionMr: "नवीन टेक स्टार्टअपसाठी लोगो आणि स्टाईल गाईडसह संपूर्ण ब्रँडिंग पॅकेज.",
+    imageId: 'work_branding_logo'
+  }
+];
+
+export default function OurWorkSection() {
+  const { language } = useLanguage();
+  const text = sectionText[language];
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const filteredProjects = projects.filter(p => activeFilter === 'all' || p.category === activeFilter);
+
+  return (
+    <section className="py-20 md:py-32 bg-muted/30">
+      <div className="container">
+        <div className="text-center mb-12">
+          <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
+            {text.heading}
+          </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-xl">
+            {text.subheading}
+          </p>
+        </div>
+
+        <div className="flex justify-center gap-2 md:gap-4 mb-12">
+          <Button variant={activeFilter === 'all' ? 'default' : 'outline'} onClick={() => setActiveFilter('all')}>{text.all}</Button>
+          <Button variant={activeFilter === 'apps' ? 'default' : 'outline'} onClick={() => setActiveFilter('apps')}>{text.apps}</Button>
+          <Button variant={activeFilter === 'automation' ? 'default' : 'outline'} onClick={() => setActiveFilter('automation')}>{text.automation}</Button>
+          <Button variant={activeFilter === 'websites' ? 'default' : 'outline'} onClick={() => setActiveFilter('websites')}>{text.websites}</Button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {filteredProjects.map((project, index) => {
+            const image = PlaceHolderImages.find(p => p.id === project.imageId);
+            return (
+              <Card key={index} className="overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                {image && (
+                  <Image
+                    src={image.imageUrl}
+                    alt={language === 'en' ? project.titleEn : project.titleMr}
+                    width={400}
+                    height={300}
+                    data-ai-hint={image.imageHint}
+                    className="w-full object-cover aspect-[4/3]"
+                  />
+                )}
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-bold font-headline">{language === 'en' ? project.titleEn : project.titleMr}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground h-16">{language === 'en' ? project.descriptionEn : project.descriptionMr}</p>
+                  <Button variant="outline" className="mt-4">{text.viewDemo}</Button>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
