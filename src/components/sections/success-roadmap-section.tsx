@@ -94,7 +94,7 @@ export default function SuccessRoadmapSection() {
     }, [milestones]);
 
   return (
-    <section className="py-8 md:py-12 bg-background overflow-x-hidden">
+    <section className="py-6 md:py-10 bg-background overflow-x-hidden">
       <div className="container text-center">
         <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
             {text[language].subheading}

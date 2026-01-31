@@ -21,7 +21,7 @@ const text = {
 export default function ContactActionSection() {
   const { language } = useLanguage();
   return (
-    <section className="py-8 md:py-12 bg-background">
+    <section className="py-6 md:py-10 bg-background">
       <div className="container max-w-3xl text-center">
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
             {text[language].h2}

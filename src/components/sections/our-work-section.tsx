@@ -73,7 +73,7 @@ export default function OurWorkSection() {
   const filteredProjects = projects.filter(p => activeFilter === 'all' || p.category === activeFilter);
 
   return (
-    <section className="py-8 md:py-12 bg-muted/30">
+    <section className="py-6 md:py-10 bg-muted/30">
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">

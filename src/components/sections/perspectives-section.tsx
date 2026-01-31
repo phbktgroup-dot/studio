@@ -73,7 +73,7 @@ export default function PerspectivesSection() {
   }, [api]);
 
   return (
-    <section className="py-8 md:py-12 bg-background">
+    <section className="py-6 md:py-10 bg-background">
       <div className="container">
         <h2 className="mb-8 font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
           {sectionText[language].heading}
