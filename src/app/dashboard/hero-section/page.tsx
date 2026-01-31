@@ -20,7 +20,6 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Textarea } from '@/components/ui/textarea';
 
 export default function HeroSectionPage() {
   // Video state
@@ -36,20 +35,6 @@ export default function HeroSectionPage() {
   const [isFetchingLogo, setIsFetchingLogo] = useState(true);
   const [isDeletingLogo, setIsDeletingLogo] = useState(false);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
-
-  // Hero Text state
-  const [heroText, setHeroText] = useState({
-    h1_en: '',
-    p_en: '',
-    button1_en: '',
-    button2_en: '',
-    h1_mr: '',
-    p_mr: '',
-    button1_mr: '',
-    button2_mr: '',
-  });
-  const [textLoading, setTextLoading] = useState(false);
-  const [isFetchingText, setIsFetchingText] = useState(true);
 
   const { toast } = useToast();
 
@@ -74,7 +59,6 @@ export default function HeroSectionPage() {
         if (error.message?.includes('column "hero_video_url" does not exist')) {
             console.warn("Could not fetch hero video URL:", error.message);
         } else {
-            // Do not show a toast on initial load failure
             console.error("Could not fetch hero video URL:", error.message);
         }
       } finally {
@@ -100,8 +84,6 @@ export default function HeroSectionPage() {
           }
         } catch (error: any) {
           if (error.message?.includes('logo_url') && error.message?.includes('does not exist')) {
-            // This is a common setup issue, we can ignore it on fetch.
-            // The upload function will guide the user.
             console.warn("Could not fetch logo URL:", error.message);
           } else {
             console.error("Could not fetch logo URL:", error.message);
@@ -111,41 +93,8 @@ export default function HeroSectionPage() {
         }
       };
 
-      const fetchHeroText = async () => {
-        setIsFetchingText(true);
-        try {
-          const { data, error } = await supabase
-            .from('settings')
-            .select('hero_h1_en, hero_p_en, hero_button1_en, hero_button2_en, hero_h1_mr, hero_p_mr, hero_button1_mr, hero_button2_mr')
-            .eq('id', 1)
-            .single();
-  
-          if (error && error.code !== 'PGRST116') {
-            throw error;
-          }
-  
-          if (data) {
-            setHeroText({
-              h1_en: data.hero_h1_en || '',
-              p_en: data.hero_p_en || '',
-              button1_en: data.hero_button1_en || '',
-              button2_en: data.hero_button2_en || '',
-              h1_mr: data.hero_h1_mr || '',
-              p_mr: data.hero_p_mr || '',
-              button1_mr: data.hero_button1_mr || '',
-              button2_mr: data.hero_button2_mr || '',
-            });
-          }
-        } catch (error: any) {
-          console.warn("Could not fetch hero text:", error.message);
-        } finally {
-          setIsFetchingText(false);
-        }
-      };
-
     fetchVideoUrl();
     fetchLogoUrl();
-    fetchHeroText();
   }, []);
 
 
@@ -437,139 +386,31 @@ export default function HeroSectionPage() {
     }
   };
 
-  const handleTextUpdate = async () => {
-    setTextLoading(true);
-    try {
-      const updateData = {
-        id: 1,
-        hero_h1_en: heroText.h1_en,
-        hero_p_en: heroText.p_en,
-        hero_button1_en: heroText.button1_en,
-        hero_button2_en: heroText.button2_en,
-        hero_h1_mr: heroText.h1_mr,
-        hero_p_mr: heroText.p_mr,
-        hero_button1_mr: heroText.button1_mr,
-        hero_button2_mr: heroText.button2_mr,
-      };
-
-      const { error } = await supabase
-        .from('settings')
-        .upsert(updateData, { onConflict: 'id' });
-        
-      if (error) {
-        throw error;
-      }
-
-      toast({
-        title: 'Update Successful',
-        description: 'Your hero section text has been updated.',
-      });
-
-    } catch (error: any) {
-        let description = `An unexpected error occurred: ${error.message}`;
-
-        if (error.message?.includes('column') && error.message?.includes('does not exist')) {
-            description = `One of the required text columns does not exist in your 'settings' table. Please ensure all hero text columns (e.g., hero_h1_en, hero_p_en, etc.) are created.`;
-        } else if (error.message?.includes('violates row-level security policy')) {
-            description = `Row-level security is preventing the update. Please disable RLS for the 'settings' table.`
-        }
-
-      toast({
-        variant: 'destructive',
-        title: 'Update Failed',
-        description: description,
-      });
-    } finally {
-      setTextLoading(false);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-lg font-bold font-headline">Site Customization</h1>
       
-      {(isFetching || isFetchingLogo || isFetchingText) ? (
+      {(isFetching || isFetchingLogo) ? (
         <div className="flex items-center justify-center p-8">
           <Loader2 className="h-6 w-6 animate-spin" />
         </div>
       ) : (
         <>
             <Card>
-                <CardContent className="p-4 flex gap-4">
-                    <div className="flex items-center justify-center border-r pr-4">
-                        <CardTitle className="text-sm [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">Hero Section Background Video</CardTitle>
-                    </div>
-                    <div className="flex-grow">
-                        <div className="space-y-3">
-                            <div className="grid w-full items-center gap-1.5">
-                                <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
-                                <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
-                            </div>
-                            <Button onClick={handleUpload} disabled={loading || !file} size="sm">
-                                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                                {videoUrl ? 'Upload and Replace' : 'Upload Video'}
-                            </Button>
-                        </div>
-                    </div>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardContent className="p-4 flex gap-4">
-                    <div className="flex items-center justify-center border-r pr-4">
-                        <CardTitle className="text-sm [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">Logo Section</CardTitle>
-                    </div>
-                    <div className="flex-grow">
-                        <div className={`grid ${logoUrl ? 'grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
-                            <div className="space-y-3">
-                                <div className="grid w-full items-center gap-1.5">
-                                    <Label htmlFor="logo" className="text-xs font-normal text-muted-foreground">Logo File (PNG, JPG, SVG)</Label>
-                                    <Input id="logo" type="file" accept="image/png, image/jpeg, image/svg+xml" onChange={handleLogoFileChange} className="h-8 text-xs" />
-                                </div>
-                                <Button onClick={handleLogoUpload} disabled={logoLoading || !logoFile} size="sm">
-                                    {logoLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                                    {logoUrl ? 'Upload and Replace' : 'Upload Logo'}
-                                </Button>
-                            </div>
-
-                            {logoUrl && (
-                                <div className="relative">
-                                    <div className="p-4 bg-muted/30 rounded-md flex items-center justify-center">
-                                       <Image src={logoUrl} alt="Logo preview" width={150} height={50} className="object-contain" />
-                                    </div>
-                                    <AlertDialog>
-                                        <AlertDialogTrigger asChild>
-                                            <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
-                                                <Trash2 className="h-4 w-4" />
-                                                <span className="sr-only">Delete Logo</span>
-                                            </Button>
-                                        </AlertDialogTrigger>
-                                        <AlertDialogContent>
-                                            <AlertDialogHeader>
-                                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                                            <AlertDialogDescription>
-                                                This action will permanently delete the site logo. This cannot be undone.
-                                            </AlertDialogDescription>
-                                            </AlertDialogHeader>
-                                            <AlertDialogFooter>
-                                            <AlertDialogCancel disabled={isDeletingLogo}>Cancel</AlertDialogCancel>
-                                            <AlertDialogAction onClick={handleLogoDelete} disabled={isDeletingLogo} className="bg-destructive hover:bg-destructive/90">
-                                                {isDeletingLogo && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                                                Delete
-                                            </AlertDialogAction>
-                                            </AlertDialogFooter>
-                                        </AlertDialogContent>
-                                    </AlertDialog>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </CardContent>
-            </Card>
-            <Card>
                 <CardHeader>
-                    <CardTitle>Hero Content & Preview</CardTitle>
+                    <CardTitle>Hero Section Background Video</CardTitle>
                 </CardHeader>
                 <CardContent className="grid md:grid-cols-2 gap-6 items-start">
+                     <div className="space-y-3">
+                        <div className="grid w-full items-center gap-1.5">
+                            <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
+                            <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
+                        </div>
+                        <Button onClick={handleUpload} disabled={loading || !file} size="sm">
+                            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                            {videoUrl ? 'Upload and Replace' : 'Upload Video'}
+                        </Button>
+                    </div>
                      <div>
                         {videoUrl ? (
                             <div className="relative">
@@ -604,57 +445,55 @@ export default function HeroSectionPage() {
                             </div>
                         )}
                     </div>
-                    <div className="space-y-6">
-                        <div>
-                            <h3 className="text-sm font-medium mb-2">English Content</h3>
-                            <div className="grid gap-4">
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="h1_en" className="text-xs">Headline</Label>
-                                    <Input id="h1_en" value={heroText.h1_en} onChange={(e) => setHeroText({...heroText, h1_en: e.target.value})} />
-                                </div>
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="p_en" className="text-xs">Sub-headline</Label>
-                                    <Textarea id="p_en" value={heroText.p_en} onChange={(e) => setHeroText({...heroText, p_en: e.target.value})} rows={2} />
-                                </div>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="space-y-1.5">
-                                        <Label htmlFor="button1_en" className="text-xs">"Our Services" Button</Label>
-                                        <Input id="button1_en" value={heroText.button1_en} onChange={(e) => setHeroText({...heroText, button1_en: e.target.value})} />
-                                    </div>
-                                    <div className="space-y-1.5">
-                                        <Label htmlFor="button2_en" className="text-xs">"Contact Us" Button</Label>
-                                        <Input id="button2_en" value={heroText.button2_en} onChange={(e) => setHeroText({...heroText, button2_en: e.target.value})} />
-                                    </div>
-                                </div>
+                </CardContent>
+            </Card>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Logo</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className={`grid ${logoUrl ? 'grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
+                        <div className="space-y-3">
+                            <div className="grid w-full items-center gap-1.5">
+                                <Label htmlFor="logo" className="text-xs font-normal text-muted-foreground">Logo File (PNG, JPG, SVG)</Label>
+                                <Input id="logo" type="file" accept="image/png, image/jpeg, image/svg+xml" onChange={handleLogoFileChange} className="h-8 text-xs" />
                             </div>
+                            <Button onClick={handleLogoUpload} disabled={logoLoading || !logoFile} size="sm">
+                                {logoLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                                {logoUrl ? 'Upload and Replace' : 'Upload Logo'}
+                            </Button>
                         </div>
-                        <div>
-                            <h3 className="text-sm font-medium mb-2">Marathi Content</h3>
-                            <div className="grid gap-4">
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="h1_mr" className="text-xs">Headline</Label>
-                                    <Input id="h1_mr" value={heroText.h1_mr} onChange={(e) => setHeroText({...heroText, h1_mr: e.target.value})} />
+
+                        {logoUrl && (
+                            <div className="relative">
+                                <div className="p-4 bg-muted/30 rounded-md flex items-center justify-center">
+                                   <Image src={logoUrl} alt="Logo preview" width={150} height={50} className="object-contain" />
                                 </div>
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="p_mr" className="text-xs">Sub-headline</Label>
-                                    <Textarea id="p_mr" value={heroText.p_mr} onChange={(e) => setHeroText({...heroText, p_mr: e.target.value})} rows={2} />
-                                </div>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="space-y-1.5">
-                                        <Label htmlFor="button1_mr" className="text-xs">"आमच्या सेवा" Button</Label>
-                                        <Input id="button1_mr" value={heroText.button1_mr} onChange={(e) => setHeroText({...heroText, button1_mr: e.target.value})} />
-                                    </div>
-                                    <div className="space-y-1.5">
-                                        <Label htmlFor="button2_mr" className="text-xs">"आमच्याशी संपर्क साधा" Button</Label>
-                                        <Input id="button2_mr" value={heroText.button2_mr} onChange={(e) => setHeroText({...heroText, button2_mr: e.target.value})} />
-                                    </div>
-                                </div>
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
+                                            <Trash2 className="h-4 w-4" />
+                                            <span className="sr-only">Delete Logo</span>
+                                        </Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            This action will permanently delete the site logo. This cannot be undone.
+                                        </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                        <AlertDialogCancel disabled={isDeletingLogo}>Cancel</AlertDialogCancel>
+                                        <AlertDialogAction onClick={handleLogoDelete} disabled={isDeletingLogo} className="bg-destructive hover:bg-destructive/90">
+                                            {isDeletingLogo && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                            Delete
+                                        </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
                             </div>
-                        </div>
-                        <Button onClick={handleTextUpdate} disabled={textLoading} size="sm">
-                            {textLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                            Update Text
-                        </Button>
+                        )}
                     </div>
                 </CardContent>
             </Card>
