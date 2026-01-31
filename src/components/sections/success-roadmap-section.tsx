@@ -8,7 +8,6 @@ import { useLanguage } from '@/context/language-provider';
 const text = {
   mr: {
     h2: "तुमच्या यशाची प्रत्येक पायरी, आमची साथ.",
-    p: "Guided growth from day one to the global stage.",
     milestones: [
       { title: "कल्पना आणि नोंदणी", icon: MilestoneIcon, description: "तुमची संकल्पना मजबूत करा आणि सर्व कायदेशीर नोंदणी हाताळा." },
       { title: "निर्मिती आणि विकास", icon: Rocket, description: "आमच्या तज्ञ विकास टीमसोबत तुमच्या दूरदृष्टीला जीवंत करा." },
@@ -18,7 +17,6 @@ const text = {
   },
   en: {
     h2: "We are with you at every step of your success.",
-    p: "Guided growth from day one to the global stage.",
     milestones: [
       { title: "Idea & Registration", icon: MilestoneIcon, description: "Solidify your concept and handle all legal registration." },
       { title: "Build & Develop", icon: Rocket, description: "Bring your vision to life with our expert development team." },
@@ -97,10 +95,7 @@ export default function SuccessRoadmapSection() {
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
             {text[language].h2}
         </h2>
-        <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-xl">
-            {text[language].p}
-        </p>
-        <div ref={roadmapRef} className="mt-20 relative">
+        <div ref={roadmapRef} className="mt-12 relative">
             <div className="absolute top-6 left-0 w-full h-0.5 bg-border"></div>
             <div className="absolute top-6 left-0 h-0.5 bg-primary transition-all duration-1000 ease-out" style={{ width: `${(Math.max(0, activeMilestone) / (milestones.length - 1)) * 100}%` }}></div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12">
