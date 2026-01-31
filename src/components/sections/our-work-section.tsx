@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -79,9 +78,11 @@ export default function OurWorkSection() {
           <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
             {text.heading}
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-xl">
-            {text.subheading}
-          </p>
+          {text.subheading && (
+            <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-xl">
+              {text.subheading}
+            </p>
+          )}
         </div>
 
         <div className="flex justify-center gap-2 md:gap-4 mb-12">
@@ -101,9 +102,9 @@ export default function OurWorkSection() {
                     src={image.imageUrl}
                     alt={language === 'en' ? project.titleEn : project.titleMr}
                     width={400}
-                    height={300}
+                    height={225}
                     data-ai-hint={image.imageHint}
-                    className="w-full object-cover aspect-[4/3]"
+                    className="w-full object-cover aspect-video"
                   />
                 )}
                 <CardContent className="p-6">
