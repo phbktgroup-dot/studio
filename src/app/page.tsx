@@ -7,6 +7,7 @@ import ContactActionSection from "@/components/sections/contact-action-section";
 import Footer from "@/components/shared/footer";
 import PerspectivesSection from "@/components/sections/perspectives-section";
 import ESGSection from "@/components/sections/esg-section";
+import CareersSection from "@/components/sections/careers-section";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <SuccessRoadmapSection />
         <PerspectivesSection />
         <ESGSection />
+        <CareersSection />
         <StatsSection />
         <ContactActionSection />
       </main>
