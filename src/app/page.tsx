@@ -7,6 +7,7 @@ import ComplianceShieldSection from "@/components/sections/compliance-shield-sec
 import TrustStatsSection from "@/components/sections/trust-stats-section";
 import ContactActionSection from "@/components/sections/contact-action-section";
 import Footer from "@/components/shared/footer";
+import PerspectivesSection from "@/components/sections/perspectives-section";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <HeroSection />
         <PremiumServicesSection />
         <SuccessRoadmapSection />
+        <PerspectivesSection />
         <StatsSection />
         <ComplianceShieldSection />
         <TrustStatsSection />

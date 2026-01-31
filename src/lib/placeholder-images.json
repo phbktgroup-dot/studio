@@ -83,6 +83,36 @@
       "description": "A customer support agent with a headset",
       "imageUrl": "https://images.unsplash.com/photo-1626863905121-3b0c0ed7b94c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjdXN0b21lciUyMHN1cHBvcnR8ZW58MHx8fHwxNzY5ODE2OTAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "customer support"
+    },
+    {
+      "id": "perspective_1",
+      "description": "A person looking out over a city skyline at dusk.",
+      "imageUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwZXJzcGVjdGl2ZXxlbnwwfHx8fDE3MTgyMzYyODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "city perspective"
+    },
+    {
+      "id": "perspective_2",
+      "description": "A well-lit, modern library with shelves full of books.",
+      "imageUrl": "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxpbnNpZ2h0fGVufDB8fHx8MTcxODIzNjMyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "library insight"
+    },
+    {
+      "id": "perspective_3",
+      "description": "Abstract light trails in the dark, representing new ideas.",
+      "imageUrl": "https://images.unsplash.com/photo-1534151784992-63b71e1b8272?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0aG91Z2h0JTIwbGVhZGVyc2hpcHxlbnwwfHx8fDE3MTgyMzYzNzR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract ideas"
+    },
+    {
+      "id": "perspective_4",
+      "description": "A person writing thoughtful notes in a journal with a cup of coffee.",
+      "imageUrl": "https://images.unsplash.com/photo-1485181280324-f783c5a6d542?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxqb3VybmFsfGVufDB8fHx8MTcxODIzNjQxN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "journal writing"
+    },
+    {
+      "id": "perspective_5",
+      "description": "A close-up of a stack of international newspapers.",
+      "imageUrl": "https://images.unsplash.com/photo-1585776245991-a69054174c5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxlZGl0b3JpYWx8ZW58MHx8fHwxNzE4MjM2NDY3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "editorial news"
     }
   ]
 }
