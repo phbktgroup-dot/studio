@@ -14,9 +14,9 @@ export default function Home() {
       <Header />
       <main className="flex-grow">
         <HeroSection />
+        <SuccessRoadmapSection />
         <StatsSection />
         <EcosystemSection />
-        <SuccessRoadmapSection />
         <ComplianceShieldSection />
         <TrustStatsSection />
         <ContactActionSection />
