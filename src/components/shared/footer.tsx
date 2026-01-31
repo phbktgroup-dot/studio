@@ -101,16 +101,16 @@ export default function Footer() {
         <div className="container flex items-center justify-between py-4 text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
           <div className="flex items-center gap-4">
-              <Link href="#" aria-label="Facebook" className="text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="#" aria-label="Facebook" className="text-muted-foreground transition-colors hover:text-blue-600">
                 <Facebook className="h-5 w-5" />
               </Link>
-              <Link href="#" aria-label="Twitter" className="text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="#" aria-label="Twitter" className="text-muted-foreground transition-colors hover:text-sky-500">
                 <Twitter className="h-5 w-5" />
               </Link>
-              <Link href="#" aria-label="Instagram" className="text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="#" aria-label="Instagram" className="text-muted-foreground transition-colors hover:text-pink-600">
                 <Instagram className="h-5 w-5" />
               </Link>
-              <Link href="#" aria-label="LinkedIn" className="text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="#" aria-label="LinkedIn" className="text-muted-foreground transition-colors hover:text-blue-700">
                 <Linkedin className="h-5 w-5" />
               </Link>
           </div>
