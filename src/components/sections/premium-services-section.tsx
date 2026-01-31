@@ -38,6 +38,11 @@ const servicesData = {
   ]
 };
 
+const headingText = {
+  en: "Igniting startup growth with unstoppable tech and elite strategy.",
+  mr: "शक्तिशाली तंत्रज्ञान आणि अजेय रणनीतीसह तुमच्या स्टार्टअपला देऊया यशाची नवी भरारी!",
+};
+
 
 const ServiceCard = ({ service }: { service: Service }) => {
   const { title, description, imageId } = service;
@@ -70,6 +75,11 @@ export default function PremiumServicesSection() {
 
   return (
     <section id="services" className="bg-[#F8F9FA] py-20 md:py-32">
+        <div className="container text-center mb-12">
+            <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
+                {headingText[language]}
+            </h2>
+        </div>
         <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
             <ul className="flex items-center justify-center md:justify-start [&_li]:mx-2 animate-scroll">
                 {services.map((service, index) => (
