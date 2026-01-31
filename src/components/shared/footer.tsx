@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
 import { supabase } from '@/lib/supabase';
+import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const MailboxIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -99,6 +100,20 @@ export default function Footer() {
       <div className="border-t bg-muted/50">
         <div className="container flex items-center justify-between py-4 text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
+          <div className="flex items-center gap-4">
+              <Link href="#" aria-label="Facebook" className="text-muted-foreground transition-colors hover:text-foreground">
+                <Facebook className="h-5 w-5" />
+              </Link>
+              <Link href="#" aria-label="Twitter" className="text-muted-foreground transition-colors hover:text-foreground">
+                <Twitter className="h-5 w-5" />
+              </Link>
+              <Link href="#" aria-label="Instagram" className="text-muted-foreground transition-colors hover:text-foreground">
+                <Instagram className="h-5 w-5" />
+              </Link>
+              <Link href="#" aria-label="LinkedIn" className="text-muted-foreground transition-colors hover:text-foreground">
+                <Linkedin className="h-5 w-5" />
+              </Link>
+          </div>
         </div>
       </div>
     </footer>
