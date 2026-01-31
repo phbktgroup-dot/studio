@@ -82,7 +82,7 @@ export default function HeroSection() {
         </>
       )}
       
-      <div className="absolute inset-0 bg-black/40"></div>
+      <div className="absolute inset-0 bg-black/20"></div>
 
       <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center">
         <AnimatedText
