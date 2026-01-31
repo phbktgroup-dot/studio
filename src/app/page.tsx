@@ -1,7 +1,6 @@
 import Header from "@/components/shared/header";
 import HeroSection from "@/components/sections/hero-section";
 import StatsSection from "@/components/sections/stats-section";
-import EcosystemSection from "@/components/sections/ecosystem-section";
 import SuccessRoadmapSection from "@/components/sections/success-roadmap-section";
 import PremiumServicesSection from "@/components/sections/premium-services-section";
 import ComplianceShieldSection from "@/components/sections/compliance-shield-section";
@@ -18,7 +17,6 @@ export default function Home() {
         <PremiumServicesSection />
         <SuccessRoadmapSection />
         <StatsSection />
-        <EcosystemSection />
         <ComplianceShieldSection />
         <TrustStatsSection />
         <ContactActionSection />
