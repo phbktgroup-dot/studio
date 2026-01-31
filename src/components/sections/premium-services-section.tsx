@@ -4,6 +4,13 @@ import { Card } from '@/components/ui/card';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useLanguage } from '@/context/language-provider';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface Service {
   title: string;
@@ -54,7 +61,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
   const image = PlaceHolderImages.find(p => p.id === imageId);
 
   return (
-    <Card className="group flex h-full w-72 flex-shrink-0 flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+    <Card className="group flex h-full w-full flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
       {image && (
           <Image
               src={image.imageUrl}
@@ -88,21 +95,26 @@ export default function PremiumServicesSection() {
                 {headingText[language]}
             </h2>
         </div>
-        <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-            <ul className="flex items-center justify-center md:justify-start [&_li]:mx-2 animate-scroll">
-                {services.map((service, index) => (
-                    <li key={index}>
-                        <ServiceCard service={service} />
-                    </li>
-                ))}
-            </ul>
-            <ul className="flex items-center justify-center md:justify-start [&_li]:mx-2 animate-scroll" aria-hidden="true">
-                {services.map((service, index) => (
-                    <li key={index}>
-                        <ServiceCard service={service} />
-                    </li>
-                ))}
-            </ul>
+        <div className="container">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4">
+              {services.map((service, index) => (
+                <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <div className="p-1 h-full">
+                      <ServiceCard service={service} />
+                    </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex" />
+            <CarouselNext className="hidden md:flex" />
+          </Carousel>
         </div>
     </section>
   );
