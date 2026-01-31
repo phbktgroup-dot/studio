@@ -60,7 +60,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
               src={image.imageUrl}
               alt={description}
               width={400}
-              height={300}
+              height={225}
               data-ai-hint={image.imageHint}
               className="w-full object-cover aspect-[16/9] transition-transform duration-500 group-hover:scale-105"
           />
@@ -79,7 +79,7 @@ export default function PremiumServicesSection() {
   const services = servicesData[language];
 
   return (
-    <section id="services" className="bg-[#F8F9FA] pt-4 md:pt-6">
+    <section id="services" className="bg-[#F8F9FA] pt-4 md:pt-6 pb-8">
         <div className="container text-center mb-8">
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {sectionTitleText[language]}
