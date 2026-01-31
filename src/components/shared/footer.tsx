@@ -86,7 +86,7 @@ export default function Footer() {
                 <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
                 info@phbkt.com
                 </a>
-                <p className="text-sm text-muted-foreground mt-1">+1 (555) 123-4567</p>
+                <p className="text-sm text-muted-foreground mt-1">+91 9552256325</p>
             </div>
           </div>
         </div>
