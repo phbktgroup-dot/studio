@@ -6,6 +6,7 @@ import PremiumServicesSection from "@/components/sections/premium-services-secti
 import ContactActionSection from "@/components/sections/contact-action-section";
 import Footer from "@/components/shared/footer";
 import PerspectivesSection from "@/components/sections/perspectives-section";
+import ESGSection from "@/components/sections/esg-section";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <PremiumServicesSection />
         <SuccessRoadmapSection />
         <PerspectivesSection />
+        <ESGSection />
         <StatsSection />
         <ContactActionSection />
       </main>
