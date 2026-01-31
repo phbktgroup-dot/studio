@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body
         className={cn(
-          "font-body antialiased",
+          "font-body antialiased no-scrollbar",
           fontBody.variable,
           fontHeadline.variable
         )}
