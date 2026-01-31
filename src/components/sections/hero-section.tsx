@@ -8,7 +8,7 @@ import { ArrowDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/context/language-provider";
 
-const defaultText = {
+const heroText = {
   mr: {
     h1: "तुमचा व्यवसाय करा डिजिटल, तुमची प्रगती आमचे ध्येय.",
     p: "शून्यातून विश्व निर्माण करणाऱ्या जिद्दी उद्योजकांसाठी.",
@@ -26,7 +26,6 @@ const defaultText = {
 export default function HeroSection() {
   const { language } = useLanguage();
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
-  const [heroText, setHeroText] = useState(defaultText);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,7 +34,7 @@ export default function HeroSection() {
       try {
         const { data, error } = await supabase
           .from('settings')
-          .select('hero_video_url, hero_h1_en, hero_p_en, hero_button1_en, hero_button2_en, hero_h1_mr, hero_p_mr, hero_button1_mr, hero_button2_mr')
+          .select('hero_video_url')
           .eq('id', 1)
           .single();
 
@@ -46,20 +45,6 @@ export default function HeroSection() {
 
         if (data) {
           setVideoUrl(data.hero_video_url || null);
-          setHeroText({
-            en: {
-              h1: data.hero_h1_en || defaultText.en.h1,
-              p: data.hero_p_en || defaultText.en.p,
-              ourServices: data.hero_button1_en || defaultText.en.ourServices,
-              contactUs: data.hero_button2_en || defaultText.en.contactUs,
-            },
-            mr: {
-              h1: data.hero_h1_mr || defaultText.mr.h1,
-              p: data.hero_p_mr || defaultText.mr.p,
-              ourServices: data.hero_button1_mr || defaultText.mr.ourServices,
-              contactUs: data.hero_button2_mr || defaultText.mr.contactUs,
-            },
-          });
         }
       } catch (error: any) {
         console.warn("Could not fetch hero data, using defaults:", error.message);
@@ -96,25 +81,25 @@ export default function HeroSection() {
         </>
       )}
       
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-[1]"></div>
+      <div className="absolute inset-0 bg-black/50 z-[1]"></div>
 
-      <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center text-primary-foreground">
+      <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
         <AnimatedText
           text={heroText[language].h1}
           el="h1"
-          className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl"
+          className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl drop-shadow-md"
           spanClassName="py-4"
         />
         <AnimatedText
           text={heroText[language].p}
-          className="mt-4 max-w-2xl text-primary-foreground/80 text-base"
+          className="mt-4 max-w-2xl text-white/80 text-base drop-shadow-md"
           stagger={0.01}
         />
         <div className="mt-8 flex gap-4">
           <Button size="lg" asChild>
             <Link href="#services">{heroText[language].ourServices}</Link>
           </Button>
-          <Button size="lg" variant="outline" asChild className="border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+          <Button size="lg" variant="outline" asChild className="border-white/50 text-white hover:bg-white hover:text-primary">
             <Link href="#contact">{heroText[language].contactUs}</Link>
           </Button>
         </div>
@@ -122,7 +107,7 @@ export default function HeroSection() {
       
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
         <Link href="#stats">
-          <ArrowDown className="h-8 w-8 text-primary-foreground/50 animate-bounce" />
+          <ArrowDown className="h-8 w-8 text-white/50 animate-bounce" />
           <span className="sr-only">Scroll down</span>
         </Link>
       </div>
