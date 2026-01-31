@@ -31,7 +31,7 @@ const text = {
 
 function Milestone({ title, description, icon: Icon, isActive }: {title: string, description: string, icon: React.ElementType, isActive: boolean}) {
     return (
-        <div className="flex flex-col items-center text-center relative z-10">
+        <div dir="ltr" className="flex flex-col items-center text-center relative z-10">
              <div className={cn(
                 "flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all duration-500 bg-background",
                 isActive ? "border-primary bg-primary text-primary-foreground" : "border-border bg-muted text-muted-foreground"
@@ -92,15 +92,15 @@ export default function SuccessRoadmapSection() {
     }, [milestones]);
 
   return (
-    <section className="py-8 md:py-12 bg-background">
-      <div className="container max-w-6xl text-center">
+    <section className="py-8 md:py-12 bg-background overflow-x-hidden">
+      <div className="container text-center">
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
             {text[language].h2}
         </h2>
         <div ref={roadmapRef} className="mt-12 relative">
             <div className="absolute top-6 left-0 w-full h-0.5 bg-border"></div>
-            <div className="absolute top-6 left-0 h-0.5 bg-primary transition-all duration-1000 ease-out" style={{ width: `${(Math.max(0, activeMilestone) / (milestones.length - 1)) * 100}%` }}></div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-12">
+            <div className="absolute top-6 right-0 h-0.5 bg-primary transition-all duration-1000 ease-out" style={{ width: `${(Math.max(0, activeMilestone) / (milestones.length - 1)) * 100}%` }}></div>
+            <div dir="rtl" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-12">
                 {milestones.map((item, index) => (
                     <Milestone key={index} {...item} isActive={index <= activeMilestone} />
                 ))}
