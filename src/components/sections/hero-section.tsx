@@ -87,7 +87,7 @@ export default function HeroSection() {
         <AnimatedText
           text={heroText[language].h1}
           el="h1"
-          className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl text-white drop-shadow-md"
+          className="font-headline text-3xl font-bold tracking-tighter sm:text-5xl text-white drop-shadow-md"
           spanClassName="py-4"
         />
         <AnimatedText
@@ -96,7 +96,7 @@ export default function HeroSection() {
           stagger={0.01}
         />
         <div className="mt-8 flex gap-4">
-          <Button size="lg" asChild className="bg-white text-primary hover:bg-primary hover:text-primary-foreground">
+          <Button size="lg" asChild>
             <Link href="#services">{heroText[language].ourServices}</Link>
           </Button>
           <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-primary hover:border-primary hover:text-primary-foreground" asChild>
