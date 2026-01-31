@@ -24,13 +24,6 @@ const heroText = {
   },
 };
 
-const animatedCornerText = [
-  "Website Development | वेबसाइट डेव्हलपमेंट",
-  "App Development | अ‍ॅप डेव्हलपमेंट",
-  "Business Operations | बिझनेस ऑपरेशन्स",
-  "Tax & Compliance | टॅक्स आणि कंप्लायन्स",
-];
-
 export default function HeroSection() {
   const { language } = useLanguage();
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
@@ -89,41 +82,6 @@ export default function HeroSection() {
         </>
       )}
       
-      <div className="absolute inset-0 z-5 pointer-events-none hidden md:block">
-            <div className="absolute top-8 left-8 animate-bob" style={{ animationDelay: '0.5s', animationDuration: '4s' }}>
-                <div className="border border-white/30 rounded-md p-2 bg-black/30 backdrop-blur-sm drop-shadow-lg">
-                    <p className="typewriter-text font-bold text-xs text-white" style={{ animationDelay: '0.5s' }}>
-                        {animatedCornerText[0]}
-                    </p>
-                </div>
-            </div>
-
-            <div className="absolute top-8 right-8 animate-bob" style={{ animationDelay: '1.0s', animationDuration: '4s' }}>
-                 <div className="border border-white/30 rounded-md p-2 bg-black/30 backdrop-blur-sm drop-shadow-lg">
-                    <p className="typewriter-text font-bold text-xs text-white" style={{ animationDelay: '1.0s' }}>
-                        {animatedCornerText[1]}
-                    </p>
-                </div>
-            </div>
-
-            <div className="absolute bottom-20 left-8 animate-bob" style={{ animationDelay: '1.5s', animationDuration: '4s' }}>
-                 <div className="border border-white/30 rounded-md p-2 bg-black/30 backdrop-blur-sm drop-shadow-lg">
-                    <p className="typewriter-text font-bold text-xs text-white" style={{ animationDelay: '1.5s' }}>
-                        {animatedCornerText[2]}
-                    </p>
-                </div>
-            </div>
-            
-            <div className="absolute bottom-20 right-8 animate-bob" style={{ animationDelay: '2.0s', animationDuration: '4s' }}>
-                 <div className="border border-white/30 rounded-md p-2 bg-black/30 backdrop-blur-sm drop-shadow-lg">
-                    <p className="typewriter-text font-bold text-xs text-white" style={{ animationDelay: '2.0s' }}>
-                        {animatedCornerText[3]}
-                    </p>
-                </div>
-            </div>
-      </div>
-
-
       <div className="absolute inset-0 bg-black/40"></div>
 
       <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center">
