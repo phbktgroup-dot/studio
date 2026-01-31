@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -59,7 +60,7 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="border-t bg-muted/30">
-      <div className="container grid items-start gap-8 py-12 md:grid-cols-3">
+      <div className="container grid items-start gap-8 py-12 md:grid-cols-2">
         <div className="flex flex-col gap-4">
           <Link href="/">
             {logoLoading ? (
@@ -73,13 +74,6 @@ export default function Footer() {
           <p className="text-sm text-muted-foreground">
             Empowering your business with innovative financial and technological solutions.
           </p>
-        </div>
-        <div className="grid gap-4">
-          <h3 className="font-semibold">Quick Links</h3>
-          <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Home</Link>
-          <Link href="#services" className="text-sm text-muted-foreground hover:text-foreground">Services</Link>
-          <Link href="#about" className="text-sm text-muted-foreground hover:text-foreground">About Us</Link>
-          <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground">Client Login</Link>
         </div>
         <div className="grid gap-4">
           <h3 className="font-semibold">Get in Touch</h3>
