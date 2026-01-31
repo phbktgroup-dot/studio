@@ -13,10 +13,10 @@ const stats = [
 function StatItem({ end, label, Icon }: { end: number; label: string; Icon: React.ElementType }) {
   const { count, ref } = useCountUp(end);
   return (
-    <div ref={ref} className="flex flex-col items-center gap-2 text-center">
-      <Icon className="h-10 w-10 text-primary" />
-      <p className="text-4xl font-bold font-headline tracking-tighter">{count}{label.includes('%') ? '%' : '+'}</p>
-      <p className="text-sm text-muted-foreground">{label}</p>
+    <div ref={ref} className="flex flex-col items-center gap-1 text-center">
+      <Icon className="h-8 w-8 text-primary" />
+      <p className="text-3xl font-bold font-headline tracking-tighter">{count}{label.includes('%') ? '%' : '+'}</p>
+      <p className="text-xs text-muted-foreground">{label}</p>
     </div>
   );
 }
