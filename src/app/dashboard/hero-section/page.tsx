@@ -500,46 +500,15 @@ export default function HeroSectionPage() {
                         <CardTitle className="text-sm [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">Hero Section Background Video</CardTitle>
                     </div>
                     <div className="flex-grow">
-                        <div className={`grid ${videoUrl ? 'grid-cols-2' : 'grid-cols-1'} gap-6 items-start`}>
-                            <div className="space-y-3">
-                                <div className="grid w-full items-center gap-1.5">
-                                    <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
-                                    <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
-                                </div>
-                                <Button onClick={handleUpload} disabled={loading || !file} size="sm">
-                                    {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                                    {videoUrl ? 'Upload and Replace' : 'Upload Video'}
-                                </Button>
+                        <div className="space-y-3">
+                            <div className="grid w-full items-center gap-1.5">
+                                <Label htmlFor="video" className="text-xs font-normal text-muted-foreground">Video File (MP4 recommended)</Label>
+                                <Input id="video" type="file" accept="video/mp4,video/webm" onChange={handleFileChange} className="h-8 text-xs" />
                             </div>
-
-                            {videoUrl && (
-                                <div className="relative">
-                                    <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-[16/9]" />
-                                    <AlertDialog>
-                                        <AlertDialogTrigger asChild>
-                                            <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
-                                                <Trash2 className="h-4 w-4" />
-                                                <span className="sr-only">Delete Video</span>
-                                            </Button>
-                                        </AlertDialogTrigger>
-                                        <AlertDialogContent>
-                                            <AlertDialogHeader>
-                                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                                            <AlertDialogDescription>
-                                                This action will permanently delete the hero section video. This cannot be undone.
-                                            </AlertDialogDescription>
-                                            </AlertDialogHeader>
-                                            <AlertDialogFooter>
-                                            <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
-                                            <AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-destructive hover:bg-destructive/90">
-                                                {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                                                Delete
-                                            </AlertDialogAction>
-                                            </AlertDialogFooter>
-                                        </AlertDialogContent>
-                                    </AlertDialog>
-                                </div>
-                            )}
+                            <Button onClick={handleUpload} disabled={loading || !file} size="sm">
+                                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                                {videoUrl ? 'Upload and Replace' : 'Upload Video'}
+                            </Button>
                         </div>
                     </div>
                 </CardContent>
@@ -597,14 +566,48 @@ export default function HeroSectionPage() {
                 </CardContent>
             </Card>
             <Card>
-                <CardContent className="p-4 flex gap-4">
-                    <div className="flex items-center justify-center border-r pr-4">
-                        <CardTitle className="text-sm [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">Hero Section Text</CardTitle>
+                <CardHeader>
+                    <CardTitle>Hero Content & Preview</CardTitle>
+                </CardHeader>
+                <CardContent className="grid md:grid-cols-2 gap-6 items-start">
+                     <div>
+                        {videoUrl ? (
+                            <div className="relative">
+                                <video key={videoUrl} src={videoUrl} controls className="w-full rounded-md aspect-[16/9]" />
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10 h-8 w-8 bg-red-600 hover:bg-red-700">
+                                            <Trash2 className="h-4 w-4" />
+                                            <span className="sr-only">Delete Video</span>
+                                        </Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            This action will permanently delete the hero section video. This cannot be undone.
+                                        </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                        <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+                                        <AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-destructive hover:bg-destructive/90">
+                                            {isDeleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                            Delete
+                                        </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+                            </div>
+                        ) : (
+                            <div className="flex items-center justify-center bg-muted rounded-md aspect-[16/9]">
+                                <p className="text-sm text-muted-foreground">No video uploaded</p>
+                            </div>
+                        )}
                     </div>
-                    <div className="flex-grow space-y-6">
+                    <div className="space-y-6">
                         <div>
                             <h3 className="text-sm font-medium mb-2">English Content</h3>
-                            <div className="grid md:grid-cols-2 gap-4">
+                            <div className="grid gap-4">
                                 <div className="space-y-1.5">
                                     <Label htmlFor="h1_en" className="text-xs">Headline</Label>
                                     <Input id="h1_en" value={heroText.h1_en} onChange={(e) => setHeroText({...heroText, h1_en: e.target.value})} />
@@ -613,19 +616,21 @@ export default function HeroSectionPage() {
                                     <Label htmlFor="p_en" className="text-xs">Sub-headline</Label>
                                     <Textarea id="p_en" value={heroText.p_en} onChange={(e) => setHeroText({...heroText, p_en: e.target.value})} rows={2} />
                                 </div>
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="button1_en" className="text-xs">"Our Services" Button</Label>
-                                    <Input id="button1_en" value={heroText.button1_en} onChange={(e) => setHeroText({...heroText, button1_en: e.target.value})} />
-                                </div>
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="button2_en" className="text-xs">"Contact Us" Button</Label>
-                                    <Input id="button2_en" value={heroText.button2_en} onChange={(e) => setHeroText({...heroText, button2_en: e.target.value})} />
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-1.5">
+                                        <Label htmlFor="button1_en" className="text-xs">"Our Services" Button</Label>
+                                        <Input id="button1_en" value={heroText.button1_en} onChange={(e) => setHeroText({...heroText, button1_en: e.target.value})} />
+                                    </div>
+                                    <div className="space-y-1.5">
+                                        <Label htmlFor="button2_en" className="text-xs">"Contact Us" Button</Label>
+                                        <Input id="button2_en" value={heroText.button2_en} onChange={(e) => setHeroText({...heroText, button2_en: e.target.value})} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <h3 className="text-sm font-medium mb-2">Marathi Content</h3>
-                            <div className="grid md:grid-cols-2 gap-4">
+                            <div className="grid gap-4">
                                 <div className="space-y-1.5">
                                     <Label htmlFor="h1_mr" className="text-xs">Headline</Label>
                                     <Input id="h1_mr" value={heroText.h1_mr} onChange={(e) => setHeroText({...heroText, h1_mr: e.target.value})} />
@@ -634,13 +639,15 @@ export default function HeroSectionPage() {
                                     <Label htmlFor="p_mr" className="text-xs">Sub-headline</Label>
                                     <Textarea id="p_mr" value={heroText.p_mr} onChange={(e) => setHeroText({...heroText, p_mr: e.target.value})} rows={2} />
                                 </div>
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="button1_mr" className="text-xs">"आमच्या सेवा" Button</Label>
-                                    <Input id="button1_mr" value={heroText.button1_mr} onChange={(e) => setHeroText({...heroText, button1_mr: e.target.value})} />
-                                </div>
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="button2_mr" className="text-xs">"आमच्याशी संपर्क साधा" Button</Label>
-                                    <Input id="button2_mr" value={heroText.button2_mr} onChange={(e) => setHeroText({...heroText, button2_mr: e.target.value})} />
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-1.5">
+                                        <Label htmlFor="button1_mr" className="text-xs">"आमच्या सेवा" Button</Label>
+                                        <Input id="button1_mr" value={heroText.button1_mr} onChange={(e) => setHeroText({...heroText, button1_mr: e.target.value})} />
+                                    </div>
+                                    <div className="space-y-1.5">
+                                        <Label htmlFor="button2_mr" className="text-xs">"आमच्याशी संपर्क साधा" Button</Label>
+                                        <Input id="button2_mr" value={heroText.button2_mr} onChange={(e) => setHeroText({...heroText, button2_mr: e.target.value})} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
