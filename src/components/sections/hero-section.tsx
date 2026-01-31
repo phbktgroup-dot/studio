@@ -81,25 +81,25 @@ export default function HeroSection() {
         </>
       )}
       
-      <div className="absolute inset-0 bg-black/50 z-[1]"></div>
+      <div className="absolute inset-0 bg-white/40 z-[1]"></div>
 
-      <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
+      <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center text-foreground">
         <AnimatedText
           text={heroText[language].h1}
           el="h1"
-          className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl drop-shadow-md"
+          className="font-headline text-5xl font-bold tracking-tighter sm:text-7xl drop-shadow-md"
           spanClassName="py-4"
         />
         <AnimatedText
           text={heroText[language].p}
-          className="mt-4 max-w-2xl text-white/80 text-base drop-shadow-md"
+          className="mt-4 max-w-2xl text-muted-foreground text-base drop-shadow-md"
           stagger={0.01}
         />
         <div className="mt-8 flex gap-4">
           <Button size="lg" asChild>
             <Link href="#services">{heroText[language].ourServices}</Link>
           </Button>
-          <Button size="lg" variant="outline" asChild className="border-white/50 text-white hover:bg-white hover:text-primary">
+          <Button size="lg" variant="outline" asChild>
             <Link href="#contact">{heroText[language].contactUs}</Link>
           </Button>
         </div>
@@ -107,7 +107,7 @@ export default function HeroSection() {
       
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
         <Link href="#stats">
-          <ArrowDown className="h-8 w-8 text-white/50 animate-bounce" />
+          <ArrowDown className="h-8 w-8 text-muted-foreground animate-bounce" />
           <span className="sr-only">Scroll down</span>
         </Link>
       </div>
