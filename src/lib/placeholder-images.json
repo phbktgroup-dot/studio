@@ -23,6 +23,66 @@
       "description": "Geometric 3D blocks arranged to look like a building under construction.",
       "imageUrl": "https://images.unsplash.com/photo-1633469924738-52101af51d87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxidWlsZGluZyUyMGJsb2Nrc3xlbnwwfHx8fDE3Njk2MTQ5MTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "building blocks"
+    },
+    {
+      "id": "service_web_dev",
+      "description": "Code on a screen",
+      "imageUrl": "https://images.unsplash.com/photo-1658274474851-fda40d4c309d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb2RlJTIwc2NyZWVufGVufDB8fHx8MTc2OTc1NjIwOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "code screen"
+    },
+    {
+      "id": "service_marketing",
+      "description": "Marketing chart on a tablet",
+      "imageUrl": "https://images.unsplash.com/photo-1542744173-05336fcc7ad4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtYXJrZXRpbmclMjBjaGFydHxlbnwwfHx8fDE3Njk4MTcxNzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "marketing chart"
+    },
+    {
+      "id": "service_tax",
+      "description": "A person signing a legal document",
+      "imageUrl": "https://images.unsplash.com/photo-1562564055-71e051d33c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsZWdhbCUyMGRvY3VtZW50fGVufDB8fHx8MTc2OTg0NjY1NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "legal document"
+    },
+    {
+      "id": "service_biz_setup",
+      "description": "A modern office setup",
+      "imageUrl": "https://images.unsplash.com/photo-1669723008642-b00fa9d10b76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxvZmZpY2UlMjBzZXR1cHxlbnwwfHx8fDE3Njk4NDY2NTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "office setup"
+    },
+    {
+      "id": "service_ui_ux",
+      "description": "UI/UX design wireframes on a board",
+      "imageUrl": "https://images.unsplash.com/photo-1546437593-3d0258c28037?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkZXNpZ24lMjB3aXJlZnJhbWV8ZW58MHx8fHwxNzY5NzQ0ODQwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "design wireframe"
+    },
+    {
+      "id": "service_ai",
+      "description": "A robot arm working on a production line",
+      "imageUrl": "https://images.unsplash.com/photo-1716191299980-a6e8827ba10b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxyb2JvdCUyMGFybXxlbnwwfHx8fDE3Njk3OTUxOTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "robot arm"
+    },
+    {
+      "id": "service_cloud",
+      "description": "A server room with many racks",
+      "imageUrl": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzZXJ2ZXIlMjByb29tfGVufDB8fHx8MTc2OTgxNzg2M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "server room"
+    },
+    {
+      "id": "service_advisory",
+      "description": "A business meeting around a table",
+      "imageUrl": "https://images.unsplash.com/photo-1573164574572-cb89e39749b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxidXNpbmVzcyUyMG1lZXRpbmd8ZW58MHx8fHwxNzY5NzQ4MTUyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "business meeting"
+    },
+    {
+      "id": "service_social",
+      "description": "Social media icons on a phone screen",
+      "imageUrl": "https://images.unsplash.com/photo-1683721003111-070bcc053d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzb2NpYWwlMjBtZWRpYXxlbnwwfHx8fDE3Njk3MjgwNDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "social media"
+    },
+    {
+      "id": "service_support",
+      "description": "A customer support agent with a headset",
+      "imageUrl": "https://images.unsplash.com/photo-1626863905121-3b0c0ed7b94c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjdXN0b21lciUyMHN1cHBvcnR8ZW58MHx8fHwxNzY5ODE2OTAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "customer support"
     }
   ]
 }
