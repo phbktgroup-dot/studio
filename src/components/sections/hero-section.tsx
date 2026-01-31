@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -22,6 +23,13 @@ const heroText = {
     contactUs: "Contact Us",
   },
 };
+
+const animatedCornerText = [
+  "Website Development | वेबसाइट डेव्हलपमेंट",
+  "App Development | अ‍ॅप डेव्हलपमेंट",
+  "Business Operations | बिझनेस ऑपरेशन्स",
+  "Tax & Compliance | टॅक्स आणि कंप्लायन्स",
+];
 
 export default function HeroSection() {
   const { language } = useLanguage();
@@ -81,7 +89,22 @@ export default function HeroSection() {
         </>
       )}
       
-      <div className="absolute inset-0 bg-black/0"></div>
+      <div className="absolute inset-0 z-5 pointer-events-none hidden md:block">
+            <div className="absolute top-8 left-8 text-white/80 text-xs font-medium animate-bob drop-shadow-lg" style={{ animationDelay: '0s' }}>
+                {animatedCornerText[0]}
+            </div>
+            <div className="absolute top-8 right-8 text-white/80 text-xs font-medium text-right animate-bob drop-shadow-lg" style={{ animationDelay: '0.5s' }}>
+                {animatedCornerText[1]}
+            </div>
+            <div className="absolute bottom-20 left-8 text-white/80 text-xs font-medium animate-bob drop-shadow-lg" style={{ animationDelay: '1s' }}>
+                {animatedCornerText[2]}
+            </div>
+            <div className="absolute bottom-20 right-8 text-white/80 text-xs font-medium text-right animate-bob drop-shadow-lg" style={{ animationDelay: '1.5s' }}>
+                {animatedCornerText[3]}
+            </div>
+        </div>
+
+      <div className="absolute inset-0 bg-black/40"></div>
 
       <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center">
         <AnimatedText
