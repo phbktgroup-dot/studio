@@ -66,13 +66,13 @@ export default function CareersSection() {
   );
 
   return (
-    <section className="relative py-16 md:py-24 bg-muted/30 overflow-hidden">
+    <section className="relative py-12 md:py-16 bg-muted/30 overflow-hidden">
         <div className="absolute inset-0 flex flex-col justify-center gap-8 opacity-10 dark:opacity-[0.07]">
             <ImageMarquee images={marquee1} />
             <ImageMarquee images={marquee2} reverse />
         </div>
         <div className="container relative z-10 text-center">
-            <h2 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-primary">
+            <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-primary">
                 {text.heading}
             </h2>
             <div className="mt-8 flex justify-center">
