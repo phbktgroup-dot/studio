@@ -64,11 +64,11 @@ export default function Footer() {
         <div className="flex flex-col gap-4">
           <Link href="/">
             {logoLoading ? (
-              <div className="h-[48px] w-[180px]" />
+              <div className="h-[58px] w-[180px]" />
             ) : logoUrl ? (
-              <img src={logoUrl} alt="PHBKT Group" className="h-[48px] w-auto object-contain" />
+              <img src={logoUrl} alt="PHBKT Group" className="h-[58px] w-auto object-contain" />
             ) : (
-              <Logo className="h-[48px]" />
+              <Logo className="h-[58px]" />
             )}
           </Link>
           <p className="text-sm text-muted-foreground">
