@@ -61,7 +61,7 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="border-t bg-muted/30">
-      <div className="container grid items-start gap-8 py-12 md:grid-cols-2">
+      <div className="container flex flex-col md:flex-row justify-between items-start gap-8 py-12">
         <div className="flex flex-col gap-4">
           <Link href="/">
             {logoLoading ? (
@@ -76,7 +76,7 @@ export default function Footer() {
             Empowering your business with innovative financial and technological solutions.
           </p>
         </div>
-        <div className="md:justify-self-end w-full max-w-sm">
+        <div className="w-full max-w-sm">
             <Card>
                 <CardContent className="p-6">
                     <h3 className="font-semibold text-lg mb-4">Get in Touch</h3>
