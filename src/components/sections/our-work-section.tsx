@@ -21,7 +21,7 @@ const sectionText = {
   },
   mr: {
     heading: "आमचे अलीकडील काम",
-    subheading: "आम्हाला अभिमान असलेल्या काही प्रकल्पांवर एक नजर टाका.",
+    subheading: "",
     all: "सर्व",
     apps: "अ‍ॅप्स",
     automation: "ऑटोमेशन",
