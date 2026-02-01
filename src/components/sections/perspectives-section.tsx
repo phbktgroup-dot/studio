@@ -44,9 +44,11 @@ const insights = [
 const sectionText = {
   en: {
     heading: "Perspectives & Insights",
+    subheading: "Igniting startup growth with unstoppable tech and elite strategy."
   },
   mr: {
     heading: "दृष्टिकोन आणि अंतर्दृष्टी",
+    subheading: "शक्तिशाली तंत्रज्ञान आणि अजेय रणनीतीसह तुमच्या स्टार्टअपला देऊया यशाची नवी भरारी!"
   },
 };
 
@@ -75,9 +77,14 @@ export default function PerspectivesSection() {
   return (
     <section className="py-6 md:py-8 bg-background">
       <div className="container">
-        <h2 className="mb-8 font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
-          {sectionText[language].heading}
-        </h2>
+        <div className="text-center mb-8">
+            <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+              {sectionText[language].heading}
+            </h3>
+            <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
+              {sectionText[language].subheading}
+            </h2>
+        </div>
         <Carousel
           setApi={setApi}
           opts={{
