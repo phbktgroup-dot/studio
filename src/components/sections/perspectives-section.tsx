@@ -1,14 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 import { useLanguage } from '@/context/language-provider';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
@@ -39,6 +42,16 @@ const insights = [
     mrTitle: "शाश्वत वाढीचे मॉडेल",
     imageId: "perspective_5",
   },
+  {
+    enTitle: "Digital Transformation",
+    mrTitle: "डिजिटल परिवर्तन",
+    imageId: "service_web_dev",
+  },
+  {
+    enTitle: "Cybersecurity in 2024",
+    mrTitle: "२०२४ मध्ये सायबर सुरक्षा",
+    imageId: "service_cloud",
+  },
 ];
 
 const sectionText = {
@@ -56,6 +69,10 @@ export default function PerspectivesSection() {
   const { language } = useLanguage();
   const [api, setApi] = useState<CarouselApi>();
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const plugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
 
   useEffect(() => {
     if (!api) {
@@ -87,10 +104,13 @@ export default function PerspectivesSection() {
         </div>
         <Carousel
           setApi={setApi}
+          plugins={[plugin.current]}
           opts={{
             align: 'start',
             loop: true,
           }}
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
         >
           <CarouselContent className="-ml-4">
             {insights.map((insight, index) => {
@@ -98,7 +118,7 @@ export default function PerspectivesSection() {
               const isActive = index === activeIndex;
 
               return (
-                <CarouselItem key={index} className="pl-4 basis-[90%] md:basis-1/2 lg:basis-[calc(100%/3.5)] group">
+                <CarouselItem key={index} className="pl-4 basis-[90%] md:basis-1/2 lg:basis-1/5 group">
                   <Card className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                     {image && (
                       <Image
@@ -116,27 +136,27 @@ export default function PerspectivesSection() {
                       maskImage: 'linear-gradient(to top, black 50%, transparent 100%)',
                       WebkitMaskImage: 'linear-gradient(to top, black 50%, transparent 100%)'
                     }} />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
                         <div className="overflow-hidden">
                           <h3
                             className={cn(
-                              'font-headline text-2xl font-bold text-white transition-all duration-500 ease-out',
+                              'font-headline text-lg font-bold text-white transition-all duration-500 ease-out',
                               isActive ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
                             )}
                             style={{ transitionDelay: isActive ? '150ms' : '0ms' }}
                             >
-                            {insight.enTitle}
+                            {language === 'en' ? insight.enTitle : insight.mrTitle}
                           </h3>
                         </div>
                         <div className="overflow-hidden">
                           <p
                             className={cn(
-                              'font-body font-medium text-white/80 mt-1 transition-all duration-500 ease-out',
+                              'font-body text-xs font-medium text-white/80 mt-1 transition-all duration-500 ease-out',
                               isActive ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
                             )}
                             style={{ transitionDelay: isActive ? '250ms' : '0ms' }}
                             >
-                            {insight.mrTitle}
+                            {language === 'mr' ? insight.enTitle : insight.mrTitle}
                           </p>
                         </div>
                     </div>
@@ -145,6 +165,8 @@ export default function PerspectivesSection() {
               );
             })}
           </CarouselContent>
+          <CarouselPrevious className="hidden md:flex left-[-20px] bg-primary text-primary-foreground hover:bg-primary/90" />
+          <CarouselNext className="hidden md:flex right-[-20px] bg-primary text-primary-foreground hover:bg-primary/90" />
         </Carousel>
       </div>
     </section>
