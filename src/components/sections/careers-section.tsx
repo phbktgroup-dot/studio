@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useLanguage } from '@/context/language-provider';
 import { Magnetic } from '@/components/shared/magnetic';
+import { cn } from '@/lib/utils';
 
 const sectionText = {
   en: {
@@ -22,40 +23,33 @@ const sectionText = {
 const teamImageIds = ["team_1", "team_2", "team_3", "team_4", "team_5", "team_6"];
 const teamImages = PlaceHolderImages.filter(img => teamImageIds.includes(img.id));
 
-// To create a seamless loop for marquee
-const marqueeImages1 = [...teamImages, ...teamImages];
-const marqueeImages2 = [...[...teamImages].reverse(), ...[...teamImages].reverse()];
+const FloatingImage = ({ image, index }: { image: typeof teamImages[0], index: number }) => {
+    const positions = [
+        { top: '10%', left: '15%', size: 'w-20 h-20 md:w-24 md:h-24', delay: '0s' },
+        { top: '20%', left: '80%', size: 'w-16 h-16 md:w-20 md:h-20', delay: '1s' },
+        { top: '70%', left: '10%', size: 'w-24 h-24 md:w-32 md:h-32', delay: '2s' },
+        { top: '80%', left: '85%', size: 'w-20 h-20 md:w-28 md:h-28', delay: '0.5s' },
+        { top: '40%', left: '45%', size: 'w-12 h-12 md:w-16 md:h-16', delay: '1.5s' },
+        { top: '5%', left: '50%', size: 'w-16 h-16 md:w-20 md:h-20', delay: '2.5s' },
+    ];
+    const pos = positions[index % positions.length];
 
-const MarqueeImage = ({ image }: { image: typeof teamImages[0] }) => (
-    <div className="relative aspect-square w-24 md:w-32 rounded-2xl overflow-hidden shadow-lg">
-        <Image
-            src={image.imageUrl}
-            alt={image.description}
-            fill
-            data-ai-hint={image.imageHint}
-            className="object-cover"
-        />
-    </div>
-);
+    return (
+        <div 
+            className={cn("absolute rounded-2xl overflow-hidden shadow-lg animate-bob", pos.size)}
+            style={{ top: pos.top, left: pos.left, animationDelay: pos.delay, animationDuration: `${Math.random() * 3 + 4}s` }}
+        >
+             <Image
+                src={image.imageUrl}
+                alt={image.description}
+                fill
+                data-ai-hint={image.imageHint}
+                className="object-cover"
+            />
+        </div>
+    );
+};
 
-const ImageMarquee = ({ images, reverse = false }: { images: (typeof teamImages); reverse?: boolean }) => (
-    <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_10%,_black_90%,transparent_100%)]">
-      <ul className={`flex items-center justify-center md:justify-start [&_li]:mx-4 ${reverse ? 'animate-scroll-reverse' : 'animate-scroll'}`}>
-        {images.map((image, index) => (
-          <li key={`marquee-${index}-${image.id}`}>
-            <MarqueeImage image={image} />
-          </li>
-        ))}
-      </ul>
-      <ul className={`flex items-center justify-center md:justify-start [&_li]:mx-4 ${reverse ? 'animate-scroll-reverse' : 'animate-scroll'}`} aria-hidden="true">
-        {images.map((image, index) => (
-          <li key={`marquee-clone-${index}-${image.id}`}>
-            <MarqueeImage image={image} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
 
 export default function CareersSection() {
   const { language } = useLanguage();
@@ -63,9 +57,10 @@ export default function CareersSection() {
 
   return (
     <section className="relative py-20 md:py-32 bg-muted/30 overflow-hidden">
-        <div className="absolute inset-0 flex flex-col justify-between py-8 opacity-10 dark:opacity-[0.07] pointer-events-none">
-            <ImageMarquee images={marqueeImages1} />
-            <ImageMarquee images={marqueeImages2} reverse />
+        <div className="absolute inset-0 opacity-10 dark:opacity-[0.07] pointer-events-none">
+            {teamImages.map((image, index) => (
+                <FloatingImage key={image.id} image={image} index={index} />
+            ))}
         </div>
         <div className="container relative z-10 text-center max-w-3xl">
             <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter text-primary">
