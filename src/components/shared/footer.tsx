@@ -20,11 +20,8 @@ const text = {
     cardTitle: "तुमची दृष्टी शेअर करा",
     cardDescription: "आम्ही तुमच्या कल्पनेला प्रत्यक्षात आणण्यासाठी उत्सुक आहोत.",
     nameLabel: "तुमचे नाव",
-    namePlaceholder: "उदा. जॉन डो",
     emailLabel: "तुमचा ईमेल",
-    emailPlaceholder: "john@example.com",
     mobileLabel: "मोबाईल नंबर",
-    mobilePlaceholder: "+९१ ९८७६५४३२१०",
     purposeLabel: "उद्देश",
     purposePlaceholder: "सेवा निवडा",
     purposeOptions: {
@@ -35,7 +32,6 @@ const text = {
       other: "इतर"
     },
     visionLabel: "तुमची दृष्टी",
-    visionPlaceholder: "तुमच्या प्रोजेक्टबद्दल आम्हाला सांगा...",
     submitButton: "चौकशी सबमिट करा",
     footerDescription: "तुमच्या व्यवसायाला नाविन्यपूर्ण आर्थिक आणि तांत्रिक उपायांनी सक्षम करणे.",
     getInTouchDirectly: "थेट संपर्कात रहा"
@@ -46,11 +42,8 @@ const text = {
     cardTitle: "Share Your Vision",
     cardDescription: "We're excited to hear about what you want to build.",
     nameLabel: "Your Name",
-    namePlaceholder: "e.g., John Doe",
     emailLabel: "Your Email",
-    emailPlaceholder: "john@example.com",
     mobileLabel: "Mobile Number",
-    mobilePlaceholder: "+91 9876543210",
     purposeLabel: "Purpose",
     purposePlaceholder: "Select a service",
     purposeOptions: {
@@ -61,7 +54,6 @@ const text = {
       other: "Other"
     },
     visionLabel: "Your Vision",
-    visionPlaceholder: "Tell us about your project...",
     submitButton: "Submit Inquiry",
     footerDescription: "Empowering your business with innovative financial and technological solutions.",
     getInTouchDirectly: "Get in Touch Directly"
@@ -147,19 +139,19 @@ export default function Footer() {
                     <CardContent className="space-y-6 px-0">
                         <div className="grid sm:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                                <Label htmlFor="footer-name" className="block text-center">{t.nameLabel}</Label>
+                                <Label htmlFor="footer-name" className="block">{t.nameLabel}</Label>
                                 <Input id="footer-name" />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="footer-email" className="block text-center">{t.emailLabel}</Label>
+                                <Label htmlFor="footer-email" className="block">{t.emailLabel}</Label>
                                 <Input id="footer-email" type="email" />
                             </div>
                              <div className="space-y-2">
-                                <Label htmlFor="footer-mobile" className="block text-center">{t.mobileLabel}</Label>
+                                <Label htmlFor="footer-mobile" className="block">{t.mobileLabel}</Label>
                                 <Input id="footer-mobile" type="tel" />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="footer-purpose" className="block text-center">{t.purposeLabel}</Label>
+                                <Label htmlFor="footer-purpose" className="block">{t.purposeLabel}</Label>
                                 <Select>
                                     <SelectTrigger id="footer-purpose">
                                         <SelectValue placeholder={t.purposePlaceholder} />
@@ -175,8 +167,8 @@ export default function Footer() {
                             </div>
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="footer-message" className="block text-center">{t.visionLabel}</Label>
-                            <Textarea id="footer-message" className="min-h-[100px]" />
+                            <Label htmlFor="footer-message" className="block">{t.visionLabel}</Label>
+                            <Textarea id="footer-message" className="min-h-[80px]" />
                         </div>
                     </CardContent>
                     <CardFooter className="px-0">
