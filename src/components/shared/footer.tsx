@@ -157,7 +157,7 @@ export default function Footer() {
               <Link href="#" aria-label="Twitter" className="text-sky-500 transition-colors hover:opacity-80">
                 <Twitter className="h-5 w-5" />
               </Link>
-              <Link href="#" aria-label="Instagram" className="text-pink-600 transition-colors hover:opacity-80">
+              <Link href="https://www.instagram.com/phbkt.it.tech?igsh=MThtOGZpdTVnYW4waw==&utm_source=ig_contact_invite" aria-label="Instagram" className="text-pink-600 transition-colors hover:opacity-80">
                 <Instagram className="h-5 w-5" />
               </Link>
               <Link href="#" aria-label="LinkedIn" className="text-blue-700 transition-colors hover:opacity-80">
