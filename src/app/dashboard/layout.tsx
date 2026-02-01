@@ -63,18 +63,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
   }, [router]);
 
   useEffect(() => {
-    const handleFocus = async () => {
-      await supabase.auth.refreshSession();
-    };
-
-    window.addEventListener('focus', handleFocus);
-
-    return () => {
-      window.removeEventListener('focus', handleFocus);
-    };
-  }, []);
-
-  useEffect(() => {
     if (user) {
       const userRole = user.user_metadata?.role;
       const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/hero-section';
