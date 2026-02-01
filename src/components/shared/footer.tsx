@@ -138,7 +138,7 @@ export default function Footer() {
                 </div>
             </div>
             
-            <Card className="shadow-2xl">
+            <div>
                 <form>
                     <CardHeader>
                         <CardTitle>{t.cardTitle}</CardTitle>
@@ -186,7 +186,7 @@ export default function Footer() {
                         </Button>
                     </CardFooter>
                 </form>
-            </Card>
+            </div>
         </div>
       </div>
       <div className="border-t bg-muted/50">
