@@ -12,6 +12,7 @@ const sectionText = {
   en: {
     heading: "Our Recent Work",
     subheading: "Take a look at some of the projects we're proud of.",
+    quote: "We build digital experiences that drive results.",
     all: "All",
     apps: "Apps",
     automation: "Automation",
@@ -21,6 +22,7 @@ const sectionText = {
   mr: {
     heading: "आमचे अलीकडील काम",
     subheading: "",
+    quote: "आम्ही असे डिजिटल अनुभव तयार करतो जे परिणाम देतात.",
     all: "सर्व",
     apps: "अ‍ॅप्स",
     automation: "ऑटोमेशन",
@@ -83,6 +85,9 @@ export default function OurWorkSection() {
           <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
             {text.heading}
           </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-lg">
+            {text.quote}
+          </p>
         </div>
 
         <div className="flex justify-center gap-2 md:gap-4 mb-12">
