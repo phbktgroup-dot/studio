@@ -141,22 +141,22 @@ export default function Footer() {
             <div>
                 <form>
                     <CardHeader className="text-center">
-                        <CardTitle>{t.cardTitle}</CardTitle>
-                        <CardDescription>{t.cardDescription}</CardDescription>
+                        <CardTitle className="text-center">{t.cardTitle}</CardTitle>
+                        <CardDescription className="text-center">{t.cardDescription}</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
                         <div className="grid sm:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <Label htmlFor="footer-name" className="block text-center">{t.nameLabel}</Label>
-                                <Input id="footer-name" placeholder={t.namePlaceholder} />
+                                <Input id="footer-name" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="footer-email" className="block text-center">{t.emailLabel}</Label>
-                                <Input id="footer-email" type="email" placeholder={t.emailPlaceholder} />
+                                <Input id="footer-email" type="email" />
                             </div>
                              <div className="space-y-2">
                                 <Label htmlFor="footer-mobile" className="block text-center">{t.mobileLabel}</Label>
-                                <Input id="footer-mobile" type="tel" placeholder={t.mobilePlaceholder} />
+                                <Input id="footer-mobile" type="tel" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="footer-purpose" className="block text-center">{t.purposeLabel}</Label>
@@ -176,7 +176,7 @@ export default function Footer() {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="footer-message" className="block text-center">{t.visionLabel}</Label>
-                            <Textarea id="footer-message" placeholder={t.visionPlaceholder} className="min-h-[120px]" />
+                            <Textarea id="footer-message" className="min-h-[120px]" />
                         </div>
                     </CardContent>
                     <CardFooter>
