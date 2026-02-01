@@ -44,11 +44,11 @@ const insights = [
 const sectionText = {
   en: {
     heading: "Perspectives & Insights",
-    subheading: "Igniting startup growth with unstoppable tech and elite strategy."
+    subheading: "Exploring tomorrow's trends, today."
   },
   mr: {
     heading: "दृष्टिकोन आणि अंतर्दृष्टी",
-    subheading: "शक्तिशाली तंत्रज्ञान आणि अजेय रणनीतीसह तुमच्या स्टार्टअपला देऊया यशाची नवी भरारी!"
+    subheading: "उद्याच्या ट्रेंडचा शोध, आजच."
   },
 };
 
