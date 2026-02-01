@@ -86,7 +86,7 @@ export default function PremiumServicesSection() {
   const services = servicesData[language];
 
   return (
-    <section id="services" className="bg-muted/30 py-12 md:py-16">
+    <section id="services" className="bg-muted/30 py-6 md:py-8">
         <div className="container text-center mb-8">
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {sectionTitleText[language]}
