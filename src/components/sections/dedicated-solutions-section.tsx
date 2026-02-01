@@ -75,7 +75,7 @@ export default function DedicatedSolutionsSection() {
   const text = sectionText[language];
 
   return (
-    <section className="py-6 md:py-10 bg-muted/30">
+    <section className="py-20 md:py-24 bg-muted/30">
       <div className="container">
         <div className="text-center mb-12">
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">

@@ -1,6 +1,7 @@
 
 import Header from "@/components/shared/header";
 import HeroSection from "@/components/sections/hero-section";
+import StatsSection from "@/components/sections/stats-section";
 import SuccessRoadmapSection from "@/components/sections/success-roadmap-section";
 import PremiumServicesSection from "@/components/sections/premium-services-section";
 import Footer from "@/components/shared/footer";
@@ -15,6 +16,7 @@ export default function Home() {
       <Header />
       <main className="flex-grow">
         <HeroSection />
+        <StatsSection />
         <PremiumServicesSection />
         <SuccessRoadmapSection />
         <DedicatedSolutionsSection />
