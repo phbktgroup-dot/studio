@@ -110,7 +110,7 @@ export default function OurWorkSection() {
                 <CardContent className="p-6">
                   <h3 className="text-lg font-bold font-headline">{language === 'en' ? project.titleEn : project.titleMr}</h3>
                   <p className="mt-2 text-sm text-muted-foreground h-10">{language === 'en' ? project.descriptionEn : project.descriptionMr}</p>
-                  <Button variant="outline" className="mt-4">{text.viewDemo}</Button>
+                  <Button variant="outline" size="sm" className="mt-4">{text.viewDemo}</Button>
                 </CardContent>
               </Card>
             );
