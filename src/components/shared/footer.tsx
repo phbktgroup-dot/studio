@@ -87,11 +87,11 @@ export default function Footer() {
                 <div className="mb-8">
                     <Link href="/" className="inline-block mb-4">
                         {logoLoading ? (
-                        <div className="h-[58px] w-[220px]" />
+                        <div className="h-[68px] w-[250px]" />
                         ) : logoUrl ? (
-                        <img src={logoUrl} alt="PHBKT Group" className="h-[58px] w-auto max-w-[220px] object-contain" />
+                        <img src={logoUrl} alt="PHBKT Group" className="h-[68px] w-auto max-w-[250px] object-contain" />
                         ) : (
-                        <Logo className="h-[58px] w-[220px]" />
+                        <Logo className="h-[68px] w-[250px]" />
                         )}
                     </Link>
                     <p className="max-w-md mx-auto text-muted-foreground">
