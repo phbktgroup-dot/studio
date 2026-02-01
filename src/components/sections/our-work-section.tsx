@@ -75,14 +75,14 @@ export default function OurWorkSection() {
     <section className="py-6 md:py-10 bg-muted/30">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
+          {text.subheading && (
+            <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+              {text.subheading}
+            </h3>
+          )}
+          <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
             {text.heading}
           </h2>
-          {text.subheading && (
-            <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-xl">
-              {text.subheading}
-            </p>
-          )}
         </div>
 
         <div className="flex justify-center gap-2 md:gap-4 mb-12">
