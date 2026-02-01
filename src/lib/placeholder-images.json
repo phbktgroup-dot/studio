@@ -173,6 +173,12 @@
       "description": "A modern, abstract company logo with orange and teal colors.",
       "imageUrl": "https://images.unsplash.com/photo-1761223956853-7c7c12ebff18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxhYnN0cmFjdCUyMGxvZ298ZW58MHx8fHwxNzY5ODE1NTMwfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "abstract logo"
+    },
+    {
+      "id": "careers_marathon",
+      "description": "A woman smiling joyfully while running a marathon.",
+      "imageUrl": "https://images.unsplash.com/photo-1579257692135-183490e0b793?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtYXJhdGhvbiUyMHJ1bm5lcnxlbnwwfHx8fDE3MTg0ODc5MjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "marathon runner"
     }
   ]
 }
