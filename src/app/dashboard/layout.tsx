@@ -129,11 +129,11 @@ function DashboardUI({ children }: { children: ReactNode }) {
         <div className="flex items-center gap-2">
           <Link href="/">
             {logoLoading ? (
-              <div className="h-10 w-[140px]" />
+              <div className="h-[58px] w-[180px]" />
             ) : logoUrl ? (
-              <img src={logoUrl} alt="PHBKT Group" className="h-10 w-auto object-contain" />
+              <img src={logoUrl} alt="PHBKT Group" className="h-[58px] w-auto object-contain" />
             ) : (
-              <Logo className="h-10" />
+              <Logo className="h-[58px]" />
             )}
           </Link>
         </div>
