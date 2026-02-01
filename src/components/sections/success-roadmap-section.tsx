@@ -42,12 +42,12 @@ function Milestone({ title, description, icon: Icon, isActive }: {title: string,
             </div>
             <div className="mt-4">
                 <h4 className={cn(
-                    "font-semibold font-headline text-sm transition-colors",
+                    "font-semibold font-headline text-base transition-colors",
                     isActive ? "text-primary" : "text-foreground"
                 )}>
                     {title}
                 </h4>
-                <p className="mt-1 text-xs text-muted-foreground">{description}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{description}</p>
             </div>
         </div>
     );
