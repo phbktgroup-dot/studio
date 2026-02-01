@@ -100,13 +100,13 @@ export default function DedicatedSolutionsSection() {
             <Card className="mt-6 border-0 shadow-none bg-transparent">
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div className="order-2 md:order-1">
-                  <h3 className="font-headline text-2xl font-bold text-primary">{text.shops.title}</h3>
-                  <p className="mt-3 text-muted-foreground">{text.shops.description}</p>
+                  <h3 className="font-headline text-xl font-bold text-primary">{text.shops.title}</h3>
+                  <p className="mt-3 text-sm text-muted-foreground">{text.shops.description}</p>
                   <ul className="mt-6 space-y-3">
                     {text.shops.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-primary" />
-                        <span className="font-medium">{feature}</span>
+                        <span className="text-sm font-medium">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -144,13 +144,13 @@ export default function DedicatedSolutionsSection() {
                   )}
                 </div>
                 <div>
-                  <h3 className="font-headline text-2xl font-bold text-primary">{text.startups.title}</h3>
-                  <p className="mt-3 text-muted-foreground">{text.startups.description}</p>
+                  <h3 className="font-headline text-xl font-bold text-primary">{text.startups.title}</h3>
+                  <p className="mt-3 text-sm text-muted-foreground">{text.startups.description}</p>
                   <ul className="mt-6 space-y-3">
                     {text.startups.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-primary" />
-                        <span className="font-medium">{feature}</span>
+                        <span className="text-sm font-medium">{feature}</span>
                       </li>
                     ))}
                   </ul>
