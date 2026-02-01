@@ -11,7 +11,7 @@ import { useLanguage } from '@/context/language-provider';
 const sectionText = {
   en: {
     heading: "Our Recent Work",
-    subheading: "Take a look at some of the projects we're proud of.",
+    subheading: "",
     quote: "We build digital experiences that drive results.",
     all: "All",
     apps: "Apps",
