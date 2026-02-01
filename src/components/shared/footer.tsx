@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
 import { supabase } from '@/lib/supabase';
 import { Facebook, Twitter, Instagram, Linkedin, Send } from 'lucide-react';
-import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -130,31 +130,31 @@ export default function Footer() {
                 </div>
             </div>
             
-            <div>
+            <Card>
                 <form>
-                    <CardHeader className="text-center px-0">
-                        <CardTitle className="text-center">{t.cardTitle}</CardTitle>
-                        <CardDescription className="text-center">{t.cardDescription}</CardDescription>
+                    <CardHeader className="text-center">
+                        <CardTitle>{t.cardTitle}</CardTitle>
+                        <CardDescription>{t.cardDescription}</CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-6 px-0">
+                    <CardContent className="space-y-6">
                         <div className="grid sm:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                                <Label htmlFor="footer-name" className="block">{t.nameLabel}</Label>
+                                <Label htmlFor="footer-name" className="text-left block w-full">{t.nameLabel}</Label>
                                 <Input id="footer-name" />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="footer-email" className="block">{t.emailLabel}</Label>
+                                <Label htmlFor="footer-email" className="text-left block w-full">{t.emailLabel}</Label>
                                 <Input id="footer-email" type="email" />
                             </div>
                              <div className="space-y-2">
-                                <Label htmlFor="footer-mobile" className="block">{t.mobileLabel}</Label>
+                                <Label htmlFor="footer-mobile" className="text-left block w-full">{t.mobileLabel}</Label>
                                 <Input id="footer-mobile" type="tel" />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="footer-purpose" className="block">{t.purposeLabel}</Label>
+                                <Label htmlFor="footer-purpose" className="text-left block w-full">{t.purposeLabel}</Label>
                                 <Select>
                                     <SelectTrigger id="footer-purpose">
-                                        <SelectValue placeholder={t.purposePlaceholder} />
+                                        <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="web">{t.purposeOptions.web}</SelectItem>
@@ -167,18 +167,18 @@ export default function Footer() {
                             </div>
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="footer-message" className="block">{t.visionLabel}</Label>
-                            <Textarea id="footer-message" className="min-h-[80px]" />
+                            <Label htmlFor="footer-message" className="text-left block w-full">{t.visionLabel}</Label>
+                            <Textarea id="footer-message" className="min-h-[60px]" />
                         </div>
                     </CardContent>
-                    <CardFooter className="px-0">
+                    <CardFooter>
                         <Button type="submit" size="lg" className="w-full">
                             <Send className="mr-2" />
                             {t.submitButton}
                         </Button>
                     </CardFooter>
                 </form>
-            </div>
+            </Card>
         </div>
       </div>
       <div className="border-t bg-muted/50">
