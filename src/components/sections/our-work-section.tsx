@@ -83,7 +83,7 @@ export default function OurWorkSection() {
             </h2>
         </div>
 
-        <div className="flex justify-center gap-2 md:gap-4 mb-12">
+        <div className="flex justify-center gap-2 md:gap-4 mb-8">
           <Button variant={activeFilter === 'all' ? 'default' : 'outline'} onClick={() => setActiveFilter('all')}>{text.all}</Button>
           <Button variant={activeFilter === 'apps' ? 'default' : 'outline'} onClick={() => setActiveFilter('apps')}>{text.apps}</Button>
           <Button variant={activeFilter === 'automation' ? 'default' : 'outline'} onClick={() => setActiveFilter('automation')}>{text.automation}</Button>
@@ -108,7 +108,7 @@ export default function OurWorkSection() {
                 <CardContent className="p-6">
                   <h3 className="text-lg font-bold font-headline">{language === 'en' ? project.titleEn : project.titleMr}</h3>
                   <p className="mt-2 text-sm text-muted-foreground h-10">{language === 'en' ? project.descriptionEn : project.descriptionMr}</p>
-                  <Button variant="outline" size="sm" className="mt-4">{text.viewDemo}</Button>
+                  <Button variant="outline" size="sm" className="mt-6">{text.viewDemo}</Button>
                 </CardContent>
               </Card>
             );
