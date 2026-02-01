@@ -1,100 +1,61 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { useLanguage } from '@/context/language-provider';
-import { Lightbulb, TrendingUp, Users, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useLanguage } from '@/context/language-provider';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { ArrowRight } from 'lucide-react';
 
 const sectionText = {
   en: {
-    heading: "Shape the Future with Us",
-    subheading: "We're more than just a company; we're a community of innovators, thinkers, and doers. Find where you fit in.",
-    button: "Explore Open Roles",
-    cards: [
-      {
-        icon: Lightbulb,
-        title: "Innovate",
-        description: "Work on cutting-edge projects that redefine industries. Your ideas have the power to create real-world impact."
-      },
-      {
-        icon: TrendingUp,
-        title: "Grow",
-        description: "We invest in your development with continuous learning opportunities, mentorship, and clear career paths."
-      },
-      {
-        icon: Users,
-        title: "Belong",
-        description: "Join a diverse and inclusive culture where every voice is heard, valued, and respected."
-      }
-    ]
+    eyebrow: "Careers",
+    heading: "Seize the Future",
+    description: "Our teams are leading change on every front. From deploying the most advanced technologies for iconic companies, to building a greener, more inclusive world for our communities.",
+    button: "Come join us"
   },
   mr: {
-    heading: "आमच्यासोबत भविष्य घडवा",
-    subheading: "आम्ही फक्त एक कंपनी नाही; आम्ही नवनवीन शोध लावणाऱ्या, विचारवंतांची आणि कार्य करणाऱ्यांची एकजूट आहोत. तुम्ही कुठे योग्य आहात ते शोधा.",
-    button: "नोकरीच्या संधी एक्सप्लोर करा",
-    cards: [
-      {
-        icon: Lightbulb,
-        title: "नवीन कल्पना",
-        description: "उद्योग पुन्हा परिभाषित करणाऱ्या अत्याधुनिक प्रकल्पांवर काम करा. तुमच्या कल्पनांमध्ये वास्तविक-जगावर प्रभाव टाकण्याची शक्ती आहे."
-      },
-      {
-        icon: TrendingUp,
-        title: "विकास",
-        description: "आम्ही सतत शिकण्याच्या संधी, मार्गदर्शन आणि स्पष्ट करिअर मार्गांसह तुमच्या विकासात गुंतवणूक करतो."
-      },
-      {
-        icon: Users,
-        title: "सामील व्हा",
-        description: "एका वैविध्यपूर्ण आणि सर्वसमावेशक संस्कृतीत सामील व्हा जिथे प्रत्येक आवाज ऐकला जातो, मूल्य दिले जाते आणि आदर केला जातो."
-      }
-    ]
+    eyebrow: "करिअर",
+    heading: "भविष्य काबीज करा",
+    description: "आमची टीम प्रत्येक आघाडीवर बदल घडवत आहे. प्रतिष्ठित कंपन्यांसाठी सर्वात प्रगत तंत्रज्ञान तैनात करण्यापासून, आमच्या समुदायांसाठी अधिक हरित, अधिक समावेशक जग तयार करण्यापर्यंत.",
+    button: "आमच्यात सामील व्हा"
   }
 };
 
 export default function CareersSection() {
   const { language } = useLanguage();
   const text = sectionText[language];
+  const careerImage = PlaceHolderImages.find(p => p.id === 'careers_marathon');
 
   return (
-    <section className="py-20 md:py-32 bg-muted/30">
-      <div className="container">
-        <div className="text-center max-w-3xl mx-auto">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary">
-                {text.heading}
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-                {text.subheading}
-            </p>
-        </div>
-        
-        <div className="mt-16 grid md:grid-cols-3 gap-8">
-          {text.cards.map((card, index) => {
-            const Icon = card.icon;
-            return (
-              <Card key={index} className="text-center group transition-all duration-300 hover:border-primary hover:shadow-xl hover:-translate-y-2">
-                <CardHeader className="items-center">
-                  <div className="p-4 bg-primary/10 rounded-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                    <Icon className="h-8 w-8 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
-                  </div>
-                  <CardTitle className="pt-4 font-headline text-2xl">{card.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{card.description}</p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+    <section className="bg-gray-900 text-white py-20 md:py-32">
+      <div className="container grid md:grid-cols-2 gap-16 items-center">
+        <div>
+          <p className="font-semibold uppercase tracking-widest text-primary mb-4">{text.eyebrow}</p>
+          <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">
+            {text.heading}
+          </h2>
+          <p className="mt-6 text-lg text-gray-300 max-w-lg">
+            {text.description}
+          </p>
+          
+          <Link href="#" className="mt-8 inline-flex items-center text-lg font-medium text-white group">
+            <span>{text.button}</span>
+            <div className="ml-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/50 bg-transparent transition-colors group-hover:bg-white group-hover:text-gray-900">
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </div>
+          </Link>
 
-        <div className="mt-16 text-center">
-            <Button size="lg" asChild>
-                <Link href="#">
-                    {text.button}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-            </Button>
+        </div>
+        <div className="rounded-lg overflow-hidden aspect-[4/3] relative">
+          {careerImage && (
+            <Image
+              src={careerImage.imageUrl}
+              alt={careerImage.description}
+              fill
+              data-ai-hint={careerImage.imageHint}
+              className="object-cover transition-transform duration-500 hover:scale-105"
+            />
+          )}
         </div>
       </div>
     </section>
