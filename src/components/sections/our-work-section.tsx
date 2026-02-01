@@ -94,7 +94,7 @@ export default function OurWorkSection() {
           {filteredProjects.map((project, index) => {
             const image = PlaceHolderImages.find(p => p.id === project.imageId);
             return (
-              <Card key={index} className="overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+              <Card key={index} className="overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col">
                 {image && (
                   <Image
                     src={image.imageUrl}
@@ -105,10 +105,13 @@ export default function OurWorkSection() {
                     className="w-full object-cover aspect-video"
                   />
                 )}
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-bold font-headline">{language === 'en' ? project.titleEn : project.titleMr}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground h-10">{language === 'en' ? project.descriptionEn : project.descriptionMr}</p>
-                  <Button variant="outline" size="sm" className="mt-8">{text.viewDemo}</Button>
+                <CardContent className="p-6 flex flex-col flex-grow">
+                  <div>
+                    <h3 className="text-lg font-bold font-headline">{language === 'en' ? project.titleEn : project.titleMr}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground min-h-[40px]">{language === 'en' ? project.descriptionEn : project.descriptionMr}</p>
+                  </div>
+                  <div className="flex-grow" />
+                  <Button variant="outline" size="sm" className="mt-4 self-start">{text.viewDemo}</Button>
                 </CardContent>
               </Card>
             );
