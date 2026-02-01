@@ -43,6 +43,8 @@ import { Loader2 } from "lucide-react";
 function DashboardUI({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [logoLoading, setLogoLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
   const { isMobile, toggleSidebar } = useSidebar();
@@ -56,6 +58,30 @@ function DashboardUI({ children }: { children: ReactNode }) {
       }
       setLoading(false);
     });
+
+    const fetchLogoUrl = async () => {
+        setLogoLoading(true);
+        try {
+          const { data, error } = await supabase
+              .from('settings')
+              .select('logo_url')
+              .eq('id', 1)
+              .single();
+          
+          if (error && error.code !== 'PGRST116') {
+              throw error;
+          }
+  
+          if (data?.logo_url) {
+              setLogoUrl(data.logo_url);
+          }
+        } catch (error: any) {
+          console.warn("Could not fetch site logo for dashboard:", error.message);
+        } finally {
+            setLogoLoading(false);
+        }
+      };
+    fetchLogoUrl();
 
     return () => {
       authListener.subscription.unsubscribe();
@@ -102,7 +128,13 @@ function DashboardUI({ children }: { children: ReactNode }) {
       <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-[51] fixed top-0 left-0 right-0">
         <div className="flex items-center gap-2">
           <Link href="/">
-            <Logo />
+            {logoLoading ? (
+              <div className="h-10 w-[140px]" />
+            ) : logoUrl ? (
+              <img src={logoUrl} alt="PHBKT Group" className="h-10 w-auto object-contain" />
+            ) : (
+              <Logo className="h-10" />
+            )}
           </Link>
         </div>
         
