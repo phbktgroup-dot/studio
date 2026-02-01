@@ -61,7 +61,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
   const image = PlaceHolderImages.find(p => p.id === imageId);
 
   return (
-    <Card className="group flex h-full w-full flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+    <Card className="group flex h-full w-full flex-col overflow-hidden rounded-lg border bg-card shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
       {image && (
           <Image
               src={image.imageUrl}
@@ -72,9 +72,9 @@ const ServiceCard = ({ service }: { service: Service }) => {
               className="w-full object-cover aspect-[16/9] transition-transform duration-500 group-hover:scale-105"
           />
       )}
-      <div className="p-6 text-center">
-        <h3 className="text-lg font-bold text-gray-900">{title}</h3>
-        <p className="mt-2 h-10 text-sm text-gray-600">{description}</p>
+      <div className="p-4 text-center">
+        <h3 className="text-base font-bold">{title}</h3>
+        <p className="mt-1 h-12 text-xs text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
@@ -86,7 +86,7 @@ export default function PremiumServicesSection() {
   const services = servicesData[language];
 
   return (
-    <section id="services" className="bg-[#F8F9FA] py-6 md:py-10">
+    <section id="services" className="bg-muted/30 py-6 md:py-10">
         <div className="container text-center mb-8">
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {sectionTitleText[language]}
