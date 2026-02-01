@@ -106,7 +106,7 @@ export default function Footer() {
     <footer id="contact" className="border-t bg-muted/30">
       <div className="container py-12 md:py-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-            <div className="flex flex-col text-center lg:text-left lg:items-start items-center">
+            <div className="flex flex-col justify-center items-center text-center">
                 <div className="mb-8">
                     <Link href="/" className="inline-block mb-4">
                         {logoLoading ? (
@@ -117,7 +117,7 @@ export default function Footer() {
                         <Logo className="h-[78px] w-[280px]" />
                         )}
                     </Link>
-                    <p className="max-w-md mx-auto lg:mx-0 text-muted-foreground">
+                    <p className="max-w-md mx-auto text-muted-foreground">
                         {t.footerDescription}
                     </p>
                 </div>
@@ -125,7 +125,7 @@ export default function Footer() {
                 <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary">
                     {t.h2}
                 </h2>
-                <p className="mt-4 max-w-md mx-auto lg:mx-0 text-muted-foreground md:text-lg">
+                <p className="mt-4 max-w-md mx-auto text-muted-foreground md:text-lg">
                     {t.p}
                 </p>
 
