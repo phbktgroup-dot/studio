@@ -8,6 +8,7 @@ import Footer from "@/components/shared/footer";
 import PerspectivesSection from "@/components/sections/perspectives-section";
 import CareersSection from "@/components/sections/careers-section";
 import OurWorkSection from "@/components/sections/our-work-section";
+import DedicatedSolutionsSection from "@/components/sections/dedicated-solutions-section";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <HeroSection />
         <PremiumServicesSection />
         <SuccessRoadmapSection />
+        <DedicatedSolutionsSection />
         <OurWorkSection />
         <PerspectivesSection />
         <CareersSection />
