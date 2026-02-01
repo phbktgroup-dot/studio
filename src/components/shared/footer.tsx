@@ -151,16 +151,16 @@ export default function Footer() {
         <div className="container flex flex-col sm:flex-row items-center justify-between py-4 text-sm text-muted-foreground gap-4">
           <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
           <div className="flex items-center gap-4">
-              <Link href="#" aria-label="Facebook" className="text-blue-600 transition-colors hover:opacity-80">
+              <Link href="#" aria-label="Facebook" className="text-blue-600 transition-colors hover:opacity-80" target="_blank" rel="noopener noreferrer">
                 <Facebook className="h-5 w-5" />
               </Link>
-              <Link href="#" aria-label="Twitter" className="text-sky-500 transition-colors hover:opacity-80">
+              <Link href="#" aria-label="Twitter" className="text-sky-500 transition-colors hover:opacity-80" target="_blank" rel="noopener noreferrer">
                 <Twitter className="h-5 w-5" />
               </Link>
-              <Link href="https://www.instagram.com/phbkt.it.tech?igsh=MThtOGZpdTVnYW4waw==&utm_source=ig_contact_invite" aria-label="Instagram" className="text-pink-600 transition-colors hover:opacity-80">
+              <Link href="https://www.instagram.com/phbkt.it.tech?igsh=MThtOGZpdTVnYW4waw==&utm_source=ig_contact_invite" aria-label="Instagram" className="text-pink-600 transition-colors hover:opacity-80" target="_blank" rel="noopener noreferrer">
                 <Instagram className="h-5 w-5" />
               </Link>
-              <Link href="#" aria-label="LinkedIn" className="text-blue-700 transition-colors hover:opacity-80">
+              <Link href="#" aria-label="LinkedIn" className="text-blue-700 transition-colors hover:opacity-80" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="h-5 w-5" />
               </Link>
           </div>
