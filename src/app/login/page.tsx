@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
-import { useState, type FormEvent } from 'react';
+import { useState, type FormEvent, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -33,8 +33,36 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [emailLoading, setEmailLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [logoLoading, setLogoLoading] = useState(true);
   const router = useRouter();
   const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchLogoUrl = async () => {
+        setLogoLoading(true);
+        try {
+          const { data, error } = await supabase
+              .from('settings')
+              .select('logo_url')
+              .eq('id', 1)
+              .single();
+          
+          if (error && error.code !== 'PGRST116') {
+              throw error;
+          }
+  
+          if (data?.logo_url) {
+              setLogoUrl(data.logo_url);
+          }
+        } catch (error: any) {
+          console.warn("Could not fetch site logo for login page:", error.message);
+        } finally {
+            setLogoLoading(false);
+        }
+      };
+    fetchLogoUrl();
+  }, []);
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -96,7 +124,13 @@ export default function LoginPage() {
       <Card className="mx-auto max-w-sm w-full shadow-2xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-             <Logo />
+            {logoLoading ? (
+              <div className="h-[58px] w-[180px]" />
+            ) : logoUrl ? (
+              <img src={logoUrl} alt="Company Logo" className="h-[58px] w-auto object-contain" />
+            ) : (
+              <Logo className="h-[58px]" />
+            )}
           </div>
           <CardTitle className="text-2xl font-headline">Login</CardTitle>
           <CardDescription>

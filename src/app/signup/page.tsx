@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
-import { useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +19,7 @@ import { ArrowLeft, Loader2, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { handleSignup, type SignupState } from "@/lib/actions";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { supabase } from "@/lib/supabase";
 
 
 function SubmitButton() {
@@ -35,6 +36,8 @@ export default function SignupPage() {
   const { toast } = useToast();
   const initialState: SignupState = { message: null, errors: {} };
   const [state, dispatch] = useActionState(handleSignup, initialState);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [logoLoading, setLogoLoading] = useState(true);
 
   useEffect(() => {
     if (state.isSuccess) {
@@ -46,6 +49,32 @@ export default function SignupPage() {
       router.push('/login');
     }
   }, [state, router, toast]);
+
+  useEffect(() => {
+    const fetchLogoUrl = async () => {
+        setLogoLoading(true);
+        try {
+          const { data, error } = await supabase
+              .from('settings')
+              .select('logo_url')
+              .eq('id', 1)
+              .single();
+          
+          if (error && error.code !== 'PGRST116') {
+              throw error;
+          }
+  
+          if (data?.logo_url) {
+              setLogoUrl(data.logo_url);
+          }
+        } catch (error: any) {
+          console.warn("Could not fetch site logo for signup page:", error.message);
+        } finally {
+            setLogoLoading(false);
+        }
+      };
+    fetchLogoUrl();
+  }, []);
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-background p-4">
@@ -60,7 +89,13 @@ export default function SignupPage() {
       <Card className="mx-auto max-w-sm w-full shadow-2xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-             <Logo />
+            {logoLoading ? (
+              <div className="h-[58px] w-[180px]" />
+            ) : logoUrl ? (
+              <img src={logoUrl} alt="Company Logo" className="h-[58px] w-auto object-contain" />
+            ) : (
+              <Logo className="h-[58px]" />
+            )}
           </div>
           <CardTitle className="text-2xl font-headline">Sign Up</CardTitle>
           <CardDescription>
