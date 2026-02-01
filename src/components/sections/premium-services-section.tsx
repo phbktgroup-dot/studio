@@ -111,8 +111,8 @@ export default function PremiumServicesSection() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex left-2 bg-primary text-primary-foreground hover:bg-primary/90" />
-            <CarouselNext className="hidden md:flex right-2 bg-primary text-primary-foreground hover:bg-primary/90" />
+            <CarouselPrevious className="hidden md:flex left-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground hover:bg-primary/90" />
+            <CarouselNext className="hidden md:flex right-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground hover:bg-primary/90" />
           </Carousel>
         </div>
     </section>
