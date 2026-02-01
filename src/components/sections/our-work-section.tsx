@@ -105,13 +105,13 @@ export default function OurWorkSection() {
                     className="w-full object-cover aspect-video"
                   />
                 )}
-                <CardContent className="p-6 flex flex-col flex-grow">
+                <CardContent className="p-4 flex flex-col flex-grow">
                   <div>
                     <h3 className="text-lg font-bold font-headline">{language === 'en' ? project.titleEn : project.titleMr}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground min-h-[40px]">{language === 'en' ? project.descriptionEn : project.descriptionMr}</p>
+                    <p className="mt-2 text-sm text-muted-foreground">{language === 'en' ? project.descriptionEn : project.descriptionMr}</p>
                   </div>
                   <div className="flex-grow" />
-                  <Button variant="outline" size="sm" className="mt-4 self-start">{text.viewDemo}</Button>
+                  <Button variant="outline" size="sm" className="mt-2 self-start">{text.viewDemo}</Button>
                 </CardContent>
               </Card>
             );
