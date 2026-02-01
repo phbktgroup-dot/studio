@@ -80,8 +80,8 @@ export default async function InquiriesPage() {
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Error Fetching Inquiries</AlertTitle>
           <AlertDescription>
-            {error.message.includes('relation "public.inquiries" does not exist') 
-            ? "The 'inquiries' table does not seem to exist in the database. An administrator needs to create it." 
+            {(error.message.includes('inquiries') && (error.message.includes('does not exist') || error.message.includes('schema cache')))
+            ? "The 'inquiries' table does not seem to exist in the database. An administrator needs to create it."
             : error.message}
           </AlertDescription>
         </Alert>

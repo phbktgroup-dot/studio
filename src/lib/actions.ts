@@ -196,8 +196,8 @@ export async function handleInquiry(prevState: InquiryState, formData: FormData)
 
   if (error) {
     let errorMessage = `Failed to submit inquiry: ${error.message}`;
-    if (error.message.includes('relation "public.inquiries" does not exist')) {
-        errorMessage = "The 'inquiries' table does not exist. Please ask your administrator to create it.";
+    if (error.message.includes('inquiries') && (error.message.includes('does not exist') || error.message.includes('schema cache'))) {
+        errorMessage = "The 'inquiries' table does not seem to exist in your database. An administrator needs to create it.";
     } else if (error.message.includes('violates row-level security policy')) {
         errorMessage = "Row-level security is preventing the submission. Please check the policies for the 'inquiries' table.";
     }
