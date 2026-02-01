@@ -74,7 +74,7 @@ export default function OurWorkSection() {
   return (
     <section className="py-6 md:py-8 bg-muted/30">
       <div className="container">
-        <div className="text-center mb-8">
+        <div className="text-center mb-4">
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {text.heading}
             </h3>
@@ -108,7 +108,7 @@ export default function OurWorkSection() {
                 <CardContent className="p-6">
                   <h3 className="text-lg font-bold font-headline">{language === 'en' ? project.titleEn : project.titleMr}</h3>
                   <p className="mt-2 text-sm text-muted-foreground h-10">{language === 'en' ? project.descriptionEn : project.descriptionMr}</p>
-                  <Button variant="outline" size="sm" className="mt-6">{text.viewDemo}</Button>
+                  <Button variant="outline" size="sm" className="mt-8">{text.viewDemo}</Button>
                 </CardContent>
               </Card>
             );
