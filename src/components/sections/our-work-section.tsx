@@ -11,7 +11,6 @@ import { useLanguage } from '@/context/language-provider';
 const sectionText = {
   en: {
     heading: "Our Recent Work",
-    subheading: "",
     quote: "We build digital experiences that drive results.",
     all: "All",
     apps: "Apps",
@@ -21,7 +20,6 @@ const sectionText = {
   },
   mr: {
     heading: "आमचे अलीकडील काम",
-    subheading: "",
     quote: "आम्ही असे डिजिटल अनुभव तयार करतो जे परिणाम देतात.",
     all: "सर्व",
     apps: "अ‍ॅप्स",
@@ -74,9 +72,9 @@ export default function OurWorkSection() {
   const filteredProjects = projects.filter(p => activeFilter === 'all' || p.category === activeFilter);
 
   return (
-    <section className="py-12 md:py-16 bg-muted/30">
+    <section className="py-6 md:py-8 bg-muted/30">
       <div className="container">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {text.heading}
             </h3>
