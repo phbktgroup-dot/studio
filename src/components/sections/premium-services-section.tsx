@@ -67,9 +67,9 @@ const ServiceCard = ({ service }: { service: Service }) => {
               src={image.imageUrl}
               alt={description}
               width={400}
-              height={225}
+              height={300}
               data-ai-hint={image.imageHint}
-              className="w-full object-cover aspect-[16/9] transition-transform duration-500 group-hover:scale-105"
+              className="w-full object-cover aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
           />
       )}
       <div className="p-4 text-center">
