@@ -16,6 +16,7 @@ import {
   LogOut,
   UserCog,
   Paintbrush,
+  Mail,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -125,7 +126,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-[51] fixed top-0 left-0 right-0">
+      <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-[51] fixed top-0 left-0 right-0">
         <div className="flex items-center gap-2">
           <Link href="/">
             {logoLoading ? (
@@ -165,7 +166,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
         )}
       </header>
 
-      <div className="flex-1 overflow-hidden pt-14 lg:pt-[60px]">
+      <div className="flex-1 overflow-hidden pt-16 lg:pt-[60px]">
           <Sidebar collapsible="icon">
               <SidebarContent>
               <SidebarMenu>
@@ -176,6 +177,14 @@ function DashboardUI({ children }: { children: ReactNode }) {
                       <span>Dashboard</span>
                       </Link>
                   </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} size="sm" tooltip="Inquiries">
+                        <Link href="/dashboard/inquiries">
+                        <Mail />
+                        <span>Inquiries</span>
+                        </Link>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                   <SidebarMenuButton isActive={pathname === '/dashboard/services'} size="sm" tooltip="Services" disabled>

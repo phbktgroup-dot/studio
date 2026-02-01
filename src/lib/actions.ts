@@ -138,6 +138,76 @@ export async function handleSignup(prevState: SignupState, formData: FormData): 
   return { isSuccess: true, message: successMessage };
 }
 
+const InquirySchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email." }),
+  mobile: z.string().optional(),
+  purpose: z.string().min(1, { message: "Please select a purpose." }),
+  vision: z.string().min(10, { message: "Vision must be at least 10 characters long." }),
+  userId: z.string().optional(),
+});
+
+export type InquiryState = {
+  message?: string | null;
+  errors?: {
+    name?: string[];
+    email?: string[];
+    mobile?: string[];
+    purpose?: string[];
+    vision?: string[];
+    _form?: string[];
+  };
+  isSuccess?: boolean;
+};
+
+export async function handleInquiry(prevState: InquiryState, formData: FormData): Promise<InquiryState> {
+  const validatedFields = InquirySchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    mobile: formData.get("mobile"),
+    purpose: formData.get("purpose"),
+    vision: formData.get("vision"),
+    userId: formData.get("userId"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { name, email, mobile, purpose, vision, userId } = validatedFields.data;
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
+  
+  if (!supabaseUrl || !supabaseKey) {
+    return { errors: { _form: ["Server is not configured for database operations."] } };
+  }
+
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  const insertData: any = { name, email, mobile, purpose, vision };
+  if (userId) {
+    insertData.user_id = userId;
+  }
+
+  const { error } = await supabase.from('inquiries').insert([insertData]);
+
+  if (error) {
+    let errorMessage = `Failed to submit inquiry: ${error.message}`;
+    if (error.message.includes('relation "public.inquiries" does not exist')) {
+        errorMessage = "The 'inquiries' table does not exist. Please ask your administrator to create it.";
+    } else if (error.message.includes('violates row-level security policy')) {
+        errorMessage = "Row-level security is preventing the submission. Please check the policies for the 'inquiries' table.";
+    }
+    return { errors: { _form: [errorMessage] } };
+  }
+
+  revalidatePath('/dashboard/inquiries');
+  return { isSuccess: true, message: "Your inquiry has been submitted successfully! We will get back to you shortly." };
+}
+
 
 export async function updateUserRole(userId: string, role: 'admin' | 'user'): Promise<{ error?: string; success?: boolean }> {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;

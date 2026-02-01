@@ -1,10 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useActionState, useRef } from 'react';
+import { useFormStatus } from 'react-dom';
 import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
 import { supabase } from '@/lib/supabase';
-import { Facebook, Twitter, Instagram, Linkedin, Send } from 'lucide-react';
+import type { User } from '@supabase/supabase-js';
+import { Facebook, Twitter, Instagram, Linkedin, Send, Loader2, AlertTriangle } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,6 +14,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/context/language-provider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/hooks/use-toast';
+import { handleInquiry, type InquiryState } from '@/lib/actions';
 
 const text = {
   mr: {
@@ -34,7 +38,8 @@ const text = {
     visionLabel: "तुमची दृष्टी",
     submitButton: "चौकशी सबमिट करा",
     footerDescription: "तुमच्या व्यवसायाला नाविन्यपूर्ण आर्थिक आणि तांत्रिक उपायांनी सक्षम करणे.",
-    getInTouchDirectly: "थेट संपर्कात रहा"
+    getInTouchDirectly: "थेट संपर्कात रहा",
+    submitting: "सबमिट करत आहे..."
   },
   en: {
     h2: "Let's Reach New Peaks of Success Together.",
@@ -56,16 +61,46 @@ const text = {
     visionLabel: "Your Vision",
     submitButton: "Submit Inquiry",
     footerDescription: "Empowering your business with innovative financial and technological solutions.",
-    getInTouchDirectly: "Get in Touch Directly"
+    getInTouchDirectly: "Get in Touch Directly",
+    submitting: "Submitting..."
   },
 };
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  const { language } = useLanguage();
+  const t = text[language];
+
+  return (
+    <Button type="submit" size="lg" className="w-full" disabled={pending}>
+      {pending ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          {t.submitting}
+        </>
+      ) : (
+        <>
+          <Send className="mr-2" />
+          {t.submitButton}
+        </>
+      )}
+    </Button>
+  );
+}
 
 
 export default function Footer() {
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [logoLoading, setLogoLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+  const [purpose, setPurpose] = useState('');
   const { language } = useLanguage();
   const t = text[language];
+  const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const initialState: InquiryState = { message: null, errors: {} };
+  const [state, dispatch] = useActionState(handleInquiry, initialState);
 
   useEffect(() => {
     const fetchLogoUrl = async () => {
@@ -85,14 +120,38 @@ export default function Footer() {
               setLogoUrl(data.logo_url);
           }
         } catch (error: any) {
-          // It's okay if this fails, we'll just fall back to the default logo.
           console.warn("Could not fetch site logo for footer:", error.message);
         } finally {
             setLogoLoading(false);
         }
       };
     fetchLogoUrl();
+    
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
   }, []);
+
+  useEffect(() => {
+    if (state.isSuccess) {
+      toast({
+        title: "Inquiry Submitted!",
+        description: state.message,
+      });
+      formRef.current?.reset();
+      setPurpose('');
+    } else if (state.message || state.errors?._form) {
+        toast({
+            variant: "destructive",
+            title: "Submission Failed",
+            description: state.message || state.errors?._form?.[0],
+        });
+    }
+  }, [state, toast]);
 
   return (
     <footer id="contact" className="border-t bg-muted/30">
@@ -131,30 +190,36 @@ export default function Footer() {
             </div>
             
             <Card>
-                <form>
+                <form ref={formRef} action={dispatch}>
                     <CardHeader>
                         <CardTitle className="text-center">{t.cardTitle}</CardTitle>
                         <CardDescription className="text-center">{t.cardDescription}</CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-6">
-                        <div className="grid sm:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <Label htmlFor="footer-name" className="text-left block w-full">{t.nameLabel}</Label>
-                                <Input id="footer-name" className="h-9" />
+                    <CardContent className="space-y-4">
+                       <input type="hidden" name="userId" value={user?.id || ''} />
+                       <input type="hidden" name="purpose" value={purpose} />
+
+                        <div className="grid sm:grid-cols-2 gap-4">
+                            <div className="space-y-1.5 text-left">
+                                <Label htmlFor="footer-name">{t.nameLabel}</Label>
+                                <Input id="footer-name" name="name" required />
+                                {state.errors?.name && <p className="text-sm text-destructive mt-1">{state.errors.name[0]}</p>}
                             </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="footer-email" className="text-left block w-full">{t.emailLabel}</Label>
-                                <Input id="footer-email" type="email" className="h-9" />
+                            <div className="space-y-1.5 text-left">
+                                <Label htmlFor="footer-email">{t.emailLabel}</Label>
+                                <Input id="footer-email" name="email" type="email" required />
+                                {state.errors?.email && <p className="text-sm text-destructive mt-1">{state.errors.email[0]}</p>}
                             </div>
-                             <div className="space-y-2">
-                                <Label htmlFor="footer-mobile" className="text-left block w-full">{t.mobileLabel}</Label>
-                                <Input id="footer-mobile" type="tel" className="h-9" />
+                             <div className="space-y-1.5 text-left">
+                                <Label htmlFor="footer-mobile">{t.mobileLabel}</Label>
+                                <Input id="footer-mobile" name="mobile" type="tel" />
+                                {state.errors?.mobile && <p className="text-sm text-destructive mt-1">{state.errors.mobile[0]}</p>}
                             </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="footer-purpose" className="text-left block w-full">{t.purposeLabel}</Label>
-                                <Select>
-                                    <SelectTrigger id="footer-purpose" className="h-9">
-                                        <SelectValue />
+                            <div className="space-y-1.5 text-left">
+                                <Label htmlFor="footer-purpose">{t.purposeLabel}</Label>
+                                <Select onValueChange={setPurpose} required>
+                                    <SelectTrigger id="footer-purpose">
+                                        <SelectValue placeholder={t.purposePlaceholder} />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="web">{t.purposeOptions.web}</SelectItem>
@@ -164,18 +229,17 @@ export default function Footer() {
                                         <SelectItem value="other">{t.purposeOptions.other}</SelectItem>
                                     </SelectContent>
                                 </Select>
+                                {state.errors?.purpose && <p className="text-sm text-destructive mt-1">{state.errors.purpose[0]}</p>}
                             </div>
                         </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="footer-message" className="text-left block w-full">{t.visionLabel}</Label>
-                            <Textarea id="footer-message" className="min-h-[60px]" />
+                        <div className="space-y-1.5 text-left">
+                            <Label htmlFor="footer-message">{t.visionLabel}</Label>
+                            <Textarea id="footer-message" name="vision" required className="min-h-[60px]" />
+                            {state.errors?.vision && <p className="text-sm text-destructive mt-1">{state.errors.vision[0]}</p>}
                         </div>
                     </CardContent>
                     <CardFooter>
-                        <Button type="submit" size="lg" className="w-full">
-                            <Send className="mr-2" />
-                            {t.submitButton}
-                        </Button>
+                       <SubmitButton />
                     </CardFooter>
                 </form>
             </Card>
