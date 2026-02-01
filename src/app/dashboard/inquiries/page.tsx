@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -145,6 +146,7 @@ export default function InquiriesPage() {
                             <TableHead className="h-8 py-0 px-2">Date</TableHead>
                             <TableHead className="h-8 py-0 px-2">Name</TableHead>
                             <TableHead className="h-8 py-0 px-2">Email</TableHead>
+                            <TableHead className="h-8 py-0 px-2">Mobile</TableHead>
                             <TableHead className="h-8 py-0 px-2">Purpose</TableHead>
                             <TableHead className="h-8 py-0 px-2 text-right">Actions</TableHead>
                         </TableRow>
@@ -156,6 +158,7 @@ export default function InquiriesPage() {
                         <TableCell className="py-0 px-2">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
                         <TableCell className="py-0 px-2 font-semibold">{inquiry.name}</TableCell>
                         <TableCell className="py-0 px-2">{inquiry.email}</TableCell>
+                        <TableCell className="py-0 px-2">{inquiry.mobile || 'N/A'}</TableCell>
                         <TableCell className="py-0 px-2 capitalize">
                             <Badge variant="secondary" className="font-normal">{inquiry.purpose}</Badge>
                         </TableCell>
