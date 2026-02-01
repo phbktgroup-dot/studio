@@ -33,14 +33,14 @@ const text = {
       about: "माहिती",
       roadmap: "रोडमॅप",
       contact: "संपर्क",
-      clientLogin: "ग्राहक लॉगिन",
+      clientLogin: "लॉगिन",
   },
   en: {
       services: "Services",
       about: "About",
       roadmap: "Roadmap",
       contact: "Contact",
-      clientLogin: "Client Login",
+      clientLogin: "Login",
   },
 };
 
