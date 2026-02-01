@@ -1,5 +1,8 @@
-import { createClient } from '@supabase/supabase-js';
-import { cookies } from 'next/headers';
+'use client';
+
+import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
+import type { User } from '@supabase/supabase-js';
 import {
   Table,
   TableBody,
@@ -16,75 +19,109 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertTriangle, Mail } from "lucide-react";
+import { AlertTriangle, Mail, Loader2 } from "lucide-react";
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { ViewInquiryButton } from './ViewInquiryButton';
 
-async function getLoggedInUser(supabase: any) {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) return null;
-    return session.user;
+type PageError = {
+    title: string;
+    message: string;
 }
 
-export default async function InquiriesPage() {
-  const cookieStore = cookies();
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!;
-  const supabase = createClient(supabaseUrl, supabaseKey, {
-    auth: {
-      storage: {
-        getItem: (key) => cookieStore.get(key)?.value,
-        setItem: () => {},
-        removeItem: () => {},
-      },
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  });
+export default function InquiriesPage() {
+  const [inquiries, setInquiries] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<PageError | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
-  const user = await getLoggedInUser(supabase);
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+      if (sessionError) {
+        setError({ title: 'Authentication Error', message: sessionError.message });
+        setLoading(false);
+        return;
+      }
+      
+      const currentUser = session?.user;
+      setUser(currentUser);
+
+      if (!currentUser) {
+          setError({ title: 'Authentication Error', message: 'You must be logged in to view your inquiries.' });
+          setLoading(false);
+          return;
+      }
+      
+      const userRole = currentUser.user_metadata?.role;
+
+      let query = supabase.from('inquiries').select('*').order('created_at', { ascending: false });
+
+      if (userRole !== 'admin') {
+        query = query.eq('user_id', currentUser.id);
+      }
+
+      const { data, error: queryError } = await query;
+
+      if (queryError) {
+        let message = queryError.message;
+        if (queryError.message.includes('inquiries') && (queryError.message.includes('does not exist') || queryError.message.includes('schema cache'))) {
+          message = "The 'inquiries' table does not seem to exist in the database. An administrator needs to create it.";
+        }
+        setError({ title: 'Error Fetching Inquiries', message });
+      } else {
+        setInquiries(data || []);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+    
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+        fetchData();
+      }
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
   const userRole = user?.user_metadata?.role;
 
-  let query = supabase.from('inquiries').select('*').order('created_at', { ascending: false });
-
-  if (userRole !== 'admin' && user) {
-    query = query.eq('user_id', user.id);
-  } else if (userRole !== 'admin' && !user) {
-    // Non-admin who is not logged in sees nothing
+  if (loading) {
     return (
-        <div className="flex flex-col gap-4">
-            <h1 className="text-lg font-bold font-headline">Inquiries</h1>
-            <Card>
-                <CardContent className="p-8">
-                <Alert variant="destructive">
-                    <AlertTriangle className="h-4 w-4" />
-                    <AlertTitle>Authentication Error</AlertTitle>
-                    <AlertDescription>
-                        You must be logged in to view your inquiries.
-                    </AlertDescription>
-                </Alert>
-                </CardContent>
-            </Card>
-        </div>
+      <div className="flex flex-col gap-4">
+        <h1 className="text-lg font-bold font-headline">Inquiries</h1>
+        <Card>
+          <CardContent className="p-8 flex items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </CardContent>
+        </Card>
+      </div>
     );
   }
 
-  const { data: inquiries, error } = await query;
-
   if (error) {
      return (
-      <div className="flex flex-col gap-2 pt-2">
+      <div className="flex flex-col gap-4">
         <h1 className="text-lg font-bold font-headline">Inquiries</h1>
-        <Alert variant="destructive">
-          <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>Error Fetching Inquiries</AlertTitle>
-          <AlertDescription>
-            {(error.message.includes('inquiries') && (error.message.includes('does not exist') || error.message.includes('schema cache')))
-            ? "The 'inquiries' table does not seem to exist in the database. An administrator needs to create it."
-            : error.message}
-          </AlertDescription>
-        </Alert>
+        <Card>
+          <CardContent className="p-8">
+            <Alert variant="destructive">
+              <AlertTriangle className="h-4 w-4" />
+              <AlertTitle>{error.title}</AlertTitle>
+              <AlertDescription>
+                {error.message}
+              </AlertDescription>
+            </Alert>
+          </CardContent>
+        </Card>
       </div>
     );
   }
