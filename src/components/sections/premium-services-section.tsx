@@ -20,7 +20,7 @@ interface Service {
 
 const servicesData = {
   en: [
-    { title: "Web & App Development", description: "High-performance digital products tailored to your goals.", imageId: "service_web_dev" },
+    { title: "Website and App Development", description: "High-performance digital products tailored to your goals.", imageId: "service_web_dev" },
     { title: "Marketing & Branding", description: "Data-driven strategies to elevate your brand presence.", imageId: "service_marketing" },
     { title: "Tax & Compliance", description: "Navigate complex regulations with expert guidance.", imageId: "service_tax" },
     { title: "Business Setup", description: "End-to-end support for a seamless business launch.", imageId: "service_biz_setup" },
@@ -32,7 +32,7 @@ const servicesData = {
     { title: "24/7 IT Support", description: "Dedicated technical assistance to ensure zero downtime.", imageId: "service_support" },
   ],
   mr: [
-    { title: "वेब आणि अ‍ॅप डेव्हलपमेंट", description: "तुमच्या ध्येयानुसार तयार केलेली उच्च-गुणवत्तेची डिजिटल उत्पादने.", imageId: "service_web_dev" },
+    { title: "वेबसाइट आणि अ‍ॅप डेव्हलपमेंट", description: "तुमच्या ध्येयानुसार तयार केलेली उच्च-गुणवत्तेची डिजिटल उत्पादने.", imageId: "service_web_dev" },
     { title: "मार्केटिंग आणि ब्रँडिंग", description: "तुमच्या ब्रँडची ओळख वाढवण्यासाठी डेटा-आधारित रणनीती.", imageId: "service_marketing" },
     { title: "टॅक्स आणि कंप्लायन्स", description: "तज्ञांच्या मार्गदर्शनासह क्लिष्ट सरकारी नियमांचे सुलभ पालन.", imageId: "service_tax" },
     { title: "बिझनेस सेटअप", description: "व्यवसाय सुरळीतपणे सुरू करण्यासाठी सुरुवातीपासून शेवटपर्यंत पूर्ण सहकार्य.", imageId: "service_biz_setup" },
