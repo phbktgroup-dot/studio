@@ -6,6 +6,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useLanguage } from '@/context/language-provider';
 import { Magnetic } from '@/components/shared/magnetic';
 import { cn } from '@/lib/utils';
+import { useState, useEffect } from 'react';
 
 const sectionText = {
   en: {
@@ -24,6 +25,12 @@ const teamImageIds = ["team_1", "team_2", "team_3", "team_4", "team_5", "team_6"
 const teamImages = PlaceHolderImages.filter(img => teamImageIds.includes(img.id));
 
 const FloatingImage = ({ image, index }: { image: typeof teamImages[0], index: number }) => {
+    const [duration, setDuration] = useState('5s');
+
+    useEffect(() => {
+        setDuration(`${Math.random() * 3 + 4}s`);
+    }, []);
+
     const positions = [
         { top: '10%', left: '15%', size: 'w-20 h-20 md:w-24 md:h-24', delay: '0s' },
         { top: '20%', left: '80%', size: 'w-16 h-16 md:w-20 md:h-20', delay: '1s' },
@@ -37,7 +44,12 @@ const FloatingImage = ({ image, index }: { image: typeof teamImages[0], index: n
     return (
         <div 
             className={cn("absolute rounded-2xl overflow-hidden shadow-lg animate-bob", pos.size)}
-            style={{ top: pos.top, left: pos.left, animationDelay: pos.delay, animationDuration: `${Math.random() * 3 + 4}s` }}
+            style={{ 
+                top: pos.top, 
+                left: pos.left, 
+                animationDelay: pos.delay, 
+                animationDuration: duration 
+            }}
         >
              <Image
                 src={image.imageUrl}
