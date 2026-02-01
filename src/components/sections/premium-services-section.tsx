@@ -42,17 +42,31 @@ const servicesData = {
     { title: "स्टार्टअप सल्लागार", description: "व्यवसाय वाढवण्यासाठी आणि गुंतवणुकीसाठी धोरणात्मक सल्ला.", imageId: "service_advisory" },
     { title: "कंटेंट आणि सोशल मीडिया", description: "ब्रँडची विश्वासार्हता आणि लोकांचा सहभाग वाढवणारा प्रभावी कंटेंट.", imageId: "service_social" },
     { title: "24/7 आयटी सपोर्ट", description: "तांत्रिक बिघाड टाळण्यासाठी आणि सतत मदतीसाठी समर्पित टीम.", imageId: "service_support" },
+  ],
+  hi: [
+    { title: "वेबसाइट और ऐप विकास", description: "आपके लक्ष्यों के अनुरूप उच्च-प्रदर्शन वाले डिजिटल उत्पाद।", imageId: "service_web_dev" },
+    { title: "विपणन और ब्रांडिंग", description: "आपके ब्रांड की उपस्थिति को बढ़ाने के लिए डेटा-संचालित रणनीतियाँ।", imageId: "service_marketing" },
+    { title: "कर और अनुपालन", description: "विशेषज्ञ मार्गदर्शन के साथ जटिल नियमों को नेविगेट करें।", imageId: "service_tax" },
+    { title: "व्यापार सेटअप", description: "एक सहज व्यापार लॉन्च के लिए एंड-टू-एंड समर्थन।", imageId: "service_biz_setup" },
+    { title: "यूआई/यूएक्स डिजाइन", description: "मानव-केंद्रित इंटरफेस जो आगंतुकों को वफादार ग्राहकों में बदलते हैं।", imageId: "service_ui_ux" },
+    { title: "एआई और स्वचालन", description: "स्मार्ट, स्वचालित वर्कफ़्लो के साथ संचालन को सुव्यवस्थित करना।", imageId: "service_ai" },
+    { title: "क्लाउड और सुरक्षा", description: "आपके डेटा को सुरक्षित और हमेशा ऑनलाइन रखने के लिए मजबूत बुनियादी ढांचा।", imageId: "service_cloud" },
+    { title: "स्टार्टअप सलाहकार", description: "व्यापार स्केलिंग और निवेश के लिए रणनीतिक परामर्श।", imageId: "service_advisory" },
+    { title: "सामग्री और सामाजिक", description: "कथा-संचालित सामग्री जो अधिकार और जुड़ाव बनाती है।", imageId: "service_social" },
+    { title: "24/7 आईटी समर्थन", description: "शून्य डाउनटाइम सुनिश्चित करने के लिए समर्पित तकनीकी सहायता।", imageId: "service_support" },
   ]
 };
 
 const headingText = {
   en: "Igniting startup growth with unstoppable tech and elite strategy.",
   mr: "शक्तिशाली तंत्रज्ञान आणि अजेय रणनीतीसह तुमच्या स्टार्टअपला देऊया यशाची नवी भरारी!",
+  hi: "अजेय तकनीक और विशिष्ट रणनीति के साथ स्टार्टअप विकास को प्रज्वलित करना।",
 };
 
 const sectionTitleText = {
     en: "Empowerment Tools",
-    mr: "सक्षमीकरण साधने"
+    mr: "सक्षमीकरण साधने",
+    hi: "सशक्तिकरण उपकरण"
 };
 
 

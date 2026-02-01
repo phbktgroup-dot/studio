@@ -22,6 +22,12 @@ const heroText = {
     ourServices: "Our Services",
     contactUs: "Contact Us",
   },
+  hi: {
+    h1: "अपने व्यवसाय को डिजिटल बनाएं, आपकी प्रगति हमारा लक्ष्य है।",
+    p: "शून्य से ब्रह्मांड बनाने वाले दृढ़ उद्यमियों के लिए।",
+    ourServices: "हमारी सेवाएँ",
+    contactUs: "हमसे संपर्क करें",
+  },
 };
 
 export default function HeroSection() {

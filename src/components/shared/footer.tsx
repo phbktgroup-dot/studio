@@ -64,6 +64,29 @@ const text = {
     getInTouchDirectly: "Get in Touch Directly",
     submitting: "Submitting..."
   },
+  hi: {
+    h2: "आइए, मिलकर सफलता की नई ऊंचाइयों को छुएं।",
+    p: "आइए आपकी दृष्टि को वास्तविकता में बदलें। अपनी डिजिटल यात्रा शुरू करने के लिए अपनी पूछताछ सबमिट करें।",
+    cardTitle: "अपनी दृष्टि साझा करें",
+    cardDescription: "हम यह सुनने के लिए उत्साहित हैं कि आप क्या बनाना चाहते हैं।",
+    nameLabel: "आपका नाम",
+    emailLabel: "आपका ईमेल",
+    mobileLabel: "मोबाइल नंबर",
+    purposeLabel: "उद्देश्य",
+    purposePlaceholder: "एक सेवा चुनें",
+    purposeOptions: {
+      web: "वेबसाइट विकास",
+      app: "ऐप विकास",
+      marketing: "विपणन और ब्रांडिंग",
+      consulting: "परामर्श",
+      other: "अन्य"
+    },
+    visionLabel: "आपकी दृष्टि",
+    submitButton: "पूछताछ सबमिट करें",
+    footerDescription: "नवोन्मेषी वित्तीय और तकनीकी समाधानों के साथ आपके व्यवसाय को सशक्त बनाना।",
+    getInTouchDirectly: "सीधे संपर्क में रहें",
+    submitting: "सबमिट हो रहा है..."
+  },
 };
 
 function SubmitButton() {

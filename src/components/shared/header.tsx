@@ -17,9 +17,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from 'next/navigation';
@@ -46,6 +46,15 @@ const text = {
       contact: "Contact",
       login: "Login",
   },
+  hi: {
+    services: "सेवाएं",
+    solutions: "समाधान",
+    work: "हमारे काम",
+    insights: "अंतर्दृष्टि",
+    careers: "करियर",
+    contact: "संपर्क",
+    login: "लॉगिन",
+  },
 };
 
 export default function Header() {
@@ -56,7 +65,7 @@ export default function Header() {
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [logoLoading, setLogoLoading] = useState(true);
   const router = useRouter();
-  const { language, toggleLanguage } = useLanguage();
+  const { language, setLanguage } = useLanguage();
 
   const navLinks = [
     { href: "#services", label: text[language].services },
@@ -155,10 +164,26 @@ export default function Header() {
         </div>
         <NavMenu className="hidden md:flex" />
         <div className="ml-auto flex items-center gap-2">
-          <Button variant="ghost" onClick={toggleLanguage} size="sm">
-            <Globe className="mr-2 h-4 w-4" />
-            <span>{language === 'mr' ? 'English' : 'मराठी'}</span>
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <Globe className="mr-2 h-4 w-4" />
+                <span>{language === 'en' ? 'English' : language === 'mr' ? 'मराठी' : 'हिंदी'}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => setLanguage('en')} disabled={language === 'en'}>
+                English
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setLanguage('mr')} disabled={language === 'mr'}>
+                मराठी
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setLanguage('hi')} disabled={language === 'hi'}>
+                हिंदी
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {loading ? (
             <div className="w-[105px] h-[40px]" /> // Placeholder to prevent layout shift
           ) : user ? (

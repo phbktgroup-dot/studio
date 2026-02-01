@@ -20,36 +20,43 @@ const insights = [
   {
     enTitle: "The Future of FinTech",
     mrTitle: "फिनटेकचे भविष्य",
+    hiTitle: "फिनटेक का भविष्य",
     imageId: "perspective_1",
   },
   {
     enTitle: "AI in Business Strategy",
     mrTitle: "व्यवसाय धोरणातील AI",
+    hiTitle: "व्यापार रणनीति में एआई",
     imageId: "perspective_2",
   },
   {
     enTitle: "Global Market Trends",
     mrTitle: "जागतिक बाजारातील ट्रेंड",
+    hiTitle: "वैश्विक बाजार के रुझान",
     imageId: "perspective_3",
   },
   {
     enTitle: "The Startup Ecosystem",
     mrTitle: "स्टार्टअप इकोसिस्टम",
+    hiTitle: "स्टार्टअप पारिस्थितिकी तंत्र",
     imageId: "perspective_4",
   },
   {
     enTitle: "Sustainable Growth Models",
     mrTitle: "शाश्वत वाढीचे मॉडेल",
+    hiTitle: "सतत विकास मॉडल",
     imageId: "perspective_5",
   },
   {
     enTitle: "Digital Transformation",
     mrTitle: "डिजिटल परिवर्तन",
+    hiTitle: "डिजिटल परिवर्तन",
     imageId: "service_web_dev",
   },
   {
     enTitle: "Cybersecurity in 2024",
     mrTitle: "२०२४ मध्ये सायबर सुरक्षा",
+    hiTitle: "2024 में साइबर सुरक्षा",
     imageId: "service_cloud",
   },
 ];
@@ -62,6 +69,10 @@ const sectionText = {
   mr: {
     heading: "दृष्टिकोन आणि अंतर्दृष्टी",
     subheading: "उद्याच्या ट्रेंडचा शोध, आजच."
+  },
+  hi: {
+    heading: "दृष्टिकोण और अंतर्दृष्टि",
+    subheading: "कल के रुझानों की खोज, आज।"
   },
 };
 
@@ -90,6 +101,19 @@ export default function PerspectivesSection() {
       api.off('select', handleSelect);
     };
   }, [api]);
+
+  const getTitle = (insight: (typeof insights)[0]) => {
+    if (language === 'hi') return insight.hiTitle;
+    if (language === 'mr') return insight.mrTitle;
+    return insight.enTitle;
+  }
+  
+  const getSubtitle = (insight: (typeof insights)[0]) => {
+    if (language === 'hi') return insight.enTitle;
+    if (language === 'mr') return insight.enTitle;
+    return insight.mrTitle;
+  }
+
 
   return (
     <section id="insights" className="py-6 md:py-8 bg-background">
@@ -145,7 +169,7 @@ export default function PerspectivesSection() {
                             )}
                             style={{ transitionDelay: isActive ? '150ms' : '0ms' }}
                             >
-                            {language === 'en' ? insight.enTitle : insight.mrTitle}
+                            {getTitle(insight)}
                           </h3>
                         </div>
                         <div className="overflow-hidden">
@@ -156,7 +180,7 @@ export default function PerspectivesSection() {
                             )}
                             style={{ transitionDelay: isActive ? '250ms' : '0ms' }}
                             >
-                            {language === 'mr' ? insight.enTitle : insight.mrTitle}
+                            {getSubtitle(insight)}
                           </p>
                         </div>
                     </div>
