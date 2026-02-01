@@ -74,20 +74,15 @@ export default function OurWorkSection() {
   const filteredProjects = projects.filter(p => activeFilter === 'all' || p.category === activeFilter);
 
   return (
-    <section className="py-6 md:py-8 bg-muted/30">
+    <section className="py-12 md:py-16 bg-muted/30">
       <div className="container">
         <div className="text-center mb-12">
-          {text.subheading && (
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-              {text.subheading}
+                {text.heading}
             </h3>
-          )}
-          <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
-            {text.heading}
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-lg">
-            {text.quote}
-          </p>
+            <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
+                {text.quote}
+            </h2>
         </div>
 
         <div className="flex justify-center gap-2 md:gap-4 mb-12">
