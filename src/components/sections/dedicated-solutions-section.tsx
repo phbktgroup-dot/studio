@@ -78,16 +78,16 @@ export default function DedicatedSolutionsSection() {
     <section className="py-6 md:py-8 bg-muted/30">
       <div className="container">
         <div className="text-center mb-8">
-            <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+            <h3 className="text-base font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {text.heading}
             </h3>
-            <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
+            <h2 className="font-headline text-xl font-bold tracking-tighter sm:text-2xl text-primary">
                 {text.subheading}
             </h2>
         </div>
 
         <Tabs defaultValue="shops" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 max-w-lg mx-auto">
+          <TabsList className="grid w-full grid-cols-2 max-w-lg mx-auto mb-4">
             <TabsTrigger value="shops">
               <Store className="mr-2" /> {text.shopsTab}
             </TabsTrigger>
@@ -112,13 +112,13 @@ export default function DedicatedSolutionsSection() {
                   </ul>
                   <Button size="lg" className="mt-8">{text.shops.cta}</Button>
                 </div>
-                <div className="order-1 md:order-2 aspect-square md:aspect-auto rounded-lg overflow-hidden">
+                <div className="order-1 md:order-2 aspect-[4/3] md:aspect-auto rounded-lg overflow-hidden">
                   {shopImage && (
                     <Image
                       src={shopImage.imageUrl}
                       alt={shopImage.description}
                       width={600}
-                      height={600}
+                      height={450}
                       data-ai-hint={shopImage.imageHint}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
@@ -131,13 +131,13 @@ export default function DedicatedSolutionsSection() {
           <TabsContent value="startups">
             <Card className="mt-6 border-0 shadow-none bg-transparent">
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                 <div className="aspect-square md:aspect-auto rounded-lg overflow-hidden">
+                 <div className="aspect-[4/3] md:aspect-auto rounded-lg overflow-hidden">
                    {startupImage && (
                     <Image
                       src={startupImage.imageUrl}
                       alt={startupImage.description}
                       width={600}
-                      height={600}
+                      height={450}
                       data-ai-hint={startupImage.imageHint}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
