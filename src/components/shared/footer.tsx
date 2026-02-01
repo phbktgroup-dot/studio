@@ -1,36 +1,56 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
 import { supabase } from '@/lib/supabase';
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Facebook, Twitter, Instagram, Linkedin, Send } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { useLanguage } from '@/context/language-provider';
 
-const MailboxIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    {...props}
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z" />
-    <polyline points="15,9 18,9 18,11" />
-    <path d="M6.5 5C9 5 11 7 11 9.5V17a2 2 0 0 1-2 2v0" />
-    <line x1="6" x2="7" y1="10" y2="10" />
-  </svg>
-);
+const text = {
+  mr: {
+    h2: "चला, सोबत मिळून यशाचे नवीन शिखर गाठूया.",
+    p: "तुमची दृष्टी प्रत्यक्षात आणूया. तुमचा डिजिटल प्रवास सुरू करण्यासाठी तुमची चौकशी सबमिट करा.",
+    cardTitle: "तुमची दृष्टी शेअर करा",
+    cardDescription: "आम्ही तुमच्या कल्पनेला प्रत्यक्षात आणण्यासाठी उत्सुक आहोत.",
+    nameLabel: "तुमचे नाव",
+    namePlaceholder: "उदा. जॉन डो",
+    emailLabel: "तुमचा ईमेल",
+    emailPlaceholder: "john@example.com",
+    visionLabel: "तुमची दृष्टी",
+    visionPlaceholder: "तुमच्या प्रोजेक्टबद्दल आम्हाला सांगा...",
+    submitButton: "चौकशी सबमिट करा",
+    footerDescription: "तुमच्या व्यवसायाला नाविन्यपूर्ण आर्थिक आणि तांत्रिक उपायांनी सक्षम करणे.",
+    getInTouchDirectly: "थेट संपर्कात रहा"
+  },
+  en: {
+    h2: "Let's Reach New Peaks of Success Together.",
+    p: "Let's turn your vision into a reality. Submit your inquiry to start your digital journey.",
+    cardTitle: "Share Your Vision",
+    cardDescription: "We're excited to hear about what you want to build.",
+    nameLabel: "Your Name",
+    namePlaceholder: "e.g., John Doe",
+    emailLabel: "Your Email",
+    emailPlaceholder: "john@example.com",
+    visionLabel: "Your Vision",
+    visionPlaceholder: "Tell us about your project...",
+    submitButton: "Submit Inquiry",
+    footerDescription: "Empowering your business with innovative financial and technological solutions.",
+    getInTouchDirectly: "Get in Touch Directly"
+  },
+};
+
 
 export default function Footer() {
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [logoLoading, setLogoLoading] = useState(true);
+  const { language } = useLanguage();
+  const t = text[language];
 
   useEffect(() => {
     const fetchLogoUrl = async () => {
@@ -61,42 +81,74 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="border-t bg-muted/30">
-      <div className="container flex flex-col md:flex-row justify-between items-start gap-8 py-12">
-        <div className="flex flex-col gap-4">
-          <Link href="/">
-            {logoLoading ? (
-              <div className="h-[58px] w-[180px]" />
-            ) : logoUrl ? (
-              <img src={logoUrl} alt="PHBKT Group" className="h-[58px] w-auto object-contain" />
-            ) : (
-              <Logo className="h-[58px]" />
-            )}
-          </Link>
-          <p className="text-sm text-muted-foreground">
-            Empowering your business with innovative financial and technological solutions.
-          </p>
-        </div>
-        <div className="w-full max-w-sm ml-auto">
-            <Card>
-                <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                        <div className="animate-bob">
-                        <MailboxIcon className="h-10 w-10 text-primary" />
+      <div className="container py-20 md:py-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+            <div className="text-center lg:text-left">
+                <div className="mb-8">
+                    <Link href="/" className="inline-block mb-4">
+                        {logoLoading ? (
+                        <div className="h-[58px] w-[220px]" />
+                        ) : logoUrl ? (
+                        <img src={logoUrl} alt="PHBKT Group" className="h-[58px] w-auto max-w-[220px] object-contain" />
+                        ) : (
+                        <Logo className="h-[58px] w-[220px]" />
+                        )}
+                    </Link>
+                    <p className="max-w-md mx-auto lg:mx-0 text-muted-foreground">
+                        {t.footerDescription}
+                    </p>
+                </div>
+                
+                <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary">
+                    {t.h2}
+                </h2>
+                <p className="mt-4 max-w-md mx-auto lg:mx-0 text-muted-foreground md:text-lg">
+                    {t.p}
+                </p>
+
+                <div className="mt-6">
+                    <h3 className="font-semibold text-lg">{t.getInTouchDirectly}</h3>
+                     <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
+                        info@phbkt.com
+                    </a>
+                    <p className="text-sm text-muted-foreground mt-1">+91 9552256325</p>
+                </div>
+            </div>
+            
+            <Card className="shadow-2xl">
+                <form>
+                    <CardHeader>
+                        <CardTitle>{t.cardTitle}</CardTitle>
+                        <CardDescription>{t.cardDescription}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                        <div className="grid sm:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                                <Label htmlFor="footer-name">{t.nameLabel}</Label>
+                                <Input id="footer-name" placeholder={t.namePlaceholder} />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="footer-email">{t.emailLabel}</Label>
+                                <Input id="footer-email" type="email" placeholder={t.emailPlaceholder} />
+                            </div>
                         </div>
-                        <div className="text-right">
-                            <h3 className="font-semibold text-lg">Get in Touch</h3>
-                            <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
-                                info@phbkt.com
-                            </a>
-                            <p className="text-sm text-muted-foreground mt-1">+91 9552256325</p>
+                        <div className="space-y-2">
+                            <Label htmlFor="footer-message">{t.visionLabel}</Label>
+                            <Textarea id="footer-message" placeholder={t.visionPlaceholder} className="min-h-[120px]" />
                         </div>
-                    </div>
-                </CardContent>
+                    </CardContent>
+                    <CardFooter>
+                        <Button type="submit" size="lg" className="w-full">
+                            <Send className="mr-2" />
+                            {t.submitButton}
+                        </Button>
+                    </CardFooter>
+                </form>
             </Card>
         </div>
       </div>
       <div className="border-t bg-muted/50">
-        <div className="container flex items-center justify-between py-4 text-sm text-muted-foreground">
+        <div className="container flex flex-col sm:flex-row items-center justify-between py-4 text-sm text-muted-foreground gap-4">
           <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
           <div className="flex items-center gap-4">
               <Link href="#" aria-label="Facebook" className="text-blue-600 transition-colors hover:opacity-80">

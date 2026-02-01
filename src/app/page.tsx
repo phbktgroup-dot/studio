@@ -3,7 +3,6 @@ import Header from "@/components/shared/header";
 import HeroSection from "@/components/sections/hero-section";
 import SuccessRoadmapSection from "@/components/sections/success-roadmap-section";
 import PremiumServicesSection from "@/components/sections/premium-services-section";
-import ContactActionSection from "@/components/sections/contact-action-section";
 import Footer from "@/components/shared/footer";
 import PerspectivesSection from "@/components/sections/perspectives-section";
 import CareersSection from "@/components/sections/careers-section";
@@ -22,7 +21,6 @@ export default function Home() {
         <OurWorkSection />
         <PerspectivesSection />
         <CareersSection />
-        <ContactActionSection />
       </main>
       <Footer />
     </div>
