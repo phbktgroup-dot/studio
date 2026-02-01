@@ -78,12 +78,12 @@ export default function DedicatedSolutionsSection() {
     <section className="py-6 md:py-10 bg-muted/30">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
-            {text.heading}
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-xl">
-            {text.subheading}
-          </p>
+            <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                {text.heading}
+            </h3>
+            <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
+                {text.subheading}
+            </h2>
         </div>
 
         <Tabs defaultValue="shops" className="w-full">
