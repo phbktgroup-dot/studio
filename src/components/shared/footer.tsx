@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Logo } from "@/components/shared/logo";
 import { supabase } from '@/lib/supabase';
 import { Facebook, Twitter, Instagram, Linkedin, Send } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -140,11 +140,11 @@ export default function Footer() {
             
             <div>
                 <form>
-                    <CardHeader className="text-center">
+                    <CardHeader className="text-center px-0">
                         <CardTitle className="text-center">{t.cardTitle}</CardTitle>
                         <CardDescription className="text-center">{t.cardDescription}</CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-6">
+                    <CardContent className="space-y-6 px-0">
                         <div className="grid sm:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <Label htmlFor="footer-name" className="block text-center">{t.nameLabel}</Label>
@@ -176,10 +176,10 @@ export default function Footer() {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="footer-message" className="block text-center">{t.visionLabel}</Label>
-                            <Textarea id="footer-message" className="min-h-[120px]" />
+                            <Textarea id="footer-message" className="min-h-[100px]" />
                         </div>
                     </CardContent>
-                    <CardFooter>
+                    <CardFooter className="px-0">
                         <Button type="submit" size="lg" className="w-full">
                             <Send className="mr-2" />
                             {t.submitButton}
