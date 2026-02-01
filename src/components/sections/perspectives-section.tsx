@@ -119,7 +119,7 @@ export default function PerspectivesSection() {
 
               return (
                 <CarouselItem key={index} className="pl-4 basis-[90%] md:basis-1/2 lg:basis-1/5 group">
-                  <Card className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+                  <Card className="relative aspect-[4/5] w-full overflow-hidden rounded-lg">
                     {image && (
                       <Image
                         src={image.imageUrl}
