@@ -72,7 +72,7 @@ export default function OurWorkSection() {
   const filteredProjects = projects.filter(p => activeFilter === 'all' || p.category === activeFilter);
 
   return (
-    <section className="py-6 md:py-8 bg-muted/30">
+    <section id="work" className="py-6 md:py-8 bg-muted/30">
       <div className="container">
         <div className="text-center mb-4">
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
@@ -111,7 +111,7 @@ export default function OurWorkSection() {
                     <p className="mt-2 text-sm text-muted-foreground">{language === 'en' ? project.descriptionEn : project.descriptionMr}</p>
                   </div>
                   <div className="flex-grow" />
-                  <Button variant="outline" size="sm" className="mt-2 self-start">{text.viewDemo}</Button>
+                  <Button variant="outline" size="sm" className="mt-auto self-start">{text.viewDemo}</Button>
                 </CardContent>
               </Card>
             );

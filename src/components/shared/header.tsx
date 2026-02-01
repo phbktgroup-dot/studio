@@ -30,17 +30,21 @@ import { useLanguage } from "@/context/language-provider";
 const text = {
   mr: {
       services: "सेवा",
-      about: "माहिती",
-      roadmap: "रोडमॅप",
+      solutions: "उपाय",
+      work: "आमचे काम",
+      insights: "अंतर्दृष्टी",
+      careers: "करिअर",
       contact: "संपर्क",
-      clientLogin: "लॉगिन",
+      login: "लॉगिन",
   },
   en: {
       services: "Services",
-      about: "About",
-      roadmap: "Roadmap",
+      solutions: "Solutions",
+      work: "Our Work",
+      insights: "Insights",
+      careers: "Careers",
       contact: "Contact",
-      clientLogin: "Login",
+      login: "Login",
   },
 };
 
@@ -56,8 +60,10 @@ export default function Header() {
 
   const navLinks = [
     { href: "#services", label: text[language].services },
-    { href: "#marketing", label: text[language].about },
-    { href: "#roadmap", label: text[language].roadmap },
+    { href: "#solutions", label: text[language].solutions },
+    { href: "#work", label: text[language].work },
+    { href: "#insights", label: text[language].insights },
+    { href: "#careers", label: text[language].careers },
     { href: "#contact", label: text[language].contact },
   ];
 
@@ -182,7 +188,7 @@ export default function Header() {
               </DropdownMenu>
           ) : (
             <Button asChild>
-              <Link href="/login">{text[language].clientLogin}</Link>
+              <Link href="/login">{text[language].login}</Link>
             </Button>
           )}
           {mounted && (

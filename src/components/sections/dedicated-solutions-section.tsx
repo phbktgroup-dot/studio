@@ -75,7 +75,7 @@ export default function DedicatedSolutionsSection() {
   const text = sectionText[language];
 
   return (
-    <section className="py-6 md:py-8 bg-muted/30">
+    <section id="solutions" className="py-6 md:py-8 bg-muted/30">
       <div className="container">
         <div className="text-center mb-8">
             <h3 className="text-base font-semibold uppercase tracking-wider text-muted-foreground mb-2">
@@ -101,18 +101,18 @@ export default function DedicatedSolutionsSection() {
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div className="order-2 md:order-1">
                   <h3 className="font-headline text-2xl font-bold text-primary">{text.shops.title}</h3>
-                  <p className="mt-3 text-base text-muted-foreground">{text.shops.description}</p>
+                  <p className="mt-3 text-lg text-muted-foreground">{text.shops.description}</p>
                   <ul className="mt-6 space-y-3">
                     {text.shops.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-primary" />
-                        <span className="text-base font-medium">{feature}</span>
+                        <span className="text-lg font-medium">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   <Button size="lg" className="mt-8">{text.shops.cta}</Button>
                 </div>
-                <div className="order-1 md:order-2 aspect-[4/3] md:aspect-video rounded-lg overflow-hidden">
+                <div className="order-1 md:order-2 aspect-video rounded-lg overflow-hidden">
                   {shopImage && (
                     <Image
                       src={shopImage.imageUrl}
@@ -131,7 +131,7 @@ export default function DedicatedSolutionsSection() {
           <TabsContent value="startups">
             <Card className="mt-6 border-0 shadow-none bg-transparent">
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                 <div className="aspect-[4/3] md:aspect-video rounded-lg overflow-hidden">
+                 <div className="aspect-video rounded-lg overflow-hidden">
                    {startupImage && (
                     <Image
                       src={startupImage.imageUrl}
@@ -145,12 +145,12 @@ export default function DedicatedSolutionsSection() {
                 </div>
                 <div>
                   <h3 className="font-headline text-2xl font-bold text-primary">{text.startups.title}</h3>
-                  <p className="mt-3 text-base text-muted-foreground">{text.startups.description}</p>
+                  <p className="mt-3 text-lg text-muted-foreground">{text.startups.description}</p>
                   <ul className="mt-6 space-y-3">
                     {text.startups.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-primary" />
-                        <span className="text-base font-medium">{feature}</span>
+                        <span className="text-lg font-medium">{feature}</span>
                       </li>
                     ))}
                   </ul>

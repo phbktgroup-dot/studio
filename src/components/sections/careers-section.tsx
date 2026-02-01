@@ -65,7 +65,7 @@ export default function CareersSection() {
     const t = content[language];
 
     return (
-      <section className="bg-background py-6 md:py-8 text-foreground">
+      <section id="careers" className="bg-background py-6 md:py-8 text-foreground">
         <div className="container max-w-5xl">
           <div className="text-center mb-12">
             <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">

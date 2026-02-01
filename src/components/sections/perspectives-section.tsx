@@ -92,7 +92,7 @@ export default function PerspectivesSection() {
   }, [api]);
 
   return (
-    <section className="py-6 md:py-8 bg-background">
+    <section id="insights" className="py-6 md:py-8 bg-background">
       <div className="container">
         <div className="text-center mb-8">
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
