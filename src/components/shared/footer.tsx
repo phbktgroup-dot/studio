@@ -160,7 +160,7 @@ export default function Footer() {
               <Link href="https://www.instagram.com/phbkt.it.tech?igsh=MThtOGZpdTVnYW4waw==&utm_source=ig_contact_invite" aria-label="Instagram" className="text-pink-600 transition-colors hover:opacity-80" target="_blank" rel="noopener noreferrer">
                 <Instagram className="h-5 w-5" />
               </Link>
-              <Link href="#" aria-label="LinkedIn" className="text-blue-700 transition-colors hover:opacity-80" target="_blank" rel="noopener noreferrer">
+              <Link href="https://www.linkedin.com/company/phbkt-consultancy-services-limited/about/?viewAsMember=true" aria-label="LinkedIn" className="text-blue-700 transition-colors hover:opacity-80" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="h-5 w-5" />
               </Link>
           </div>
