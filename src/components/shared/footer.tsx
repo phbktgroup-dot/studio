@@ -132,28 +132,28 @@ export default function Footer() {
             
             <Card>
                 <form>
-                    <CardHeader className="text-center">
-                        <CardTitle>{t.cardTitle}</CardTitle>
-                        <CardDescription>{t.cardDescription}</CardDescription>
+                    <CardHeader>
+                        <CardTitle className="text-center">{t.cardTitle}</CardTitle>
+                        <CardDescription className="text-center">{t.cardDescription}</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
                         <div className="grid sm:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <Label htmlFor="footer-name" className="text-left block w-full">{t.nameLabel}</Label>
-                                <Input id="footer-name" />
+                                <Input id="footer-name" className="h-9" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="footer-email" className="text-left block w-full">{t.emailLabel}</Label>
-                                <Input id="footer-email" type="email" />
+                                <Input id="footer-email" type="email" className="h-9" />
                             </div>
                              <div className="space-y-2">
                                 <Label htmlFor="footer-mobile" className="text-left block w-full">{t.mobileLabel}</Label>
-                                <Input id="footer-mobile" type="tel" />
+                                <Input id="footer-mobile" type="tel" className="h-9" />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="footer-purpose" className="text-left block w-full">{t.purposeLabel}</Label>
                                 <Select>
-                                    <SelectTrigger id="footer-purpose">
+                                    <SelectTrigger id="footer-purpose" className="h-9">
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
