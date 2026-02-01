@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from '@/context/language-provider';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const text = {
   mr: {
@@ -22,6 +23,17 @@ const text = {
     namePlaceholder: "उदा. जॉन डो",
     emailLabel: "तुमचा ईमेल",
     emailPlaceholder: "john@example.com",
+    mobileLabel: "मोबाईल नंबर",
+    mobilePlaceholder: "+९१ ९८७६५४३२१०",
+    purposeLabel: "उद्देश",
+    purposePlaceholder: "सेवा निवडा",
+    purposeOptions: {
+      web: "वेबसाइट डेव्हलपमेंट",
+      app: "ॲप डेव्हलपमेंट",
+      marketing: "मार्केटिंग आणि ब्रँडिंग",
+      consulting: "सल्लामसलत",
+      other: "इतर"
+    },
     visionLabel: "तुमची दृष्टी",
     visionPlaceholder: "तुमच्या प्रोजेक्टबद्दल आम्हाला सांगा...",
     submitButton: "चौकशी सबमिट करा",
@@ -37,6 +49,17 @@ const text = {
     namePlaceholder: "e.g., John Doe",
     emailLabel: "Your Email",
     emailPlaceholder: "john@example.com",
+    mobileLabel: "Mobile Number",
+    mobilePlaceholder: "+91 9876543210",
+    purposeLabel: "Purpose",
+    purposePlaceholder: "Select a service",
+    purposeOptions: {
+      web: "Web Development",
+      app: "App Development",
+      marketing: "Marketing & Branding",
+      consulting: "Consulting",
+      other: "Other"
+    },
     visionLabel: "Your Vision",
     visionPlaceholder: "Tell us about your project...",
     submitButton: "Submit Inquiry",
@@ -83,18 +106,18 @@ export default function Footer() {
     <footer id="contact" className="border-t bg-muted/30">
       <div className="container py-12 md:py-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col text-center lg:text-left lg:items-start items-center">
                 <div className="mb-8">
                     <Link href="/" className="inline-block mb-4">
                         {logoLoading ? (
-                        <div className="h-[68px] w-[250px]" />
+                        <div className="h-[78px] w-[280px]" />
                         ) : logoUrl ? (
-                        <img src={logoUrl} alt="PHBKT Group" className="h-[68px] w-auto max-w-[250px] object-contain" />
+                        <img src={logoUrl} alt="PHBKT Group" className="h-[78px] w-auto max-w-[280px] object-contain" />
                         ) : (
-                        <Logo className="h-[68px] w-[250px]" />
+                        <Logo className="h-[78px] w-[280px]" />
                         )}
                     </Link>
-                    <p className="max-w-md mx-auto text-muted-foreground">
+                    <p className="max-w-md mx-auto lg:mx-0 text-muted-foreground">
                         {t.footerDescription}
                     </p>
                 </div>
@@ -102,7 +125,7 @@ export default function Footer() {
                 <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary">
                     {t.h2}
                 </h2>
-                <p className="mt-4 max-w-md mx-auto text-muted-foreground md:text-lg">
+                <p className="mt-4 max-w-md mx-auto lg:mx-0 text-muted-foreground md:text-lg">
                     {t.p}
                 </p>
 
@@ -130,6 +153,25 @@ export default function Footer() {
                             <div className="space-y-2">
                                 <Label htmlFor="footer-email">{t.emailLabel}</Label>
                                 <Input id="footer-email" type="email" placeholder={t.emailPlaceholder} />
+                            </div>
+                             <div className="space-y-2">
+                                <Label htmlFor="footer-mobile">{t.mobileLabel}</Label>
+                                <Input id="footer-mobile" type="tel" placeholder={t.mobilePlaceholder} />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="footer-purpose">{t.purposeLabel}</Label>
+                                <Select>
+                                    <SelectTrigger id="footer-purpose">
+                                        <SelectValue placeholder={t.purposePlaceholder} />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="web">{t.purposeOptions.web}</SelectItem>
+                                        <SelectItem value="app">{t.purposeOptions.app}</SelectItem>
+                                        <SelectItem value="marketing">{t.purposeOptions.marketing}</SelectItem>
+                                        <SelectItem value="consulting">{t.purposeOptions.consulting}</SelectItem>
+                                        <SelectItem value="other">{t.purposeOptions.other}</SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </div>
                         </div>
                         <div className="space-y-2">
