@@ -34,7 +34,7 @@ const BuildingBlocksIcon = () => (
 
 export default function LaunchpadSection() {
   return (
-    <section className="py-20 md:py-32 bg-muted/30">
+    <section className="py-12 md:py-16 bg-muted/30">
       <div className="container grid md:grid-cols-2 gap-12 items-center">
         <div className="flex justify-center items-center">
             <BuildingBlocksIcon />

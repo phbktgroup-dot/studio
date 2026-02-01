@@ -46,7 +46,7 @@ function StatItem({ end, label, Icon }: { end: number; label: string; Icon: Reac
 export default function StatsSection() {
   const { language } = useLanguage();
   return (
-    <section id="stats" className="py-20 md:py-24 bg-muted/30">
+    <section id="stats" className="py-12 md:py-16 bg-muted/30">
       <div className="container">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat) => (

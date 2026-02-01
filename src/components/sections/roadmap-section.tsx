@@ -88,7 +88,7 @@ export default function RoadmapSection() {
   }, [state.roadmap]);
 
   return (
-    <section id="roadmap" className="py-20 md:py-32 bg-background">
+    <section id="roadmap" className="py-12 md:py-16 bg-background">
       <div className="container max-w-3xl text-center">
         <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
           AI-Powered Business Roadmap

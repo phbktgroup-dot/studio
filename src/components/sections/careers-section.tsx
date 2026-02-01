@@ -1,60 +1,72 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useLanguage } from '@/context/language-provider';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { ArrowRight, Briefcase, Lightbulb, Users } from 'lucide-react';
 
-const sectionText = {
-  en: {
-    heading: "Shape the Future With Us",
-    description: "We are a collective of thinkers, builders, and dreamers dedicated to pushing boundaries. Your unique skills and perspective could be the missing piece of our next big breakthrough. Join us and let's create what's next, together.",
-    button: "See Open Roles"
-  },
-  mr: {
-    heading: "आमच्यासोबत भविष्य घडवा",
-    description: "आम्ही विचारवंत, निर्माते आणि स्वप्न पाहणाऱ्यांचा एक समूह आहोत, जे सीमा ओलांडण्यासाठी समर्पित आहेत. तुमची अद्वितीय कौशल्ये आणि दृष्टीकोन आमच्या पुढील मोठ्या प्रगतीचा एक महत्त्वाचा भाग असू शकतो. आमच्यात सामील व्हा आणि चला एकत्र मिळून काहीतरी नवीन निर्माण करूया.",
-    button: "रिक्त पदे पहा"
-  }
-};
+const content = {
+    heading: 'Find Your Future Here',
+    subheading:
+      "We're a team of innovators, thinkers, and builders dedicated to making a difference. Your unique skills can help us shape what's next. Join us.",
+    cta: 'Explore Open Positions',
+    pillars: [
+      {
+        icon: Lightbulb,
+        title: 'Innovate with Purpose',
+        description:
+          'Tackle meaningful challenges and work on projects that redefine industries. Your ideas have a home here.',
+      },
+      {
+        icon: Briefcase,
+        title: 'Grow Your Career',
+        description:
+          'We invest in your development with mentorship, continuous learning opportunities, and clear paths for advancement.',
+      },
+      {
+        icon: Users,
+        title: 'Belong to a Community',
+        description:
+          'Join a diverse, inclusive, and collaborative environment where every voice is heard and valued.',
+      },
+    ],
+  };
 
 export default function CareersSection() {
-  const { language } = useLanguage();
-  const text = sectionText[language];
-  const careerImage = PlaceHolderImages.find(p => p.id === 'careers_marathon');
-
-  return (
-    <section className="bg-background text-foreground py-20 md:py-24">
-      <div className="container grid md:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">
-            {text.heading}
-          </h2>
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl">
-            {text.description}
-          </p>
-          
-          <Button asChild size="lg" className="mt-8">
-            <Link href="#">
-              {text.button}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+    return (
+      <section className="bg-background py-12 md:py-16 text-foreground">
+        <div className="container max-w-5xl">
+          <div className="text-center mb-12">
+            <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
+              {content.heading}
+            </h2>
+            <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
+              {content.subheading}
+            </p>
+          </div>
+  
+          <div className="grid md:grid-cols-3 gap-8">
+            {content.pillars.map((pillar, index) => (
+              <Card key={index} className="bg-muted/30 border-0 text-center shadow-lg transition-transform hover:-translate-y-2">
+                <CardContent className="p-8">
+                  <div className="flex justify-center mb-4">
+                    <div className="p-4 bg-primary text-primary-foreground rounded-full">
+                      <pillar.icon className="h-8 w-8" />
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold font-headline">{pillar.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{pillar.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+  
+          <div className="text-center mt-12">
+            <Button size="lg">
+              {content.cta}
+              <ArrowRight className="ml-2" />
+            </Button>
+          </div>
         </div>
-        <div className="rounded-lg overflow-hidden aspect-[4/3] relative">
-          {careerImage && (
-            <Image
-              src={careerImage.imageUrl}
-              alt={careerImage.description}
-              fill
-              data-ai-hint={careerImage.imageHint}
-              className="object-cover transition-transform duration-500 hover:scale-105"
-            />
-          )}
-        </div>
-      </div>
-    </section>
-  );
-}
+      </section>
+    );
+  }

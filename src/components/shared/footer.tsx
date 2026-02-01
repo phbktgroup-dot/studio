@@ -81,7 +81,7 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="border-t bg-muted/30">
-      <div className="container py-20 md:py-24">
+      <div className="container py-12 md:py-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
             <div className="text-center lg:text-left">
                 <div className="mb-8">

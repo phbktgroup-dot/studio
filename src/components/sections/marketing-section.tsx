@@ -43,7 +43,7 @@ const NetworkGraphIcon = () => (
 
 export default function MarketingSection() {
   return (
-    <section id="marketing" className="py-20 md:py-32 bg-muted/30 overflow-hidden">
+    <section id="marketing" className="py-12 md:py-16 bg-muted/30 overflow-hidden">
       <div className="container grid md:grid-cols-2 gap-12 items-center">
         <div className="flex justify-center items-center h-full">
             <NetworkGraphIcon />

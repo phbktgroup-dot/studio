@@ -93,7 +93,7 @@ export default function ESGSection() {
     const text = sectionText[language];
 
     return (
-        <section className="py-20 md:py-32 bg-muted/30">
+        <section className="py-12 md:py-16 bg-muted/30">
             <div className="container">
                 <div className="text-center mb-12">
                     <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">

@@ -16,7 +16,7 @@ export default function ServicesSection() {
   const mobileAppImage = PlaceHolderImages.find(p => p.id === 'mobile_app_mockup');
 
   return (
-    <section id="services" className="py-20 md:py-32 bg-background">
+    <section id="services" className="py-12 md:py-16 bg-background">
       <div className="container grid md:grid-cols-2 gap-12 items-center">
         <div className="max-w-md">
           <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
