@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card } from '@/components/ui/card';
@@ -105,7 +106,7 @@ export default function PremiumServicesSection() {
           >
             <CarouselContent className="-ml-4">
               {services.map((service, index) => (
-                <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
                     <div className="p-1 h-full">
                       <ServiceCard service={service} />
                     </div>
