@@ -2,6 +2,7 @@
 
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
+import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useLanguage } from '@/context/language-provider';
 import {
@@ -94,7 +95,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
       )}
       <div className="p-4 text-center">
         <h3 className="text-lg font-bold">{title}</h3>
-        <p className="mt-2 h-28 text-sm text-muted-foreground">{description}</p>
+        <p className="mt-2 h-32 text-sm text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
@@ -126,13 +127,20 @@ export default function PremiumServicesSection() {
             className="w-full"
           >
             <CarouselContent className="-ml-4">
-              {services.map((service, index) => (
-                <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
-                    <div className="p-1 h-full">
-                      <ServiceCard service={service} />
-                    </div>
-                </CarouselItem>
-              ))}
+              {services.map((service, index) => {
+                const isWebAppDev = service.imageId === "service_web_dev";
+                const href = isWebAppDev ? "/services/web-app-development" : "#";
+                
+                return (
+                  <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
+                      <div className="p-1 h-full">
+                        <Link href={href} className="h-full block" onClick={(e) => href === '#' && e.preventDefault()}>
+                          <ServiceCard service={service} />
+                        </Link>
+                      </div>
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
             <CarouselPrevious className="hidden md:flex left-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground hover:bg-primary/90" />
             <CarouselNext className="hidden md:flex right-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground hover:bg-primary/90" />
