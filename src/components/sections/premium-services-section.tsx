@@ -44,24 +44,30 @@ const servicesData = {
     { title: "24/7 आयटी सपोर्ट", description: "तांत्रिक बिघाड टाळण्यासाठी आणि सतत मदतीसाठी समर्पित टीम.", imageId: "service_support" },
   ],
   hi: [
-    { title: "वेबसाइट और ऐप विकास", description: "आपके लक्ष्यों के अनुरूप उच्च-प्रदर्शन वाले डिजिटल उत्पाद।", imageId: "service_web_dev" },
-    { title: "विपणन और ब्रांडिंग", description: "आपके ब्रांड की उपस्थिति को बढ़ाने के लिए डेटा-संचालित रणनीतियाँ।", imageId: "service_marketing" },
-    { title: "कर और अनुपालन", description: "विशेषज्ञ मार्गदर्शन के साथ जटिल नियमों को नेविगेट करें।", imageId: "service_tax" },
-    { title: "व्यापार सेटअप", description: "एक सहज व्यापार लॉन्च के लिए एंड-टू-एंड समर्थन।", imageId: "service_biz_setup" },
-    { title: "यूआई/यूएक्स डिजाइन", description: "मानव-केंद्रित इंटरफेस जो आगंतुकों को वफादार ग्राहकों में बदलते हैं।", imageId: "service_ui_ux" },
-    { title: "एआई और स्वचालन", description: "स्मार्ट, स्वचालित वर्कफ़्लो के साथ संचालन को सुव्यवस्थित करना।", imageId: "service_ai" },
-    { title: "क्लाउड और सुरक्षा", description: "आपके डेटा को सुरक्षित और हमेशा ऑनलाइन रखने के लिए मजबूत बुनियादी ढांचा।", imageId: "service_cloud" },
-    { title: "स्टार्टअप सलाहकार", description: "व्यापार स्केलिंग और निवेश के लिए रणनीतिक परामर्श।", imageId: "service_advisory" },
-    { title: "सामग्री और सामाजिक", description: "कथा-संचालित सामग्री जो अधिकार और जुड़ाव बनाती है।", imageId: "service_social" },
-    { title: "24/7 आईटी समर्थन", description: "शून्य डाउनटाइम सुनिश्चित करने के लिए समर्पित तकनीकी सहायता।", imageId: "service_support" },
+    { title: "वेबसाइट और ऐप विकास", description: "आपके बिज़नेस के अनुसार तैयार किए गए तेज़, सुरक्षित और स्केलेबल डिजिटल प्लेटफॉर्म — जो केवल दिखें नहीं, बल्कि परिणाम दें।", imageId: "service_web_dev" },
+    { title: "मार्केटिंग और ब्रांडिंग", description: "डेटा-आधारित मार्केटिंग रणनीतियाँ जो आपके ब्रांड को पहचान, भरोसा और निरंतर ग्रोथ दिलाएँ।", imageId: "service_marketing" },
+    { title: "कर और अनुपालन", description: "GST, रजिस्ट्रेशन और सभी कानूनी प्रक्रियाएँ — विशेषज्ञों के मार्गदर्शन में, बिना तनाव।", imageId: "service_tax" },
+    { title: "बिजनेस सेटअप", description: "आइडिया से लेकर सफल लॉन्च तक — एक मजबूत शुरुआत के लिए एंड-टू-एंड सपोर्ट।", imageId: "service_biz_setup" },
+    { title: "यूआई/यूएक्स डिजाइन", description: "ऐसे यूज़र-फ्रेंडली डिज़ाइन जो विज़िटर्स को ग्राहकों में बदल दें।", imageId: "service_ui_ux" },
+    { title: "एआई और ऑटोमेशन", description: "स्मार्ट ऑटोमेशन से समय बचाएँ, लागत घटाएँ और ऑपरेशन्स को तेज़ करें।", imageId: "service_ai" },
+    { title: "क्लाउड और सुरक्षा", description: "मजबूत क्लाउड इंफ्रास्ट्रक्चर जो आपके डेटा को सुरक्षित और सिस्टम को हमेशा ऑनलाइन रखे।", imageId: "service_cloud" },
+    { title: "स्टार्टअप सलाहकार", description: "बिज़नेस स्केलिंग, फंडिंग और ग्रोथ के लिए रणनीतिक परामर्श।", imageId: "service_advisory" },
+    { title: "कंटेंट और सोशल", description: "कहानी-आधारित कंटेंट जो ब्रांड अथॉरिटी बनाए और ऑडियंस से जुड़ाव बढ़ाए।", imageId: "service_social" },
+    { title: "24/7 आईटी सपोर्ट", description: "बिना रुकावट काम चलता रहे — इसके लिए चौबीसों घंटे टेक्निकल सपोर्ट।", imageId: "service_support" },
   ]
 };
 
 const headingText = {
   en: "Igniting startup growth with unstoppable tech and elite strategy.",
   mr: "शक्तिशाली तंत्रज्ञान आणि अजेय रणनीतीसह तुमच्या स्टार्टअपला देऊया यशाची नवी भरारी!",
-  hi: "अजेय तकनीक और विशिष्ट रणनीति के साथ स्टार्टअप विकास को प्रज्वलित करना।",
+  hi: "तकनीक और रणनीति का ऐसा संगम, जो स्टार्टअप को तेज़ी से आगे बढ़ाए।",
 };
+
+const descriptionText = {
+    en: "We build digital solutions that lead in performance, security, and scalability.",
+    mr: "आम्ही असे डिजिटल समाधान तयार करतो जे प्रदर्शन, सुरक्षा आणि स्केलेबिलिटीमध्ये पुढे आहेत.",
+    hi: "हम ऐसे डिजिटल समाधान बनाते हैं जो प्रदर्शन, सुरक्षा और स्केलेबिलिटी तीनों में आगे हों।"
+}
 
 const sectionTitleText = {
     en: "Empowerment Tools",
@@ -108,6 +114,9 @@ export default function PremiumServicesSection() {
             <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary mt-2">
                 {headingText[language]}
             </h2>
+             <p className="mt-4 max-w-3xl mx-auto text-muted-foreground">
+                {descriptionText[language]}
+            </p>
         </div>
         <div className="container">
           <Carousel
