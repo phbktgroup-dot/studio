@@ -94,7 +94,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
       )}
       <div className="p-4 text-center">
         <h3 className="text-lg font-bold">{title}</h3>
-        <p className="mt-2 h-14 text-sm text-muted-foreground">{description}</p>
+        <p className="mt-2 h-20 text-sm text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
