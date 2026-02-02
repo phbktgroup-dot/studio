@@ -95,7 +95,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
       )}
       <div className="p-4 text-center">
         <h3 className="text-lg font-bold">{title}</h3>
-        <p className="mt-2 h-36 text-sm text-muted-foreground">{description}</p>
+        <p className="mt-2 h-40 text-sm text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
@@ -130,12 +130,15 @@ export default function PremiumServicesSection() {
               {services.map((service, index) => {
                 const isWebAppDev = service.imageId === "service_web_dev";
                 const isMarketing = service.imageId === "service_marketing";
+                const isTax = service.imageId === "service_tax";
                 
                 let href = "#";
                 if (isWebAppDev) {
                     href = "/services/web-app-development";
                 } else if (isMarketing) {
                     href = "/services/marketing-and-branding";
+                } else if (isTax) {
+                    href = "/services/tax-and-compliance";
                 }
                 
                 return (
