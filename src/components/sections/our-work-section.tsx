@@ -20,7 +20,7 @@ const sectionText = {
   },
   mr: {
     heading: "आमचे अलीकडील काम",
-    quote: "आम्ही असे डिजिटल अनुभव तयार करतो जे परिणाम देतात.",
+    quote: "आम्ही असे डिजिटल अनुभव तयार करतो जे प्रत्यक्ष व्यवसाय परिणाम देतात.",
     all: "सर्व",
     apps: "अ‍ॅप्स",
     automation: "ऑटोमेशन",
@@ -52,7 +52,7 @@ const projects = [
   {
     category: 'automation',
     titleEn: "Data Analytics Dashboard",
-    titleMr: "डेटा ॲनालिटिक्स डॅशबोर्ड",
+    titleMr: "डेटा अ‍ॅनालिटिक्स डॅशबोर्ड",
     titleHi: "डेटा एनालिटिक्स डैशबोर्ड",
     descriptionEn: "A real-time dashboard for visualizing sales data and customer behavior.",
     descriptionMr: "विक्री डेटा आणि ग्राहक वर्तनाचे व्हिज्युअलायझेशन करण्यासाठी एक रिअल-टाइम डॅशबोर्ड.",
@@ -72,7 +72,7 @@ const projects = [
   {
     category: 'apps',
     titleEn: "Branding for 'Company'",
-    titleMr: "'कंपनी' साठी ब्रँडिंग",
+    titleMr: "स्टार्टअपसाठी संपूर्ण ब्रँडिंग",
     titleHi: "'कंपनी' के लिए ब्रांडिंग",
     descriptionEn: "Complete branding package for a new tech startup, including logo, and style guide.",
     descriptionMr: "नवीन टेक स्टार्टअपसाठी लोगो आणि स्टाईल गाईडसह संपूर्ण ब्रँडिंग पॅकेज.",

@@ -32,16 +32,16 @@ const servicesData = {
     { title: "24/7 IT Support", description: "Dedicated technical assistance to ensure zero downtime.", imageId: "service_support" },
   ],
   mr: [
-    { title: "वेबसाइट आणि अ‍ॅप डेव्हलपमेंट", description: "तुमच्या ध्येयानुसार तयार केलेली उच्च-गुणवत्तेची डिजिटल उत्पादने.", imageId: "service_web_dev" },
-    { title: "मार्केटिंग आणि ब्रँडिंग", description: "तुमच्या ब्रँडची ओळख वाढवण्यासाठी डेटा-आधारित रणनीती.", imageId: "service_marketing" },
-    { title: "टॅक्स आणि कंप्लायन्स", description: "तज्ञांच्या मार्गदर्शनासह क्लिष्ट सरकारी नियमांचे सुलभ पालन.", imageId: "service_tax" },
-    { title: "बिझनेस सेटअप", description: "व्यवसाय सुरळीतपणे सुरू करण्यासाठी सुरुवातीपासून शेवटपर्यंत पूर्ण सहकार्य.", imageId: "service_biz_setup" },
-    { title: "UI/UX डिझाइन", description: "अभ्यागत ग्राहकांना आकर्षित करतील अशी मानवी गरजांवर आधारित डिझाइन्स.", imageId: "service_ui_ux" },
-    { title: "AI आणि ऑटोमेशन", description: "स्मार्ट ऑटोमेशनद्वारे तुमच्या व्यवसायाचे कामकाज अधिक वेगवान बनवा.", imageId: "service_ai" },
-    { title: "क्लाउड आणि सिक्युरिटी", description: "तुमचा डेटा सुरक्षित आणि नेहमी ऑनलाइन ठेवण्यासाठी मजबूत इन्फ्रास्ट्रक्चर.", imageId: "service_cloud" },
-    { title: "स्टार्टअप सल्लागार", description: "व्यवसाय वाढवण्यासाठी आणि गुंतवणुकीसाठी धोरणात्मक सल्ला.", imageId: "service_advisory" },
-    { title: "कंटेंट आणि सोशल मीडिया", description: "ब्रँडची विश्वासार्हता आणि लोकांचा सहभाग वाढवणारा प्रभावी कंटेंट.", imageId: "service_social" },
-    { title: "24/7 आयटी सपोर्ट", description: "तांत्रिक बिघाड टाळण्यासाठी आणि सतत मदतीसाठी समर्पित टीम.", imageId: "service_support" },
+    { title: "Website आणि App Development", description: "तुमच्या व्यवसायाच्या गरजेनुसार तयार केलेले वेगवान, सुरक्षित आणि स्केलेबल डिजिटल प्लॅटफॉर्म — जे ग्राहक आकर्षित करतात आणि विक्री वाढवतात.", imageId: "service_web_dev" },
+    { title: "Marketing आणि Branding", description: "डेटा-आधारित मार्केटिंग रणनीती ज्यामुळे तुमच्या ब्रँडची ओळख, विश्वास आणि सातत्यपूर्ण वाढ होते.", imageId: "service_marketing" },
+    { title: "Tax आणि Compliance", description: "GST, नोंदणी आणि सर्व कायदेशीर प्रक्रिया — तज्ञांच्या मार्गदर्शनाखाली, ताणतणावाशिवाय.", imageId: "service_tax" },
+    { title: "Business Setup", description: "कल्पनेपासून व्यवसाय सुरू होईपर्यंत — एक मजबूत सुरुवात करण्यासाठी संपूर्ण एंड-टू-एंड सहकार्य.", imageId: "service_biz_setup" },
+    { title: "UI / UX Design", description: "ग्राहकांना गुंतवून ठेवणारे, विश्वास निर्माण करणारे आणि रूपांतरण वाढवणारे डिझाइन.", imageId: "service_ui_ux" },
+    { title: "AI आणि Automation", description: "स्मार्ट ऑटोमेशनद्वारे वेळ व खर्च वाचवा आणि व्यवसाय अधिक कार्यक्षम बनवा.", imageId: "service_ai" },
+    { title: "Cloud आणि Security", description: "तुमचा डेटा सुरक्षित ठेवणारे आणि सिस्टम कायम ऑनलाइन ठेवणारे मजबूत इन्फ्रास्ट्रक्चर.", imageId: "service_cloud" },
+    { title: "Startup Advisory", description: "व्यवसाय वाढ, गुंतवणूक आणि स्केलिंगसाठी धोरणात्मक आणि अनुभवी मार्गदर्शन.", imageId: "service_advisory" },
+    { title: "Content आणि Social Media", description: "ब्रँडची विश्वासार्हता निर्माण करणारा आणि लोकांशी नातं जोडणारा प्रभावी कंटेंट.", imageId: "service_social" },
+    { title: "24/7 IT Support", description: "कोणतीही तांत्रिक अडचण असो — आमची सपोर्ट टीम नेहमी तुमच्यासोबत.", imageId: "service_support" },
   ],
   hi: [
     { title: "वेबसाइट और ऐप विकास", description: "आपके बिज़नेस के अनुसार तैयार किए गए तेज़, सुरक्षित और स्केलेबल डिजिटल प्लेटफॉर्म — जो केवल दिखें नहीं, बल्कि परिणाम दें।", imageId: "service_web_dev" },
@@ -59,19 +59,19 @@ const servicesData = {
 
 const headingText = {
   en: "Igniting startup growth with unstoppable tech and elite strategy.",
-  mr: "शक्तिशाली तंत्रज्ञान आणि अजेय रणनीतीसह तुमच्या स्टार्टअपला देऊया यशाची नवी भरारी!",
+  mr: "शक्तिशाली तंत्रज्ञान आणि अचूक रणनीती — व्यवसाय वाढीसाठी.",
   hi: "तकनीक और रणनीति का ऐसा संगम, जो स्टार्टअप को तेज़ी से आगे बढ़ाए।",
 };
 
 const descriptionText = {
     en: "We build digital solutions that lead in performance, security, and scalability.",
-    mr: "आम्ही असे डिजिटल समाधान तयार करतो जे प्रदर्शन, सुरक्षा आणि स्केलेबिलिटीमध्ये पुढे आहेत.",
+    mr: "आम्ही असे डिजिटल सोल्युशन्स तयार करतो जे केवळ आकर्षक नसून प्रत्यक्ष परिणाम देतात.",
     hi: "हम ऐसे डिजिटल समाधान बनाते हैं जो प्रदर्शन, सुरक्षा और स्केलेबिलिटी तीनों में आगे हों।"
 }
 
 const sectionTitleText = {
     en: "Empowerment Tools",
-    mr: "सक्षमीकरण साधने",
+    mr: "आमच्या सेवा",
     hi: "सशक्तिकरण उपकरण"
 };
 
