@@ -280,7 +280,7 @@ export default function TaxAndCompliancePage() {
             </Link>
           </Button>
 
-          <div className="max-w-5xl mx-auto">
+          <div>
             <header className="text-center mb-12">
               <p className="font-bold text-primary tracking-wider uppercase text-sm md:text-base">
                 {t.title}
