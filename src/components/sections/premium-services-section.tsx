@@ -95,7 +95,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
       )}
       <div className="p-4 text-center">
         <h3 className="text-lg font-bold">{title}</h3>
-        <p className="mt-2 h-32 text-sm text-muted-foreground">{description}</p>
+        <p className="mt-2 h-36 text-sm text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
@@ -129,7 +129,14 @@ export default function PremiumServicesSection() {
             <CarouselContent className="-ml-4">
               {services.map((service, index) => {
                 const isWebAppDev = service.imageId === "service_web_dev";
-                const href = isWebAppDev ? "/services/web-app-development" : "#";
+                const isMarketing = service.imageId === "service_marketing";
+                
+                let href = "#";
+                if (isWebAppDev) {
+                    href = "/services/web-app-development";
+                } else if (isMarketing) {
+                    href = "/services/marketing-and-branding";
+                }
                 
                 return (
                   <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
