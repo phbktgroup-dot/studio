@@ -164,86 +164,95 @@ export default function Header() {
         </div>
         <NavMenu className="hidden md:flex" />
         <div className="ml-auto flex items-center gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm">
-                <Globe className="mr-2 h-4 w-4" />
-                <span>{language === 'en' ? 'English' : language === 'mr' ? 'मराठी' : 'हिंदी'}</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => setLanguage('en')} disabled={language === 'en'}>
-                English
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setLanguage('mr')} disabled={language === 'mr'}>
-                मराठी
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setLanguage('hi')} disabled={language === 'hi'}>
-                हिंदी
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {loading ? (
-            <div className="w-[105px] h-[40px]" /> // Placeholder to prevent layout shift
-          ) : user ? (
-             <DropdownMenu>
+          {mounted ? (
+            <>
+              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="secondary" size="icon" className="rounded-full">
-                    <Avatar>
-                      <AvatarImage src={user.user_metadata?.avatar_url} />
-                      <AvatarFallback>{user.user_metadata?.full_name?.[0] || user.email?.[0].toUpperCase()}</AvatarFallback>
-                    </Avatar>
-                    <span className="sr-only">Toggle user menu</span>
+                  <Button variant="ghost" size="sm">
+                    <Globe className="mr-2 h-4 w-4" />
+                    <span>{language === 'en' ? 'English' : language === 'mr' ? 'मराठी' : 'हिंदी'}</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>{user.user_metadata?.full_name || user.email}</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link href="/dashboard">Dashboard</Link>
+                  <DropdownMenuItem onClick={() => setLanguage('en')} disabled={language === 'en'}>
+                    English
                   </DropdownMenuItem>
-                  <DropdownMenuItem>Support</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout}>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Logout
+                  <DropdownMenuItem onClick={() => setLanguage('mr')} disabled={language === 'mr'}>
+                    मराठी
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLanguage('hi')} disabled={language === 'hi'}>
+                    हिंदी
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-          ) : (
-            <Button asChild>
-              <Link href="/login">{text[language].login}</Link>
-            </Button>
-          )}
-          {mounted && (
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden">
-                  <Menu className="h-6 w-6" />
-                  <span className="sr-only">Toggle navigation menu</span>
+
+              {loading ? (
+                <div className="w-[105px] h-[40px]" /> // Placeholder to prevent layout shift
+              ) : user ? (
+                 <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="secondary" size="icon" className="rounded-full">
+                        <Avatar>
+                          <AvatarImage src={user.user_metadata?.avatar_url} />
+                          <AvatarFallback>{user.user_metadata?.full_name?.[0] || user.email?.[0].toUpperCase()}</AvatarFallback>
+                        </Avatar>
+                        <span className="sr-only">Toggle user menu</span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuLabel>{user.user_metadata?.full_name || user.email}</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        <Link href="/dashboard">Dashboard</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>Support</DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={handleLogout}>
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Logout
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+              ) : (
+                <Button asChild>
+                  <Link href="/login">{text[language].login}</Link>
                 </Button>
-              </SheetTrigger>
-              <SheetContent side="right">
-                <SheetHeader>
-                  <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                </SheetHeader>
-                <div className="p-6">
-                  <Logo />
-                  <div className="flex flex-col gap-6 text-lg font-medium mt-8">
-                    {navLinks.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className="text-foreground/80 transition-colors hover:text-foreground"
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
+              )}
+              
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="md:hidden">
+                    <Menu className="h-6 w-6" />
+                    <span className="sr-only">Toggle navigation menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right">
+                  <SheetHeader>
+                    <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                  </SheetHeader>
+                  <div className="p-6">
+                    <Logo />
+                    <div className="flex flex-col gap-6 text-lg font-medium mt-8">
+                      {navLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className="text-foreground/80 transition-colors hover:text-foreground"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </SheetContent>
-            </Sheet>
+                </SheetContent>
+              </Sheet>
+            </>
+          ) : (
+            <>
+              <div className="h-9 w-[120px]" />
+              <div className="h-10 w-[105px]" />
+              <div className="h-10 w-10 md:hidden" />
+            </>
           )}
         </div>
       </div>
