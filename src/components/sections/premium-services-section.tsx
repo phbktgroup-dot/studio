@@ -131,6 +131,7 @@ export default function PremiumServicesSection() {
                 const isWebAppDev = service.imageId === "service_web_dev";
                 const isMarketing = service.imageId === "service_marketing";
                 const isTax = service.imageId === "service_tax";
+                const isBizSetup = service.imageId === "service_biz_setup";
                 
                 let href = "#";
                 if (isWebAppDev) {
@@ -139,7 +140,10 @@ export default function PremiumServicesSection() {
                     href = "/services/marketing-and-branding";
                 } else if (isTax) {
                     href = "/services/tax-and-compliance";
+                } else if (isBizSetup) {
+                    href = "/services/business-setup";
                 }
+
                 
                 return (
                   <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
