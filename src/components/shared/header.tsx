@@ -232,8 +232,14 @@ export default function Header() {
                     <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                   </SheetHeader>
                   <div className="p-6">
-                    <Logo />
-                    <div className="flex flex-col gap-6 text-base font-medium mt-8">
+                    {logoLoading ? (
+                      <div className="h-[58px] w-[180px]" />
+                    ) : logoUrl ? (
+                      <img src={logoUrl} alt="PHBKT Group" className="h-[58px] w-auto object-contain" />
+                    ) : (
+                      <Logo className="h-[58px]" />
+                    )}
+                    <div className="flex flex-col gap-6 text-xs font-medium mt-8">
                       {navLinks.map((link) => (
                         <Link
                           key={link.href}
