@@ -1,3 +1,4 @@
+
 'use client'
 
 import Link from "next/link";
@@ -77,7 +78,7 @@ export default function SignupPage() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-background p-4">
+    <div className="min-h-screen w-full flex items-start sm:items-center justify-center bg-background p-4 pt-20 sm:pt-4">
       <div className="absolute top-4 left-4">
         <Button variant="ghost" asChild>
           <Link href="/">
@@ -86,7 +87,7 @@ export default function SignupPage() {
           </Link>
         </Button>
       </div>
-      <Card className="mx-auto w-full max-w-xs sm:max-w-sm shadow-2xl">
+      <Card className="mx-auto w-full max-w-sm shadow-2xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             {logoLoading ? (
