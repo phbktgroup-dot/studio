@@ -73,7 +73,7 @@ function MilestoneMobile({ title, description, icon: Icon, isActive }: {title: s
             )}>
                 <Icon className="w-6 h-6" />
             </div>
-            <div className="mt-2">
+            <div className="mt-2 bg-background px-2 relative z-10">
                 <h4 className={cn(
                     "font-semibold font-headline text-base transition-colors",
                     isActive ? "text-primary" : "text-foreground"
