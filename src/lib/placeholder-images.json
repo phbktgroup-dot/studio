@@ -179,6 +179,24 @@
       "description": "A woman smiling joyfully while running a marathon.",
       "imageUrl": "https://images.unsplash.com/photo-1579257692135-183490e0b793?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtYXJhdGhvbiUyMHJ1bm5lcnxlbnwwfHx8fDE3MTg0ODc5MjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "marathon runner"
+    },
+    {
+      "id": "local_shop_billing",
+      "description": "A friendly shopkeeper using a tablet for billing in a modern-looking local store.",
+      "imageUrl": "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsb2NhbCUyMHNob3AlMjBiaWxsaW5nfGVufDB8fHx8MTc3MjU4NTAwOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "local shop billing"
+    },
+    {
+      "id": "local_seo_maps",
+      "description": "A smartphone screen showing a local shop's profile on Google Maps with a 5-star rating.",
+      "imageUrl": "https://images.unsplash.com/photo-1616587896649-7c211a193658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxsb2NhbCUyMHNlYXJjaCUyMG1hcHN8ZW58MHx8fHwxNzcyNTg1MDM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "local search maps"
+    },
+    {
+      "id": "tax_compliance_docs",
+      "description": "An organized desk with documents, a calculator, and a laptop displaying spreadsheets for tax compliance.",
+      "imageUrl": "https://images.unsplash.com/photo-1554224155-8d04421cd6c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0YXglMjBkb2N1bWVudHN8ZW58MHx8fHwxNzcyNTg1MDY3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tax documents"
     }
   ]
 }

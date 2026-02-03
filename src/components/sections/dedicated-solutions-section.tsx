@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Store, Rocket, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useLanguage } from '@/context/language-provider';
 
@@ -138,7 +139,9 @@ export default function DedicatedSolutionsSection() {
                       </li>
                     ))}
                   </ul>
-                  <Button size="lg" className="mt-8">{text.shops.cta}</Button>
+                  <Button size="lg" className="mt-8" asChild>
+                    <Link href="/solutions/for-local-shops">{text.shops.cta}</Link>
+                  </Button>
                 </div>
                 <div className="order-1 md:order-2 aspect-video rounded-lg overflow-hidden">
                   {shopImage && (
