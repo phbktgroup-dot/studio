@@ -284,7 +284,7 @@ export default function Header() {
                         key={link.href}
                         href={link.href}
                         className={cn(
-                            "py-3 w-full text-center transition-colors",
+                            "py-2 w-full text-center transition-colors",
                             activeLink === link.href ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
                         )}
                         onClick={() => setSheetOpen(false)}
