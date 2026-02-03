@@ -9,13 +9,15 @@ import Image from 'next/image';
 import { ArrowLeft, CheckCircle, Code, Eye, BarChart, Rocket } from 'lucide-react';
 import { projects } from '@/lib/projects-data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DemoRequestDialog } from '@/components/shared/DemoRequestDialog';
 
-export default function WorkDetailPage({ params }: { params: { slug: string } }) {
+export default function WorkDetailPage() {
+  const params = useParams();
+  const slug = params.slug as string;
   const { language } = useLanguage();
-  const project = projects.find(p => p.slug === params.slug);
+  const project = projects.find(p => p.slug === slug);
 
   if (!project) {
     notFound();
