@@ -65,7 +65,7 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="border-t bg-muted/30">
-      <div className="container py-4 text-center">
+      <div className="container py-2 text-center">
         <div className="flex flex-col items-center">
           <Link href="/" className="inline-block">
              {logoLoading ? (
@@ -80,19 +80,19 @@ export default function Footer() {
             {t.footerDescription}
           </p>
           
-          <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary mt-4">
+          <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary mt-2">
             {t.p_large}
           </h2>
           <p className="mt-1 max-w-2xl mx-auto text-muted-foreground">
             {t.p_small}
           </p>
-          <Button asChild size="lg" className="mt-4">
+          <Button asChild size="sm" className="mt-4">
             <Link href="/contact">{t.contactUs}</Link>
           </Button>
         </div>
       </div>
       <div className="border-t bg-muted/50">
-        <div className="container flex flex-col md:flex-row items-center justify-between py-4 text-sm text-muted-foreground gap-4">
+        <div className="container flex flex-col md:flex-row items-center justify-between py-2 text-sm text-muted-foreground gap-4">
           <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
           <div className="flex items-center gap-4 sm:gap-6">
                 <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
