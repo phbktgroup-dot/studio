@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -232,7 +233,7 @@ export default function Header() {
                   </SheetHeader>
                   <div className="p-6">
                     <Logo />
-                    <div className="flex flex-col gap-6 text-lg font-medium mt-8">
+                    <div className="flex flex-col gap-6 text-base font-medium mt-8">
                       {navLinks.map((link) => (
                         <Link
                           key={link.href}
