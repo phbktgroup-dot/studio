@@ -100,7 +100,6 @@ const sectionText = {
 export default function PerspectivesSection() {
   const { language } = useLanguage();
   const [api, setApi] = useState<CarouselApi>();
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const plugin = useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true })
@@ -110,17 +109,6 @@ export default function PerspectivesSection() {
     if (!api) {
       return;
     }
-
-    const handleSelect = () => {
-      setActiveIndex(api.selectedScrollSnap());
-    };
-
-    api.on('select', handleSelect);
-    handleSelect();
-
-    return () => {
-      api.off('select', handleSelect);
-    };
   }, [api]);
 
   const getTitle = (insight: (typeof insights)[0]) => {
@@ -160,10 +148,9 @@ export default function PerspectivesSection() {
           <CarouselContent className="-ml-4">
             {insights.map((insight, index) => {
               const image = PlaceHolderImages.find(p => p.id === insight.imageId);
-              const isActive = index === activeIndex;
 
               return (
-                <CarouselItem key={index} className="pl-4 basis-[90%] md:basis-1/2 lg:basis-1/3 group">
+                <CarouselItem key={index} className="pl-4 basis-[90%] md:basis-1/2 lg:basis-1/5 group">
                   <Card className="relative aspect-[4/5] w-full overflow-hidden rounded-lg">
                     {image && (
                       <Image
@@ -171,36 +158,17 @@ export default function PerspectivesSection() {
                         alt={image.description}
                         fill
                         data-ai-hint={image.imageHint}
-                        className={cn(
-                          'object-cover transition-transform duration-700 ease-in-out',
-                          isActive ? 'scale-105' : 'scale-100 group-hover:scale-105'
-                        )}
+                        className='object-cover transition-transform duration-700 ease-in-out group-hover:scale-105'
                       />
                     )}
                     <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                        <div className="overflow-hidden">
-                          <h3
-                            className={cn(
-                              'font-headline text-lg font-bold text-white transition-all duration-500 ease-out',
-                              isActive ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-                            )}
-                            style={{ transitionDelay: isActive ? '150ms' : '0ms' }}
-                            >
-                            {getTitle(insight)}
-                          </h3>
-                        </div>
-                        <div className="overflow-hidden">
-                          <p
-                            className={cn(
-                              'font-body text-xs font-medium text-white/80 mt-1 transition-all duration-500 ease-out',
-                              isActive ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-                            )}
-                            style={{ transitionDelay: isActive ? '250ms' : '0ms' }}
-                            >
-                            {getDescription(insight)}
-                          </p>
-                        </div>
+                        <h3 className='font-headline text-lg font-bold text-white'>
+                          {getTitle(insight)}
+                        </h3>
+                        <p className='font-body text-xs font-medium text-white/80 mt-1'>
+                          {getDescription(insight)}
+                        </p>
                     </div>
                   </Card>
                 </CarouselItem>
