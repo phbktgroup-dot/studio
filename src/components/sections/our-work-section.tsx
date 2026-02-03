@@ -79,7 +79,7 @@ export default function OurWorkSection() {
             {projects.map((project, index) => {
               const image = PlaceHolderImages.find(p => p.id === project.imageId);
               return (
-                <CarouselItem key={index} className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/5 group aspect-[9/18] sm:aspect-[9/16] md:aspect-[4/5]">
+                <CarouselItem key={index} className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/5 group">
                   <div className="p-px h-full">
                     <Card className="overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-full">
                       {image && (
@@ -91,17 +91,17 @@ export default function OurWorkSection() {
                                 width={400}
                                 height={225}
                                 data-ai-hint={image.imageHint}
-                                className="w-full object-cover aspect-[5/7] transition-transform duration-500 group-hover:scale-105"
+                                className="w-full object-cover aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
                             />
                           </div>
                         </Link>
                       )}
-                      <CardContent className="p-2 pt-1 flex flex-col flex-grow justify-between">
-                        <div>
-                          <h3 className="font-bold font-headline text-base">{getTitle(project)}</h3>
-                          <p className="mt-1 text-sm text-muted-foreground overflow-hidden">{getDescription(project)}</p>
+                      <CardContent className="p-3 flex flex-col flex-grow">
+                        <div className="flex-grow">
+                          <h3 className="font-bold font-headline text-base leading-tight">{getTitle(project)}</h3>
+                          <p className="mt-1 text-xs text-muted-foreground line-clamp-2">{getDescription(project)}</p>
                         </div>
-                        <Button variant="outline" size="sm" className="mt-2 self-start text-sm">
+                        <Button variant="outline" size="sm" className="mt-3 self-start text-xs h-7">
                           <Link href={`/work/${project.slug}`}>{text.viewDemo}</Link>
                         </Button>
                       </CardContent>
