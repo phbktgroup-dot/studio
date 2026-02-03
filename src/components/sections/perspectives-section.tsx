@@ -128,10 +128,10 @@ export default function PerspectivesSection() {
     <section id="insights" className="py-6 md:py-8 bg-background">
       <div className="container">
         <div className="text-center mb-8">
-            <h3 className="text-base font-semibold uppercase tracking-wider text-black mb-2">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-black mb-2">
               {sectionText[language].heading}
             </h3>
-            <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary">
+            <h2 className="font-headline text-lg md:text-xl font-bold tracking-tighter text-primary">
               {sectionText[language].subheading}
             </h2>
         </div>
@@ -145,12 +145,12 @@ export default function PerspectivesSection() {
           onMouseEnter={plugin.current.stop}
           onMouseLeave={plugin.current.reset}
         >
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="-ml-2">
             {insights.map((insight, index) => {
               const image = PlaceHolderImages.find(p => p.id === insight.imageId);
 
               return (
-                <CarouselItem key={index} className="pl-4 basis-1/2 lg:basis-1/5 group">
+                <CarouselItem key={index} className="pl-2 basis-1/2 lg:basis-1/5 group">
                   <Card className="relative aspect-[4/5] w-full overflow-hidden rounded-lg">
                     {image && (
                       <Image
@@ -162,8 +162,8 @@ export default function PerspectivesSection() {
                       />
                     )}
                     <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                        <h3 className='font-headline text-lg font-bold text-white'>
+                    <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
+                        <h3 className='font-headline text-base md:text-lg font-bold text-white'>
                           {getTitle(insight)}
                         </h3>
                         <p className='font-body text-xs font-medium text-white/80 mt-1'>
