@@ -144,13 +144,14 @@ export default function PerspectivesSection() {
           }}
           onMouseEnter={plugin.current.stop}
           onMouseLeave={plugin.current.reset}
+          className="w-full"
         >
           <CarouselContent className="-ml-2">
             {insights.map((insight, index) => {
               const image = PlaceHolderImages.find(p => p.id === insight.imageId);
 
               return (
-                <CarouselItem key={index} className="pl-2 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 group">
+                <CarouselItem key={index} className="pl-2 basis-1/2 md:basis-1/3 lg:basis-1/5 group">
                   <Card className="relative aspect-[4/5] w-full overflow-hidden rounded-lg">
                     {image && (
                       <Image
