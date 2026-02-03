@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -10,7 +9,6 @@ import { Menu, LogOut, Globe } from "lucide-react";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
@@ -227,29 +225,18 @@ export default function Header() {
                     <span className="sr-only">Toggle navigation menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[50vw] p-0">
-                  <SheetHeader className="px-4 py-1 border-b">
-                    <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                    {logoLoading ? (
-                      <div className="h-[58px] w-[180px]" />
-                    ) : logoUrl ? (
-                      <img src={logoUrl} alt="PHBKT Group" className="h-[58px] w-auto object-contain" />
-                    ) : (
-                      <Logo className="h-[58px]" />
-                    )}
-                  </SheetHeader>
-                  <div className="p-4">
-                    <div className="flex flex-col gap-2 text-[10px] font-medium">
-                      {navLinks.map((link) => (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          className="text-foreground/80 transition-colors hover:text-foreground py-1"
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
-                    </div>
+                <SheetContent side="right" className="w-[50vw] p-4 top-16 h-[calc(100vh-4rem)]">
+                  <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                  <div className="flex flex-col gap-2 text-[10px] font-medium">
+                    {navLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="text-foreground/80 transition-colors hover:text-foreground py-1"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
                   </div>
                 </SheetContent>
               </Sheet>
