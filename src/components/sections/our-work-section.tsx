@@ -82,17 +82,17 @@ export default function OurWorkSection() {
                               width={400}
                               height={225}
                               data-ai-hint={image.imageHint}
-                              className="w-full object-cover aspect-video"
+                              className="w-full object-cover aspect-[4/5] sm:aspect-video"
                           />
                         </Link>
                       )}
                       <CardContent className="p-3 flex flex-col flex-grow">
                         <div>
-                          <h3 className="text-base font-bold font-headline h-10">{getTitle(project)}</h3>
+                          <h3 className="text-base font-bold font-headline text-sm h-10">{getTitle(project)}</h3>
                           <p className="mt-1 text-xs text-muted-foreground h-12 overflow-hidden">{getDescription(project)}</p>
                         </div>
                         <div className="flex-grow" />
-                        <Button variant="outline" size="sm" className="mt-4 self-start" asChild>
+                        <Button variant="outline" size="sm" className="mt-4 self-start text-xs">
                           <Link href={`/work/${project.slug}`}>{text.viewDemo}</Link>
                         </Button>
                       </CardContent>
