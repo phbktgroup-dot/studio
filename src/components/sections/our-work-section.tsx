@@ -78,7 +78,7 @@ export default function OurWorkSection() {
             {projects.map((project, index) => {
               const image = PlaceHolderImages.find(p => p.id === project.imageId);
               return (
-                <CarouselItem key={index} className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/5 group aspect-[9/16] sm:aspect-[10/16] md:aspect-[4/5]">
+                <CarouselItem key={index} className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/5 group aspect-[9/20] sm:aspect-[10/16] md:aspect-[4/5]">
                   <div className="p-px h-full">
                     <Card className="overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-full">
                       {image && (
