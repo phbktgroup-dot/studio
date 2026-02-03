@@ -21,6 +21,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
+export const dynamic = 'force-dynamic';
+
 const text = {
   mr: {
     pageTitle: "विनंती सबमिट करा",
