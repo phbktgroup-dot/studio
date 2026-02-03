@@ -18,6 +18,8 @@ import { handleInquiry, type InquiryState } from '@/lib/actions';
 import Header from '@/components/shared/header';
 import Footer from '@/components/shared/footer';
 import { Card, CardContent } from '@/components/ui/card';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const text = {
   mr: {
@@ -159,22 +161,36 @@ export default function ContactPage() {
         });
     }
   }, [state, toast, router]);
+  
+  const contactImage = PlaceHolderImages.find(p => p.id === 'contact_form_image');
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <Header />
-      <main className="flex-grow">
-        <div className="container py-12 md:py-16">
+      <main className="flex-grow relative py-12 md:py-16 flex items-center">
+        {contactImage && (
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src={contactImage.imageUrl}
+                    alt="Contact background"
+                    fill
+                    data-ai-hint={contactImage.imageHint}
+                    className="object-cover"
+                />
+                <div className="absolute inset-0 bg-black/50" />
+            </div>
+        )}
+        <div className="container relative z-10">
           <div className="max-w-2xl mx-auto">
               <header className="text-center mb-8">
-                  <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
+                  <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-white">
                       {t.pageTitle}
                   </h1>
-                  <p className="mt-2 text-muted-foreground">
+                  <p className="mt-2 text-white/80">
                       {t.pageDescription}
                   </p>
               </header>
-            <Card>
+            <Card className="bg-background/80 backdrop-blur-sm">
                 <CardContent className="p-6 sm:p-8">
                   <form ref={formRef} action={dispatch} className="space-y-6">
                       <input type="hidden" name="userId" value={user?.id || ''} />
