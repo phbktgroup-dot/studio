@@ -1,5 +1,17 @@
-'use client'
 
+'use client';
+
+import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
+import type { User } from '@supabase/supabase-js';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
   Card,
   CardContent,
@@ -7,107 +19,165 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertTriangle, Mail, Loader2 } from "lucide-react";
+import { Badge } from '@/components/ui/badge';
+import { format } from 'date-fns';
+import { ViewInquiryButton } from './inquiries/ViewInquiryButton';
 
-const data = [
-  { name: "Jan", revenue: 4000, clients: 24 },
-  { name: "Feb", revenue: 3000, clients: 13 },
-  { name: "Mar", revenue: 5000, clients: 38 },
-  { name: "Apr", revenue: 4500, clients: 29 },
-  { name: "May", revenue: 6000, clients: 42 },
-  { name: "Jun", revenue: 5500, clients: 35 },
-];
+type PageError = {
+    title: string;
+    message: string;
+}
 
 export default function DashboardPage() {
-  return (
-    <div className="flex flex-col gap-6">
-      <h1 className="text-3xl font-bold font-headline">Dashboard</h1>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+  const [inquiries, setInquiries] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<PageError | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+      if (sessionError) {
+        setError({ title: 'Authentication Error', message: sessionError.message });
+        setLoading(false);
+        return;
+      }
+      
+      const currentUser = session?.user;
+      setUser(currentUser);
+
+      if (!currentUser) {
+          setError({ title: 'Authentication Error', message: 'You must be logged in to view your inquiries.' });
+          setLoading(false);
+          return;
+      }
+      
+      const userRole = currentUser.user_metadata?.role;
+
+      let query = supabase.from('inquiries').select('*').order('created_at', { ascending: false });
+
+      if (userRole !== 'admin') {
+        query = query.eq('user_id', currentUser.id);
+      }
+
+      const { data, error: queryError } = await query;
+
+      if (queryError) {
+        let message = queryError.message;
+        if (queryError.message.includes('inquiries') && (queryError.message.includes('does not exist') || queryError.message.includes('schema cache'))) {
+          message = "The 'inquiries' table does not seem to exist in the database. An administrator needs to create it.";
+        }
+        setError({ title: 'Error Fetching Inquiries', message });
+      } else {
+        setInquiries(data || []);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+    
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+        fetchData();
+      }
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
+  const userRole = user?.user_metadata?.role;
+
+  if (loading) {
+    return (
+      <div className="flex flex-col gap-4">
+        <h1 className="text-3xl font-bold font-headline">Dashboard</h1>
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
-            <p className="text-xs text-muted-foreground">
-              +20.1% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">New Clients</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+23</div>
-            <p className="text-xs text-muted-foreground">
-              +12.2% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Projects Done</CardTitle>
-            <CreditCard className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+12,234</div>
-            <p className="text-xs text-muted-foreground">
-              +19% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Now</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+573</div>
-            <p className="text-xs text-muted-foreground">
-              +201 since last hour
-            </p>
+          <CardContent className="p-8 flex items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </CardContent>
         </Card>
       </div>
+    );
+  }
 
-      <Card>
+  if (error) {
+     return (
+      <div className="flex flex-col gap-4">
+        <h1 className="text-3xl font-bold font-headline">Dashboard</h1>
+        <Card>
+          <CardContent className="p-8">
+            <Alert variant="destructive">
+              <AlertTriangle className="h-4 w-4" />
+              <AlertTitle>{error.title}</AlertTitle>
+              <AlertDescription>
+                {error.message}
+              </AlertDescription>
+            </Alert>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-6">
+       <h1 className="text-3xl font-bold font-headline">Dashboard</h1>
+       <Card>
         <CardHeader>
-          <CardTitle>Monthly Overview</CardTitle>
+          <CardTitle>Received Inquiries</CardTitle>
           <CardDescription>
-            Revenue and new client data for the last 6 months.
+            {userRole === 'admin' ? 'All inquiries submitted through the contact form.' : 'Your submitted inquiries.'}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis yAxisId="left" orientation="left" stroke="hsl(var(--primary))" />
-              <YAxis yAxisId="right" orientation="right" stroke="hsl(var(--accent))" />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: 'hsl(var(--background))',
-                  borderColor: 'hsl(var(--border))'
-                }}
-              />
-              <Legend />
-              <Bar yAxisId="left" dataKey="revenue" fill="hsl(var(--primary))" name="Revenue" />
-              <Bar yAxisId="right" dataKey="clients" fill="hsl(var(--accent))" name="Clients" />
-            </BarChart>
-          </ResponsiveContainer>
+            {inquiries && inquiries.length > 0 ? (
+                 <Table className="text-xs">
+                    <TableHeader>
+                        <TableRow className="bg-muted/50 hover:bg-muted/50 h-8">
+                            <TableHead className="h-8 py-0 px-2">Request ID</TableHead>
+                            <TableHead className="h-8 py-0 px-2">Date</TableHead>
+                            <TableHead className="h-8 py-0 px-2">Name</TableHead>
+                            <TableHead className="h-8 py-0 px-2">Email</TableHead>
+                            <TableHead className="h-8 py-0 px-2">Mobile</TableHead>
+                            <TableHead className="h-8 py-0 px-2">Purpose</TableHead>
+                            <TableHead className="h-8 py-0 px-2 text-right">Actions</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                    {inquiries.map((inquiry) => (
+                        <TableRow key={inquiry.id} className="h-8">
+                        <TableCell className="py-0 px-2 font-mono">{inquiry.id.substring(0, 8)}</TableCell>
+                        <TableCell className="py-0 px-2">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
+                        <TableCell className="py-0 px-2 font-semibold">{inquiry.name}</TableCell>
+                        <TableCell className="py-0 px-2">{inquiry.email}</TableCell>
+                        <TableCell className="py-0 px-2">{inquiry.mobile || 'N/A'}</TableCell>
+                        <TableCell className="py-0 px-2 capitalize">
+                            <Badge variant="secondary" className="font-normal">{inquiry.purpose}</Badge>
+                        </TableCell>
+                        <TableCell className="py-0 px-2 text-right">
+                           <ViewInquiryButton inquiry={inquiry} />
+                        </TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+            ) : (
+                <div className="flex flex-col items-center justify-center text-center p-8 border-2 border-dashed rounded-lg">
+                    <Mail className="h-12 w-12 text-muted-foreground" />
+                    <h3 className="mt-4 text-lg font-semibold">No Inquiries Found</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                        {userRole === 'admin' ? 'There are no inquiries yet.' : 'You have not submitted any inquiries.'}
+                    </p>
+                </div>
+            )}
         </CardContent>
       </Card>
     </div>
