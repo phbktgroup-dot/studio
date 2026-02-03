@@ -42,7 +42,7 @@ const text = {
 };
 
 
-function Milestone({ title, description, icon: Icon, isActive }: {title: string, description: string, icon: React.ElementType, isActive: boolean}) {
+function MilestoneDesktop({ title, description, icon: Icon, isActive }: {title: string, description: string, icon: React.ElementType, isActive: boolean}) {
     return (
         <div className="flex flex-col items-center text-center relative z-10">
              <div className={cn(
@@ -64,11 +64,33 @@ function Milestone({ title, description, icon: Icon, isActive }: {title: string,
     );
 }
 
+function MilestoneMobile({ title, description, icon: Icon, isActive }: {title: string, description: string, icon: React.ElementType, isActive: boolean}) {
+    return (
+        <div className="flex items-start gap-4 relative">
+             <div className={cn(
+                "flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all duration-500 bg-background z-10 shrink-0",
+                isActive ? "border-primary bg-primary text-primary-foreground" : "border-border bg-muted text-muted-foreground"
+            )}>
+                <Icon className="w-6 h-6" />
+            </div>
+            <div>
+                <h4 className={cn(
+                    "font-semibold font-headline text-base transition-colors",
+                    isActive ? "text-primary" : "text-foreground"
+                )}>
+                    {title}
+                </h4>
+                <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+            </div>
+        </div>
+    );
+}
+
 
 export default function SuccessRoadmapSection() {
     const { language } = useLanguage();
     const [activeMilestone, setActiveMilestone] = useState(-1);
-    const roadmapRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLDivElement>(null);
     const milestones = text[language].milestones;
 
     useEffect(() => {
@@ -82,8 +104,8 @@ export default function SuccessRoadmapSection() {
                             setActiveMilestone(index);
                         }, index * 400); // Stagger the animation
                     });
-                    if (roadmapRef.current) {
-                        observer.unobserve(roadmapRef.current);
+                    if (sectionRef.current) {
+                        observer.unobserve(sectionRef.current);
                     }
                 }
             },
@@ -92,20 +114,20 @@ export default function SuccessRoadmapSection() {
             }
         );
 
-        if (roadmapRef.current) {
-            observer.observe(roadmapRef.current);
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
         }
 
         return () => {
-            if (roadmapRef.current) {
+            if (sectionRef.current) {
                 // eslint-disable-next-line react-hooks/exhaustive-deps
-                observer.unobserve(roadmapRef.current);
+                observer.unobserve(sectionRef.current);
             }
         };
     }, [milestones]);
 
   return (
-    <section className="py-6 md:py-8 bg-background overflow-x-hidden">
+    <section ref={sectionRef} className="py-6 md:py-8 bg-background overflow-x-hidden">
       <div className="container text-center">
         <h3 className="text-sm font-semibold uppercase tracking-wider text-black mb-2">
             {text[language].subheading}
@@ -113,12 +135,25 @@ export default function SuccessRoadmapSection() {
         <h2 className="font-headline text-lg md:text-xl font-bold tracking-tighter text-primary">
             {text[language].h2}
         </h2>
-        <div ref={roadmapRef} className="mt-12 relative">
+        
+        {/* Desktop View */}
+        <div className="hidden sm:block mt-12 relative">
             <div className="absolute top-6 left-0 w-full h-0.5 bg-border"></div>
             <div className="absolute top-6 left-0 h-0.5 bg-primary transition-all duration-1000 ease-out" style={{ width: `${(Math.max(0, activeMilestone) / (milestones.length - 1)) * 100}%` }}></div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-12">
                 {milestones.map((item, index) => (
-                    <Milestone key={index} {...item} isActive={index <= activeMilestone} />
+                    <MilestoneDesktop key={index} {...item} isActive={index <= activeMilestone} />
+                ))}
+            </div>
+        </div>
+
+        {/* Mobile View */}
+        <div className="sm:hidden mt-12 relative">
+            <div className="absolute top-0 left-6 w-0.5 h-full bg-border"></div>
+             <div className="absolute top-0 left-6 w-0.5 bg-primary transition-all duration-500 ease-linear" style={{ height: `${(Math.max(0, activeMilestone + 1) / milestones.length) * 100}%` }}></div>
+            <div className="flex flex-col gap-y-8">
+                {milestones.map((item, index) => (
+                    <MilestoneMobile key={index} {...item} isActive={index <= activeMilestone} />
                 ))}
             </div>
         </div>
