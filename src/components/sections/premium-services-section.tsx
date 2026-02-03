@@ -94,8 +94,8 @@ const ServiceCard = ({ service }: { service: Service }) => {
           />
       )}
       <div className="p-4 text-center">
-        <h3 className="text-lg font-bold">{title}</h3>
-        <p className="mt-2 h-40 text-sm text-muted-foreground">{description}</p>
+        <h3 className="h-12 text-lg font-bold flex items-center justify-center">{title}</h3>
+        <p className="mt-2 h-24 text-sm text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
@@ -136,6 +136,7 @@ export default function PremiumServicesSection() {
                 const isAi = service.imageId === "service_ai";
                 const isCloud = service.imageId === "service_cloud";
                 const isAdvisory = service.imageId === "service_advisory";
+                const isSocial = service.imageId === "service_social";
                 
                 let href = "#";
                 if (isWebAppDev) {
@@ -154,6 +155,8 @@ export default function PremiumServicesSection() {
                     href = "/services/cloud-and-security";
                 } else if (isAdvisory) {
                     href = "/services/startup-advisory";
+                } else if (isSocial) {
+                    href = "/services/content-and-social";
                 }
 
                 
