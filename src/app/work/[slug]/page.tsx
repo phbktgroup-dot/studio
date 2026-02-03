@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useLanguage } from '@/context/language-provider';
@@ -12,6 +11,7 @@ import { projects } from '@/lib/projects-data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { notFound } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { DemoRequestDialog } from '@/components/shared/DemoRequestDialog';
 
 export default function WorkDetailPage({ params }: { params: { slug: string } }) {
   const { language } = useLanguage();
@@ -73,8 +73,12 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
                         <p>Our goal was to create a best-in-class digital product that not only met the client's immediate needs but also provided a scalable foundation for future growth and innovation.</p>
                     </div>
                     <div className="mt-8 flex gap-4">
-                        <Button size="lg"><Eye className="mr-2" />{t.liveDemo}</Button>
-                        <Button size="lg" variant="outline"><Code className="mr-2" />{t.viewCode}</Button>
+                        <DemoRequestDialog projectName={getTitle(project)}>
+                            <Button size="lg"><Eye className="mr-2" />{t.liveDemo}</Button>
+                        </DemoRequestDialog>
+                        <DemoRequestDialog projectName={getTitle(project)}>
+                            <Button size="lg" variant="outline"><Code className="mr-2" />{t.viewCode}</Button>
+                        </DemoRequestDialog>
                     </div>
                 </div>
                 <div>
