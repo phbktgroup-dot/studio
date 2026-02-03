@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card } from '@/components/ui/card';
@@ -88,14 +89,14 @@ const ServiceCard = ({ service }: { service: Service }) => {
               src={image.imageUrl}
               alt={description}
               width={400}
-              height={300}
+              height={400}
               data-ai-hint={image.imageHint}
-              className="w-full object-cover aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
+              className="w-full object-cover aspect-square transition-transform duration-500 group-hover:scale-105"
           />
       )}
       <div className="p-2 text-center flex-grow flex flex-col justify-start">
-        <h3 className="text-sm font-bold flex items-center justify-center text-center min-h-[40px]">{title}</h3>
-        <p className="mt-1 text-xs leading-tight text-muted-foreground">{description}</p>
+        <h3 className="text-lg font-bold flex items-center justify-center text-center min-h-[40px]">{title}</h3>
+        <p className="mt-1 text-base leading-tight text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
@@ -167,7 +168,7 @@ export default function PremiumServicesSection() {
           {/* Mobile View - Grid */}
           <div className="grid grid-cols-3 gap-1 sm:hidden">
             {services.map((service, index) => (
-              <div key={index} className="h-[260px]">
+              <div key={index}>
                 {renderServiceCard(service)}
               </div>
             ))}
