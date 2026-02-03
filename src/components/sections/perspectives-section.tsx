@@ -122,7 +122,7 @@ export default function PerspectivesSection() {
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
               {sectionText[language].heading}
             </h3>
-            <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
+            <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary">
               {sectionText[language].subheading}
             </h2>
         </div>

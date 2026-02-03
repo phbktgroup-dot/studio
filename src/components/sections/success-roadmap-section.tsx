@@ -110,7 +110,7 @@ export default function SuccessRoadmapSection() {
         <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
             {text[language].subheading}
         </h3>
-        <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
+        <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary">
             {text[language].h2}
         </h2>
         <div ref={roadmapRef} className="mt-12 relative">

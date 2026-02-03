@@ -110,7 +110,7 @@ export default function DedicatedSolutionsSection() {
             <h3 className="text-base font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {text.heading}
             </h3>
-            <h2 className="font-headline text-xl font-bold tracking-tighter sm:text-2xl text-primary">
+            <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary">
                 {text.subheading}
             </h2>
         </div>

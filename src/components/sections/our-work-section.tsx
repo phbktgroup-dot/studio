@@ -65,7 +65,7 @@ export default function OurWorkSection() {
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {text.heading}
             </h3>
-            <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary">
+            <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary">
                 {text.quote}
             </h2>
         </div>
