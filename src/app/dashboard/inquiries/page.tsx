@@ -132,7 +132,7 @@ export default function InquiriesPage() {
       <h1 className="text-lg font-bold font-headline">Inquiries</h1>
        <Card>
         <CardHeader>
-          <CardTitle className="text-xl">All Received Inquiries</CardTitle>
+          <CardTitle className="text-lg">All Received Inquiries</CardTitle>
           <CardDescription className="text-xs">
             All inquiries submitted through the contact form.
           </CardDescription>
