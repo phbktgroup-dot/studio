@@ -78,16 +78,16 @@ export default function SignupPage() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full flex items-start sm:items-center justify-center bg-background p-4 pt-20 sm:pt-4">
+    <div className="min-h-screen w-full flex items-start justify-center bg-background pt-24 sm:pt-4">
       <div className="absolute top-4 left-4">
-        <Button variant="ghost" asChild>
+        <Button variant="ghost" size="icon" asChild>
           <Link href="/">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
+            <ArrowLeft className="h-4 w-4" />
+            <span className="sr-only">Back to Home</span>
           </Link>
         </Button>
       </div>
-      <Card className="mx-auto w-full max-w-sm shadow-2xl">
+      <Card className="mx-auto w-full max-w-[380px] shadow-2xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             {logoLoading ? (
@@ -173,3 +173,4 @@ export default function SignupPage() {
     </div>
   );
 }
+    
