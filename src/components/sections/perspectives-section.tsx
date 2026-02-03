@@ -151,8 +151,8 @@ export default function PerspectivesSection() {
               const image = PlaceHolderImages.find(p => p.id === insight.imageId);
 
               return (
-                <CarouselItem key={index} className="pl-2 basis-1/2 md:basis-1/3 lg:basis-1/5 group">
-                  <Card className="relative aspect-[4/5] w-full overflow-hidden rounded-lg">
+                <CarouselItem key={index} className="pl-2 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 group">
+                  <Card className="relative aspect-[3/4] md:aspect-[4/5] w-full overflow-hidden rounded-lg">
                     {image && (
                       <Image
                         src={image.imageUrl}
@@ -162,9 +162,9 @@ export default function PerspectivesSection() {
                         className='object-cover transition-transform duration-700 ease-in-out group-hover:scale-105'
                       />
                     )}
-                    <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 h-3/5 bg-gradient-to-t from-black/80 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
-                        <h3 className='font-headline text-base md:text-lg font-bold text-white'>
+                        <h3 className='font-headline text-sm md:text-base font-bold text-white'>
                           {getTitle(insight)}
                         </h3>
                         <p className='font-body text-xs font-medium text-white/80 mt-1'>
