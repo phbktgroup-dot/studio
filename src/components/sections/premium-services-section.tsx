@@ -91,12 +91,12 @@ const ServiceCard = ({ service }: { service: Service }) => {
               width={400}
               height={400}
               data-ai-hint={image.imageHint}
-              className="w-full object-cover aspect-square transition-transform duration-500 group-hover:scale-105"
+              className="w-full object-cover aspect-[3/5] transition-transform duration-500 group-hover:scale-105"
           />
       )}
       <div className="p-2 text-center flex-grow flex flex-col justify-start">
-        <h3 className="text-lg font-bold flex items-center justify-center text-center min-h-[40px]">{title}</h3>
-        <p className="mt-1 text-base leading-tight text-muted-foreground">{description}</p>
+        <h3 className="text-xl font-bold flex items-center justify-center text-center min-h-[40px]">{title}</h3>
+        <p className="mt-1 text-lg leading-tight text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
