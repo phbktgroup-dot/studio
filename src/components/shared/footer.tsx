@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -64,8 +65,8 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="border-t bg-muted/30">
-      <div className="container py-6 text-center">
-        <div className="flex flex-col items-center gap-2">
+      <div className="container py-4 text-center">
+        <div className="flex flex-col items-center">
           <Link href="/" className="inline-block">
              {logoLoading ? (
                 <div className="h-[78px] w-[280px]" />
@@ -75,17 +76,17 @@ export default function Footer() {
                 <Logo className="h-[78px] w-[280px]" />
               )}
           </Link>
-          <p className="max-w-2xl mx-auto text-muted-foreground">
+          <p className="mt-2 max-w-2xl mx-auto text-muted-foreground">
             {t.footerDescription}
           </p>
           
           <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary mt-4">
             {t.p_large}
           </h2>
-          <p className="mt-2 max-w-2xl mx-auto text-muted-foreground">
+          <p className="mt-1 max-w-2xl mx-auto text-muted-foreground">
             {t.p_small}
           </p>
-          <Button asChild size="lg" className="mt-2">
+          <Button asChild size="lg" className="mt-4">
             <Link href="/contact">{t.contactUs}</Link>
           </Button>
         </div>
