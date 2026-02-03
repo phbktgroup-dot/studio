@@ -129,6 +129,22 @@ export default function SignupPage() {
                 )}
             </div>
             <div className="grid gap-2">
+              <Label htmlFor="mobileNumber">Mobile Number</Label>
+              <Input
+                id="mobileNumber"
+                name="mobileNumber"
+                type="tel"
+                placeholder="9876543210"
+                required
+                aria-describedby="mobileNumber-error"
+              />
+              {state.errors?.mobileNumber && (
+                    <p id="mobileNumber-error" className="text-sm text-destructive mt-1">
+                        {state.errors.mobileNumber[0]}
+                    </p>
+              )}
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -157,6 +173,22 @@ export default function SignupPage() {
               {state.errors?.password && (
                     <p id="password-error" className="text-sm text-destructive mt-1">
                         {state.errors.password[0]}
+                    </p>
+                )}
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Input 
+                id="confirmPassword" 
+                name="confirmPassword"
+                type="password" 
+                required 
+                minLength={6}
+                aria-describedby="confirmPassword-error"
+              />
+              {state.errors?.confirmPassword && (
+                    <p id="confirmPassword-error" className="text-sm text-destructive mt-1">
+                        {state.errors.confirmPassword[0]}
                     </p>
                 )}
             </div>
