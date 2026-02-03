@@ -1,3 +1,4 @@
+
 // @ts-nocheck
 "use server";
 
@@ -139,22 +140,22 @@ export async function handleSignup(prevState: SignupState, formData: FormData): 
 }
 
 const InquirySchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  firstName: z.string().min(1, { message: "First name is required." }),
+  lastName: z.string().min(1, { message: "Last name is required." }),
   email: z.string().email({ message: "Please enter a valid email." }),
-  mobile: z.string().optional(),
-  purpose: z.string().min(1, { message: "Please select a purpose." }),
-  vision: z.string().min(10, { message: "Vision must be at least 10 characters long." }),
+  industry: z.string().min(1, { message: "Please select an industry." }),
+  help: z.string().min(10, { message: "Message must be at least 10 characters long." }),
   userId: z.string().optional(),
 });
 
 export type InquiryState = {
   message?: string | null;
   errors?: {
-    name?: string[];
+    firstName?: string[];
+    lastName?: string[];
     email?: string[];
-    mobile?: string[];
-    purpose?: string[];
-    vision?: string[];
+    industry?: string[];
+    help?: string[];
     _form?: string[];
   };
   isSuccess?: boolean;
@@ -162,11 +163,11 @@ export type InquiryState = {
 
 export async function handleInquiry(prevState: InquiryState, formData: FormData): Promise<InquiryState> {
   const validatedFields = InquirySchema.safeParse({
-    name: formData.get("name"),
+    firstName: formData.get("firstName"),
+    lastName: formData.get("lastName"),
     email: formData.get("email"),
-    mobile: formData.get("mobile"),
-    purpose: formData.get("purpose"),
-    vision: formData.get("vision"),
+    industry: formData.get("industry"),
+    help: formData.get("help"),
     userId: formData.get("userId"),
   });
 
@@ -176,7 +177,7 @@ export async function handleInquiry(prevState: InquiryState, formData: FormData)
     };
   }
 
-  const { name, email, mobile, purpose, vision, userId } = validatedFields.data;
+  const { firstName, lastName, email, industry, help, userId } = validatedFields.data;
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
@@ -187,7 +188,12 @@ export async function handleInquiry(prevState: InquiryState, formData: FormData)
 
   const supabase = createClient(supabaseUrl, supabaseKey);
 
-  const insertData: any = { name, email, mobile, purpose, vision };
+  const insertData: any = { 
+    name: `${firstName} ${lastName}`, 
+    email,
+    purpose: industry,
+    vision: help,
+  };
   if (userId) {
     insertData.user_id = userId;
   }

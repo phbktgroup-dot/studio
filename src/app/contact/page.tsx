@@ -6,8 +6,7 @@ import { useFormStatus } from 'react-dom';
 import Link from "next/link";
 import { supabase } from '@/lib/supabase';
 import type { User } from '@supabase/supabase-js';
-import { Send, Loader2 } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Send, Loader2, ArrowLeft } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -16,71 +15,64 @@ import { useLanguage } from '@/context/language-provider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { handleInquiry, type InquiryState } from '@/lib/actions';
-import Header from '@/components/shared/header';
-import Footer from '@/components/shared/footer';
-import { ArrowLeft } from 'lucide-react';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const text = {
   mr: {
-    pageTitle: "संपर्क साधा",
-    pageDescription: "आमच्या टीमशी संपर्क साधा. आम्ही तुमच्या प्रश्नांची उत्तरे देण्यासाठी आणि तुमच्या डिजिटल गरजा पूर्ण करण्यासाठी येथे आहोत.",
-    cardTitle: "तुमची दृष्टी शेअर करा",
-    cardDescription: "आम्ही तुमची कल्पना प्रत्यक्षात आणण्यासाठी उत्सुक आहोत.",
-    nameLabel: "तुमचे नाव",
+    pageTitle: "एका तज्ञाशी बोला",
+    pageDescription: "आम्ही तुम्हाला योग्य व्यक्तीशी संपर्क साधून देण्यासाठी काही तपशील आवश्यक आहेत.",
+    firstNameLabel: "पहिले नाव",
+    lastNameLabel: "आडनाव",
     emailLabel: "तुमचा ईमेल",
-    mobileLabel: "मोबाईल नंबर",
-    purposeLabel: "उद्देश",
-    purposePlaceholder: "सेवा निवडा",
-    purposeOptions: {
-      web: "वेबसाइट डेव्हलपमेंट",
-      app: "ॲप डेव्हलपमेंट",
-      marketing: "मार्केटिंग आणि ब्रँडिंग",
-      consulting: "सल्लामसलत",
+    industryLabel: "उद्योग",
+    industryPlaceholder: "एक उद्योग निवडा",
+    industryOptions: {
+      tech: "तंत्रज्ञान",
+      finance: "वित्त",
+      healthcare: "आरोग्यसेवा",
+      retail: "किरकोळ",
       other: "इतर"
     },
-    visionLabel: "तुमची दृष्टी",
+    helpLabel: "आम्ही कशी मदत करू शकतो?",
     submitButton: "चौकशी सबमिट करा",
     submitting: "सबमिट करत आहे..."
   },
   en: {
-    pageTitle: "Get in Touch",
-    pageDescription: "Contact our team. We're here to answer your questions and help you with your digital needs.",
-    cardTitle: "Share Your Vision",
-    cardDescription: "We're excited to hear about what you want to build.",
-    nameLabel: "Your Name",
+    pageTitle: "Talk to an expert",
+    pageDescription: "To get you in touch with the right person, we just need a few details from you first.",
+    firstNameLabel: "First Name",
+    lastNameLabel: "Last Name",
     emailLabel: "Your Email",
-    mobileLabel: "Mobile Number",
-    purposeLabel: "Purpose",
-    purposePlaceholder: "Select a service",
-    purposeOptions: {
-      web: "Web Development",
-      app: "App Development",
-      marketing: "Marketing & Branding",
-      consulting: "Consulting",
+    industryLabel: "Industry",
+    industryPlaceholder: "Select an industry",
+    industryOptions: {
+      tech: "Technology",
+      finance: "Finance",
+      healthcare: "Healthcare",
+      retail: "Retail",
       other: "Other"
     },
-    visionLabel: "Your Vision",
+    helpLabel: "How can we help you?",
     submitButton: "Submit Inquiry",
     submitting: "Submitting..."
   },
   hi: {
-    pageTitle: "संपर्क करें",
-    pageDescription: "हमारी टीम से संपर्क करें। हम आपके सवालों का जवाब देने और आपकी डिजिटल जरूरतों में मदद करने के लिए यहां हैं।",
-    cardTitle: "अपनी दृष्टि साझा करें",
-    cardDescription: "हम यह सुनने के लिए उत्साहित हैं कि आप क्या बनाना चाहते हैं।",
-    nameLabel: "आपका नाम",
+    pageTitle: "एक विशेषज्ञ से बात करें",
+    pageDescription: "आपको सही व्यक्ति से संपर्क कराने के लिए, हमें पहले आपसे कुछ जानकारी चाहिए।",
+    firstNameLabel: "पहला नाम",
+    lastNameLabel: "उपनाम",
     emailLabel: "आपका ईमेल",
-    mobileLabel: "मोबाइल नंबर",
-    purposeLabel: "उद्देश्य",
-    purposePlaceholder: "एक सेवा चुनें",
-    purposeOptions: {
-      web: "वेबसाइट विकास",
-      app: "ऐप विकास",
-      marketing: "विपणन और ब्रांडिंग",
-      consulting: "परामर्श",
+    industryLabel: "उद्योग",
+    industryPlaceholder: "एक उद्योग चुनें",
+    industryOptions: {
+      tech: "प्रौद्योगिकी",
+      finance: "वित्त",
+      healthcare: "स्वास्थ्य सेवा",
+      retail: "खुदरा",
       other: "अन्य"
     },
-    visionLabel: "आपकी दृष्टि",
+    helpLabel: "हम कैसे मदद कर सकते हैं?",
     submitButton: "पूछताछ सबमिट करें",
     submitting: "सबमिट हो रहा है..."
   },
@@ -92,7 +84,7 @@ function SubmitButton() {
   const t = text[language];
 
   return (
-    <Button type="submit" size="lg" className="w-full" disabled={pending}>
+    <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90" disabled={pending}>
       {pending ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -111,11 +103,12 @@ function SubmitButton() {
 
 export default function ContactPage() {
   const [user, setUser] = useState<User | null>(null);
-  const [purpose, setPurpose] = useState('');
+  const [industry, setIndustry] = useState('');
   const { language } = useLanguage();
   const t = text[language];
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
+  const contactImage = PlaceHolderImages.find(p => p.id === 'contact_form_image');
 
   const initialState: InquiryState = { message: null, errors: {} };
   const [state, dispatch] = useActionState(handleInquiry, initialState);
@@ -137,7 +130,7 @@ export default function ContactPage() {
         description: state.message,
       });
       formRef.current?.reset();
-      setPurpose('');
+      setIndustry('');
     } else if (state.message || state.errors?._form) {
         toast({
             variant: "destructive",
@@ -148,83 +141,87 @@ export default function ContactPage() {
   }, [state, toast]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
-      <Header />
-      <main className="flex-grow py-8 md:py-16">
-        <div className="container max-w-4xl">
-           <Button variant="ghost" asChild className="mb-8">
-            <Link href="/">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Home
-            </Link>
+    <div className="min-h-screen bg-gray-900 text-gray-100 font-body">
+      <div className="absolute top-4 left-4 z-20">
+          <Button variant="ghost" asChild className="text-white hover:bg-gray-800 hover:text-white">
+              <Link href="/">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to Home
+              </Link>
           </Button>
+      </div>
+      <div className="grid md:grid-cols-2 min-h-screen">
+          <div className="p-8 md:p-12 lg:p-24 flex flex-col justify-center">
+              <header className="mb-8">
+                  <p className="text-sm font-bold uppercase tracking-wider text-primary">{t.pageTitle}</p>
+                  <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl mt-2 leading-tight">
+                      {t.pageDescription}
+                  </h1>
+              </header>
+              <form ref={formRef} action={dispatch} className="space-y-6">
+                  <input type="hidden" name="userId" value={user?.id || ''} />
+                  <input type="hidden" name="industry" value={industry} />
+                  
+                  <div className="grid sm:grid-cols-2 gap-6">
+                      <div className="space-y-1.5">
+                          <Label htmlFor="first-name">{t.firstNameLabel}</Label>
+                          <Input id="first-name" name="firstName" required className="bg-gray-800 border-gray-700 focus:ring-primary text-white" />
+                          {state.errors?.firstName && <p className="text-sm text-red-400 mt-1">{state.errors.firstName[0]}</p>}
+                      </div>
+                      <div className="space-y-1.5">
+                          <Label htmlFor="last-name">{t.lastNameLabel}</Label>
+                          <Input id="last-name" name="lastName" required className="bg-gray-800 border-gray-700 focus:ring-primary text-white" />
+                          {state.errors?.lastName && <p className="text-sm text-red-400 mt-1">{state.errors.lastName[0]}</p>}
+                      </div>
+                  </div>
 
-          <header className="text-center mb-12">
-            <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mt-2 leading-tight text-primary">
-              {t.pageTitle}
-            </h1>
-            <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-lg">
-                {t.pageDescription}
-            </p>
-          </header>
+                  <div className="space-y-1.5">
+                      <Label htmlFor="contact-email">{t.emailLabel}</Label>
+                      <Input id="contact-email" name="email" type="email" required className="bg-gray-800 border-gray-700 focus:ring-primary text-white" />
+                      {state.errors?.email && <p className="text-sm text-red-400 mt-1">{state.errors.email[0]}</p>}
+                  </div>
+                  
+                  <div className="space-y-1.5">
+                      <Label htmlFor="contact-industry">{t.industryLabel}</Label>
+                      <Select onValueChange={setIndustry} required>
+                          <SelectTrigger id="contact-industry" className="bg-gray-800 border-gray-700 focus:ring-primary text-white">
+                              <SelectValue placeholder={t.industryPlaceholder} />
+                          </SelectTrigger>
+                          <SelectContent className="bg-gray-800 border-gray-700 text-white">
+                              <SelectItem value="tech">{t.industryOptions.tech}</SelectItem>
+                              <SelectItem value="finance">{t.industryOptions.finance}</SelectItem>
+                              <SelectItem value="healthcare">{t.industryOptions.healthcare}</SelectItem>
+                              <SelectItem value="retail">{t.industryOptions.retail}</SelectItem>
+                              <SelectItem value="other">{t.industryOptions.other}</SelectItem>
+                          </SelectContent>
+                      </Select>
+                      {state.errors?.industry && <p className="text-sm text-red-400 mt-1">{state.errors.industry[0]}</p>}
+                  </div>
 
-          <Card className="max-w-2xl mx-auto">
-            <form ref={formRef} action={dispatch}>
-                <CardHeader>
-                    <CardTitle className="text-center">{t.cardTitle}</CardTitle>
-                    <CardDescription className="text-center">{t.cardDescription}</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                   <input type="hidden" name="userId" value={user?.id || ''} />
-                   <input type="hidden" name="purpose" value={purpose} />
+                  <div className="space-y-1.5">
+                      <Label htmlFor="contact-message">{t.helpLabel}</Label>
+                      <Textarea id="contact-message" name="help" required className="min-h-[100px] bg-gray-800 border-gray-700 focus:ring-primary text-white" />
+                      {state.errors?.help && <p className="text-sm text-red-400 mt-1">{state.errors.help[0]}</p>}
+                  </div>
 
-                    <div className="grid sm:grid-cols-2 gap-4">
-                        <div className="space-y-1.5 text-left">
-                            <Label htmlFor="contact-name">{t.nameLabel}</Label>
-                            <Input id="contact-name" name="name" required />
-                            {state.errors?.name && <p className="text-sm text-destructive mt-1">{state.errors.name[0]}</p>}
-                        </div>
-                        <div className="space-y-1.5 text-left">
-                            <Label htmlFor="contact-email">{t.emailLabel}</Label>
-                            <Input id="contact-email" name="email" type="email" required />
-                            {state.errors?.email && <p className="text-sm text-destructive mt-1">{state.errors.email[0]}</p>}
-                        </div>
-                         <div className="space-y-1.5 text-left">
-                            <Label htmlFor="contact-mobile">{t.mobileLabel}</Label>
-                            <Input id="contact-mobile" name="mobile" type="tel" />
-                            {state.errors?.mobile && <p className="text-sm text-destructive mt-1">{state.errors.mobile[0]}</p>}
-                        </div>
-                        <div className="space-y-1.5 text-left">
-                            <Label htmlFor="contact-purpose">{t.purposeLabel}</Label>
-                            <Select onValueChange={setPurpose} required>
-                                <SelectTrigger id="contact-purpose">
-                                    <SelectValue placeholder={t.purposePlaceholder} />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="web">{t.purposeOptions.web}</SelectItem>
-                                    <SelectItem value="app">{t.purposeOptions.app}</SelectItem>
-                                    <SelectItem value="marketing">{t.purposeOptions.marketing}</SelectItem>
-                                    <SelectItem value="consulting">{t.purposeOptions.consulting}</SelectItem>
-                                    <SelectItem value="other">{t.purposeOptions.other}</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            {state.errors?.purpose && <p className="text-sm text-destructive mt-1">{state.errors.purpose[0]}</p>}
-                        </div>
-                    </div>
-                    <div className="space-y-1.5 text-left">
-                        <Label htmlFor="contact-message">{t.visionLabel}</Label>
-                        <Textarea id="contact-message" name="vision" required className="min-h-[100px]" />
-                        {state.errors?.vision && <p className="text-sm text-destructive mt-1">{state.errors.vision[0]}</p>}
-                    </div>
-                </CardContent>
-                <CardFooter>
-                   <SubmitButton />
-                </CardFooter>
-            </form>
-          </Card>
-        </div>
-      </main>
-      <Footer />
+                  <div>
+                      <SubmitButton />
+                  </div>
+              </form>
+          </div>
+          <div className="hidden md:block relative">
+              {contactImage && (
+                    <Image
+                      src={contactImage.imageUrl}
+                      alt={contactImage.description}
+                      fill
+                      data-ai-hint={contactImage.imageHint}
+                      className="object-cover"
+                  />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/50 to-transparent"></div>
+          </div>
+      </div>
     </div>
   );
 }
