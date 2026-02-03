@@ -135,6 +135,7 @@ export default function PremiumServicesSection() {
                 const isUiUx = service.imageId === "service_ui_ux";
                 const isAi = service.imageId === "service_ai";
                 const isCloud = service.imageId === "service_cloud";
+                const isAdvisory = service.imageId === "service_advisory";
                 
                 let href = "#";
                 if (isWebAppDev) {
@@ -151,6 +152,8 @@ export default function PremiumServicesSection() {
                     href = "/services/ai-and-automation";
                 } else if (isCloud) {
                     href = "/services/cloud-and-security";
+                } else if (isAdvisory) {
+                    href = "/services/startup-advisory";
                 }
 
                 
