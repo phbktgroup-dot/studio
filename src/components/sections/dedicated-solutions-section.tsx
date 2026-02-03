@@ -96,8 +96,8 @@ const sectionText = {
   }
 };
 
-const shopImage = PlaceHolderImages.find(p => p.id === 'work_ecommerce_platform');
-const startupImage = PlaceHolderImages.find(p => p.id === 'service_advisory');
+const shopImage = PlaceHolderImages.find(p => p.id === 'local_shop_billing');
+const startupImage = PlaceHolderImages.find(p => p.id === 'startup_validate_idea');
 
 export default function DedicatedSolutionsSection() {
   const { language } = useLanguage();
