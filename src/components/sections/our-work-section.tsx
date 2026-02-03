@@ -72,7 +72,7 @@ export default function OurWorkSection() {
             {projects.map((project, index) => {
               const image = PlaceHolderImages.find(p => p.id === project.imageId);
               return (
-                <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
                   <div className="p-1 h-full">
                     <Card className="overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-full">
                       {image && (
@@ -89,8 +89,8 @@ export default function OurWorkSection() {
                       )}
                       <CardContent className="p-4 flex flex-col flex-grow">
                         <div>
-                          <h3 className="text-lg font-bold font-headline h-14">{getTitle(project)}</h3>
-                          <p className="mt-2 text-sm text-muted-foreground h-20 overflow-hidden">{getDescription(project)}</p>
+                          <h3 className="text-lg font-bold font-headline h-12">{getTitle(project)}</h3>
+                          <p className="mt-2 text-sm text-muted-foreground h-16 overflow-hidden">{getDescription(project)}</p>
                         </div>
                         <div className="flex-grow" />
                         <Button variant="outline" size="sm" className="mt-4 self-start" asChild>
