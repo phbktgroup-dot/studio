@@ -95,12 +95,12 @@ export default function OurWorkSection() {
                           </div>
                         </Link>
                       )}
-                      <CardContent className="p-3 flex flex-col flex-grow justify-start sm:justify-between">
+                      <CardContent className="p-2 flex flex-col flex-grow justify-start sm:justify-between">
                         <div>
                           <h3 className="text-base font-bold font-headline text-sm h-10">{getTitle(project)}</h3>
-                          <p className="mt-1 text-xs text-muted-foreground h-12 overflow-hidden">{getDescription(project)}</p>
+                          <p className="mt-1 text-xs text-muted-foreground h-10 overflow-hidden">{getDescription(project)}</p>
                         </div>
-                        <Button variant="outline" size="sm" className="mt-2 sm:mt-0 self-start text-xs">
+                        <Button variant="outline" size="sm" className="mt-1 sm:mt-0 self-start text-xs">
                           <Link href={`/work/${project.slug}`}>{text.viewDemo}</Link>
                         </Button>
                       </CardContent>
