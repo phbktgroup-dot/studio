@@ -80,7 +80,7 @@ export default function Footer() {
             {t.footerDescription}
           </p>
           
-          <h2 className="font-headline text-2xl md:text-3xl font-bold tracking-tighter text-primary mt-2">
+          <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary mt-2">
             {t.p_large}
           </h2>
           <p className="mt-1 max-w-2xl mx-auto text-sm text-black">
@@ -90,7 +90,7 @@ export default function Footer() {
             <Button asChild size="sm">
               <Link href="/contact">{t.contactUs}</Link>
             </Button>
-            <div className="flex items-center gap-4 text-sm">
+            <div className="flex items-center gap-4 text-xs">
               <a href="mailto:info@phbkt.com" className="text-blue-600 hover:text-primary transition-colors">
                   info@phbkt.com
               </a>
@@ -103,7 +103,7 @@ export default function Footer() {
       </div>
       <div className="border-t bg-muted/50">
         <div className="container flex flex-col md:flex-row items-center justify-between py-2 text-sm text-muted-foreground gap-4">
-          <p className="text-black">&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
+          <p className="text-black text-xs">&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
           <div className="flex items-center gap-4 sm:gap-6">
                 <div className="flex items-center gap-4">
                     <Link href="#" aria-label="Facebook" className="text-blue-600 transition-colors hover:text-blue-700" target="_blank" rel="noopener noreferrer">
