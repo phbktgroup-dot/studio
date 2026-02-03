@@ -90,17 +90,17 @@ export default function OurWorkSection() {
                                 width={400}
                                 height={225}
                                 data-ai-hint={image.imageHint}
-                                className="w-full object-cover aspect-[3/4] sm:aspect-video transition-transform duration-500 group-hover:scale-105"
+                                className="w-full object-cover aspect-[3/4] transition-transform duration-500 group-hover:scale-105"
                             />
                           </div>
                         </Link>
                       )}
                       <CardContent className="p-2 pt-1 flex flex-col flex-grow justify-between">
                         <div>
-                          <h3 className="text-base font-bold font-headline text-sm">{getTitle(project)}</h3>
-                          <p className="mt-1 text-xs text-muted-foreground overflow-hidden">{getDescription(project)}</p>
+                          <h3 className="font-bold font-headline text-base">{getTitle(project)}</h3>
+                          <p className="mt-1 text-sm text-muted-foreground overflow-hidden">{getDescription(project)}</p>
                         </div>
-                        <Button variant="outline" size="sm" className="mt-2 self-start text-xs">
+                        <Button variant="outline" size="sm" className="mt-2 self-start text-sm">
                           <Link href={`/work/${project.slug}`}>{text.viewDemo}</Link>
                         </Button>
                       </CardContent>
