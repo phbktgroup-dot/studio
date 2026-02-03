@@ -52,47 +52,16 @@ export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-
-      if (sessionError) {
-        setError({ title: 'Authentication Error', message: sessionError.message });
+    const getSession = async () => {
+        const { data: { session } } = await supabase.auth.getSession();
+        setUser(session?.user ?? null);
         setLoading(false);
-        return;
-      }
-      
-      const currentUser = session?.user;
-      setUser(currentUser);
+    }
+    getSession();
 
-      if (!currentUser) {
-          setError({ title: 'Authentication Error', message: 'You must be logged in to view your inquiries.' });
-          setLoading(false);
-          return;
-      }
-      
-      const { data, error: queryError } = await supabase.from('inquiries').select('*').eq('user_id', currentUser.id).order('created_at', { ascending: false });
-
-      if (queryError) {
-        let message = queryError.message;
-        if (queryError.message.includes('inquiries') && (queryError.message.includes('does not exist') || queryError.message.includes('schema cache'))) {
-          message = "The 'inquiries' table does not seem to exist in the database. An administrator needs to create it.";
-        }
-        setError({ title: 'Error Fetching Inquiries', message });
-      } else {
-        setInquiries(data || []);
-      }
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
       setLoading(false);
-    };
-
-    fetchData();
-    
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
-        fetchData();
-      }
     });
 
     return () => {
@@ -100,13 +69,68 @@ export default function DashboardPage() {
     };
   }, []);
 
+  useEffect(() => {
+    if (user) {
+        const fetchInquiries = async () => {
+            const { data, error: queryError } = await supabase
+                .from('inquiries')
+                .select('*')
+                .eq('user_id', user.id)
+                .order('created_at', { ascending: false });
+
+            if (queryError) {
+                let message = queryError.message;
+                if (queryError.message.includes('inquiries') && (queryError.message.includes('does not exist') || queryError.message.includes('schema cache'))) {
+                    message = "The 'inquiries' table does not seem to exist in the database. An administrator needs to create it.";
+                }
+                setError({ title: 'Error Fetching Inquiries', message });
+            } else {
+                setInquiries(data || []);
+            }
+        };
+
+        fetchInquiries();
+
+        const channel = supabase
+            .channel('public:inquiries:user-dashboard')
+            .on('postgres_changes', 
+                { event: '*', schema: 'public', table: 'inquiries', filter: `user_id=eq.${user.id}` }, 
+                () => fetchInquiries()
+            )
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }
+  }, [user]);
+
   if (loading) {
     return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-2xl font-bold font-headline">Dashboard</h1>
+        <h1 className="text-xl font-bold font-headline">Dashboard</h1>
         <Card>
           <CardContent className="p-8 flex items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+  
+  if (!user && !loading) {
+     return (
+      <div className="flex flex-col gap-4">
+        <h1 className="text-xl font-bold font-headline">Dashboard</h1>
+        <Card>
+          <CardContent className="p-8">
+            <Alert variant="destructive">
+              <AlertTriangle className="h-4 w-4" />
+              <AlertTitle>Authentication Error</AlertTitle>
+              <AlertDescription>
+                You must be logged in to view your inquiries.
+              </AlertDescription>
+            </Alert>
           </CardContent>
         </Card>
       </div>
@@ -116,7 +140,7 @@ export default function DashboardPage() {
   if (error) {
      return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-2xl font-bold font-headline">Dashboard</h1>
+        <h1 className="text-xl font-bold font-headline">Dashboard</h1>
         <Card>
           <CardContent className="p-8">
             <Alert variant="destructive">
@@ -134,7 +158,7 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-4">
-       <h1 className="text-2xl font-bold font-headline">Dashboard</h1>
+       <h1 className="text-xl font-bold font-headline">Dashboard</h1>
        <Card>
         <CardHeader>
           <CardTitle className="text-xl">My Inquiries</CardTitle>
