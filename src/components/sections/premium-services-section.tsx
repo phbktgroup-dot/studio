@@ -93,12 +93,12 @@ const ServiceCard = ({ service }: { service: Service }) => {
               width={400}
               height={400}
               data-ai-hint={image.imageHint}
-              className="w-full object-cover aspect-[3/5] sm:aspect-[1] transition-transform duration-500 group-hover:scale-105 h-[65%] object-center"
+              className="w-full object-cover aspect-[3/5] sm:aspect-[1] transition-transform duration-500 group-hover:scale-105 h-[60%] object-center"
           />
       )}
       <div className="p-1 text-center flex-grow flex flex-col justify-center">
-        <h3 className="text-[11px] font-bold flex items-center justify-center text-center leading-tight">{title}</h3>
-        <p className="mt-1 text-[9px] leading-tight text-muted-foreground">{description}</p>
+        <h3 className="text-xs font-bold flex items-center justify-center text-center leading-tight">{title}</h3>
+        <p className="mt-1 text-[10px] leading-tight text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
@@ -181,7 +181,7 @@ export default function PremiumServicesSection() {
           >
             <CarouselContent className="-ml-2">
               {services.map((service, index) => (
-                  <CarouselItem key={index} className="pl-2 basis-1/2">
+                  <CarouselItem key={index} className="pl-2 basis-2/5">
                     {renderServiceCard(service)}
                   </CarouselItem>
               ))}
