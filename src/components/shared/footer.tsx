@@ -68,49 +68,31 @@ export default function Footer() {
   return (
     <footer id="contact" className="border-t bg-muted/30">
       <div className="container py-12 md:py-16">
-        <div className="flex flex-col items-center text-center gap-8">
-            <div className="flex flex-col justify-center items-center text-center">
-                <div className="mb-4">
-                    <Link href="/" className="inline-block mb-4">
-                        {logoLoading ? (
-                        <div className="h-[78px] w-[280px]" />
-                        ) : logoUrl ? (
-                        <img src={logoUrl} alt="PHBKT Group" className="h-[78px] w-auto max-w-[280px] object-contain" />
-                        ) : (
-                        <Logo className="h-[78px] w-[280px]" />
-                        )}
-                    </Link>
-                    <p className="max-w-md mx-auto text-muted-foreground">
-                        {t.footerDescription}
-                    </p>
-                </div>
-                
-                <div className="mt-2">
-                    <h3 className="font-semibold text-lg">{t.getInTouchDirectly}</h3>
-                     <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
-                        info@phbkt.com
-                    </a>
-                    <p className="text-sm text-muted-foreground mt-1">+91 9552256325</p>
-                </div>
-            </div>
-            
-            <div className="flex flex-col justify-center items-center text-center">
-                <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary max-w-md">
-                    {t.p_large}
-                </h2>
-                <p className="mt-2 max-w-xl text-muted-foreground md:text-lg">
-                    {t.p_small}
-                </p>
-                <Button asChild size="lg" className="mt-6">
-                    <Link href="/contact">{t.contactUs}</Link>
-                </Button>
-            </div>
-        </div>
-      </div>
-      <div className="border-t bg-muted/50">
-        <div className="container flex flex-col sm:flex-row items-center justify-between py-4 text-sm text-muted-foreground gap-4">
-          <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
-          <div className="flex items-center gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left">
+          {/* Column 1: Logo & Description */}
+          <div className="flex flex-col items-center md:items-start">
+            <Link href="/" className="inline-block mb-4">
+              {logoLoading ? (
+                <div className="h-[78px] w-[280px]" />
+              ) : logoUrl ? (
+                <img src={logoUrl} alt="PHBKT Group" className="h-[78px] w-auto max-w-[280px] object-contain" />
+              ) : (
+                <Logo className="h-[78px] w-[280px]" />
+              )}
+            </Link>
+            <p className="text-muted-foreground">
+              {t.footerDescription}
+            </p>
+          </div>
+
+          {/* Column 2: Contact & Socials */}
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <h3 className="font-semibold text-lg">{t.getInTouchDirectly}</h3>
+            <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
+              info@phbkt.com
+            </a>
+            <p className="text-sm text-muted-foreground">+91 9552256325</p>
+             <div className="flex items-center gap-4 mt-2">
               <Link href="#" aria-label="Facebook" className="text-blue-600 transition-colors hover:opacity-80" target="_blank" rel="noopener noreferrer">
                 <Facebook className="h-5 w-5" />
               </Link>
@@ -124,6 +106,25 @@ export default function Footer() {
                 <Linkedin className="h-5 w-5" />
               </Link>
           </div>
+          </div>
+
+          {/* Column 3: CTA */}
+          <div className="flex flex-col items-center md:items-start">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary">
+              {t.p_large}
+            </h2>
+            <p className="mt-2 text-muted-foreground">
+              {t.p_small}
+            </p>
+            <Button asChild size="lg" className="mt-6">
+              <Link href="/contact">{t.contactUs}</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+      <div className="border-t bg-muted/50">
+        <div className="container flex items-center justify-center py-4 text-sm text-muted-foreground">
+          <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
         </div>
       </div>
     </footer>
