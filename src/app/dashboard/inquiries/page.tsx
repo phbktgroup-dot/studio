@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -24,7 +23,6 @@ import { AlertTriangle, Mail, Loader2 } from "lucide-react";
 import { format } from 'date-fns';
 import { ViewInquiryButton } from './ViewInquiryButton';
 import { StatusSwitcher } from './StatusSwitcher';
-import { ResolutionDialog } from './ResolutionDialog';
 
 type PageError = {
     title: string;
@@ -64,7 +62,7 @@ export default function InquiriesPage() {
       if (queryError) {
         let message = queryError.message;
         if (queryError.message.includes('inquiries') && (queryError.message.includes('does not exist') || queryError.message.includes('schema cache'))) {
-          message = "The 'inquiries' table does not seem to exist in the database. An administrator needs to create it and add 'status' (text, default 'pending') and 'resolution' (text) columns.";
+          message = "The 'inquiries' table does not seem to exist in the database. An administrator needs to create it and add a 'status' column (text, default 'pending').";
         }
         setError({ title: 'Error Fetching Inquiries', message });
       } else {
@@ -139,7 +137,6 @@ export default function InquiriesPage() {
                             <TableHead className="h-8 py-0 px-2">Email</TableHead>
                             <TableHead className="h-8 py-0 px-2">Purpose</TableHead>
                             <TableHead className="h-8 py-0 px-2">Status</TableHead>
-                            <TableHead className="h-8 py-0 px-2">Resolution</TableHead>
                             <TableHead className="h-8 py-0 px-2 text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -153,9 +150,6 @@ export default function InquiriesPage() {
                         <TableCell className="py-0 px-2 capitalize">{inquiry.purpose}</TableCell>
                         <TableCell className="py-0 px-2">
                             <StatusSwitcher inquiryId={inquiry.id} currentStatus={inquiry.status} />
-                        </TableCell>
-                        <TableCell className="py-0 px-2">
-                            <ResolutionDialog inquiryId={inquiry.id} resolution={inquiry.resolution} />
                         </TableCell>
                         <TableCell className="py-0 px-2 text-right">
                            <ViewInquiryButton inquiry={inquiry} />

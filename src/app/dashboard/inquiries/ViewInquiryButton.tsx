@@ -1,4 +1,3 @@
-
 'use client';
 
 import {
@@ -66,14 +65,6 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
                             </Badge>
                         </div>
                     </div>
-                    {inquiry.resolution && (
-                        <div className="grid grid-cols-4 items-start gap-4">
-                            <Label className="text-right text-muted-foreground mt-1">Resolution</Label>
-                            <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-sm whitespace-pre-wrap break-words">
-                                {inquiry.resolution}
-                            </div>
-                        </div>
-                    )}
                 </div>
             </DialogContent>
         </Dialog>

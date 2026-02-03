@@ -1,4 +1,3 @@
-
 // @ts-nocheck
 "use server";
 
@@ -334,60 +333,4 @@ export async function updateInquiryStatus(inquiryId: string, status: 'pending' |
   revalidatePath('/dashboard/inquiries');
   revalidatePath('/dashboard');
   return { success: true };
-}
-
-
-const ResolutionSchema = z.object({
-  inquiryId: z.string().uuid({ message: "Invalid Inquiry ID." }),
-  resolution: z.string().min(10, { message: "Resolution must be at least 10 characters." }),
-});
-
-export type ResolutionState = {
-  message?: string | null;
-  errors?: {
-    resolution?: string[];
-  };
-  isSuccess?: boolean;
-};
-
-export async function updateInquiryResolution(prevState: ResolutionState, formData: FormData): Promise<ResolutionState> {
-    const validatedFields = ResolutionSchema.safeParse({
-        inquiryId: formData.get("inquiryId"),
-        resolution: formData.get("resolution"),
-    });
-
-    if (!validatedFields.success) {
-        return {
-            errors: validatedFields.error.flatten().fieldErrors,
-            isSuccess: false,
-        };
-    }
-    
-    const { inquiryId, resolution } = validatedFields.data;
-
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (!supabaseUrl || !serviceRoleKey) {
-        return { message: 'Supabase admin credentials are not configured.', isSuccess: false };
-    }
-
-    const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
-    
-    const { error } = await supabaseAdmin
-        .from('inquiries')
-        .update({ resolution: resolution })
-        .eq('id', inquiryId);
-
-    if (error) {
-        let errorMessage = `Failed to update resolution: ${error.message}`;
-        if (error.message.includes("'resolution' column") && (error.message.includes('does not exist') || error.message.includes('schema cache'))) {
-            errorMessage = "The 'resolution' column does not seem to exist in your 'inquiries' table. Please go to your Supabase dashboard, open the Table Editor for the 'inquiries' table, and add a new column named 'resolution' with the type 'text'.";
-        }
-        return { message: errorMessage, isSuccess: false };
-    }
-
-    revalidatePath('/dashboard/inquiries');
-    revalidatePath('/dashboard');
-    return { isSuccess: true, message: 'Resolution has been saved successfully.' };
 }
