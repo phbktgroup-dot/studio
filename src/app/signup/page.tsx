@@ -79,15 +79,15 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen w-full flex items-start justify-center bg-background pt-8 sm:pt-4">
-      <div className="absolute top-4 left-4">
-        <Button variant="ghost" size="icon" asChild>
-          <Link href="/">
-            <ArrowLeft className="h-4 w-4" />
-            <span className="sr-only">Back to Home</span>
-          </Link>
-        </Button>
-      </div>
-      <Card className="mx-auto w-full max-w-[360px] shadow-2xl">
+      <Card className="relative mx-auto w-full max-w-lg shadow-2xl">
+        <div className="absolute top-4 left-4">
+            <Button variant="ghost" size="icon" asChild>
+            <Link href="/">
+                <ArrowLeft className="h-4 w-4" />
+                <span className="sr-only">Back to Home</span>
+            </Link>
+            </Button>
+        </div>
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             {logoLoading ? (
