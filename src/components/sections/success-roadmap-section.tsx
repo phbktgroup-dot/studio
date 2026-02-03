@@ -68,10 +68,10 @@ function MilestoneMobile({ title, description, icon: Icon, isActive }: {title: s
     return (
         <div className="relative flex flex-col items-center text-center">
              <div className={cn(
-                "flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all duration-500 bg-background z-10 shrink-0",
+                "flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-500 bg-background z-10 shrink-0",
                 isActive ? "border-primary bg-primary text-primary-foreground" : "border-border bg-muted text-muted-foreground"
             )}>
-                <Icon className="w-6 h-6" />
+                <Icon className="w-5 h-5" />
             </div>
             <div className="mt-2 bg-background px-2 relative z-10">
                 <h4 className={cn(
@@ -149,7 +149,7 @@ export default function SuccessRoadmapSection() {
 
         {/* Mobile View */}
         <div className="sm:hidden mt-12 relative">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-full bg-border"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-full bg-border -z-10"></div>
              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 bg-primary transition-all duration-500 ease-linear" style={{ height: `${(Math.max(0, activeMilestone + 1) / milestones.length) * 100}%` }}></div>
             <div className="flex flex-col gap-y-8">
                 {milestones.map((item, index) => (
