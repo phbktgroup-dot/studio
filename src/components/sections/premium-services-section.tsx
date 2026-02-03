@@ -142,7 +142,7 @@ export default function PremiumServicesSection() {
     }
     
     return (
-      <div className="p-1 h-full">
+      <div className="h-full">
         <Link href={href} className="h-full block" onClick={(e) => href === '#' && e.preventDefault()}>
           <ServiceCard service={service} />
         </Link>
@@ -163,9 +163,9 @@ export default function PremiumServicesSection() {
                 {descriptionText[language]}
             </p>
         </div>
-        <div className="container">
+        <div className="container px-1 sm:px-4">
           {/* Mobile View - Grid */}
-          <div className="grid grid-cols-3 gap-2 sm:hidden">
+          <div className="grid grid-cols-3 gap-1 sm:hidden">
             {services.map((service, index) => (
               <div key={index}>
                 {renderServiceCard(service)}
