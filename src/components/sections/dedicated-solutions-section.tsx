@@ -106,7 +106,7 @@ export default function DedicatedSolutionsSection() {
 
   return (
     <section id="solutions" className="py-6 md:py-8 bg-muted/30">
-      <div className="container px-0">
+      <div className="container px-0 md:px-4">
         <div className="text-center mb-8 px-8 sm:px-0">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-black mb-2">
                 {text.heading}
@@ -129,14 +129,14 @@ export default function DedicatedSolutionsSection() {
           <TabsContent value="shops">
             <Card className="mt-6 border-0 shadow-none bg-transparent">
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div className="order-2 md:order-1 px-8 md:px-0 text-center">
-                  <h3 className="font-headline text-lg font-bold text-primary">{text.shops.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{text.shops.description}</p>
-                  <ul className="mt-4 space-y-2 inline-block">
+                <div className="order-2 md:order-1 px-8 md:px-0 text-center md:text-left">
+                  <h3 className="font-headline text-lg md:text-2xl font-bold text-primary">{text.shops.title}</h3>
+                  <p className="mt-2 text-sm md:text-base text-muted-foreground">{text.shops.description}</p>
+                  <ul className="mt-4 space-y-2 inline-block md:block">
                     {text.shops.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-primary" />
-                        <span className="text-sm font-medium">{feature}</span>
+                        <span className="text-sm md:text-lg font-medium">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -175,14 +175,14 @@ export default function DedicatedSolutionsSection() {
                     />
                   )}
                 </div>
-                <div className="px-8 md:px-0 text-center">
-                  <h3 className="font-headline text-lg font-bold text-primary">{text.startups.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{text.startups.description}</p>
-                  <ul className="mt-4 space-y-2 inline-block">
+                <div className="px-8 md:px-0 text-center md:text-left">
+                  <h3 className="font-headline text-lg md:text-2xl font-bold text-primary">{text.startups.title}</h3>
+                  <p className="mt-2 text-sm md:text-base text-muted-foreground">{text.startups.description}</p>
+                  <ul className="mt-4 space-y-2 inline-block md:block">
                     {text.startups.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-primary" />
-                        <span className="text-sm font-medium">{feature}</span>
+                        <span className="text-sm md:text-lg font-medium">{feature}</span>
                       </li>
                     ))}
                   </ul>
