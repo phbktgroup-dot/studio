@@ -76,20 +76,20 @@ export default function Footer() {
                 <Logo className="h-[78px] w-[280px]" />
               )}
           </Link>
-          <p className="mt-2 max-w-2xl mx-auto text-sm text-foreground">
+          <p className="mt-2 max-w-2xl mx-auto text-sm text-black">
             {t.footerDescription}
           </p>
           
           <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary mt-2">
             {t.p_large}
           </h2>
-          <p className="mt-1 max-w-2xl mx-auto text-sm text-foreground">
+          <p className="mt-1 max-w-2xl mx-auto text-sm text-black">
             {t.p_small}
           </p>
           <Button asChild size="sm" className="mt-4">
             <Link href="/contact">{t.contactUs}</Link>
           </Button>
-          <div className="mt-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
+          <div className="mt-2 flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
               <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   info@phbkt.com
               </a>
