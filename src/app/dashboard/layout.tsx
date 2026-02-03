@@ -14,9 +14,8 @@ import {
   Briefcase,
   FileText,
   LogOut,
-  UserCog,
-  Paintbrush,
   Mail,
+  Settings,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -92,7 +91,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (user) {
       const userRole = user.user_metadata?.role;
-      const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/hero-section' || pathname.startsWith('/dashboard/inquiries');
+      const isAdminRoute = pathname.startsWith('/dashboard/users') || pathname.startsWith('/dashboard/hero-section') || pathname.startsWith('/dashboard/inquiries') || pathname.startsWith('/dashboard/settings');
       if (isAdminRoute && userRole !== 'admin') {
         router.push('/dashboard');
       }
@@ -215,18 +214,10 @@ function DashboardUI({ children }: { children: ReactNode }) {
                   {userRole === 'admin' && (
                     <>
                       <SidebarMenuItem>
-                        <SidebarMenuButton asChild isActive={pathname === '/dashboard/users'} size="sm" tooltip="Manage Users">
-                          <Link href="/dashboard/users">
-                            <UserCog />
-                            <span>Manage Users</span>
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                       <SidebarMenuItem>
-                        <SidebarMenuButton asChild isActive={pathname === '/dashboard/hero-section'} size="sm" tooltip="Site Customization">
-                          <Link href="/dashboard/hero-section">
-                            <Paintbrush />
-                            <span>Site Customization</span>
+                        <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/settings')} size="sm" tooltip="Settings">
+                          <Link href="/dashboard/settings">
+                            <Settings />
+                            <span>Settings</span>
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
