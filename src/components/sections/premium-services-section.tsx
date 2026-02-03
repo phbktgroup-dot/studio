@@ -95,8 +95,8 @@ const ServiceCard = ({ service }: { service: Service }) => {
           />
       )}
       <div className="p-2 text-center flex-grow flex flex-col justify-start">
-        <h3 className="text-xl font-bold flex items-center justify-center text-center min-h-[40px]">{title}</h3>
-        <p className="mt-1 text-lg leading-tight text-muted-foreground">{description}</p>
+        <h3 className="text-lg font-bold flex items-center justify-center text-center min-h-[40px]">{title}</h3>
+        <p className="mt-1 text-base leading-tight text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
