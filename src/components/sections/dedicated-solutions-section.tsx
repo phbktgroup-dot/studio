@@ -128,10 +128,10 @@ export default function DedicatedSolutionsSection() {
           <TabsContent value="shops">
             <Card className="mt-6 border-0 shadow-none bg-transparent">
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div className="order-2 md:order-1 px-8 md:px-0">
+                <div className="order-2 md:order-1 px-8 md:px-0 text-center md:text-left">
                   <h3 className="font-headline text-xs font-bold text-primary">{text.shops.title}</h3>
                   <p className="mt-2 text-xs text-muted-foreground">{text.shops.description}</p>
-                  <ul className="mt-4 space-y-2">
+                  <ul className="mt-4 space-y-2 inline-block">
                     {text.shops.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-primary" />
@@ -174,10 +174,10 @@ export default function DedicatedSolutionsSection() {
                     />
                   )}
                 </div>
-                <div className="px-8 md:px-0">
+                <div className="px-8 md:px-0 text-center md:text-left">
                   <h3 className="font-headline text-xs font-bold text-primary">{text.startups.title}</h3>
                   <p className="mt-2 text-xs text-muted-foreground">{text.startups.description}</p>
-                  <ul className="mt-4 space-y-2">
+                  <ul className="mt-4 space-y-2 inline-block">
                     {text.startups.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-primary" />
