@@ -118,7 +118,6 @@ export default function SignupPage() {
                 id="fullName"
                 name="fullName"
                 type="text"
-                placeholder="John Doe"
                 required
                 aria-describedby="fullName-error"
               />
@@ -134,7 +133,6 @@ export default function SignupPage() {
                 id="mobileNumber"
                 name="mobileNumber"
                 type="tel"
-                placeholder="9876543210"
                 required
                 aria-describedby="mobileNumber-error"
               />
@@ -150,7 +148,6 @@ export default function SignupPage() {
                 id="email"
                 name="email"
                 type="email"
-                placeholder="m@example.com"
                 required
                 aria-describedby="email-error"
               />
