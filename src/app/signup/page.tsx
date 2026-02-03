@@ -86,7 +86,7 @@ export default function SignupPage() {
           </Link>
         </Button>
       </div>
-      <Card className="mx-auto max-w-sm w-full shadow-2xl">
+      <Card className="mx-auto w-full max-w-xs sm:max-w-sm shadow-2xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             {logoLoading ? (
@@ -103,7 +103,7 @@ export default function SignupPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={dispatch} className="grid gap-4">
+          <form action={dispatch} className="grid gap-3">
             {state.errors?._form && (
                 <Alert variant="destructive">
                     <AlertTriangle className="h-4 w-4" />
@@ -160,7 +160,7 @@ export default function SignupPage() {
                 )}
             </div>
             <SubmitButton />
-            <div className="mt-4 text-center text-sm">
+            <div className="mt-3 text-center text-sm">
               Already have an account?{" "}
               <Link href="/login" className="underline">
                 Login

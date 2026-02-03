@@ -121,7 +121,7 @@ export default function LoginPage() {
           </Link>
         </Button>
       </div>
-      <Card className="mx-auto max-w-sm w-full shadow-2xl">
+      <Card className="mx-auto w-full max-w-xs sm:max-w-sm shadow-2xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             {logoLoading ? (
@@ -138,7 +138,7 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleLogin} className="grid gap-4">
+          <form onSubmit={handleLogin} className="grid gap-3">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -167,7 +167,7 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <div className="relative my-4">
+          <div className="relative my-3">
             <div className="absolute inset-0 flex items-center">
                 <span className="w-full border-t" />
             </div>
@@ -189,7 +189,7 @@ export default function LoginPage() {
             )}
           </Button>
 
-          <div className="mt-4 text-center text-sm">
+          <div className="mt-3 text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link href="/signup" className="underline">
               Sign up
