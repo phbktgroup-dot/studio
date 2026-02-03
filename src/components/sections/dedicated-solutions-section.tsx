@@ -105,8 +105,8 @@ export default function DedicatedSolutionsSection() {
 
   return (
     <section id="solutions" className="py-6 md:py-8 bg-muted/30">
-      <div className="container">
-        <div className="text-center mb-8">
+      <div className="container px-0">
+        <div className="text-center mb-8 px-8 sm:px-0">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-black mb-2">
                 {text.heading}
             </h3>
@@ -128,22 +128,22 @@ export default function DedicatedSolutionsSection() {
           <TabsContent value="shops">
             <Card className="mt-6 border-0 shadow-none bg-transparent">
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div className="order-2 md:order-1">
-                  <h3 className="font-headline text-lg font-bold text-primary">{text.shops.title}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground">{text.shops.description}</p>
-                  <ul className="mt-6 space-y-3">
+                <div className="order-2 md:order-1 px-8 md:px-0">
+                  <h3 className="font-headline text-xs font-bold text-primary">{text.shops.title}</h3>
+                  <p className="mt-2 text-xs text-muted-foreground">{text.shops.description}</p>
+                  <ul className="mt-4 space-y-2">
                     {text.shops.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-primary" />
-                        <span className="text-sm font-medium">{feature}</span>
+                        <span className="text-xs font-medium">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <Button size="lg" className="mt-8" asChild>
+                  <Button size="lg" className="mt-6" asChild>
                     <Link href="/solutions/for-local-shops">{text.shops.cta}</Link>
                   </Button>
                 </div>
-                <div className="order-1 md:order-2 aspect-video rounded-lg overflow-hidden">
+                <div className="order-1 md:order-2 aspect-video rounded-none md:rounded-lg overflow-hidden">
                   {shopImage && (
                     <Image
                       src={shopImage.imageUrl}
@@ -162,7 +162,7 @@ export default function DedicatedSolutionsSection() {
           <TabsContent value="startups">
             <Card className="mt-6 border-0 shadow-none bg-transparent">
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                 <div className="aspect-video rounded-lg overflow-hidden">
+                 <div className="aspect-video rounded-none md:rounded-lg overflow-hidden">
                    {startupImage && (
                     <Image
                       src={startupImage.imageUrl}
@@ -174,18 +174,18 @@ export default function DedicatedSolutionsSection() {
                     />
                   )}
                 </div>
-                <div>
-                  <h3 className="font-headline text-lg font-bold text-primary">{text.startups.title}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground">{text.startups.description}</p>
-                  <ul className="mt-6 space-y-3">
+                <div className="px-8 md:px-0">
+                  <h3 className="font-headline text-xs font-bold text-primary">{text.startups.title}</h3>
+                  <p className="mt-2 text-xs text-muted-foreground">{text.startups.description}</p>
+                  <ul className="mt-4 space-y-2">
                     {text.startups.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-primary" />
-                        <span className="text-sm font-medium">{feature}</span>
+                        <span className="text-xs font-medium">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <Button size="lg" className="mt-8" asChild>
+                  <Button size="lg" className="mt-6" asChild>
                     <Link href="/solutions/for-startups">{text.startups.cta}</Link>
                   </Button>
                 </div>
