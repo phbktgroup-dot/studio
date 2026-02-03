@@ -1,3 +1,4 @@
+
 // @ts-nocheck
 "use server";
 
@@ -141,7 +142,9 @@ const InquirySchema = z.object({
   firstName: z.string().min(1, { message: "First name is required." }),
   lastName: z.string().min(1, { message: "Last name is required." }),
   email: z.string().email({ message: "Please enter a valid email." }),
-  mobileNumber: z.string().optional(),
+  mobileNumber: z.string().optional().refine((val) => !val || /^\d{10}$/.test(val), {
+    message: "Mobile number must be 10 digits.",
+  }),
   industry: z.string().min(1, { message: "Please select an industry." }),
   help: z.string().min(10, { message: "Message must be at least 10 characters long." }),
   userId: z.string().optional(),

@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect, useActionState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { useFormStatus } from 'react-dom';
 import { supabase } from '@/lib/supabase';
 import type { User } from '@supabase/supabase-js';
@@ -126,6 +127,7 @@ export default function ContactPage() {
   const t = text[language];
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
 
   const initialState: InquiryState = { message: null, errors: {} };
   const [state, dispatch] = useActionState(handleInquiry, initialState);
@@ -148,6 +150,7 @@ export default function ContactPage() {
       });
       formRef.current?.reset();
       setPurpose('');
+      router.push('/');
     } else if (state.message || state.errors?._form) {
         toast({
             variant: "destructive",
@@ -155,7 +158,7 @@ export default function ContactPage() {
             description: state.message || state.errors?._form?.[0],
         });
     }
-  }, [state, toast]);
+  }, [state, toast, router]);
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
@@ -198,7 +201,7 @@ export default function ContactPage() {
                         </div>
                         <div className="space-y-1.5">
                             <Label htmlFor="contact-mobile">{t.mobileNumberLabel}</Label>
-                            <Input id="contact-mobile" name="mobileNumber" type="tel" />
+                            <Input id="contact-mobile" name="mobileNumber" type="tel" maxLength={10} pattern="[0-9]{10}" />
                             {state.errors?.mobileNumber && <p className="text-sm text-destructive mt-1">{state.errors.mobileNumber[0]}</p>}
                         </div>
                       </div>
