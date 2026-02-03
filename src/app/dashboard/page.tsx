@@ -30,6 +30,21 @@ type PageError = {
     message: string;
 }
 
+type Status = 'in_process' | 'completed' | 'pending';
+
+const statusText: Record<Status, string> = {
+    pending: 'Pending',
+    in_process: 'In Process',
+    completed: 'Completed'
+}
+
+const statusBadgeVariant: Record<Status, "secondary" | "default" | "outline"> = {
+    pending: 'secondary',
+    in_process: 'default',
+    completed: 'outline'
+}
+
+
 export default function DashboardPage() {
   const [inquiries, setInquiries] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -138,11 +153,14 @@ export default function DashboardPage() {
                             <TableHead className="h-8 py-0 px-2">Email</TableHead>
                             <TableHead className="h-8 py-0 px-2">Mobile</TableHead>
                             <TableHead className="h-8 py-0 px-2">Purpose</TableHead>
+                            <TableHead className="h-8 py-0 px-2">Status</TableHead>
                             <TableHead className="h-8 py-0 px-2 text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                    {inquiries.map((inquiry) => (
+                    {inquiries.map((inquiry) => {
+                        const effectiveStatus: Status = inquiry.status || 'pending';
+                        return (
                         <TableRow key={inquiry.id} className="h-8">
                         <TableCell className="py-0 px-2 font-mono">{inquiry.id.substring(0, 8)}</TableCell>
                         <TableCell className="py-0 px-2">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
@@ -152,11 +170,17 @@ export default function DashboardPage() {
                         <TableCell className="py-0 px-2 capitalize">
                             <Badge variant="secondary" className="font-normal">{inquiry.purpose}</Badge>
                         </TableCell>
+                        <TableCell className="py-0 px-2">
+                            <Badge variant={statusBadgeVariant[effectiveStatus]} className="font-normal capitalize">
+                                {statusText[effectiveStatus]}
+                            </Badge>
+                        </TableCell>
                         <TableCell className="py-0 px-2 text-right">
                            <ViewInquiryButton inquiry={inquiry} />
                         </TableCell>
                         </TableRow>
-                    ))}
+                    );
+                    })}
                     </TableBody>
                 </Table>
             ) : (
