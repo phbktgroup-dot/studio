@@ -137,6 +137,7 @@ export default function PremiumServicesSection() {
                 const isCloud = service.imageId === "service_cloud";
                 const isAdvisory = service.imageId === "service_advisory";
                 const isSocial = service.imageId === "service_social";
+                const isSupport = service.imageId === "service_support";
                 
                 let href = "#";
                 if (isWebAppDev) {
@@ -157,6 +158,8 @@ export default function PremiumServicesSection() {
                     href = "/services/startup-advisory";
                 } else if (isSocial) {
                     href = "/services/content-and-social";
+                } else if (isSupport) {
+                    href = "/services/24-7-it-support";
                 }
 
                 
