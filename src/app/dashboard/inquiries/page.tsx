@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -73,6 +74,15 @@ export default function InquiriesPage() {
 
     fetchData();
     
+    const channel = supabase
+      .channel('public:inquiries:admin')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'inquiries' },
+        () => fetchData()
+      )
+      .subscribe();
+
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
         fetchData();
@@ -80,6 +90,7 @@ export default function InquiriesPage() {
     });
 
     return () => {
+      supabase.removeChannel(channel);
       authListener.subscription.unsubscribe();
     };
   }, []);
@@ -121,8 +132,8 @@ export default function InquiriesPage() {
       <h1 className="text-lg font-bold font-headline">Inquiries</h1>
        <Card>
         <CardHeader>
-          <CardTitle>All Received Inquiries</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-xl">All Received Inquiries</CardTitle>
+          <CardDescription className="text-xs">
             All inquiries submitted through the contact form.
           </CardDescription>
         </CardHeader>
