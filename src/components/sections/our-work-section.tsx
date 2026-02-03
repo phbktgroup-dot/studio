@@ -62,7 +62,7 @@ export default function OurWorkSection() {
     <section id="work" className="py-6 md:py-8 bg-muted/30">
       <div className="container">
         <div className="text-center mb-4">
-            <h3 className="text-xl font-semibold uppercase tracking-wider text-black mb-2">
+            <h3 className="text-lg font-semibold uppercase tracking-wider text-black mb-2">
                 {text.heading}
             </h3>
             <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary">
