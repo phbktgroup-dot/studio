@@ -68,7 +68,7 @@ export default function Footer() {
   return (
     <footer id="contact" className="border-t bg-muted/30">
       <div className="container py-12 md:py-16">
-        <div className="flex flex-col items-center text-center gap-12">
+        <div className="flex flex-col items-center text-center gap-8">
             <div className="flex flex-col justify-center items-center text-center">
                 <div className="mb-4">
                     <Link href="/" className="inline-block mb-4">
@@ -85,7 +85,7 @@ export default function Footer() {
                     </p>
                 </div>
                 
-                <div className="mt-4">
+                <div className="mt-2">
                     <h3 className="font-semibold text-lg">{t.getInTouchDirectly}</h3>
                      <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
                         info@phbkt.com
@@ -98,10 +98,10 @@ export default function Footer() {
                 <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary max-w-md">
                     {t.p_large}
                 </h2>
-                <p className="mt-4 max-w-xl text-muted-foreground md:text-lg">
+                <p className="mt-2 max-w-xl text-muted-foreground md:text-lg">
                     {t.p_small}
                 </p>
-                <Button asChild size="lg" className="mt-8">
+                <Button asChild size="lg" className="mt-6">
                     <Link href="/contact">{t.contactUs}</Link>
                 </Button>
             </div>
