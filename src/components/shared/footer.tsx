@@ -103,7 +103,7 @@ export default function Footer() {
       </div>
       <div className="border-t bg-muted/50">
         <div className="container flex flex-col md:flex-row items-center justify-between py-2 text-sm text-muted-foreground gap-4">
-          <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
+          <p className="text-black">&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
           <div className="flex items-center gap-4 sm:gap-6">
                 <div className="flex items-center gap-4">
                     <Link href="#" aria-label="Facebook" className="text-blue-600 transition-colors hover:text-blue-700" target="_blank" rel="noopener noreferrer">
