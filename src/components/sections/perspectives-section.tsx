@@ -126,7 +126,7 @@ export default function PerspectivesSection() {
 
   return (
     <section id="insights" className="py-6 md:py-8 bg-background">
-      <div className="container px-0 sm:px-8">
+      <div className="container px-0 sm:px-0">
         <div className="text-center mb-8 px-8 sm:px-0">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-black mb-2">
               {sectionText[language].heading}
@@ -146,12 +146,12 @@ export default function PerspectivesSection() {
           onMouseLeave={plugin.current.reset}
           className="w-full"
         >
-          <CarouselContent className="-ml-2 sm:-ml-4">
+          <CarouselContent className="-ml-4 sm:-ml-4">
             {insights.map((insight, index) => {
               const image = PlaceHolderImages.find(p => p.id === insight.imageId);
 
               return (
-                <CarouselItem key={index} className="pl-2 sm:pl-4 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 group aspect-[9/16] sm:aspect-[9/16] md:aspect-[4/5]">
+                <CarouselItem key={index} className="pl-4 sm:pl-4 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-[22%] group aspect-[9/16] sm:aspect-[9/16] md:aspect-[4/5]">
                   <Card className="relative h-full w-full overflow-hidden rounded-lg">
                     {image && (
                       <Image
@@ -176,8 +176,8 @@ export default function PerspectivesSection() {
               );
             })}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex left-[-20px] bg-primary text-primary-foreground hover:bg-primary/90" />
-          <CarouselNext className="hidden md:flex right-[-20px] bg-primary text-primary-foreground hover:bg-primary/90" />
+          <CarouselPrevious className="flex left-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground hover:bg-primary/90" />
+          <CarouselNext className="flex right-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground hover:bg-primary/90" />
         </Carousel>
       </div>
     </section>
