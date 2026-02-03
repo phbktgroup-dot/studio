@@ -51,8 +51,8 @@ export default function OurWorkSection() {
 
   return (
     <section id="work" className="py-6 md:py-8 bg-muted/30">
-      <div className="container">
-        <div className="text-center mb-8">
+      <div className="container px-0 sm:px-8">
+        <div className="text-center mb-8 px-8 sm:px-0">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-black mb-2">
                 {text.heading}
             </h3>
@@ -67,11 +67,11 @@ export default function OurWorkSection() {
           }}
           className="w-full"
         >
-          <CarouselContent className="-ml-2">
+          <CarouselContent className="-ml-2 sm:-ml-4">
             {projects.map((project, index) => {
               const image = PlaceHolderImages.find(p => p.id === project.imageId);
               return (
-                <CarouselItem key={index} className="pl-2 basis-1/2 md:basis-1/3 lg:basis-1/5">
+                <CarouselItem key={index} className="pl-2 sm:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5">
                   <div className="p-1 h-full">
                     <Card className="overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-full">
                       {image && (
@@ -82,7 +82,7 @@ export default function OurWorkSection() {
                               width={400}
                               height={225}
                               data-ai-hint={image.imageHint}
-                              className="w-full object-cover aspect-[4/5] sm:aspect-video"
+                              className="w-full object-cover aspect-[9/16] sm:aspect-video"
                           />
                         </Link>
                       )}
