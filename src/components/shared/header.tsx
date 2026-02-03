@@ -237,7 +237,7 @@ export default function Header() {
                       <Logo className="h-[48px]" />
                     )}
                   </div>
-                  <div className="flex flex-col gap-2 text-base font-medium p-4">
+                  <div className="flex flex-col items-center gap-2 text-sm font-medium p-4">
                     {navLinks.map((link) => (
                       <Link
                         key={link.href}
