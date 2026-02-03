@@ -548,7 +548,7 @@ const sidebarMenuButtonVariants = cva(
       },
       size: {
         default: "h-8 text-[11px] md:text-xs",
-        sm: "h-7 text-[9px] md:text-xs",
+        sm: "h-7 text-[8px] md:text-xs",
         lg: "h-12 text-[11px] md:text-xs group-data-[collapsible=icon]:!p-0",
       },
     },
@@ -787,7 +787,3 @@ export {
   SidebarTrigger,
   useSidebar,
 }
-
-    
-
-    
