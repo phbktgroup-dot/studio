@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -225,9 +226,18 @@ export default function Header() {
                     <span className="sr-only">Toggle navigation menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[50vw] p-4 top-16 h-[calc(100vh-4rem)]">
+                <SheetContent side="right" className="w-[35vw] p-0 top-16 h-[calc(100vh-4rem)]">
                   <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                  <div className="flex flex-col gap-2 text-[10px] font-medium">
+                  <div className="flex justify-center py-2 border-b">
+                     {logoLoading ? (
+                      <div className="h-[48px] w-[150px]" />
+                    ) : logoUrl ? (
+                      <img src={logoUrl} alt="PHBKT Group" className="h-[48px] w-auto object-contain" />
+                    ) : (
+                      <Logo className="h-[48px]" />
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-2 text-xs font-medium p-4">
                     {navLinks.map((link) => (
                       <Link
                         key={link.href}
