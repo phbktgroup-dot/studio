@@ -10,19 +10,22 @@ import { useLanguage } from '@/context/language-provider';
 
 const text = {
   mr: {
-    p: "तुमची दृष्टी प्रत्यक्षात आणूया. तुमचा डिजिटल प्रवास सुरू करण्यासाठी आमच्याशी संपर्क साधा.",
+    p_large: "चला, मिळून यशाचे नवे शिखर गाठूया.",
+    p_small: "तुमची दृष्टी प्रत्यक्षात आणूया. तुमचा डिजिटल प्रवास सुरू करण्यासाठी आमच्याशी संपर्क साधा.",
     contactUs: "संपर्क साधा",
     footerDescription: "नाविन्यपूर्ण आर्थिक आणि तांत्रिक उपायांसह तुमच्या व्यवसायाला बळकटी देणारे.",
     getInTouchDirectly: "थेट संपर्कात रहा",
   },
   en: {
-    p: "Let's turn your vision into a reality. Get in touch to start your digital journey.",
+    p_large: "Let's build the next peak together.",
+    p_small: "Let's turn your vision into a reality. Get in touch to start your digital journey.",
     contactUs: "Contact Us",
     footerDescription: "Empowering your business with innovative financial and technological solutions.",
     getInTouchDirectly: "Get in Touch Directly",
   },
   hi: {
-    p: "आइए आपकी दृष्टि को वास्तविकता में बदलें। अपनी डिजिटल यात्रा शुरू करने के लिए संपर्क करें।",
+    p_large: "आइए, मिलकर सफलता का नया शिखर छुएँ।",
+    p_small: "आइए आपकी दृष्टि को वास्तविकता में बदलें। अपनी डिजिटल यात्रा शुरू करने के लिए संपर्क करें।",
     contactUs: "संपर्क करें",
     footerDescription: "नवोन्मेषी वित्तीय और तकनीकी समाधानों के साथ आपके व्यवसाय को सशक्त बनाना।",
     getInTouchDirectly: "सीधे संपर्क में रहें",
@@ -93,8 +96,11 @@ export default function Footer() {
             
             <div className="flex flex-col justify-center items-center text-center">
                 <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary max-w-md">
-                    {t.p}
+                    {t.p_large}
                 </h2>
+                <p className="mt-4 max-w-xl text-muted-foreground md:text-lg">
+                    {t.p_small}
+                </p>
                 <Button asChild size="lg" className="mt-8">
                     <Link href="/contact">{t.contactUs}</Link>
                 </Button>
