@@ -112,7 +112,7 @@ export default function PremiumServicesSection() {
             <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 {sectionTitleText[language]}
             </h3>
-            <h2 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-primary mt-2">
+            <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary">
                 {headingText[language]}
             </h2>
              <p className="mt-4 max-w-3xl mx-auto text-muted-foreground">
