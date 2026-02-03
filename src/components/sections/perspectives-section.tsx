@@ -64,15 +64,15 @@ const insights = [
 const sectionText = {
   en: {
     heading: "Perspectives & Insights",
-    subheading: "Exploring tomorrow's trends, today."
+    subheading: "Understanding today’s ideas, trends, and signals to thoughtfully shape the future we build tomorrow."
   },
   mr: {
     heading: "दृष्टिकोन आणि अंतर्दृष्टी",
-    subheading: "भविष्यातील झलक"
+    subheading: "आजच्या कल्पना, प्रवाह आणि संकेत समजून घेऊन, आपण उद्याचे भविष्य जाणीवपूर्वक घडवतो."
   },
   hi: {
     heading: "भविष्य की सोच",
-    subheading: "कल के रुझानों की खोज, आज।"
+    subheading: "आज के विचारों, रुझानों और संकेतों को समझकर, हम कल के भविष्य को सोच-समझकर गढ़ते हैं।"
   },
 };
 
