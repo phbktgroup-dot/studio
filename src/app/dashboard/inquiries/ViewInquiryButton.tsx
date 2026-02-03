@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -12,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
 import { format } from "date-fns";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 
 export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
     return (
@@ -56,6 +58,22 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
                             {inquiry.vision}
                         </div>
                     </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label className="text-right text-muted-foreground">Status</Label>
+                        <div className="col-span-3">
+                            <Badge variant={inquiry.status === 'completed' ? 'outline' : inquiry.status === 'in_process' ? 'default' : 'secondary'} className="font-normal capitalize">
+                                {inquiry.status?.replace('_', ' ') || 'Pending'}
+                            </Badge>
+                        </div>
+                    </div>
+                    {inquiry.resolution && (
+                        <div className="grid grid-cols-4 items-start gap-4">
+                            <Label className="text-right text-muted-foreground mt-1">Resolution</Label>
+                            <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-sm whitespace-pre-wrap break-words">
+                                {inquiry.resolution}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </DialogContent>
         </Dialog>

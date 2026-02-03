@@ -307,3 +307,79 @@ export async function deleteUser(userId: string): Promise<{ error?: string; succ
   revalidatePath('/dashboard/users');
   return { success: true };
 }
+
+export async function updateInquiryStatus(inquiryId: string, status: 'pending' | 'in_process' | 'completed'): Promise<{ error?: string; success?: boolean }> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    return { error: 'Supabase admin credentials are not configured.' };
+  }
+
+  const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+  
+  const { error } = await supabaseAdmin
+    .from('inquiries')
+    .update({ status: status })
+    .eq('id', inquiryId);
+
+  if (error) {
+    return { error: `Failed to update inquiry status: ${error.message}` };
+  }
+
+  revalidatePath('/dashboard/inquiries');
+  revalidatePath('/dashboard');
+  return { success: true };
+}
+
+
+const ResolutionSchema = z.object({
+  inquiryId: z.string().uuid({ message: "Invalid Inquiry ID." }),
+  resolution: z.string().min(10, { message: "Resolution must be at least 10 characters." }),
+});
+
+export type ResolutionState = {
+  message?: string | null;
+  errors?: {
+    resolution?: string[];
+  };
+  isSuccess?: boolean;
+};
+
+export async function updateInquiryResolution(prevState: ResolutionState, formData: FormData): Promise<ResolutionState> {
+    const validatedFields = ResolutionSchema.safeParse({
+        inquiryId: formData.get("inquiryId"),
+        resolution: formData.get("resolution"),
+    });
+
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            isSuccess: false,
+        };
+    }
+    
+    const { inquiryId, resolution } = validatedFields.data;
+
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !serviceRoleKey) {
+        return { message: 'Supabase admin credentials are not configured.', isSuccess: false };
+    }
+
+    const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+    
+    const { error } = await supabaseAdmin
+        .from('inquiries')
+        .update({ resolution: resolution })
+        .eq('id', inquiryId);
+
+    if (error) {
+        return { message: `Failed to update resolution: ${error.message}`, isSuccess: false };
+    }
+
+    revalidatePath('/dashboard/inquiries');
+    revalidatePath('/dashboard');
+    return { isSuccess: true, message: 'Resolution has been saved successfully.' };
+}
