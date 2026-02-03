@@ -88,11 +88,11 @@ const sectionText = {
     subheading: "Understanding today’s ideas, trends, and signals to thoughtfully shape the future we build tomorrow."
   },
   mr: {
-    heading: "विचार आणि विश्लेषण",
-    subheading: "आजच्या कल्पना, प्रवाह आणि संकेत समजून घेऊन, आपण उद्याचे भविष्य जाणीवपूर्वक घडवतो."
+    heading: "दृष्टिकोन आणि अंतर्दृष्टी",
+    subheading: "आजच्या कल्पना, ट्रेंड्स आणि संकेत समजून घेऊन, आपण उद्याचे भविष्य जाणीवपूर्वक घडवतो."
   },
   hi: {
-    heading: "विचार और विश्लेषण",
+    heading: "दृष्टिकोण और अंतर्दृष्टि",
     subheading: "आज के विचारों, रुझानों और संकेतों को समझकर, हम कल के भविष्य को सोच-समझकर गढ़ते हैं।"
   },
 };
@@ -152,7 +152,7 @@ export default function PerspectivesSection() {
 
               return (
                 <CarouselItem key={index} className="pl-2 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 group">
-                  <Card className="relative aspect-[3/4] md:aspect-[4/5] w-full overflow-hidden rounded-lg">
+                  <Card className="relative aspect-[2/3] md:aspect-[4/5] w-full overflow-hidden rounded-lg">
                     {image && (
                       <Image
                         src={image.imageUrl}
