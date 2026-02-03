@@ -39,7 +39,7 @@ export default function OurWorkSection() {
   const { language } = useLanguage();
   const text = sectionText[language];
   const plugin = useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: false })
+    Autoplay({ delay: 2000, stopOnInteraction: true })
   );
 
   const getTitle = (project: (typeof projects)[0]) => {
@@ -78,7 +78,7 @@ export default function OurWorkSection() {
             {projects.map((project, index) => {
               const image = PlaceHolderImages.find(p => p.id === project.imageId);
               return (
-                <CarouselItem key={index} className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/5 group aspect-[9/20] sm:aspect-[9/16] md:aspect-[4/5]">
+                <CarouselItem key={index} className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/5 group aspect-[9/18] sm:aspect-[9/16] md:aspect-[4/5]">
                   <div className="p-px h-full">
                     <Card className="overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-full">
                       {image && (
@@ -95,12 +95,12 @@ export default function OurWorkSection() {
                           </div>
                         </Link>
                       )}
-                      <CardContent className="p-2 flex flex-col flex-grow justify-start sm:justify-between">
+                      <CardContent className="p-2 pt-1 flex flex-col flex-grow justify-start sm:justify-between">
                         <div>
                           <h3 className="text-base font-bold font-headline text-sm h-10">{getTitle(project)}</h3>
                           <p className="mt-1 text-xs text-muted-foreground h-10 overflow-hidden">{getDescription(project)}</p>
                         </div>
-                        <Button variant="outline" size="sm" className="mt-1 sm:mt-0 self-start text-xs">
+                        <Button variant="outline" size="sm" className="mt-2 self-start text-xs">
                           <Link href={`/work/${project.slug}`}>{text.viewDemo}</Link>
                         </Button>
                       </CardContent>
