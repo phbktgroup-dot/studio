@@ -134,6 +134,8 @@ export default function SignupPage() {
                 name="mobileNumber"
                 type="tel"
                 required
+                maxLength={10}
+                pattern="[0-9]{10}"
                 aria-describedby="mobileNumber-error"
               />
               {state.errors?.mobileNumber && (

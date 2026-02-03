@@ -58,7 +58,7 @@ export async function handleGenerateRoadmap(prevState: RoadmapState, formData: F
 
 const SignupSchema = z.object({
   fullName: z.string().min(2, { message: "Full name must be at least 2 characters." }),
-  mobileNumber: z.string().min(10, { message: "Mobile number must be at least 10 digits." }),
+  mobileNumber: z.string().regex(/^\d{10}$/, { message: "Mobile number must be 10 digits." }),
   email: z.string().email({ message: "Please enter a valid email." }),
   password: z.string().min(6, { message: "Password must be at least 6 characters." }),
   confirmPassword: z.string().min(6, { message: "Confirm password must be at least 6 characters." })
