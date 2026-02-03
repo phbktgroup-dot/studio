@@ -80,22 +80,24 @@ export default function Footer() {
             {t.footerDescription}
           </p>
           
-          <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary mt-2">
+          <h2 className="font-headline text-2xl md:text-3xl font-bold tracking-tighter text-primary mt-2">
             {t.p_large}
           </h2>
           <p className="mt-1 max-w-2xl mx-auto text-sm text-black">
             {t.p_small}
           </p>
-          <Button asChild size="sm" className="mt-4">
-            <Link href="/contact">{t.contactUs}</Link>
-          </Button>
-          <div className="mt-2 flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
-              <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+          <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button asChild size="sm">
+              <Link href="/contact">{t.contactUs}</Link>
+            </Button>
+            <div className="flex items-center gap-4">
+              <a href="mailto:info@phbkt.com" className="text-sm font-bold text-black hover:text-primary transition-colors">
                   info@phbkt.com
               </a>
-              <a href="tel:+919552256325" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a href="tel:+919552256325" className="text-sm font-bold text-black hover:text-primary transition-colors">
                 +91 9552256325
               </a>
+            </div>
           </div>
         </div>
       </div>
