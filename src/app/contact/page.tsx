@@ -180,8 +180,8 @@ export default function ContactPage() {
                 <div className="absolute inset-0 bg-black/50" />
             </div>
         )}
-        <div className="container relative z-10">
-          <div className="max-w-2xl mx-auto">
+        <div className="container px-4 sm:px-8 relative z-10">
+          <div className="max-w-3xl mx-auto">
               <header className="text-center mb-8">
                   <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-white">
                       {t.pageTitle}
