@@ -84,7 +84,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
   const image = PlaceHolderImages.find(p => p.id === imageId);
 
   return (
-    <Card className="group flex h-[280px] w-full flex-col overflow-hidden rounded-lg border bg-card shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+    <Card className="group flex h-[260px] w-full flex-col overflow-hidden rounded-lg border bg-card shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
       {image && (
           <Image
               src={image.imageUrl}
@@ -96,8 +96,8 @@ const ServiceCard = ({ service }: { service: Service }) => {
           />
       )}
       <div className="p-3 text-center flex-grow flex flex-col justify-center">
-        <h3 className="font-bold flex items-center justify-center text-center leading-tight text-xs md:text-base">{title}</h3>
-        <p className="mt-1 leading-tight text-muted-foreground text-[11px] md:text-sm">{description}</p>
+        <h3 className="font-bold flex items-center justify-center text-center leading-tight text-[15px] md:text-xl">{title}</h3>
+        <p className="mt-1 leading-tight text-muted-foreground text-[13px] md:text-lg">{description}</p>
       </div>
     </Card>
   );
