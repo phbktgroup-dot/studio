@@ -93,9 +93,9 @@ const ServiceCard = ({ service }: { service: Service }) => {
               className="w-full object-cover aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
           />
       )}
-      <div className="p-4 text-center">
-        <h3 className="h-12 text-lg font-bold flex items-center justify-center">{title}</h3>
-        <p className="mt-2 h-24 text-sm text-muted-foreground">{description}</p>
+      <div className="p-2 text-center">
+        <h3 className="text-xs font-bold flex items-center justify-center min-h-[30px]">{title}</h3>
+        <p className="mt-1 text-[10px] leading-tight text-muted-foreground overflow-hidden h-14">{description}</p>
       </div>
     </Card>
   );
@@ -165,7 +165,7 @@ export default function PremiumServicesSection() {
         </div>
         <div className="container">
           {/* Mobile View - Grid */}
-          <div className="grid grid-cols-1 gap-4 sm:hidden">
+          <div className="grid grid-cols-3 gap-2 sm:hidden">
             {services.map((service, index) => (
               <div key={index}>
                 {renderServiceCard(service)}
