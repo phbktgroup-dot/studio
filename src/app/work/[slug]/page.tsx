@@ -11,7 +11,6 @@ import { projects } from '@/lib/projects-data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { notFound, useParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { DemoRequestDialog } from '@/components/shared/DemoRequestDialog';
 
 export default function WorkDetailPage() {
   const params = useParams();
@@ -75,12 +74,16 @@ export default function WorkDetailPage() {
                         <p>Our goal was to create a best-in-class digital product that not only met the client's immediate needs but also provided a scalable foundation for future growth and innovation.</p>
                     </div>
                     <div className="mt-8 flex gap-4">
-                        <DemoRequestDialog projectName={getTitle(project)}>
-                            <Button size="lg"><Eye className="mr-2" />{t.liveDemo}</Button>
-                        </DemoRequestDialog>
-                        <DemoRequestDialog projectName={getTitle(project)}>
-                            <Button size="lg" variant="outline"><Code className="mr-2" />{t.viewCode}</Button>
-                        </DemoRequestDialog>
+                        <Button size="lg" asChild>
+                           <Link href="/contact">
+                                <Eye className="mr-2" />{t.liveDemo}
+                            </Link>
+                        </Button>
+                        <Button size="lg" variant="outline" asChild>
+                            <Link href="/contact">
+                                <Code className="mr-2" />{t.viewCode}
+                            </Link>
+                        </Button>
                     </div>
                 </div>
                 <div>
