@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card } from '@/components/ui/card';
@@ -35,7 +36,7 @@ const servicesData = {
     { title: "24/7 IT Support", description: "Dedicated technical assistance to ensure zero downtime.", imageId: "service_support" },
   ],
   mr: [
-    { title: "Website आणि App Development", description: "तुमच्या व्यवसायाच्या गरजेनुसार तयार केलेले वेगवान, सुरक्षित आणि स्केलेबल डिजिटल प्लॅटफॉर्म — जे ग्राहक आकर्षित करतात आणि विक्री वाढवतात.", imageId: "service_web_dev" },
+    { title: "Website आणि App Development", description: "तुमच्या व्यवसायाच्या गरजेनुसार तयार केलेले वेगवान, सुरक्षित आणि स्केलेबल डिजिटल प्लॅटफॉर्म.", imageId: "service_web_dev" },
     { title: "Marketing आणि Branding", description: "डेटा-आधारित मार्केटिंग रणनीती ज्यामुळे तुमच्या ब्रँडची ओळख, विश्वास आणि सातत्यपूर्ण वाढ होते.", imageId: "service_marketing" },
     { title: "Tax आणि Compliance", description: "GST, नोंदणी आणि सर्व कायदेशीर प्रक्रिया — तज्ञांच्या मार्गदर्शनाखाली, ताणतणावाशिवाय.", imageId: "service_tax" },
     { title: "Business Setup", description: "कल्पनेपासून व्यवसाय सुरू होईपर्यंत — एक मजबूत सुरुवात करण्यासाठी संपूर्ण एंड-टू-एंड सहकार्य.", imageId: "service_biz_setup" },
@@ -84,7 +85,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
   const image = PlaceHolderImages.find(p => p.id === imageId);
 
   return (
-    <Card className="group flex h-[260px] w-full flex-col overflow-hidden rounded-lg border bg-card shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+    <Card className="group flex h-full w-full flex-col overflow-hidden rounded-lg border bg-card shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
       {image && (
           <Image
               src={image.imageUrl}
@@ -92,7 +93,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
               width={400}
               height={400}
               data-ai-hint={image.imageHint}
-              className="w-full object-cover aspect-[3/5] sm:aspect-[1] transition-transform duration-500 group-hover:scale-105 h-[55%] sm:h-[40%] object-center"
+              className="w-full object-cover aspect-[3/5] sm:aspect-[1] transition-transform duration-500 group-hover:scale-105 h-[40%] object-center"
           />
       )}
       <div className="p-3 text-center flex-grow flex flex-col justify-center">
