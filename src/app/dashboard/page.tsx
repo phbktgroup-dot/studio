@@ -82,6 +82,8 @@ export default function DashboardPage() {
                 let message = queryError.message;
                 if (queryError.message.includes('inquiries') && (queryError.message.includes('does not exist') || queryError.message.includes('schema cache'))) {
                     message = "The 'inquiries' table does not seem to exist in the database. An administrator needs to create it.";
+                } else if (queryError.message.includes('column "mobile" of relation "inquiries" does not exist')) {
+                    message = "The 'inquiries' table is missing a 'mobile' column. An administrator needs to add it.";
                 }
                 setError({ title: 'Error Fetching Inquiries', message });
             } else {
@@ -161,7 +163,7 @@ export default function DashboardPage() {
        <h1 className="text-xl font-bold font-headline">Dashboard</h1>
        <Card>
         <CardHeader>
-          <CardTitle className="text-xl">My Inquiries</CardTitle>
+          <CardTitle className="text-base">My Inquiries</CardTitle>
           <CardDescription className="text-xs">
             Your submitted inquiries.
           </CardDescription>
@@ -192,7 +194,7 @@ export default function DashboardPage() {
                         <TableCell className="py-0 px-2">{inquiry.email}</TableCell>
                         <TableCell className="py-0 px-2">{inquiry.mobile || 'N/A'}</TableCell>
                         <TableCell className="py-0 px-2 capitalize">
-                            <Badge variant="secondary" className="font-normal">{inquiry.purpose}</Badge>
+                            <Badge variant="secondary" className="font-normal">{inquiry.purpose.replace(/-/g, ' ')}</Badge>
                         </TableCell>
                         <TableCell className="py-0 px-2">
                             <Badge variant={statusBadgeVariant[effectiveStatus]} className="font-normal capitalize">

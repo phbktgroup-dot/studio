@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -49,7 +50,7 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground">Purpose</Label>
-                        <div className="col-span-3 font-medium capitalize">{inquiry.purpose}</div>
+                        <div className="col-span-3 font-medium capitalize">{inquiry.purpose.replace(/-/g, ' ')}</div>
                     </div>
                      <div className="grid grid-cols-4 items-start gap-4">
                         <Label className="text-right text-muted-foreground mt-1">Vision</Label>

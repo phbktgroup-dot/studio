@@ -141,6 +141,7 @@ const InquirySchema = z.object({
   firstName: z.string().min(1, { message: "First name is required." }),
   lastName: z.string().min(1, { message: "Last name is required." }),
   email: z.string().email({ message: "Please enter a valid email." }),
+  mobileNumber: z.string().optional(),
   industry: z.string().min(1, { message: "Please select an industry." }),
   help: z.string().min(10, { message: "Message must be at least 10 characters long." }),
   userId: z.string().optional(),
@@ -152,6 +153,7 @@ export type InquiryState = {
     firstName?: string[];
     lastName?: string[];
     email?: string[];
+    mobileNumber?: string[];
     industry?: string[];
     help?: string[];
     _form?: string[];
@@ -164,6 +166,7 @@ export async function handleInquiry(prevState: InquiryState, formData: FormData)
     firstName: formData.get("firstName"),
     lastName: formData.get("lastName"),
     email: formData.get("email"),
+    mobileNumber: formData.get("mobileNumber"),
     industry: formData.get("industry"),
     help: formData.get("help"),
     userId: formData.get("userId"),
@@ -175,7 +178,7 @@ export async function handleInquiry(prevState: InquiryState, formData: FormData)
     };
   }
 
-  const { firstName, lastName, email, industry, help, userId } = validatedFields.data;
+  const { firstName, lastName, email, mobileNumber, industry, help, userId } = validatedFields.data;
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
@@ -189,6 +192,7 @@ export async function handleInquiry(prevState: InquiryState, formData: FormData)
   const insertData: any = { 
     name: `${firstName} ${lastName}`, 
     email,
+    mobile: mobileNumber,
     purpose: industry,
     vision: help,
   };
@@ -204,6 +208,8 @@ export async function handleInquiry(prevState: InquiryState, formData: FormData)
         errorMessage = "The 'inquiries' table does not seem to exist in your database. An administrator needs to create it.";
     } else if (error.message.includes('violates row-level security policy')) {
         errorMessage = "Row-level security is preventing the submission. Please check the policies for the 'inquiries' table.";
+    } else if (error.message.includes('column "mobile" of relation "inquiries" does not exist')) {
+        errorMessage = "The 'mobile' column does not exist in your 'inquiries' table. Please add a column named 'mobile' of type 'text'.";
     }
     return { errors: { _form: [errorMessage] } };
   }
