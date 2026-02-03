@@ -80,7 +80,7 @@ export default function Footer() {
             {t.footerDescription}
           </p>
           
-          <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary mt-2">
+          <h2 className="font-headline text-2xl md:text-3xl font-bold tracking-tighter text-primary mt-2">
             {t.p_large}
           </h2>
           <p className="mt-1 max-w-2xl mx-auto text-muted-foreground">
