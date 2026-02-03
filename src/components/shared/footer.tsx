@@ -86,15 +86,15 @@ export default function Footer() {
           <p className="mt-1 max-w-2xl mx-auto text-sm text-black">
             {t.p_small}
           </p>
-          <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-4 flex flex-col items-center justify-center gap-2">
             <Button asChild size="sm">
               <Link href="/contact">{t.contactUs}</Link>
             </Button>
             <div className="flex items-center gap-4">
-              <a href="mailto:info@phbkt.com" className="text-sm font-bold text-black hover:text-primary transition-colors">
+              <a href="mailto:info@phbkt.com" className="text-sm text-black hover:text-primary transition-colors">
                   info@phbkt.com
               </a>
-              <a href="tel:+919552256325" className="text-sm font-bold text-black hover:text-primary transition-colors">
+              <a href="tel:+919552256325" className="text-sm text-black hover:text-primary transition-colors">
                 +91 9552256325
               </a>
             </div>
