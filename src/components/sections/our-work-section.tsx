@@ -82,7 +82,7 @@ export default function OurWorkSection() {
                               width={400}
                               height={225}
                               data-ai-hint={image.imageHint}
-                              className="w-full object-cover aspect-[9/16] sm:aspect-video"
+                              className="w-full object-cover aspect-square sm:aspect-video"
                           />
                         </Link>
                       )}
