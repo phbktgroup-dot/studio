@@ -132,6 +132,7 @@ export default function PremiumServicesSection() {
                 const isMarketing = service.imageId === "service_marketing";
                 const isTax = service.imageId === "service_tax";
                 const isBizSetup = service.imageId === "service_biz_setup";
+                const isUiUx = service.imageId === "service_ui_ux";
                 
                 let href = "#";
                 if (isWebAppDev) {
@@ -142,6 +143,8 @@ export default function PremiumServicesSection() {
                     href = "/services/tax-and-compliance";
                 } else if (isBizSetup) {
                     href = "/services/business-setup";
+                } else if (isUiUx) {
+                    href = "/services/ui-ux-design";
                 }
 
                 
