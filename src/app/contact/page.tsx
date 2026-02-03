@@ -181,7 +181,7 @@ export default function ContactPage() {
             </div>
         )}
         <div className="container px-4 sm:px-8 relative z-10">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
               <header className="text-center mb-8">
                   <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-white">
                       {t.pageTitle}
