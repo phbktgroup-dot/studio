@@ -22,42 +22,63 @@ const insights = [
     mrTitle: "फिनटेकचे भविष्य",
     hiTitle: "फिनटेक का भविष्य",
     imageId: "perspective_1",
+    enDescription: "Exploring the technologies and trends shaping the future of finance.",
+    mrDescription: "आर्थिक सेवांच्या भविष्याला आकार देणारे तंत्रज्ञान आणि ट्रेंड्सचे अन्वेषण.",
+    hiDescription: "वित्त के भविष्य को आकार देने वाली प्रौद्योगिकियों और प्रवृत्तियों की खोज।",
   },
   {
     enTitle: "AI in Business Strategy",
     mrTitle: "व्यवसाय धोरणातील AI",
     hiTitle: "व्यापार रणनीति में एआई",
     imageId: "perspective_2",
+    enDescription: "How artificial intelligence is revolutionizing decision-making and operations.",
+    mrDescription: "कृत्रिम बुद्धिमत्ता निर्णयक्षमता आणि कार्यप्रणालीमध्ये कशी क्रांती घडवत आहे.",
+    hiDescription: "कैसे कृत्रिम बुद्धिमत्ता निर्णय लेने और संचालन में क्रांति ला रही है।",
   },
   {
     enTitle: "Global Market Trends",
     mrTitle: "जागतिक बाजारातील ट्रेंड",
     hiTitle: "वैश्विक बाजार के रुझान",
     imageId: "perspective_3",
+    enDescription: "Navigating the complexities of the global market for business growth.",
+    mrDescription: "व्यवसाय वाढीसाठी जागतिक बाजारातील गुंतागुंत समजून घेणे.",
+    hiDescription: "व्यापार वृद्धि के लिए वैश्विक बाजार की जटिलताओं को नेविगेट करना।",
   },
   {
     enTitle: "The Startup Ecosystem",
     mrTitle: "स्टार्टअप इकोसिस्टम",
     hiTitle: "स्टार्टअप पारिस्थितिकी तंत्र",
     imageId: "perspective_4",
+    enDescription: "Insights into building and scaling a successful startup in today's landscape.",
+    mrDescription: "आजच्या काळात यशस्वी स्टार्टअप तयार करण्यासाठी आणि वाढवण्यासाठी उपयुक्त माहिती.",
+    hiDescription: "आज के परिदृश्य में एक सफल स्टार्टअप बनाने और उसे बढ़ाने की अंतर्दृष्टि।",
   },
   {
     enTitle: "Sustainable Growth Models",
     mrTitle: "शाश्वत वाढीचे मॉडेल",
     hiTitle: "सतत विकास मॉडल",
     imageId: "perspective_5",
+    enDescription: "Strategies for building businesses that are both profitable and responsible.",
+    mrDescription: "नफा आणि जबाबदारी यांचा समतोल साधणाऱ्या व्यवसायांसाठीच्या यशस्वी रणनीती.",
+    hiDescription: "लाभदायक और जिम्मेदार दोनों तरह के व्यवसायों के निर्माण के लिए रणनीतियाँ।",
   },
   {
     enTitle: "Digital Transformation",
     mrTitle: "डिजिटल परिवर्तन",
     hiTitle: "डिजिटल परिवर्तन",
     imageId: "service_web_dev",
+    enDescription: "The roadmap for integrating digital technology into all areas of a business.",
+    mrDescription: "व्यवसायाच्या सर्व क्षेत्रांमध्ये डिजिटल तंत्रज्ञानाचे एकत्रीकरण करण्यासाठीचा रोडमॅप.",
+    hiDescription: "व्यवसाय के सभी क्षेत्रों में डिजिटल प्रौद्योगिकी को एकीकृत करने का रोडमैप।",
   },
   {
     enTitle: "Cybersecurity in 2024",
     mrTitle: "२०२४ मध्ये सायबर सुरक्षा",
     hiTitle: "2024 में साइबर सुरक्षा",
     imageId: "service_cloud",
+    enDescription: "Understanding and mitigating the latest threats in the digital world.",
+    mrDescription: "डिजिटल जगातील नवीनतम धोके समजून घेणे आणि ते कमी करणे.",
+    hiDescription: "डिजिटल दुनिया में नवीनतम खतरों को समझना और उन्हें कम करना।",
   },
 ];
 
@@ -108,10 +129,10 @@ export default function PerspectivesSection() {
     return insight.enTitle;
   }
   
-  const getSubtitle = (insight: (typeof insights)[0]) => {
-    if (language === 'hi') return insight.enTitle;
-    if (language === 'mr') return insight.enTitle;
-    return insight.mrTitle;
+  const getDescription = (insight: (typeof insights)[0]) => {
+    if (language === 'hi') return insight.hiDescription;
+    if (language === 'mr') return insight.mrDescription;
+    return insight.enDescription;
   }
 
 
@@ -180,7 +201,7 @@ export default function PerspectivesSection() {
                             )}
                             style={{ transitionDelay: isActive ? '250ms' : '0ms' }}
                             >
-                            {getSubtitle(insight)}
+                            {getDescription(insight)}
                           </p>
                         </div>
                     </div>
