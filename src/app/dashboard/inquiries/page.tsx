@@ -58,15 +58,7 @@ export default function InquiriesPage() {
           return;
       }
       
-      const userRole = currentUser.user_metadata?.role;
-
-      let query = supabase.from('inquiries').select('*').order('created_at', { ascending: false });
-
-      if (userRole !== 'admin') {
-        query = query.eq('user_id', currentUser.id);
-      }
-
-      const { data, error: queryError } = await query;
+      const { data, error: queryError } = await supabase.from('inquiries').select('*').order('created_at', { ascending: false });
 
       if (queryError) {
         let message = queryError.message;
@@ -92,8 +84,6 @@ export default function InquiriesPage() {
       authListener.subscription.unsubscribe();
     };
   }, []);
-
-  const userRole = user?.user_metadata?.role;
 
   if (loading) {
     return (
@@ -132,9 +122,9 @@ export default function InquiriesPage() {
       <h1 className="text-lg font-bold font-headline">Inquiries</h1>
        <Card>
         <CardHeader>
-          <CardTitle>Received Inquiries</CardTitle>
+          <CardTitle>All Received Inquiries</CardTitle>
           <CardDescription>
-            {userRole === 'admin' ? 'All inquiries submitted through the contact form.' : 'Your submitted inquiries.'}
+            All inquiries submitted through the contact form.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -174,7 +164,7 @@ export default function InquiriesPage() {
                     <Mail className="h-12 w-12 text-muted-foreground" />
                     <h3 className="mt-4 text-lg font-semibold">No Inquiries Found</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                        {userRole === 'admin' ? 'There are no inquiries yet.' : 'You have not submitted any inquiries.'}
+                        There are no inquiries yet.
                     </p>
                 </div>
             )}

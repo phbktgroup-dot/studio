@@ -92,7 +92,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (user) {
       const userRole = user.user_metadata?.role;
-      const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/hero-section';
+      const isAdminRoute = pathname === '/dashboard/users' || pathname === '/dashboard/hero-section' || pathname.startsWith('/dashboard/inquiries');
       if (isAdminRoute && userRole !== 'admin') {
         router.push('/dashboard');
       }
@@ -178,14 +178,16 @@ function DashboardUI({ children }: { children: ReactNode }) {
                       </Link>
                   </SidebarMenuButton>
                   </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} size="sm" tooltip="Inquiries">
-                        <Link href="/dashboard/inquiries">
-                        <Mail />
-                        <span>Inquiries</span>
-                        </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                  {userRole === 'admin' && (
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} size="sm" tooltip="Inquiries">
+                            <Link href="/dashboard/inquiries">
+                            <Mail />
+                            <span>Inquiries</span>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )}
                   <SidebarMenuItem>
                   <SidebarMenuButton isActive={pathname === '/dashboard/services'} size="sm" tooltip="Services" disabled>
                       <Briefcase />
