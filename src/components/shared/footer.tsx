@@ -64,7 +64,7 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="border-t bg-muted/30">
-      <div className="container py-8 md:py-12 text-center">
+      <div className="container py-6 md:py-8 text-center">
         <div className="flex flex-col items-center gap-2">
           <Link href="/" className="inline-block">
              {logoLoading ? (
