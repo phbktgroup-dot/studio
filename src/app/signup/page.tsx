@@ -22,6 +22,7 @@ import { handleSignup, type SignupState } from "@/lib/actions";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { supabase } from "@/lib/supabase";
 
+export const dynamic = 'force-dynamic';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
