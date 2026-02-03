@@ -131,10 +131,10 @@ export default function DedicatedSolutionsSection() {
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div className="order-2 md:order-1 px-8 md:px-0">
                   <Card className="shadow-lg">
-                    <CardContent className="p-6 text-center md:text-left">
+                    <CardContent className="p-8 text-center md:text-left">
                       <h3 className="font-headline text-xl md:text-3xl font-bold text-primary">{text.shops.title}</h3>
                       <p className="mt-2 text-base md:text-lg text-muted-foreground">{text.shops.description}</p>
-                      <ul className="mt-4 space-y-2 inline-block text-left">
+                      <ul className="mt-6 space-y-3 text-left">
                         {text.shops.features.map((feature, index) => (
                           <li key={index} className="flex items-center gap-3">
                             <Check className="h-5 w-5 text-primary" />
@@ -142,7 +142,7 @@ export default function DedicatedSolutionsSection() {
                           </li>
                         ))}
                       </ul>
-                      <div className="mt-6">
+                      <div className="mt-8">
                         <Button size="lg" asChild>
                           <Link href="/solutions/for-local-shops">{text.shops.cta}</Link>
                         </Button>
@@ -183,10 +183,10 @@ export default function DedicatedSolutionsSection() {
                 </div>
                 <div className="px-8 md:px-0">
                   <Card className="shadow-lg">
-                    <CardContent className="p-6 text-center md:text-left">
+                    <CardContent className="p-8 text-center md:text-left">
                       <h3 className="font-headline text-xl md:text-3xl font-bold text-primary">{text.startups.title}</h3>
                       <p className="mt-2 text-base md:text-lg text-muted-foreground">{text.startups.description}</p>
-                      <ul className="mt-4 space-y-2 inline-block text-left">
+                      <ul className="mt-6 space-y-3 text-left">
                         {text.startups.features.map((feature, index) => (
                           <li key={index} className="flex items-center gap-3">
                             <Check className="h-5 w-5 text-primary" />
@@ -194,7 +194,7 @@ export default function DedicatedSolutionsSection() {
                           </li>
                         ))}
                       </ul>
-                      <div className="mt-6">
+                      <div className="mt-8">
                         <Button size="lg" asChild>
                           <Link href="/solutions/for-startups">{text.startups.cta}</Link>
                         </Button>
