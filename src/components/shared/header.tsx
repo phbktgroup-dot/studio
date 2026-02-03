@@ -227,8 +227,8 @@ export default function Header() {
                     <span className="sr-only">Toggle navigation menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-1/2">
-                  <SheetHeader className="p-6 border-b">
+                <SheetContent side="right" className="w-1/2 p-0">
+                  <SheetHeader className="p-4 border-b">
                     <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                     {logoLoading ? (
                       <div className="h-[58px] w-[180px]" />
@@ -238,8 +238,8 @@ export default function Header() {
                       <Logo className="h-[58px]" />
                     )}
                   </SheetHeader>
-                  <div className="p-6">
-                    <div className="flex flex-col gap-6 text-[10px] font-medium">
+                  <div className="p-4">
+                    <div className="flex flex-col gap-4 text-xs font-medium">
                       {navLinks.map((link) => (
                         <Link
                           key={link.href}
