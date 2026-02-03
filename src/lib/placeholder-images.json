@@ -197,6 +197,30 @@
       "description": "An organized desk with documents, a calculator, and a laptop displaying spreadsheets for tax compliance.",
       "imageUrl": "https://images.unsplash.com/photo-1554224155-8d04421cd6c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0YXglMjBkb2N1bWVudHN8ZW58MHx8fHwxNzcyNTg1MDY3fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "tax documents"
+    },
+    {
+      "id": "startup_validate_idea",
+      "description": "A business meeting with two people discussing plans over documents.",
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop",
+      "imageHint": "business planning"
+    },
+    {
+      "id": "startup_build_product",
+      "description": "A team collaborating around a whiteboard with sticky notes.",
+      "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1770&auto=format&fit=crop",
+      "imageHint": "team collaboration"
+    },
+    {
+      "id": "startup_growth_market",
+      "description": "A financial chart with an upward trending graph on a screen.",
+      "imageUrl": "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=1770&auto=format&fit=crop",
+      "imageHint": "growth chart"
+    },
+    {
+      "id": "startup_scale_invest",
+      "description": "A person's hands signing a document, representing an investment or deal.",
+      "imageUrl": "https://images.unsplash.com/photo-1554200876-56c2f25224fa?q=80&w=1770&auto=format&fit=crop",
+      "imageHint": "signing deal"
     }
   ]
 }

@@ -185,7 +185,9 @@ export default function DedicatedSolutionsSection() {
                       </li>
                     ))}
                   </ul>
-                  <Button size="lg" className="mt-8">{text.startups.cta}</Button>
+                  <Button size="lg" className="mt-8" asChild>
+                    <Link href="/solutions/for-startups">{text.startups.cta}</Link>
+                  </Button>
                 </div>
               </CardContent>
             </Card>
