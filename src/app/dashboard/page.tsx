@@ -88,7 +88,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-bold font-headline">Dashboard</h1>
+        <h1 className="text-2xl font-bold font-headline">Dashboard</h1>
         <Card>
           <CardContent className="p-8 flex items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -101,7 +101,7 @@ export default function DashboardPage() {
   if (error) {
      return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-bold font-headline">Dashboard</h1>
+        <h1 className="text-2xl font-bold font-headline">Dashboard</h1>
         <Card>
           <CardContent className="p-8">
             <Alert variant="destructive">
@@ -118,12 +118,12 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-       <h1 className="text-3xl font-bold font-headline">Dashboard</h1>
+    <div className="flex flex-col gap-4">
+       <h1 className="text-2xl font-bold font-headline">Dashboard</h1>
        <Card>
         <CardHeader>
-          <CardTitle>My Inquiries</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-xl">My Inquiries</CardTitle>
+          <CardDescription className="text-xs">
             Your submitted inquiries.
           </CardDescription>
         </CardHeader>
