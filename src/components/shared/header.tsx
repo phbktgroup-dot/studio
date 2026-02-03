@@ -227,8 +227,9 @@ export default function Header() {
                     <span className="sr-only">Toggle navigation menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right">
+                <SheetContent side="right" className="w-1/2">
                   <SheetHeader className="p-6 border-b">
+                    <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                     {logoLoading ? (
                       <div className="h-[58px] w-[180px]" />
                     ) : logoUrl ? (
