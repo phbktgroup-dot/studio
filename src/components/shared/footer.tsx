@@ -90,10 +90,11 @@ export default function Footer() {
             <Button asChild size="sm">
               <Link href="/contact">{t.contactUs}</Link>
             </Button>
-            <div className="flex flex-col items-center gap-1 text-xs">
+            <div className="flex flex-row items-center gap-2 text-xs">
               <a href="mailto:info@phbkt.com" className="text-black hover:text-primary transition-colors">
                   info@phbkt.com
               </a>
+              <span className="text-black">|</span>
               <a href="tel:+919552256325" className="text-black hover:text-primary transition-colors">
                 +91 9552256325
               </a>
