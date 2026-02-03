@@ -129,20 +129,26 @@ export default function DedicatedSolutionsSection() {
           <TabsContent value="shops">
             <Card className="mt-6 border-0 shadow-none bg-transparent">
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div className="order-2 md:order-1 px-8 md:px-0 text-center md:text-left">
-                  <h3 className="font-headline text-lg md:text-2xl font-bold text-primary">{text.shops.title}</h3>
-                  <p className="mt-2 text-sm md:text-base text-muted-foreground">{text.shops.description}</p>
-                  <ul className="mt-4 space-y-2 inline-block md:block">
-                    {text.shops.features.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-3">
-                        <Check className="h-5 w-5 text-primary" />
-                        <span className="text-sm md:text-lg font-medium">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button size="lg" className="mt-6" asChild>
-                    <Link href="/solutions/for-local-shops">{text.shops.cta}</Link>
-                  </Button>
+                <div className="order-2 md:order-1 px-8 md:px-0">
+                  <Card className="shadow-lg">
+                    <CardContent className="p-6 text-center md:text-left">
+                      <h3 className="font-headline text-xl md:text-3xl font-bold text-primary">{text.shops.title}</h3>
+                      <p className="mt-2 text-base md:text-lg text-muted-foreground">{text.shops.description}</p>
+                      <ul className="mt-4 space-y-2 inline-block text-left">
+                        {text.shops.features.map((feature, index) => (
+                          <li key={index} className="flex items-center gap-3">
+                            <Check className="h-5 w-5 text-primary" />
+                            <span className="font-medium text-base">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-6">
+                        <Button size="lg" asChild>
+                          <Link href="/solutions/for-local-shops">{text.shops.cta}</Link>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
                 <div className="order-1 md:order-2 aspect-video rounded-none md:rounded-lg overflow-hidden">
                   {shopImage && (
@@ -175,20 +181,26 @@ export default function DedicatedSolutionsSection() {
                     />
                   )}
                 </div>
-                <div className="px-8 md:px-0 text-center md:text-left">
-                  <h3 className="font-headline text-lg md:text-2xl font-bold text-primary">{text.startups.title}</h3>
-                  <p className="mt-2 text-sm md:text-base text-muted-foreground">{text.startups.description}</p>
-                  <ul className="mt-4 space-y-2 inline-block md:block">
-                    {text.startups.features.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-3">
-                        <Check className="h-5 w-5 text-primary" />
-                        <span className="text-sm md:text-lg font-medium">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button size="lg" className="mt-6" asChild>
-                    <Link href="/solutions/for-startups">{text.startups.cta}</Link>
-                  </Button>
+                <div className="px-8 md:px-0">
+                  <Card className="shadow-lg">
+                    <CardContent className="p-6 text-center md:text-left">
+                      <h3 className="font-headline text-xl md:text-3xl font-bold text-primary">{text.startups.title}</h3>
+                      <p className="mt-2 text-base md:text-lg text-muted-foreground">{text.startups.description}</p>
+                      <ul className="mt-4 space-y-2 inline-block text-left">
+                        {text.startups.features.map((feature, index) => (
+                          <li key={index} className="flex items-center gap-3">
+                            <Check className="h-5 w-5 text-primary" />
+                            <span className="font-medium text-base">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-6">
+                        <Button size="lg" asChild>
+                          <Link href="/solutions/for-startups">{text.startups.cta}</Link>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
               </CardContent>
             </Card>
