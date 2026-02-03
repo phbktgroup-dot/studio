@@ -13,6 +13,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useRef } from 'react';
+import Autoplay from "embla-carousel-autoplay";
 
 interface Service {
   title: string;
@@ -83,7 +85,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
   const image = PlaceHolderImages.find(p => p.id === imageId);
 
   return (
-    <Card className="group flex h-full w-full flex-col overflow-hidden rounded-lg border bg-card shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+    <Card className="group flex h-[220px] w-full flex-col overflow-hidden rounded-lg border bg-card shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
       {image && (
           <Image
               src={image.imageUrl}
@@ -91,12 +93,12 @@ const ServiceCard = ({ service }: { service: Service }) => {
               width={400}
               height={400}
               data-ai-hint={image.imageHint}
-              className="w-full object-cover aspect-[3/5] sm:aspect-square transition-transform duration-500 group-hover:scale-105"
+              className="w-full object-cover aspect-[3/5] sm:aspect-[1] transition-transform duration-500 group-hover:scale-105 h-[65%] object-center"
           />
       )}
-      <div className="p-2 text-center flex-grow flex flex-col justify-start">
-        <h3 className="text-xs font-bold flex items-center justify-center text-center">{title}</h3>
-        <p className="mt-1 text-[11px] leading-tight text-muted-foreground">{description}</p>
+      <div className="p-1 text-center flex-grow flex flex-col justify-center">
+        <h3 className="text-[11px] font-bold flex items-center justify-center text-center leading-tight">{title}</h3>
+        <p className="mt-1 text-[9px] leading-tight text-muted-foreground">{description}</p>
       </div>
     </Card>
   );
@@ -106,6 +108,9 @@ const ServiceCard = ({ service }: { service: Service }) => {
 export default function PremiumServicesSection() {
   const { language } = useLanguage();
   const services = servicesData[language];
+  const plugin = useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  );
 
   const renderServiceCard = (service: Service) => {
     const isWebAppDev = service.imageId === "service_web_dev";
@@ -165,14 +170,25 @@ export default function PremiumServicesSection() {
             </p>
         </div>
         <div className="container px-1 sm:px-4">
-          {/* Mobile View - Grid */}
-          <div className="grid grid-cols-3 gap-1 sm:hidden">
-            {services.map((service, index) => (
-              <div key={index}>
-                {renderServiceCard(service)}
-              </div>
-            ))}
-          </div>
+          {/* Mobile View - Carousel */}
+          <Carousel
+            plugins={[plugin.current]}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full sm:hidden"
+          >
+            <CarouselContent className="-ml-2">
+              {services.map((service, index) => (
+                  <CarouselItem key={index} className="pl-2 basis-1/2">
+                    {renderServiceCard(service)}
+                  </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="flex left-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground hover:bg-primary/90 h-6 w-6" />
+            <CarouselNext className="flex right-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground hover:bg-primary/90 h-6 w-6" />
+          </Carousel>
           
           {/* Desktop View - Carousel */}
           <Carousel
