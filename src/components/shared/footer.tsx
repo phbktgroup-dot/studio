@@ -88,8 +88,12 @@ export default function Footer() {
           <Button asChild size="lg" className="mt-2">
             <Link href="/contact">{t.contactUs}</Link>
           </Button>
-
-           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
+        </div>
+      </div>
+      <div className="border-t bg-muted/50">
+        <div className="container flex flex-col md:flex-row items-center justify-between py-4 text-sm text-muted-foreground gap-4">
+          <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
+          <div className="flex items-center gap-4 sm:gap-6">
                 <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     info@phbkt.com
                 </a>
@@ -109,12 +113,6 @@ export default function Footer() {
                     </Link>
                 </div>
             </div>
-
-        </div>
-      </div>
-      <div className="border-t bg-muted/50">
-        <div className="container flex items-center justify-center py-4 text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
         </div>
       </div>
     </footer>
