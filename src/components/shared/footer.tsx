@@ -64,7 +64,7 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="border-t bg-muted/30">
-      <div className="container py-6 md:py-8 text-center">
+      <div className="container py-6 text-center">
         <div className="flex flex-col items-center gap-2">
           <Link href="/" className="inline-block">
              {logoLoading ? (
@@ -94,21 +94,23 @@ export default function Footer() {
         <div className="container flex flex-col md:flex-row items-center justify-between py-4 text-sm text-muted-foreground gap-4">
           <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
           <div className="flex items-center gap-4 sm:gap-6">
-                <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     info@phbkt.com
                 </a>
-                <p className="text-sm text-muted-foreground">+91 9552256325</p>
+                <a href="tel:+919552256325" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  +91 9552256325
+                </a>
                 <div className="flex items-center gap-4">
-                    <Link href="#" aria-label="Facebook" className="text-muted-foreground transition-colors hover:text-blue-600" target="_blank" rel="noopener noreferrer">
+                    <Link href="#" aria-label="Facebook" className="text-blue-600 transition-colors hover:text-blue-700" target="_blank" rel="noopener noreferrer">
                         <Facebook className="h-5 w-5" />
                     </Link>
-                    <Link href="#" aria-label="Twitter" className="text-muted-foreground transition-colors hover:text-sky-500" target="_blank" rel="noopener noreferrer">
+                    <Link href="#" aria-label="Twitter" className="text-sky-500 transition-colors hover:text-sky-600" target="_blank" rel="noopener noreferrer">
                         <Twitter className="h-5 w-5" />
                     </Link>
-                    <Link href="https://www.instagram.com/phbkt.it.tech?igsh=MThtOGZpdTVnYW4waw==&utm_source=ig_contact_invite" aria-label="Instagram" className="text-muted-foreground transition-colors hover:text-pink-600" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://www.instagram.com/phbkt.it.tech?igsh=MThtOGZpdTVnYW4waw==&utm_source=ig_contact_invite" aria-label="Instagram" className="text-pink-600 transition-colors hover:text-pink-700" target="_blank" rel="noopener noreferrer">
                         <Instagram className="h-5 w-5" />
                     </Link>
-                    <Link href="https://www.linkedin.com/company/phbkt-consultancy-services-limited/about/?viewAsMember=true" aria-label="LinkedIn" className="text-muted-foreground transition-colors hover:text-blue-700" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://www.linkedin.com/company/phbkt-consultancy-services-limited/about/?viewAsMember=true" aria-label="LinkedIn" className="text-blue-700 transition-colors hover:text-blue-800" target="_blank" rel="noopener noreferrer">
                         <Linkedin className="h-5 w-5" />
                     </Link>
                 </div>
