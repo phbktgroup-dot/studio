@@ -181,7 +181,7 @@ export default function ContactPage() {
             </div>
         )}
         <div className="container px-4 sm:px-8 relative z-10">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-5xl mx-auto">
               <header className="text-center mb-8">
                   <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-white">
                       {t.pageTitle}
@@ -192,37 +192,33 @@ export default function ContactPage() {
               </header>
             <Card className="bg-background/80 backdrop-blur-sm">
                 <CardContent className="p-6 sm:p-8">
-                  <form ref={formRef} action={dispatch} className="space-y-6">
+                  <form ref={formRef} action={dispatch} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <input type="hidden" name="userId" value={user?.id || ''} />
                       <input type="hidden" name="industry" value={purpose} />
                       
-                      <div className="grid sm:grid-cols-2 gap-6">
-                          <div className="space-y-1.5">
-                              <Label htmlFor="first-name">{t.firstNameLabel}</Label>
-                              <Input id="first-name" name="firstName" required />
-                              {state.errors?.firstName && <p className="text-sm text-destructive mt-1">{state.errors.firstName[0]}</p>}
-                          </div>
-                          <div className="space-y-1.5">
-                              <Label htmlFor="last-name">{t.lastNameLabel}</Label>
-                              <Input id="last-name" name="lastName" required />
-                              {state.errors?.lastName && <p className="text-sm text-destructive mt-1">{state.errors.lastName[0]}</p>}
-                          </div>
+                      <div className="space-y-1.5">
+                          <Label htmlFor="first-name">{t.firstNameLabel}</Label>
+                          <Input id="first-name" name="firstName" required />
+                          {state.errors?.firstName && <p className="text-sm text-destructive mt-1">{state.errors.firstName[0]}</p>}
+                      </div>
+                      <div className="space-y-1.5">
+                          <Label htmlFor="last-name">{t.lastNameLabel}</Label>
+                          <Input id="last-name" name="lastName" required />
+                          {state.errors?.lastName && <p className="text-sm text-destructive mt-1">{state.errors.lastName[0]}</p>}
                       </div>
 
-                      <div className="grid sm:grid-cols-2 gap-6">
-                        <div className="space-y-1.5">
-                            <Label htmlFor="contact-email">{t.emailLabel}</Label>
-                            <Input id="contact-email" name="email" type="email" required />
-                            {state.errors?.email && <p className="text-sm text-destructive mt-1">{state.errors.email[0]}</p>}
-                        </div>
-                        <div className="space-y-1.5">
-                            <Label htmlFor="contact-mobile">{t.mobileNumberLabel}</Label>
-                            <Input id="contact-mobile" name="mobileNumber" type="tel" maxLength={10} pattern="[0-9]{10}" />
-                            {state.errors?.mobileNumber && <p className="text-sm text-destructive mt-1">{state.errors.mobileNumber[0]}</p>}
-                        </div>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="contact-email">{t.emailLabel}</Label>
+                        <Input id="contact-email" name="email" type="email" required />
+                        {state.errors?.email && <p className="text-sm text-destructive mt-1">{state.errors.email[0]}</p>}
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="contact-mobile">{t.mobileNumberLabel}</Label>
+                        <Input id="contact-mobile" name="mobileNumber" type="tel" maxLength={10} pattern="[0-9]{10}" />
+                        {state.errors?.mobileNumber && <p className="text-sm text-destructive mt-1">{state.errors.mobileNumber[0]}</p>}
                       </div>
                       
-                      <div className="space-y-1.5">
+                      <div className="space-y-1.5 md:col-span-2">
                           <Label htmlFor="contact-purpose">{t.purposeLabel}</Label>
                           <Select onValueChange={setPurpose} required>
                               <SelectTrigger id="contact-purpose">
@@ -237,13 +233,13 @@ export default function ContactPage() {
                           {state.errors?.industry && <p className="text-sm text-destructive mt-1">{state.errors.industry[0]}</p>}
                       </div>
 
-                      <div className="space-y-1.5">
+                      <div className="space-y-1.5 md:col-span-2">
                           <Label htmlFor="contact-message">{t.helpLabel}</Label>
                           <Textarea id="contact-message" name="help" required className="min-h-[100px]" />
                           {state.errors?.help && <p className="text-sm text-destructive mt-1">{state.errors.help[0]}</p>}
                       </div>
 
-                      <div>
+                      <div className="md:col-span-2">
                           <SubmitButton />
                       </div>
                   </form>
