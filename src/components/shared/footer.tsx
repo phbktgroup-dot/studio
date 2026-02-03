@@ -76,31 +76,33 @@ export default function Footer() {
                 <Logo className="h-[78px] w-[280px]" />
               )}
           </Link>
-          <p className="mt-2 max-w-2xl mx-auto text-muted-foreground">
+          <p className="mt-2 max-w-2xl mx-auto text-sm text-foreground">
             {t.footerDescription}
           </p>
           
-          <h2 className="font-headline text-2xl md:text-3xl font-bold tracking-tighter text-primary mt-2">
+          <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary mt-2">
             {t.p_large}
           </h2>
-          <p className="mt-1 max-w-2xl mx-auto text-muted-foreground">
+          <p className="mt-1 max-w-2xl mx-auto text-sm text-foreground">
             {t.p_small}
           </p>
           <Button asChild size="sm" className="mt-4">
             <Link href="/contact">{t.contactUs}</Link>
           </Button>
+          <div className="mt-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
+              <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  info@phbkt.com
+              </a>
+              <a href="tel:+919552256325" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                +91 9552256325
+              </a>
+          </div>
         </div>
       </div>
       <div className="border-t bg-muted/50">
         <div className="container flex flex-col md:flex-row items-center justify-between py-2 text-sm text-muted-foreground gap-4">
           <p>&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
           <div className="flex items-center gap-4 sm:gap-6">
-                <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    info@phbkt.com
-                </a>
-                <a href="tel:+919552256325" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  +91 9552256325
-                </a>
                 <div className="flex items-center gap-4">
                     <Link href="#" aria-label="Facebook" className="text-blue-600 transition-colors hover:text-blue-700" target="_blank" rel="noopener noreferrer">
                         <Facebook className="h-5 w-5" />
