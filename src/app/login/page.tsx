@@ -85,9 +85,9 @@ export default function LoginPage() {
     } else {
       toast({
         title: "Login successful!",
-        description: "Redirecting you to the dashboard.",
+        description: "Redirecting you to the home page.",
       });
-      router.push('/dashboard');
+      router.push('/');
       router.refresh();
     }
   };
@@ -97,7 +97,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/dashboard`,
+        redirectTo: `${window.location.origin}/`,
       },
     });
     if (error) {
@@ -135,7 +135,7 @@ export default function LoginPage() {
           </div>
           <CardTitle className="text-2xl font-headline">Login</CardTitle>
           <CardDescription>
-            Enter your credentials to access your dashboard
+            Enter your credentials to access your account.
           </CardDescription>
         </CardHeader>
         <CardContent>
