@@ -93,12 +93,12 @@ export default function CareersSection() {
       <section id="careers" className="bg-background py-6 md:py-8 text-foreground">
         <div className="container max-w-5xl">
           <div className="text-center mb-12">
-            <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-black">
+            <h3 className="text-xl font-semibold uppercase tracking-wider text-black mb-2">
               {t.heading}
-            </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
+            </h3>
+            <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary">
               {t.subheading}
-            </p>
+            </h2>
           </div>
   
           <div className="grid md:grid-cols-3 gap-8">
