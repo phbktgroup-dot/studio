@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/logo";
@@ -64,17 +64,19 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [logoLoading, setLogoLoading] = useState(true);
+  const [activeLink, setActiveLink] = useState('');
+  const [sheetOpen, setSheetOpen] = useState(false);
   const router = useRouter();
   const { language, setLanguage } = useLanguage();
 
-  const navLinks = [
+  const navLinks = useMemo(() => [
     { href: "#services", label: text[language].services },
     { href: "#solutions", label: text[language].solutions },
     { href: "#work", label: text[language].work },
     { href: "#insights", label: text[language].insights },
     { href: "#careers", label: text[language].careers },
     { href: "#contact", label: text[language].contact },
-  ];
+  ], [language]);
 
   useEffect(() => {
     setMounted(true);
@@ -103,7 +105,6 @@ export default function Header() {
               setLogoUrl(data.logo_url);
           }
         } catch (error: any) {
-          // It's okay if this fails, we'll just fall back to the default logo.
           console.warn("Could not fetch site logo:", error.message);
         } finally {
             setLogoLoading(false);
@@ -124,6 +125,43 @@ export default function Header() {
       authListener.subscription.unsubscribe();
     };
   }, [router]);
+  
+  useEffect(() => {
+    if (!mounted) return;
+
+    const sections = navLinks.map(link => {
+      try {
+        // querySelector needs a valid CSS selector. Hash needs to be escaped in some cases, but here it's simple.
+        return document.querySelector(link.href);
+      } catch (e) {
+        console.error(`Invalid selector: ${link.href}`);
+        return null;
+      }
+    }).filter((s): s is Element => s !== null);
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setActiveLink(`#${entry.target.id}`);
+            }
+        });
+    }, {
+        rootMargin: '-40% 0px -60% 0px',
+        threshold: 0
+    });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    return () => {
+        sections.forEach(section => {
+            observer.unobserve(section);
+        });
+    };
+  }, [navLinks, mounted]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -135,7 +173,10 @@ export default function Header() {
         <Link
           key={link.href}
           href={link.href}
-          className="text-foreground/80 transition-colors hover:text-foreground"
+          className={cn(
+            "transition-colors",
+            activeLink === link.href ? "text-primary font-semibold" : "text-foreground/80 hover:text-foreground"
+          )}
         >
           {link.label}
         </Link>
@@ -219,7 +260,7 @@ export default function Header() {
                 </Button>
               )}
               
-              <Sheet>
+              <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="md:hidden">
                     <Menu className="h-6 w-6" />
@@ -237,12 +278,16 @@ export default function Header() {
                       <Logo className="h-[48px]" />
                     )}
                   </div>
-                  <div className="flex flex-col items-center gap-2 text-sm font-medium p-4">
+                  <div className="flex flex-col items-center divide-y divide-border text-sm font-medium">
                     {navLinks.map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="text-foreground/80 transition-colors hover:text-foreground py-1"
+                        className={cn(
+                            "py-3 w-full text-center transition-colors",
+                            activeLink === link.href ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
+                        )}
+                        onClick={() => setSheetOpen(false)}
                       >
                         {link.label}
                       </Link>
