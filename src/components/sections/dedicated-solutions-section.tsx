@@ -129,16 +129,16 @@ export default function DedicatedSolutionsSection() {
           <TabsContent value="shops">
             <Card className="mt-6 border-0 shadow-none bg-transparent">
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div className="order-2 md:order-1 px-8 md:px-0">
+                <div className="order-2 md:order-1 px-4 md:px-0">
                   <Card className="shadow-lg">
-                    <CardContent className="p-8 text-center md:text-left">
-                      <h3 className="font-headline text-xl md:text-3xl font-bold text-primary">{text.shops.title}</h3>
-                      <p className="mt-2 text-base md:text-lg text-muted-foreground">{text.shops.description}</p>
+                    <CardContent className="p-6 text-center md:text-left">
+                      <h3 className="font-headline text-base md:text-xl font-bold text-primary">{text.shops.title}</h3>
+                      <p className="mt-2 text-xs md:text-sm text-muted-foreground">{text.shops.description}</p>
                       <ul className="mt-6 space-y-3 text-left">
                         {text.shops.features.map((feature, index) => (
                           <li key={index} className="flex items-center gap-3">
                             <Check className="h-5 w-5 text-primary" />
-                            <span className="font-medium text-base">{feature}</span>
+                            <span className="font-medium text-xs">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -181,16 +181,16 @@ export default function DedicatedSolutionsSection() {
                     />
                   )}
                 </div>
-                <div className="px-8 md:px-0">
+                <div className="px-4 md:px-0">
                   <Card className="shadow-lg">
-                    <CardContent className="p-8 text-center md:text-left">
-                      <h3 className="font-headline text-xl md:text-3xl font-bold text-primary">{text.startups.title}</h3>
-                      <p className="mt-2 text-base md:text-lg text-muted-foreground">{text.startups.description}</p>
+                    <CardContent className="p-6 text-center md:text-left">
+                      <h3 className="font-headline text-base md:text-xl font-bold text-primary">{text.startups.title}</h3>
+                      <p className="mt-2 text-xs md:text-sm text-muted-foreground">{text.startups.description}</p>
                       <ul className="mt-6 space-y-3 text-left">
                         {text.startups.features.map((feature, index) => (
                           <li key={index} className="flex items-center gap-3">
                             <Check className="h-5 w-5 text-primary" />
-                            <span className="font-medium text-base">{feature}</span>
+                            <span className="font-medium text-xs">{feature}</span>
                           </li>
                         ))}
                       </ul>
