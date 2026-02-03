@@ -151,7 +151,7 @@ export default function PerspectivesSection() {
               const image = PlaceHolderImages.find(p => p.id === insight.imageId);
 
               return (
-                <CarouselItem key={index} className="pl-2 sm:pl-4 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 group aspect-[3/4] sm:aspect-[9/16] md:aspect-[4/5]">
+                <CarouselItem key={index} className="pl-2 sm:pl-4 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 group aspect-[9/16] sm:aspect-[9/16] md:aspect-[4/5]">
                   <Card className="relative h-full w-full overflow-hidden rounded-lg">
                     {image && (
                       <Image
