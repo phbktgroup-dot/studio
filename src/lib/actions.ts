@@ -324,7 +324,11 @@ export async function updateInquiryStatus(inquiryId: string, status: 'pending' |
     .eq('id', inquiryId);
 
   if (error) {
-    return { error: `Failed to update inquiry status: ${error.message}` };
+    let errorMessage = `Failed to update inquiry status: ${error.message}`;
+    if (error.message.includes("'status' column") && (error.message.includes('does not exist') || error.message.includes('schema cache'))) {
+        errorMessage = "The 'status' column does not seem to exist in your 'inquiries' table. Please go to your Supabase dashboard, open the Table Editor for the 'inquiries' table, and add a new column named 'status' with the type 'text'. You can set its default value to 'pending'.";
+    }
+    return { error: errorMessage };
   }
 
   revalidatePath('/dashboard/inquiries');
@@ -376,7 +380,11 @@ export async function updateInquiryResolution(prevState: ResolutionState, formDa
         .eq('id', inquiryId);
 
     if (error) {
-        return { message: `Failed to update resolution: ${error.message}`, isSuccess: false };
+        let errorMessage = `Failed to update resolution: ${error.message}`;
+        if (error.message.includes("'resolution' column") && (error.message.includes('does not exist') || error.message.includes('schema cache'))) {
+            errorMessage = "The 'resolution' column does not seem to exist in your 'inquiries' table. Please go to your Supabase dashboard, open the Table Editor for the 'inquiries' table, and add a new column named 'resolution' with the type 'text'.";
+        }
+        return { message: errorMessage, isSuccess: false };
     }
 
     revalidatePath('/dashboard/inquiries');
