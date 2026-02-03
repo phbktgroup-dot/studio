@@ -106,6 +106,50 @@ export default function PremiumServicesSection() {
   const { language } = useLanguage();
   const services = servicesData[language];
 
+  const renderServiceCard = (service: Service) => {
+    const isWebAppDev = service.imageId === "service_web_dev";
+    const isMarketing = service.imageId === "service_marketing";
+    const isTax = service.imageId === "service_tax";
+    const isBizSetup = service.imageId === "service_biz_setup";
+    const isUiUx = service.imageId === "service_ui_ux";
+    const isAi = service.imageId === "service_ai";
+    const isCloud = service.imageId === "service_cloud";
+    const isAdvisory = service.imageId === "service_advisory";
+    const isSocial = service.imageId === "service_social";
+    const isSupport = service.imageId === "service_support";
+    
+    let href = "#";
+    if (isWebAppDev) {
+        href = "/services/web-app-development";
+    } else if (isMarketing) {
+        href = "/services/marketing-and-branding";
+    } else if (isTax) {
+        href = "/services/tax-and-compliance";
+    } else if (isBizSetup) {
+        href = "/services/business-setup";
+    } else if (isUiUx) {
+        href = "/services/ui-ux-design";
+    } else if (isAi) {
+        href = "/services/ai-and-automation";
+    } else if (isCloud) {
+        href = "/services/cloud-and-security";
+    } else if (isAdvisory) {
+        href = "/services/startup-advisory";
+    } else if (isSocial) {
+        href = "/services/content-and-social";
+    } else if (isSupport) {
+        href = "/services/24-7-it-support";
+    }
+    
+    return (
+      <div className="p-1 h-full">
+        <Link href={href} className="h-full block" onClick={(e) => href === '#' && e.preventDefault()}>
+          <ServiceCard service={service} />
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <section id="services" className="bg-muted/30 py-6 md:py-8">
         <div className="container text-center mb-8">
@@ -120,59 +164,28 @@ export default function PremiumServicesSection() {
             </p>
         </div>
         <div className="container">
+          {/* Mobile View - Grid */}
+          <div className="grid grid-cols-1 gap-4 sm:hidden">
+            {services.map((service, index) => (
+              <div key={index}>
+                {renderServiceCard(service)}
+              </div>
+            ))}
+          </div>
+          
+          {/* Desktop View - Carousel */}
           <Carousel
             opts={{
               align: "start",
             }}
-            className="w-full"
+            className="w-full hidden sm:block"
           >
             <CarouselContent className="-ml-4">
-              {services.map((service, index) => {
-                const isWebAppDev = service.imageId === "service_web_dev";
-                const isMarketing = service.imageId === "service_marketing";
-                const isTax = service.imageId === "service_tax";
-                const isBizSetup = service.imageId === "service_biz_setup";
-                const isUiUx = service.imageId === "service_ui_ux";
-                const isAi = service.imageId === "service_ai";
-                const isCloud = service.imageId === "service_cloud";
-                const isAdvisory = service.imageId === "service_advisory";
-                const isSocial = service.imageId === "service_social";
-                const isSupport = service.imageId === "service_support";
-                
-                let href = "#";
-                if (isWebAppDev) {
-                    href = "/services/web-app-development";
-                } else if (isMarketing) {
-                    href = "/services/marketing-and-branding";
-                } else if (isTax) {
-                    href = "/services/tax-and-compliance";
-                } else if (isBizSetup) {
-                    href = "/services/business-setup";
-                } else if (isUiUx) {
-                    href = "/services/ui-ux-design";
-                } else if (isAi) {
-                    href = "/services/ai-and-automation";
-                } else if (isCloud) {
-                    href = "/services/cloud-and-security";
-                } else if (isAdvisory) {
-                    href = "/services/startup-advisory";
-                } else if (isSocial) {
-                    href = "/services/content-and-social";
-                } else if (isSupport) {
-                    href = "/services/24-7-it-support";
-                }
-
-                
-                return (
-                  <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
-                      <div className="p-1 h-full">
-                        <Link href={href} className="h-full block" onClick={(e) => href === '#' && e.preventDefault()}>
-                          <ServiceCard service={service} />
-                        </Link>
-                      </div>
+              {services.map((service, index) => (
+                  <CarouselItem key={index} className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
+                    {renderServiceCard(service)}
                   </CarouselItem>
-                );
-              })}
+              ))}
             </CarouselContent>
             <CarouselPrevious className="hidden md:flex left-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground hover:bg-primary/90" />
             <CarouselNext className="hidden md:flex right-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground hover:bg-primary/90" />
