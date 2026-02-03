@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useLanguage } from '@/context/language-provider';
@@ -52,10 +53,9 @@ export default function WorkDetailPage() {
       <Header />
       <main className="flex-grow">
         <div className="container py-8 md:py-12">
-          <Button variant="ghost" asChild className="mb-8">
-            <Link href="/#work">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              {t.back}
+          <Button variant="ghost" size="icon" asChild className="mb-8">
+            <Link href="/#work" aria-label={t.back}>
+              <ArrowLeft className="h-5 w-5" />
             </Link>
           </Button>
 
