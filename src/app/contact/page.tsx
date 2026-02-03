@@ -21,7 +21,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const text = {
   mr: {
-    pageTitle: "एका तज्ञाशी बोला",
+    pageTitle: "विनंती सबमिट करा",
     pageDescription: "आम्ही तुम्हाला योग्य व्यक्तीशी संपर्क साधून देण्यासाठी काही तपशील आवश्यक आहेत.",
     firstNameLabel: "पहिले नाव",
     lastNameLabel: "आडनाव",
@@ -46,7 +46,7 @@ const text = {
     submitting: "सबमिट करत आहे..."
   },
   en: {
-    pageTitle: "Talk to an expert",
+    pageTitle: "Submit the Request",
     pageDescription: "To get you in touch with the right person, we just need a few details from you first.",
     firstNameLabel: "First Name",
     lastNameLabel: "Last Name",
@@ -71,7 +71,7 @@ const text = {
     submitting: "Submitting..."
   },
   hi: {
-    pageTitle: "एक विशेषज्ञ से बात करें",
+    pageTitle: "अनुरोध सबमिट करें",
     pageDescription: "आपको सही व्यक्ति से संपर्क कराने के लिए, हमें पहले आपसे कुछ जानकारी चाहिए।",
     firstNameLabel: "पहला नाम",
     lastNameLabel: "उपनाम",
