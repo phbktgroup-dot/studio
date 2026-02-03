@@ -68,9 +68,9 @@ export default function Footer() {
   return (
     <footer id="contact" className="border-t bg-muted/30">
       <div className="container py-12 md:py-16">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+        <div className="flex flex-col items-center text-center gap-12">
             <div className="flex flex-col justify-center items-center text-center">
-                <div className="mb-8">
+                <div className="mb-4">
                     <Link href="/" className="inline-block mb-4">
                         {logoLoading ? (
                         <div className="h-[78px] w-[280px]" />
@@ -85,7 +85,7 @@ export default function Footer() {
                     </p>
                 </div>
                 
-                <div className="mt-6">
+                <div className="mt-4">
                     <h3 className="font-semibold text-lg">{t.getInTouchDirectly}</h3>
                      <a href="mailto:info@phbkt.com" className="text-sm text-muted-foreground hover:text-foreground">
                         info@phbkt.com
@@ -94,7 +94,7 @@ export default function Footer() {
                 </div>
             </div>
             
-            <div className="flex flex-col justify-center items-center text-center bg-background/50 p-8 rounded-lg">
+            <div className="flex flex-col justify-center items-center text-center">
                 <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tighter text-primary">
                     {t.h2}
                 </h2>
