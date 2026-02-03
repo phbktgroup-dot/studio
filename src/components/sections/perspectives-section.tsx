@@ -126,7 +126,7 @@ export default function PerspectivesSection() {
 
   return (
     <section id="insights" className="py-6 md:py-8 bg-background">
-      <div className="container px-0 sm:px-0">
+      <div className="container px-0">
         <div className="text-center mb-8 px-8 sm:px-0">
             <h3 className="text-base font-semibold uppercase tracking-wider text-black mb-2">
               {sectionText[language].heading}
@@ -144,12 +144,12 @@ export default function PerspectivesSection() {
           }}
           className="w-full"
         >
-          <CarouselContent className="-ml-2">
+          <CarouselContent className="-ml-1">
             {insights.map((insight, index) => {
               const image = PlaceHolderImages.find(p => p.id === insight.imageId);
 
               return (
-                <CarouselItem key={index} className="pl-2 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 group aspect-[9/16] sm:aspect-[9/16] md:aspect-[4/5]">
+                <CarouselItem key={index} className="pl-1 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 group aspect-[9/16] sm:aspect-[9/16] md:aspect-[4/5]">
                   <Card className="relative h-full w-full overflow-hidden rounded-lg">
                     {image && (
                       <Image
