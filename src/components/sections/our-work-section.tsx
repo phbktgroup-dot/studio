@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -90,7 +91,7 @@ export default function OurWorkSection() {
                                 width={400}
                                 height={225}
                                 data-ai-hint={image.imageHint}
-                                className="w-full object-cover aspect-[3/4] transition-transform duration-500 group-hover:scale-105"
+                                className="w-full object-cover aspect-[5/7] transition-transform duration-500 group-hover:scale-105"
                             />
                           </div>
                         </Link>
