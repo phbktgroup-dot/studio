@@ -78,7 +78,7 @@ export default function SignupPage() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full flex items-start justify-center bg-background pt-24 sm:pt-4">
+    <div className="min-h-screen w-full flex items-start justify-center bg-background pt-8 sm:pt-4">
       <div className="absolute top-4 left-4">
         <Button variant="ghost" size="icon" asChild>
           <Link href="/">
@@ -87,7 +87,7 @@ export default function SignupPage() {
           </Link>
         </Button>
       </div>
-      <Card className="mx-auto w-full max-w-[380px] shadow-2xl">
+      <Card className="mx-auto w-full max-w-[360px] shadow-2xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             {logoLoading ? (
@@ -100,7 +100,7 @@ export default function SignupPage() {
           </div>
           <CardTitle className="text-2xl font-headline">Sign Up</CardTitle>
           <CardDescription>
-            Create an account to get started. The first user will become an admin.
+            Create an account to get started.
           </CardDescription>
         </CardHeader>
         <CardContent>

@@ -103,13 +103,7 @@ export async function handleSignup(prevState: SignupState, formData: FormData): 
     }
   });
 
-  const { data: { users }, error: listError } = await supabaseAdmin.auth.admin.listUsers();
-  
-  if (listError) {
-      return { errors: { _form: [`Database error: ${listError.message}`] } };
-  }
-
-  const role = users.length === 0 ? 'admin' : 'user';
+  const role = 'user';
 
   const { error } = await supabaseAdmin.auth.admin.createUser({
       email,
@@ -132,9 +126,7 @@ export async function handleSignup(prevState: SignupState, formData: FormData): 
     return { errors: { _form: [`Signup failed: ${error.message}`] } };
   }
   
-  const successMessage = role === 'admin' 
-    ? 'Signup successful! As the first user, you have been assigned the admin role. Please log in.' 
-    : 'Signup successful! Please log in.';
+  const successMessage = 'Signup successful! Please log in.';
 
   return { isSuccess: true, message: successMessage };
 }
