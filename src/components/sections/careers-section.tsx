@@ -93,7 +93,7 @@ export default function CareersSection() {
       <section id="careers" className="bg-background py-6 md:py-8 text-foreground">
         <div className="container max-w-5xl">
           <div className="text-center mb-12">
-            <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-primary">
+            <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl text-black">
               {t.heading}
             </h2>
             <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">

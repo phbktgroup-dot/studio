@@ -107,7 +107,7 @@ export default function SuccessRoadmapSection() {
   return (
     <section className="py-6 md:py-8 bg-background overflow-x-hidden">
       <div className="container text-center">
-        <h3 className="text-xl font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+        <h3 className="text-xl font-semibold uppercase tracking-wider text-black mb-2">
             {text[language].subheading}
         </h3>
         <h2 className="font-headline text-xl md:text-2xl font-bold tracking-tighter text-primary">
