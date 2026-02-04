@@ -88,15 +88,16 @@ function DashboardUI({ children }: { children: ReactNode }) {
     };
   }, [router]);
 
+  const isAdmin = user?.user_metadata?.role === 'admin' || user?.email === 'hari.garad@phbkt.com';
+
   useEffect(() => {
     if (user) {
-      const userRole = user.user_metadata?.role;
       const isAdminRoute = pathname.startsWith('/dashboard/users') || pathname.startsWith('/dashboard/hero-section') || pathname.startsWith('/dashboard/inquiries') || pathname.startsWith('/dashboard/settings');
-      if (isAdminRoute && userRole !== 'admin') {
+      if (isAdminRoute && !isAdmin) {
         router.push('/dashboard');
       }
     }
-  }, [user, pathname, router]);
+  }, [user, pathname, router, isAdmin]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -113,8 +114,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
   if (!user) {
     return null; // Redirecting...
   }
-
-  const userRole = user.user_metadata?.role;
   
   const UserAvatarButton = () => (
       <Avatar>
@@ -177,7 +176,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
                       </Link>
                   </SidebarMenuButton>
                   </SidebarMenuItem>
-                  {userRole === 'admin' && (
+                  {isAdmin && (
                     <>
                       <SidebarMenuItem>
                           <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} size="sm" tooltip="Inquiries">
