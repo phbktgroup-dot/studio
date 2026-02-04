@@ -110,15 +110,8 @@ export async function handleSignup(prevState: SignupState, formData: FormData): 
       persistSession: false
     }
   });
-  
-  const { data: { users }, error: listUsersError } = await supabaseAdmin.auth.admin.listUsers();
 
-  if (listUsersError) {
-    return { errors: { _form: [`Failed to check for existing users: ${listUsersError.message}`] } };
-  }
-
-  const isFirstUser = users.length === 0;
-  const role = isFirstUser ? 'admin' : 'user';
+  const role = 'user';
 
   const { error } = await supabaseAdmin.auth.admin.createUser({
       email,
