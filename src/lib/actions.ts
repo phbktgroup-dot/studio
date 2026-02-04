@@ -111,7 +111,13 @@ export async function handleSignup(prevState: SignupState, formData: FormData): 
     }
   });
 
-  const role = 'user';
+  const { data: { users }, error: usersError } = await supabaseAdmin.auth.admin.listUsers();
+  if (usersError) {
+    return { errors: { _form: [`Failed to check existing users: ${usersError.message}`] } };
+  }
+  
+  const isFirstUser = users.length === 0;
+  const role = isFirstUser ? 'admin' : 'user';
 
   const { error } = await supabaseAdmin.auth.admin.createUser({
       email,
@@ -339,6 +345,27 @@ export async function updateInquiryStatus(inquiryId: string, status: 'pending' |
         errorMessage = "The 'status' column does not seem to exist in your 'inquiries' table. Please go to your Supabase dashboard, open the Table Editor for the 'inquiries' table, and add a new column named 'status' with the type 'text'. You can set its default value to 'pending'.";
     }
     return { error: errorMessage };
+  }
+
+  revalidatePath('/dashboard/inquiries');
+  revalidatePath('/dashboard');
+  return { success: true };
+}
+
+export async function deleteInquiry(inquiryId: string): Promise<{ error?: string; success?: boolean }> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    return { error: 'Supabase admin credentials are not configured.' };
+  }
+
+  const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+
+  const { error } = await supabaseAdmin.from('inquiries').delete().eq('id', inquiryId);
+
+  if (error) {
+    return { error: `Failed to delete inquiry: ${error.message}` };
   }
 
   revalidatePath('/dashboard/inquiries');

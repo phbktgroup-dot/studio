@@ -24,6 +24,7 @@ import { AlertTriangle, Mail, Loader2 } from "lucide-react";
 import { format } from 'date-fns';
 import { ViewInquiryButton } from './ViewInquiryButton';
 import { StatusSwitcher } from './StatusSwitcher';
+import { DeleteInquiryButton } from './DeleteInquiryButton';
 
 type PageError = {
     title: string;
@@ -164,6 +165,7 @@ export default function InquiriesPage() {
                         </TableCell>
                         <TableCell className="py-0 px-2 text-right">
                            <ViewInquiryButton inquiry={inquiry} />
+                           <DeleteInquiryButton inquiryId={inquiry.id} />
                         </TableCell>
                         </TableRow>
                     ))}
