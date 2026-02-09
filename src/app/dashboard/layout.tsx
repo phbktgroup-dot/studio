@@ -16,6 +16,10 @@ import {
   Mail,
   Settings,
   ArrowLeft,
+  Lightbulb,
+  GalleryVertical,
+  BookOpen,
+  Phone,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -178,6 +182,54 @@ function DashboardUI({ children }: { children: ReactNode }) {
                       <span>Dashboard</span>
                       </Link>
                   </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild size="sm" tooltip="Services">
+                        <Link href="/#services">
+                        <Briefcase />
+                        <span>Services</span>
+                        </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild size="sm" tooltip="Solutions">
+                        <Link href="/#solutions">
+                        <Lightbulb />
+                        <span>Solutions</span>
+                        </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild size="sm" tooltip="Our Work">
+                        <Link href="/#work">
+                        <GalleryVertical />
+                        <span>Our Work</span>
+                        </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild size="sm" tooltip="Insights">
+                        <Link href="/#insights">
+                        <BookOpen />
+                        <span>Insights</span>
+                        </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild size="sm" tooltip="Careers">
+                        <Link href="/#careers">
+                        <Users />
+                        <span>Careers</span>
+                        </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild size="sm" tooltip="Contact">
+                        <Link href="/#contact">
+                        <Phone />
+                        <span>Contact</span>
+                        </Link>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                   {isAdmin && (
                     <>
