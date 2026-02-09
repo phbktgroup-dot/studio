@@ -3,22 +3,20 @@
 
 import { useState, useEffect } from 'react';
 import { addDays, format } from "date-fns";
-import type { DateRange } from "react-day-picker";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowLeft, Download, Loader2, Calendar as CalendarIcon, AlertTriangle, Filter } from 'lucide-react';
+import { ArrowLeft, Download, Loader2, AlertTriangle, Filter } from 'lucide-react';
 import Link from 'next/link';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calendar } from '@/components/ui/calendar';
 import { generateInquiryReport } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import { cn } from '@/lib/utils';
 import { supabase } from '@/lib/supabase';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 type Status = 'in_process' | 'completed' | 'pending';
 
@@ -44,9 +42,9 @@ export default function InquiryReportsPage() {
 
     // Filters state
     const [statusFilter, setStatusFilter] = useState('all');
-    const [date, setDate] = useState<DateRange | undefined>({
-        from: addDays(new Date(), -30),
-        to: new Date(),
+    const [date, setDate] = useState<{from?: string, to?: string}>({
+        from: format(addDays(new Date(), -30), 'yyyy-MM-dd'),
+        to: format(new Date(), 'yyyy-MM-dd'),
     });
 
     useEffect(() => {
@@ -60,12 +58,12 @@ export default function InquiryReportsPage() {
                 query = query.eq('status', statusFilter);
             }
             if (date?.from) {
-                query = query.gte('created_at', date.from.toISOString());
+                query = query.gte('created_at', date.from);
             }
             if (date?.to) {
                 const toDate = new Date(date.to);
                 toDate.setDate(toDate.getDate() + 1);
-                query = query.lte('created_at', toDate.toISOString());
+                query = query.lt('created_at', toDate.toISOString());
             }
 
             const { data, error: queryError } = await query;
@@ -86,7 +84,10 @@ export default function InquiryReportsPage() {
         setGenerating(true);
         const filters = { 
             status: statusFilter, 
-            dateRange: date 
+            dateRange: {
+                from: date?.from ? new Date(date.from) : undefined,
+                to: date?.to ? new Date(date.to) : undefined,
+            } 
         };
         
         const result = await generateInquiryReport(filters);
@@ -158,42 +159,23 @@ export default function InquiryReportsPage() {
                                 </div>
                                 <div className="space-y-2">
                                     <Label>Date range</Label>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                        <Button
-                                            id="date"
-                                            variant={"outline"}
-                                            className={cn(
-                                                "w-[250px] justify-start text-left font-normal h-8",
-                                                !date && "text-muted-foreground"
-                                            )}
-                                        >
-                                            <CalendarIcon className="mr-2 h-4 w-4" />
-                                            {date?.from ? (
-                                            date.to ? (
-                                                <>
-                                                {format(date.from, "LLL dd, y")} -{" "}
-                                                {format(date.to, "LLL dd, y")}
-                                                </>
-                                            ) : (
-                                                format(date.from, "LLL dd, y")
-                                            )
-                                            ) : (
-                                            <span>Pick a date</span>
-                                            )}
-                                        </Button>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="end">
-                                        <Calendar
-                                            initialFocus
-                                            mode="range"
-                                            defaultMonth={date?.from}
-                                            selected={date}
-                                            onSelect={setDate}
-                                            numberOfMonths={1}
+                                    <div className="flex items-center gap-2">
+                                        <Input
+                                            type="date"
+                                            value={date?.from || ''}
+                                            onChange={(e) => setDate(prev => ({...prev, from: e.target.value}))}
+                                            className="h-8"
+                                            aria-label="Start date"
                                         />
-                                        </PopoverContent>
-                                    </Popover>
+                                        <span className="text-muted-foreground">to</span>
+                                        <Input
+                                            type="date"
+                                            value={date?.to || ''}
+                                            onChange={(e) => setDate(prev => ({...prev, to: e.target.value}))}
+                                            className="h-8"
+                                            aria-label="End date"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </PopoverContent>
