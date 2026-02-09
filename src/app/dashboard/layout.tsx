@@ -26,7 +26,6 @@ import {
   SidebarMenuButton,
   SidebarInset,
   useSidebar,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import {
@@ -48,7 +47,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
   const [logoLoading, setLogoLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
-  const { isMobile } = useSidebar();
+  const { isMobile, toggleSidebar } = useSidebar();
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -127,7 +126,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
     <>
       <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-[51] fixed top-0 left-0 right-0">
         <div className="flex items-center gap-2">
-          <SidebarTrigger className="md:hidden" />
           <Link href="/">
             {logoLoading ? (
               <div className="h-[58px] w-[180px]" />
@@ -139,27 +137,34 @@ function DashboardUI({ children }: { children: ReactNode }) {
           </Link>
         </div>
         
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <UserAvatarButton />
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>{user.user_metadata?.full_name || user.email}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link href="/dashboard">Dashboard</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout}>
-              <LogOut className="mr-2 h-4 w-4" />
-              Logout
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {isMobile ? (
+          <Button variant="secondary" size="icon" className="rounded-full" onClick={toggleSidebar}>
+            <UserAvatarButton />
+            <span className="sr-only">Toggle sidebar menu</span>
+          </Button>
+        ) : (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" size="icon" className="rounded-full">
+                <UserAvatarButton />
+                <span className="sr-only">Toggle user menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>{user.user_metadata?.full_name || user.email}</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard">Dashboard</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>Support</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </header>
 
       <div className="flex-1 overflow-hidden pt-16 lg:pt-[60px]">
