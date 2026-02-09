@@ -111,11 +111,11 @@ export default function Footer() {
           <p className="text-black text-xs">&copy; {new Date().getFullYear()} PHBKT Group Limited. All rights reserved.</p>
           <div className="flex items-center gap-4 sm:gap-6">
                 <div className="flex items-center gap-4">
-                    <Link href="https://www.instagram.com/phbkt.it.tech?igsh=MThtOGZpdTVnYW4waw==&utm_source=ig_contact_invite" aria-label="Instagram" className="text-pink-600 transition-colors hover:text-pink-700" target="_blank" rel="noopener noreferrer">
-                        <Instagram className="h-5 w-5" />
-                    </Link>
                     <Link href="https://www.linkedin.com/company/phbkt-consultancy-services-limited/about/?viewAsMember=true" aria-label="LinkedIn" className="text-blue-700 transition-colors hover:text-blue-800" target="_blank" rel="noopener noreferrer">
                         <Linkedin className="h-5 w-5" />
+                    </Link>
+                    <Link href="https://www.instagram.com/phbkt.it.tech?igsh=MThtOGZpdTVnYW4waw==&utm_source=ig_contact_invite" aria-label="Instagram" className="text-pink-600 transition-colors hover:text-pink-700" target="_blank" rel="noopener noreferrer">
+                        <Instagram className="h-5 w-5" />
                     </Link>
                     <Link href="#" aria-label="Facebook" className="text-blue-600 transition-colors hover:text-blue-700" target="_blank" rel="noopener noreferrer">
                         <Facebook className="h-5 w-5" />
