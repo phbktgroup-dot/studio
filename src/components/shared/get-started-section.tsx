@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useTransition } from 'react';
@@ -10,6 +11,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { LogIn, Mail, Loader2, Send } from 'lucide-react';
 import { handleInquiry, type InquiryState } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const content = {
   en: {
@@ -59,6 +70,9 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
     const [loading, setLoading] = useState(true);
     const [isPending, startTransition] = useTransition();
     const { toast } = useToast();
+    const [isMobileDialogOpen, setIsMobileDialogOpen] = useState(false);
+    const [mobileNumber, setMobileNumber] = useState('');
+    const [isSubmittingMobile, setIsSubmittingMobile] = useState(false);
 
     useEffect(() => {
         const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -78,6 +92,11 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
         }
         if (!serviceTitle) {
             toast({ variant: "destructive", title: "Service Not Specified", description: "Could not determine which service to request." });
+            return;
+        }
+
+        if (!user.phone) {
+            setIsMobileDialogOpen(true);
             return;
         }
 
@@ -110,6 +129,69 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
                 });
             }
         });
+    };
+
+    const handleDialogSubmit = async () => {
+        if (!user || !serviceTitle) return;
+
+        setIsSubmittingMobile(true);
+
+        if (mobileNumber) {
+            if (!/^\d{10}$/.test(mobileNumber)) {
+                toast({
+                    variant: "destructive",
+                    title: "Invalid Mobile Number",
+                    description: "Please enter a valid 10-digit mobile number.",
+                });
+                setIsSubmittingMobile(false);
+                return;
+            }
+            const { error: updateError } = await supabase.auth.updateUser({ phone: mobileNumber });
+            if (updateError) {
+                toast({
+                    variant: "destructive",
+                    title: "Update Failed",
+                    description: `Could not save mobile number: ${updateError.message}`,
+                });
+            } else {
+                 toast({
+                    title: "Profile Updated",
+                    description: "Your mobile number has been saved.",
+                });
+            }
+        }
+
+        const fullName = user.user_metadata?.full_name || 'User';
+        const [firstName, ...lastNameParts] = fullName.split(' ');
+        const lastName = lastNameParts.join(' ') || '(No last name)';
+
+        const formData = new FormData();
+        formData.append('firstName', firstName);
+        formData.append('lastName', lastName);
+        formData.append('email', user.email!);
+        formData.append('mobileNumber', mobileNumber || user.phone || '');
+        formData.append('industry', serviceTitle);
+        formData.append('help', `Automated service request for: ${serviceTitle}`);
+        formData.append('userId', user.id);
+
+        const result = await handleInquiry({} as InquiryState, formData);
+
+        if (result.isSuccess) {
+            toast({
+                title: "Request Submitted!",
+                description: result.message,
+            });
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Submission Failed",
+                description: result.errors?._form?.[0] || "An unknown error occurred.",
+            });
+        }
+
+        setIsSubmittingMobile(false);
+        setIsMobileDialogOpen(false);
+        setMobileNumber('');
     };
 
     return (
@@ -162,6 +244,38 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
                     </CardContent>
                 </Card>
             </div>
+            <Dialog open={isMobileDialogOpen} onOpenChange={setIsMobileDialogOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Complete Your Request</DialogTitle>
+                        <DialogDescription>
+                            Please provide your mobile number. You can submit the request without it if you prefer.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="mobile" className="text-right">
+                                Mobile
+                            </Label>
+                            <Input
+                                id="mobile"
+                                value={mobileNumber}
+                                onChange={(e) => setMobileNumber(e.target.value)}
+                                className="col-span-3"
+                                placeholder="10-digit number"
+                                maxLength={10}
+                                pattern="[0-9]{10}"
+                            />
+                        </div>
+                    </div>
+                    <DialogFooter>
+                        <Button onClick={handleDialogSubmit} disabled={isSubmittingMobile}>
+                            {isSubmittingMobile && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                            Submit Request
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }
