@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
@@ -36,6 +35,8 @@ const text = {
       careers: "करिअर",
       contact: "संपर्क",
       login: "लॉगिन",
+      dashboard: "डॅशबोर्ड",
+      logout: "लॉगआउट",
   },
   en: {
       services: "Services",
@@ -45,6 +46,8 @@ const text = {
       careers: "Careers",
       contact: "Contact",
       login: "Login",
+      dashboard: "Dashboard",
+      logout: "Logout",
   },
   hi: {
     services: "सेवाएँ",
@@ -54,6 +57,8 @@ const text = {
     careers: "करियर",
     contact: "संपर्क",
     login: "लॉगिन",
+    dashboard: "डैशबोर्ड",
+    logout: "लॉगआउट",
   },
 };
 
@@ -267,7 +272,7 @@ export default function Header() {
                     <span className="sr-only">Toggle navigation menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-1/2 p-0">
+                <SheetContent side="right" className="w-full max-w-xs p-0">
                   <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                   <div className="flex justify-start px-4 py-1 border-b">
                      {logoLoading ? (
@@ -278,20 +283,39 @@ export default function Header() {
                       <Logo className="h-[48px]" />
                     )}
                   </div>
-                  <div className="flex flex-col items-center divide-y divide-border text-sm font-medium">
-                    {navLinks.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className={cn(
-                            "py-2 w-full text-center transition-colors",
-                            activeLink === link.href ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
+                  <div className="flex h-[calc(100%-60px)] flex-col">
+                    <div className="flex flex-col items-center divide-y divide-border text-sm font-medium">
+                        {navLinks.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className={cn(
+                                "py-3 w-full text-center transition-colors",
+                                activeLink === link.href ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
+                            )}
+                            onClick={() => setSheetOpen(false)}
+                        >
+                            {link.label}
+                        </Link>
+                        ))}
+                    </div>
+                    <div className="mt-auto border-t p-4">
+                        {user ? (
+                            <div className="flex flex-col gap-2">
+                                <Button asChild className="w-full">
+                                    <Link href="/dashboard" onClick={() => setSheetOpen(false)}>{text[language].dashboard}</Link>
+                                </Button>
+                                <Button variant="outline" onClick={() => { handleLogout(); setSheetOpen(false); }} className="w-full">
+                                    <LogOut className="mr-2 h-4 w-4" />
+                                    {text[language].logout}
+                                </Button>
+                            </div>
+                        ) : (
+                            <Button asChild className="w-full">
+                                <Link href="/login" onClick={() => setSheetOpen(false)}>{text[language].login}</Link>
+                            </Button>
                         )}
-                        onClick={() => setSheetOpen(false)}
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
+                    </div>
                   </div>
                 </SheetContent>
               </Sheet>
