@@ -16,6 +16,7 @@ import {
   LogOut,
   Mail,
   Settings,
+  ArrowLeft,
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -168,7 +169,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
       </header>
 
       <div className="flex-1 overflow-hidden pt-16 lg:pt-[60px]">
-          <Sidebar collapsible="icon" side="left">
+          <Sidebar collapsible="icon" side="right">
               <SidebarContent>
               <SidebarMenu>
                   <SidebarMenuItem>
@@ -238,7 +239,15 @@ function DashboardUI({ children }: { children: ReactNode }) {
           </Sidebar>
 
           <SidebarInset className="h-full overflow-y-auto no-scrollbar">
-              <div className="p-4 sm:p-6">{children}</div>
+              <div className="p-4 sm:p-6">
+                <Button variant="ghost" asChild className="mb-4 -ml-4">
+                  <Link href="/">
+                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      Back to Home
+                  </Link>
+                </Button>
+                {children}
+              </div>
           </SidebarInset>
       </div>
     </>
