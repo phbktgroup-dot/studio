@@ -7,4 +7,12 @@ if (!supabaseUrl || !supabaseKey) {
   throw new Error('Supabase URL or key not defined in environment variables.')
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+const isServer = typeof window === 'undefined';
+
+export const supabase = createClient(supabaseUrl, supabaseKey, {
+  auth: {
+    persistSession: !isServer,
+    autoRefreshToken: !isServer,
+    detectSessionInUrl: !isServer,
+  },
+});
