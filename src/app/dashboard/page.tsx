@@ -202,7 +202,7 @@ export default function DashboardPage() {
         </CardHeader>
         <CardContent className="p-0">
             {inquiries && inquiries.length > 0 ? (
-                 <Table className="text-xs md:text-sm">
+                 <Table className="text-[11px] md:text-sm">
                     <TableHeader>
                         <TableRow className="bg-muted/50 hover:bg-muted/50 h-8">
                             <TableHead className="h-8 py-0 px-2 sm:px-4">Request ID</TableHead>
