@@ -24,38 +24,38 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
                     <span className="sr-only">View Inquiry</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-lg">
                 <DialogHeader>
-                    <DialogTitle className="text-lg">Inquiry Details</DialogTitle>
-                    <DialogDescription className="text-sm">
+                    <DialogTitle>Inquiry Details</DialogTitle>
+                    <DialogDescription>
                         Submitted on {format(new Date(inquiry.created_at), 'PPP p')}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground text-sm">Name</Label>
-                        <div className="col-span-3 text-sm">{inquiry.name}</div>
+                        <Label className="text-right text-muted-foreground">Name</Label>
+                        <div className="col-span-3">{inquiry.name}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground text-sm">Email</Label>
-                        <div className="col-span-3 text-sm">{inquiry.email}</div>
+                        <Label className="text-right text-muted-foreground">Email</Label>
+                        <div className="col-span-3">{inquiry.email}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground text-sm">Mobile</Label>
-                        <div className="col-span-3 text-sm">{inquiry.mobile || 'N/A'}</div>
+                        <Label className="text-right text-muted-foreground">Mobile</Label>
+                        <div className="col-span-3">{inquiry.mobile || 'N/A'}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground text-sm">Purpose</Label>
-                        <div className="col-span-3 capitalize text-sm">{inquiry.purpose.replace(/-/g, ' ')}</div>
+                        <Label className="text-right text-muted-foreground">Purpose</Label>
+                        <div className="col-span-3 capitalize">{inquiry.purpose.replace(/-/g, ' ')}</div>
                     </div>
                      <div className="grid grid-cols-4 items-start gap-4">
-                        <Label className="text-right text-muted-foreground mt-1 text-sm">Vision</Label>
-                        <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-sm whitespace-pre-wrap break-words">
+                        <Label className="text-right text-muted-foreground mt-1">Vision</Label>
+                        <div className="col-span-3 rounded-md border bg-muted/50 p-3 whitespace-pre-wrap break-words">
                             {inquiry.vision}
                         </div>
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground text-sm">Status</Label>
+                        <Label className="text-right text-muted-foreground">Status</Label>
                         <div className="col-span-3">
                             <StatusSwitcher inquiryId={inquiry.id} currentStatus={inquiry.status} />
                         </div>
