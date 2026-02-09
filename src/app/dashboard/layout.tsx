@@ -224,6 +224,16 @@ function DashboardUI({ children }: { children: ReactNode }) {
                     </>
                   )}
               </SidebarMenu>
+               {isMobile && (
+                <SidebarMenu className="mt-auto">
+                  <SidebarMenuItem>
+                    <SidebarMenuButton onClick={handleLogout} size="sm">
+                      <LogOut />
+                      <span>Logout</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              )}
               </SidebarContent>
           </Sidebar>
 
