@@ -1,4 +1,3 @@
-
 'use client';
 
 import type { ReactNode } from "react";
@@ -239,9 +238,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
           </Sidebar>
 
           <SidebarInset className="h-full overflow-y-auto no-scrollbar">
-              <div className="p-4 sm:p-6">
-                {children}
-              </div>
+            {children}
           </SidebarInset>
       </div>
     </>
