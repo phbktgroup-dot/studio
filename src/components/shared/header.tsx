@@ -212,7 +212,7 @@ export default function Header() {
             )}
           </Link>
         </div>
-        <NavMenu className="hidden md:flex" />
+        {mounted && <NavMenu className="hidden md:flex" />}
         <div className="ml-auto flex items-center gap-2">
           {mounted ? (
             <>

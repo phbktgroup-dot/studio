@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -11,18 +12,24 @@ type Language = 'en' | 'mr' | 'hi';
 export function LanguageSelector() {
   const { setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     const storedLang = localStorage.getItem('phbkt_lang');
     if (!storedLang) {
       setIsOpen(true);
     }
+    setIsMounted(true);
   }, []);
 
   const handleSelectLanguage = (lang: Language) => {
     setLanguage(lang);
     setIsOpen(false);
   };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <Dialog open={isOpen}>
