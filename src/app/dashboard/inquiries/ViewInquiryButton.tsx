@@ -26,7 +26,7 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[625px]">
                 <DialogHeader>
-                    <DialogTitle>Inquiry Details</DialogTitle>
+                    <DialogTitle className="text-base">Inquiry Details</DialogTitle>
                     <DialogDescription>
                         Submitted on {format(new Date(inquiry.created_at), 'PPP p')}
                     </DialogDescription>
@@ -34,23 +34,23 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground">Name</Label>
-                        <div className="col-span-3 text-xs">{inquiry.name}</div>
+                        <div className="col-span-3 text-[10px]">{inquiry.name}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground">Email</Label>
-                        <div className="col-span-3 text-xs">{inquiry.email}</div>
+                        <div className="col-span-3 text-[10px]">{inquiry.email}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground">Mobile</Label>
-                        <div className="col-span-3 text-xs">{inquiry.mobile || 'N/A'}</div>
+                        <div className="col-span-3 text-[10px]">{inquiry.mobile || 'N/A'}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground">Purpose</Label>
-                        <div className="col-span-3 capitalize text-xs">{inquiry.purpose.replace(/-/g, ' ')}</div>
+                        <div className="col-span-3 capitalize text-[10px]">{inquiry.purpose.replace(/-/g, ' ')}</div>
                     </div>
                      <div className="grid grid-cols-4 items-start gap-4">
                         <Label className="text-right text-muted-foreground mt-1">Vision</Label>
-                        <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-xs whitespace-pre-wrap break-words">
+                        <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-[10px] whitespace-pre-wrap break-words">
                             {inquiry.vision}
                         </div>
                     </div>
