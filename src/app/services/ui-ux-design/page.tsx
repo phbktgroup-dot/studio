@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useLanguage } from '@/context/language-provider';
@@ -331,7 +332,7 @@ export default function UiUxDesignPage() {
               <p className="font-bold text-primary tracking-wider uppercase text-sm md:text-base">
                 {t.title}
               </p>
-              <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mt-2 leading-tight">
+              <h1 className="font-headline text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl mt-2 leading-tight">
                 {t.heading}
               </h1>
             </header>
