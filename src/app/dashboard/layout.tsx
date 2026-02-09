@@ -203,10 +203,10 @@ function DashboardUI({ children }: { children: ReactNode }) {
                   </SidebarMenuItem>
                   {isAdmin && (
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} tooltip="Inquiries">
+                        <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} tooltip="All Inquiries">
                             <Link href="/dashboard/inquiries">
                             <Mail />
-                            <span className="text-xs">Inquiries</span>
+                            <span className="text-xs">All Inquiries</span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
