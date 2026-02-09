@@ -1,4 +1,3 @@
-
 'use client';
 
 import {
@@ -14,8 +13,26 @@ import { Eye } from "lucide-react";
 import { format } from "date-fns";
 import { Label } from "@/components/ui/label";
 import { StatusSwitcher } from './StatusSwitcher';
+import { Badge } from '@/components/ui/badge';
 
-export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
+type Status = 'in_process' | 'completed' | 'pending';
+
+const statusText: Record<Status, string> = {
+    pending: 'Pending',
+    in_process: 'In Process',
+    completed: 'Completed'
+}
+
+const statusBadgeVariant: Record<Status, "secondary" | "default" | "outline"> = {
+    pending: 'secondary',
+    in_process: 'default',
+    completed: 'outline'
+}
+
+
+export function ViewInquiryButton({ inquiry, isAdminView = false }: { inquiry: any, isAdminView?: boolean }) {
+    const effectiveStatus: Status = inquiry.status || 'pending';
+    
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -57,7 +74,13 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground text-xs">Status</Label>
                         <div className="col-span-3">
-                            <StatusSwitcher inquiryId={inquiry.id} currentStatus={inquiry.status} />
+                            {isAdminView ? (
+                                <StatusSwitcher inquiryId={inquiry.id} currentStatus={inquiry.status} />
+                            ) : (
+                                <Badge variant={statusBadgeVariant[effectiveStatus]} className="font-normal capitalize text-xs">
+                                    {statusText[effectiveStatus]}
+                                </Badge>
+                            )}
                         </div>
                     </div>
                 </div>

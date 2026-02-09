@@ -177,7 +177,7 @@ export default function InquiriesPage() {
                         <TableCell className="py-0 px-2 sm:px-4 font-semibold">{inquiry.name}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 capitalize">{inquiry.purpose}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 text-right">
-                           <ViewInquiryButton inquiry={inquiry} />
+                           <ViewInquiryButton inquiry={inquiry} isAdminView={true} />
                            <DeleteInquiryButton inquiryId={inquiry.id} />
                         </TableCell>
                         </TableRow>
