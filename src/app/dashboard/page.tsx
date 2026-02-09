@@ -219,10 +219,10 @@ export default function DashboardPage() {
                         <TableCell className="py-0 px-2 sm:px-4 font-mono font-bold">{inquiry.id.substring(0, 8)}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 capitalize">
-                            <Badge variant="secondary" className="font-normal">{inquiry.purpose.replace(/-/g, ' ')}</Badge>
+                            <Badge variant="secondary" className="font-normal text-[8px] sm:text-xs">{inquiry.purpose.replace(/-/g, ' ')}</Badge>
                         </TableCell>
                         <TableCell className="py-0 px-2 sm:px-4">
-                            <Badge variant={statusBadgeVariant[effectiveStatus]} className="font-normal capitalize">
+                            <Badge variant={statusBadgeVariant[effectiveStatus]} className="font-normal capitalize text-[8px] sm:text-xs">
                                 {statusText[effectiveStatus]}
                             </Badge>
                         </TableCell>
