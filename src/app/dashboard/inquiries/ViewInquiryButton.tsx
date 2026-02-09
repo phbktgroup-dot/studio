@@ -1,4 +1,3 @@
-
 'use client';
 
 import {
@@ -26,38 +25,38 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[625px]">
                 <DialogHeader>
-                    <DialogTitle className="text-sm">Inquiry Details</DialogTitle>
-                    <DialogDescription>
+                    <DialogTitle className="text-[10px]">Inquiry Details</DialogTitle>
+                    <DialogDescription className="text-xs">
                         Submitted on {format(new Date(inquiry.created_at), 'PPP p')}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground">Name</Label>
-                        <div className="col-span-3 text-[10px]">{inquiry.name}</div>
+                        <Label className="text-right text-muted-foreground text-xs">Name</Label>
+                        <div className="col-span-3 text-[9px]">{inquiry.name}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground">Email</Label>
-                        <div className="col-span-3 text-[10px]">{inquiry.email}</div>
+                        <Label className="text-right text-muted-foreground text-xs">Email</Label>
+                        <div className="col-span-3 text-[9px]">{inquiry.email}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground">Mobile</Label>
-                        <div className="col-span-3 text-[10px]">{inquiry.mobile || 'N/A'}</div>
+                        <Label className="text-right text-muted-foreground text-xs">Mobile</Label>
+                        <div className="col-span-3 text-[9px]">{inquiry.mobile || 'N/A'}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground">Purpose</Label>
-                        <div className="col-span-3 capitalize text-[10px]">{inquiry.purpose.replace(/-/g, ' ')}</div>
+                        <Label className="text-right text-muted-foreground text-xs">Purpose</Label>
+                        <div className="col-span-3 capitalize text-[9px]">{inquiry.purpose.replace(/-/g, ' ')}</div>
                     </div>
                      <div className="grid grid-cols-4 items-start gap-4">
-                        <Label className="text-right text-muted-foreground mt-1">Vision</Label>
-                        <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-[10px] whitespace-pre-wrap break-words">
+                        <Label className="text-right text-muted-foreground mt-1 text-xs">Vision</Label>
+                        <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-[9px] whitespace-pre-wrap break-words">
                             {inquiry.vision}
                         </div>
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground">Status</Label>
+                        <Label className="text-right text-muted-foreground text-xs">Status</Label>
                         <div className="col-span-3">
-                            <Badge variant={inquiry.status === 'completed' ? 'outline' : inquiry.status === 'in_process' ? 'default' : 'secondary'} className="font-normal capitalize">
+                            <Badge variant={inquiry.status === 'completed' ? 'outline' : inquiry.status === 'in_process' ? 'default' : 'secondary'} className="font-normal capitalize text-[9px]">
                                 {inquiry.status?.replace('_', ' ') || 'Pending'}
                             </Badge>
                         </div>
