@@ -273,7 +273,7 @@ export default function Header() {
                     <span className="sr-only">Toggle navigation menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-1/2 p-0">
+                <SheetContent side="right" className="w-[65%] p-0">
                   <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                   <div className="flex justify-start px-4 py-1 border-b">
                      {logoLoading ? (
