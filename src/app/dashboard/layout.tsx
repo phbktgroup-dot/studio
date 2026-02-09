@@ -128,7 +128,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6 z-[51] fixed top-0 left-0 right-0">
+      <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b bg-background pr-4 lg:h-[60px] lg:pr-6 z-[51] fixed top-0 left-0 right-0">
         <div className="flex items-center gap-2">
           <Link href="/">
             {logoLoading ? (
