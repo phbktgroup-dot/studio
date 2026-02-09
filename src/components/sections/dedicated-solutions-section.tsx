@@ -159,8 +159,8 @@ export default function DedicatedSolutionsSection() {
           </TabsList>
           
           <TabsContent value="shops">
-            <Card className="mt-6 border-0 shadow-none bg-transparent">
-              <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <Card className="border-0 shadow-none bg-transparent">
+              <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-4 md:gap-8 items-center">
                 <div className="order-2 md:order-1 px-4 md:px-0">
                   <Card className="shadow-lg">
                     <CardContent className="p-6 text-center md:text-left">
@@ -209,8 +209,8 @@ export default function DedicatedSolutionsSection() {
           </TabsContent>
           
           <TabsContent value="startups">
-            <Card className="mt-6 border-0 shadow-none bg-transparent">
-              <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <Card className="border-0 shadow-none bg-transparent">
+              <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-4 md:gap-8 items-center">
                  <div className="aspect-video rounded-none md:rounded-lg overflow-hidden bg-muted">
                    {startupsVideoUrl ? (
                     <video
