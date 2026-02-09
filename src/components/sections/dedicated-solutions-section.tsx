@@ -1,6 +1,7 @@
 
 'use client';
 
+import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Store, Rocket, Check } from "lucide-react";
@@ -9,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useLanguage } from '@/context/language-provider';
+import { supabase } from "@/lib/supabase";
 
 const sectionText = {
   en: {
@@ -103,6 +105,36 @@ const startupImage = PlaceHolderImages.find(p => p.id === 'startup_build_product
 export default function DedicatedSolutionsSection() {
   const { language } = useLanguage();
   const text = sectionText[language];
+  const [shopsVideoUrl, setShopsVideoUrl] = useState<string | null>(null);
+  const [startupsVideoUrl, setStartupsVideoUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      setLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('settings')
+          .select('local_shops_video_url, startups_video_url')
+          .eq('id', 1)
+          .single();
+
+        if (error && error.code !== 'PGRST116') {
+          console.warn("Could not fetch section videos:", error.message);
+        }
+
+        if (data) {
+          setShopsVideoUrl(data.local_shops_video_url);
+          setStartupsVideoUrl(data.startups_video_url);
+        }
+      } catch (error: any) {
+        console.warn("Error fetching section videos:", error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVideos();
+  }, []);
 
   return (
     <section id="solutions" className="py-6 md:py-8 bg-muted/30">
@@ -150,8 +182,18 @@ export default function DedicatedSolutionsSection() {
                     </CardContent>
                   </Card>
                 </div>
-                <div className="order-1 md:order-2 aspect-video rounded-none md:rounded-lg overflow-hidden">
-                  {shopImage && (
+                <div className="order-1 md:order-2 aspect-video rounded-none md:rounded-lg overflow-hidden bg-muted">
+                  {shopsVideoUrl ? (
+                    <video
+                      key={shopsVideoUrl}
+                      src={shopsVideoUrl}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  ) : shopImage ? (
                     <Image
                       src={shopImage.imageUrl}
                       alt={shopImage.description}
@@ -160,7 +202,7 @@ export default function DedicatedSolutionsSection() {
                       data-ai-hint={shopImage.imageHint}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
-                  )}
+                  ) : null}
                 </div>
               </CardContent>
             </Card>
@@ -169,8 +211,18 @@ export default function DedicatedSolutionsSection() {
           <TabsContent value="startups">
             <Card className="mt-6 border-0 shadow-none bg-transparent">
               <CardContent className="p-0 md:p-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                 <div className="aspect-video rounded-none md:rounded-lg overflow-hidden">
-                   {startupImage && (
+                 <div className="aspect-video rounded-none md:rounded-lg overflow-hidden bg-muted">
+                   {startupsVideoUrl ? (
+                    <video
+                      key={startupsVideoUrl}
+                      src={startupsVideoUrl}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                   ) : startupImage ? (
                     <Image
                       src={startupImage.imageUrl}
                       alt={startupImage.description}
@@ -179,7 +231,7 @@ export default function DedicatedSolutionsSection() {
                       data-ai-hint={startupImage.imageHint}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
-                  )}
+                  ) : null}
                 </div>
                 <div className="px-4 md:px-0">
                   <Card className="shadow-lg">
