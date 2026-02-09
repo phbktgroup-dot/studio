@@ -85,20 +85,8 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
         };
       }, []);
     
-    const handleRequest = () => {
-        if (!user) {
-            toast({ variant: "destructive", title: "Authentication Error", description: "You must be logged in to make a request." });
-            return;
-        }
-        if (!serviceTitle) {
-            toast({ variant: "destructive", title: "Service Not Specified", description: "Could not determine which service to request." });
-            return;
-        }
-
-        if (!user.phone) {
-            setIsMobileDialogOpen(true);
-            return;
-        }
+    const submitInquiry = (mobileToUse?: string | null) => {
+        if (!user || !serviceTitle) return;
 
         startTransition(async () => {
             const fullName = user.user_metadata?.full_name || 'User';
@@ -109,7 +97,7 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
             formData.append('firstName', firstName);
             formData.append('lastName', lastName);
             formData.append('email', user.email!);
-            formData.append('mobileNumber', user.phone || '');
+            formData.append('mobileNumber', mobileToUse || user.phone || '');
             formData.append('industry', serviceTitle);
             formData.append('help', `Automated service request for: ${serviceTitle}`);
             formData.append('userId', user.id);
@@ -129,13 +117,29 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
                 });
             }
         });
+    }
+    
+    const handleRequest = () => {
+        if (!user) {
+            toast({ variant: "destructive", title: "Authentication Error", description: "You must be logged in to make a request." });
+            return;
+        }
+        if (!serviceTitle) {
+            toast({ variant: "destructive", title: "Service Not Specified", description: "Could not determine which service to request." });
+            return;
+        }
+
+        if (!user.phone) {
+            setIsMobileDialogOpen(true);
+            return;
+        }
+        submitInquiry();
     };
 
     const handleDialogSubmit = async () => {
-        if (!user || !serviceTitle) return;
-
+        if (!user) return;
         setIsSubmittingMobile(true);
-
+        
         if (mobileNumber) {
             if (!/^\d{10}$/.test(mobileNumber)) {
                 toast({
@@ -159,40 +163,21 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
                     description: "Your mobile number has been saved.",
                 });
             }
-        }
-
-        const fullName = user.user_metadata?.full_name || 'User';
-        const [firstName, ...lastNameParts] = fullName.split(' ');
-        const lastName = lastNameParts.join(' ') || '(No last name)';
-
-        const formData = new FormData();
-        formData.append('firstName', firstName);
-        formData.append('lastName', lastName);
-        formData.append('email', user.email!);
-        formData.append('mobileNumber', mobileNumber || user.phone || '');
-        formData.append('industry', serviceTitle);
-        formData.append('help', `Automated service request for: ${serviceTitle}`);
-        formData.append('userId', user.id);
-
-        const result = await handleInquiry({} as InquiryState, formData);
-
-        if (result.isSuccess) {
-            toast({
-                title: "Request Submitted!",
-                description: result.message,
-            });
+            submitInquiry(mobileNumber);
         } else {
-            toast({
-                variant: "destructive",
-                title: "Submission Failed",
-                description: result.errors?._form?.[0] || "An unknown error occurred.",
-            });
+            submitInquiry();
         }
 
         setIsSubmittingMobile(false);
         setIsMobileDialogOpen(false);
         setMobileNumber('');
     };
+
+    const handleDialogCancel = () => {
+        submitInquiry();
+        setIsMobileDialogOpen(false);
+        setMobileNumber('');
+    }
 
     return (
         <div className="py-16 bg-muted/30">
@@ -249,7 +234,7 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
                     <DialogHeader>
                         <DialogTitle>Complete Your Request</DialogTitle>
                         <DialogDescription>
-                            Please provide your mobile number. You can submit the request without it if you prefer.
+                           To update your profile, please provide your mobile number. If you prefer not to, simply click Cancel to submit your request.
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
@@ -269,6 +254,9 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
                         </div>
                     </div>
                     <DialogFooter>
+                        <Button variant="outline" onClick={handleDialogCancel} disabled={isSubmittingMobile}>
+                            Cancel
+                        </Button>
                         <Button onClick={handleDialogSubmit} disabled={isSubmittingMobile}>
                             {isSubmittingMobile && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                             Submit Request
