@@ -168,7 +168,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
       </header>
 
       <div className="flex-1 overflow-hidden pt-16 lg:pt-[60px]">
-          <Sidebar collapsible="icon">
+          <Sidebar collapsible="icon" side="left">
               <SidebarContent>
               <SidebarMenu>
                   <SidebarMenuItem>
