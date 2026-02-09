@@ -172,9 +172,7 @@ export default function Header() {
     await supabase.auth.signOut();
   };
 
-  const handleMobileLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    router.push(href);
+  const handleMobileLinkClick = () => {
     setSheetOpen(false);
   };
   
@@ -299,7 +297,7 @@ export default function Header() {
                                 "py-3 w-full text-center transition-colors",
                                 activeLink === link.href ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
                             )}
-                            onClick={(e) => handleMobileLinkClick(e, link.href)}
+                            onClick={handleMobileLinkClick}
                         >
                             {link.label}
                         </Link>
