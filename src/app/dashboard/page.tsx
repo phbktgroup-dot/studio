@@ -163,10 +163,7 @@ export default function DashboardPage() {
        <h1 className="text-xl font-bold font-headline">Dashboard</h1>
        <Card>
         <CardHeader>
-          <CardTitle className="text-base">My Inquiries</CardTitle>
-          <CardDescription className="text-xs">
-            Your submitted inquiries.
-          </CardDescription>
+          <CardTitle className="text-lg">My Inquiries</CardTitle>
         </CardHeader>
         <CardContent>
             {inquiries && inquiries.length > 0 ? (

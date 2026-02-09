@@ -134,9 +134,6 @@ export default function InquiriesPage() {
        <Card>
         <CardHeader>
           <CardTitle className="text-lg">All Received Inquiries</CardTitle>
-          <CardDescription className="text-xs">
-            All inquiries submitted through the contact form.
-          </CardDescription>
         </CardHeader>
         <CardContent>
             {inquiries && inquiries.length > 0 ? (
