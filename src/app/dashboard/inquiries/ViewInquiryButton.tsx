@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
 import { format } from "date-fns";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
+import { StatusSwitcher } from './StatusSwitcher';
 
 export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
     return (
@@ -24,42 +24,40 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
                     <span className="sr-only">View Inquiry</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[525px]">
+            <DialogContent className="sm:max-w-md">
                 <DialogHeader>
-                    <DialogTitle className="text-sm">Inquiry Details</DialogTitle>
-                    <DialogDescription className="text-xs">
+                    <DialogTitle className="text-lg">Inquiry Details</DialogTitle>
+                    <DialogDescription className="text-sm">
                         Submitted on {format(new Date(inquiry.created_at), 'PPP p')}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground text-xs">Name</Label>
-                        <div className="col-span-3 text-xs">{inquiry.name}</div>
+                        <Label className="text-right text-muted-foreground text-sm">Name</Label>
+                        <div className="col-span-3 text-sm">{inquiry.name}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground text-xs">Email</Label>
-                        <div className="col-span-3 text-xs">{inquiry.email}</div>
+                        <Label className="text-right text-muted-foreground text-sm">Email</Label>
+                        <div className="col-span-3 text-sm">{inquiry.email}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground text-xs">Mobile</Label>
-                        <div className="col-span-3 text-xs">{inquiry.mobile || 'N/A'}</div>
+                        <Label className="text-right text-muted-foreground text-sm">Mobile</Label>
+                        <div className="col-span-3 text-sm">{inquiry.mobile || 'N/A'}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground text-xs">Purpose</Label>
-                        <div className="col-span-3 capitalize text-xs">{inquiry.purpose.replace(/-/g, ' ')}</div>
+                        <Label className="text-right text-muted-foreground text-sm">Purpose</Label>
+                        <div className="col-span-3 capitalize text-sm">{inquiry.purpose.replace(/-/g, ' ')}</div>
                     </div>
                      <div className="grid grid-cols-4 items-start gap-4">
-                        <Label className="text-right text-muted-foreground mt-1 text-xs">Vision</Label>
-                        <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-xs whitespace-pre-wrap break-words">
+                        <Label className="text-right text-muted-foreground mt-1 text-sm">Vision</Label>
+                        <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-sm whitespace-pre-wrap break-words">
                             {inquiry.vision}
                         </div>
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right text-muted-foreground text-xs">Status</Label>
+                        <Label className="text-right text-muted-foreground text-sm">Status</Label>
                         <div className="col-span-3">
-                            <Badge variant={inquiry.status === 'completed' ? 'outline' : inquiry.status === 'in_process' ? 'default' : 'secondary'} className="font-normal capitalize text-xs">
-                                {inquiry.status?.replace('_', ' ') || 'Pending'}
-                            </Badge>
+                            <StatusSwitcher inquiryId={inquiry.id} currentStatus={inquiry.status} />
                         </div>
                     </div>
                 </div>

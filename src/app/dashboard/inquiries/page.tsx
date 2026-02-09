@@ -22,7 +22,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle, Mail, Loader2, ArrowLeft } from "lucide-react";
 import { format } from 'date-fns';
 import { ViewInquiryButton } from './ViewInquiryButton';
-import { StatusSwitcher } from './StatusSwitcher';
 import { DeleteInquiryButton } from './DeleteInquiryButton';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -166,9 +165,7 @@ export default function InquiriesPage() {
                             <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Request ID</TableHead>
                             <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Date</TableHead>
                             <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Name</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Email</TableHead>
                             <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Purpose</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Status</TableHead>
                             <TableHead className="h-8 py-0 px-2 sm:px-4 text-right text-[10px]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -178,11 +175,7 @@ export default function InquiriesPage() {
                         <TableCell className="py-0 px-2 sm:px-4 font-mono">{inquiry.id.substring(0, 8)}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 font-semibold">{inquiry.name}</TableCell>
-                        <TableCell className="py-0 px-2 sm:px-4">{inquiry.email}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 capitalize">{inquiry.purpose}</TableCell>
-                        <TableCell className="py-0 px-2 sm:px-4">
-                            <StatusSwitcher inquiryId={inquiry.id} currentStatus={inquiry.status} />
-                        </TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 text-right">
                            <ViewInquiryButton inquiry={inquiry} />
                            <DeleteInquiryButton inquiryId={inquiry.id} />
