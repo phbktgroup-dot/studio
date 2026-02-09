@@ -138,39 +138,44 @@ export default function Header() {
   }, [router]);
   
   useEffect(() => {
-    if (!mounted || !isHomePage) {
-        setActiveLink('');
-        return;
-    };
-
-    const sections = navLinks.map(link => document.querySelector(`#${link.id}`)).filter(Boolean);
-
-    if (sections.length === 0) return;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                setActiveLink(`#${entry.target.id}`);
-            }
-        });
-    }, {
-        rootMargin: '-40% 0px -60% 0px',
-        threshold: 0
-    });
-
-    sections.forEach(section => {
-        if (section) observer.observe(section);
-    });
-
-    return () => {
-        sections.forEach(section => {
-            if (section) observer.unobserve(section);
-        });
-    };
-  }, [navLinks, mounted, isHomePage]);
+    if (mounted && isHomePage) {
+      const sections = navLinks.map(link => document.querySelector(link.href)).filter(Boolean);
+  
+      if (sections.length === 0) return;
+  
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  setActiveLink(`#${entry.target.id}`);
+              }
+          });
+      }, {
+          rootMargin: '-40% 0px -60% 0px',
+          threshold: 0
+      });
+  
+      sections.forEach(section => {
+          if (section) observer.observe(section);
+      });
+  
+      return () => {
+          sections.forEach(section => {
+              if (section) observer.unobserve(section);
+          });
+      };
+    } else {
+      setActiveLink('');
+    }
+  }, [isHomePage, mounted, navLinks]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+  };
+
+  const handleMobileLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    router.push(href);
+    setSheetOpen(false);
   };
   
   const NavMenu = ({ className }: { className?: string }) => (
@@ -294,7 +299,7 @@ export default function Header() {
                                 "py-3 w-full text-center transition-colors",
                                 activeLink === link.href ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
                             )}
-                            onClick={() => setSheetOpen(false)}
+                            onClick={(e) => handleMobileLinkClick(e, link.href)}
                         >
                             {link.label}
                         </Link>
