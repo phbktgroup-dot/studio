@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useTransition } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/context/language-provider';
@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { LogIn, Mail, Loader2, Send } from 'lucide-react';
+import { handleInquiry, type InquiryState } from '@/lib/actions';
+import { useToast } from '@/hooks/use-toast';
 
 const content = {
   en: {
@@ -16,7 +18,8 @@ const content = {
     google: "Sign in with Google",
     email: "Sign in with Email",
     form: "Fill The Inquiry Form",
-    requestService: "Request This Service"
+    requestService: "Request This Service",
+    submitting: "Submitting..."
   },
   hi: {
     title: "चलिए शुरू करते हैं",
@@ -24,7 +27,8 @@ const content = {
     google: "Google से साइन इन करें",
     email: "ईमेल से साइन इन करें",
     form: "पूछताछ फ़ॉर्म भरें",
-    requestService: "इस सेवा का अनुरोध करें"
+    requestService: "इस सेवा का अनुरोध करें",
+    submitting: "सबमिट हो रहा है..."
   },
   mr: {
     title: "चला, सुरुवात करूया",
@@ -32,7 +36,8 @@ const content = {
     google: "Google ने साइन इन करा",
     email: "ईमेलने साइन इन करा",
     form: "चौकशी अर्ज भरा",
-    requestService: "या सेवेसाठी विनंती करा"
+    requestService: "या सेवेसाठी विनंती करा",
+    submitting: "सबमिट करत आहे..."
   }
 };
 
@@ -47,11 +52,13 @@ const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 
-export function GetStartedSection() {
+export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
     const { language } = useLanguage();
     const t = content[language];
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isPending, startTransition] = useTransition();
+    const { toast } = useToast();
 
     useEffect(() => {
         const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -63,6 +70,47 @@ export function GetStartedSection() {
           authListener.subscription.unsubscribe();
         };
       }, []);
+    
+    const handleRequest = () => {
+        if (!user) {
+            toast({ variant: "destructive", title: "Authentication Error", description: "You must be logged in to make a request." });
+            return;
+        }
+        if (!serviceTitle) {
+            toast({ variant: "destructive", title: "Service Not Specified", description: "Could not determine which service to request." });
+            return;
+        }
+
+        startTransition(async () => {
+            const fullName = user.user_metadata?.full_name || 'User';
+            const [firstName, ...lastNameParts] = fullName.split(' ');
+            const lastName = lastNameParts.join(' ') || '(No last name)';
+
+            const formData = new FormData();
+            formData.append('firstName', firstName);
+            formData.append('lastName', lastName);
+            formData.append('email', user.email!);
+            formData.append('mobileNumber', user.phone || '');
+            formData.append('industry', serviceTitle);
+            formData.append('help', `Automated service request for: ${serviceTitle}`);
+            formData.append('userId', user.id);
+
+            const result = await handleInquiry({} as InquiryState, formData);
+
+            if (result.isSuccess) {
+                toast({
+                    title: "Request Submitted!",
+                    description: result.message,
+                });
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: "Submission Failed",
+                    description: result.errors?._form?.[0] || "An unknown error occurred.",
+                });
+            }
+        });
+    };
 
     return (
         <div className="py-16 bg-muted/30">
@@ -76,11 +124,18 @@ export function GetStartedSection() {
                         {loading ? (
                             <Loader2 className="h-8 w-8 animate-spin" />
                         ) : user ? (
-                            <Button asChild size="lg" className="w-full sm:w-auto">
-                                <Link href="/contact">
-                                    <Send className="mr-2 h-5 w-5" />
-                                    {t.requestService}
-                                </Link>
+                            <Button onClick={handleRequest} disabled={isPending} size="lg" className="w-full sm:w-auto">
+                                {isPending ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                                        {t.submitting}
+                                    </>
+                                ) : (
+                                    <>
+                                        <Send className="mr-2 h-5 w-5" />
+                                        {t.requestService}
+                                    </>
+                                )}
                             </Button>
                         ) : (
                             <>

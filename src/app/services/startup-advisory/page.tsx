@@ -359,7 +359,7 @@ export default function StartupAdvisoryPage() {
 
           </div>
         </div>
-        <GetStartedSection />
+        <GetStartedSection serviceTitle={t.title} />
       </main>
       <Footer />
     </div>

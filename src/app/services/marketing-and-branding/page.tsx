@@ -278,7 +278,7 @@ export default function MarketingAndBrandingPage() {
             <ResultSection title={t.resultTitle} items={t.resultItems} />
           </div>
         </div>
-        <GetStartedSection />
+        <GetStartedSection serviceTitle={t.title} />
       </main>
       <Footer />
     </div>

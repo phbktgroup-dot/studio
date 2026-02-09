@@ -368,7 +368,7 @@ export default function CloudAndSecurityPage() {
 
           </div>
         </div>
-        <GetStartedSection />
+        <GetStartedSection serviceTitle={t.title} />
       </main>
       <Footer />
     </div>

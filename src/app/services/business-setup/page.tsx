@@ -390,7 +390,7 @@ export default function BusinessSetupPage() {
 
           </div>
         </div>
-        <GetStartedSection />
+        <GetStartedSection serviceTitle={t.title} />
       </main>
       <Footer />
     </div>
