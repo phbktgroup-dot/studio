@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { GetStartedSection } from '@/components/shared/get-started-section';
 
 const content = {
   en: {
@@ -358,6 +359,7 @@ export default function StartupAdvisoryPage() {
 
           </div>
         </div>
+        <GetStartedSection />
       </main>
       <Footer />
     </div>

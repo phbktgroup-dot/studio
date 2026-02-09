@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { GetStartedSection } from '@/components/shared/get-started-section';
 
 const content = {
   en: {
@@ -239,8 +240,8 @@ export default function MarketingAndBrandingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
-      <main className="flex-grow py-8 md:py-12">
-        <div className="container">
+      <main className="flex-grow">
+        <div className="container py-8 md:py-12">
           <Button variant="ghost" asChild className="mb-8">
             <Link href="/#services">
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -277,6 +278,7 @@ export default function MarketingAndBrandingPage() {
             <ResultSection title={t.resultTitle} items={t.resultItems} />
           </div>
         </div>
+        <GetStartedSection />
       </main>
       <Footer />
     </div>
