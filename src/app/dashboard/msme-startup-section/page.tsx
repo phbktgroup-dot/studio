@@ -62,7 +62,11 @@ export default function MsmeStartupSectionPage() {
           }
         }
       } catch (error: any) {
-          console.error("Could not fetch section video URLs:", error.message);
+          if (error.message?.includes('does not exist') && (error.message.includes('local_shops_video_url') || error.message.includes('startups_video_url'))) {
+            console.warn("Could not fetch section video URLs because a column is missing. Please ensure 'local_shops_video_url' and 'startups_video_url' columns exist in the 'settings' table.", error.message);
+          } else {
+            console.error("Could not fetch section video URLs:", error.message);
+          }
       } finally {
         setIsFetchingLocalShops(false);
         setIsFetchingStartups(false);
