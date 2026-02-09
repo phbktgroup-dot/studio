@@ -55,16 +55,8 @@ function DashboardUI({ children }: { children: ReactNode }) {
   const { isMobile, toggleSidebar } = useSidebar();
 
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_OUT' || !session) {
-        router.push('/login');
-      } else {
-        setUser(session.user);
-        if (session.user && !session.user.phone && pathname !== '/complete-profile') {
-            router.push('/complete-profile');
-            return;
-        }
-      }
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
       setLoading(false);
     });
 
@@ -95,20 +87,32 @@ function DashboardUI({ children }: { children: ReactNode }) {
     return () => {
       authListener.subscription.unsubscribe();
     };
-  }, [router, pathname]);
-
-  const isAdmin = user?.user_metadata?.role === 'admin' || user?.email === 'hari.garad@phbkt.com';
+  }, []);
 
   useEffect(() => {
-    if (user) {
-      if (user.phone) { // Only run this check if profile is complete
-        const isAdminRoute = pathname.startsWith('/dashboard/users') || pathname.startsWith('/dashboard/hero-section') || pathname.startsWith('/dashboard/inquiries') || pathname.startsWith('/dashboard/settings') || pathname.startsWith('/dashboard/msme-startup-section');
-        if (isAdminRoute && !isAdmin) {
-          router.push('/dashboard');
-        }
-      }
+    if (loading) return; 
+
+    if (!user) {
+      router.push('/login');
+      return;
     }
-  }, [user, pathname, router, isAdmin]);
+
+    if (!user.phone && pathname !== '/complete-profile') {
+      router.push('/complete-profile');
+      return;
+    }
+
+    if (user.phone && pathname === '/complete-profile') {
+        router.push('/dashboard');
+        return;
+    }
+
+    const isAdmin = user.user_metadata?.role === 'admin' || user.email === 'hari.garad@phbkt.com';
+    const isAdminRoute = pathname.startsWith('/dashboard/users') || pathname.startsWith('/dashboard/hero-section') || pathname.startsWith('/dashboard/inquiries') || pathname.startsWith('/dashboard/settings') || pathname.startsWith('/dashboard/msme-startup-section');
+    if (isAdminRoute && !isAdmin) {
+      router.push('/dashboard');
+    }
+  }, [user, loading, pathname, router]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -122,8 +126,12 @@ function DashboardUI({ children }: { children: ReactNode }) {
     );
   }
 
-  if (!user) {
-    return null; // Redirecting...
+  if (!user || (!user.phone && pathname !== '/complete-profile')) {
+    return (
+        <div className="flex h-screen w-full items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+    );
   }
   
   const UserAvatarButton = () => (
@@ -132,6 +140,8 @@ function DashboardUI({ children }: { children: ReactNode }) {
         <AvatarFallback>{user.user_metadata?.full_name?.[0] || user.email?.[0].toUpperCase()}</AvatarFallback>
       </Avatar>
   );
+  
+  const isAdmin = user?.user_metadata?.role === 'admin' || user?.email === 'hari.garad@phbkt.com';
 
   return (
     <>
