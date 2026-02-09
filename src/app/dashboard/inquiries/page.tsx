@@ -159,19 +159,19 @@ export default function InquiriesPage() {
         </CardHeader>
         <CardContent className="p-0">
             {inquiries && inquiries.length > 0 ? (
-                 <Table className="text-xs">
+                 <Table className="text-xs md:text-sm">
                     <TableHeader>
                         <TableRow className="bg-muted/50 hover:bg-muted/50 h-8">
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Request ID</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Date</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Name</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Purpose</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right text-[10px]">Actions</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Request ID</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Date</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Name</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Purpose</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                     {inquiries.map((inquiry) => (
-                        <TableRow key={inquiry.id} className="h-8 text-[9px]">
+                        <TableRow key={inquiry.id} className="h-8">
                         <TableCell className="py-0 px-2 sm:px-4 font-mono font-bold">{inquiry.id.substring(0, 8)}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 font-semibold">{inquiry.name}</TableCell>

@@ -202,28 +202,28 @@ export default function DashboardPage() {
         </CardHeader>
         <CardContent className="p-0">
             {inquiries && inquiries.length > 0 ? (
-                 <Table className="text-xs">
+                 <Table className="text-xs md:text-sm">
                     <TableHeader>
                         <TableRow className="bg-muted/50 hover:bg-muted/50 h-8">
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[9px]">Request ID</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[9px]">Date</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[9px]">Purpose</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[9px]">Status</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right text-[9px]">Actions</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Request ID</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Date</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Purpose</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Status</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                     {inquiries.map((inquiry) => {
                         const effectiveStatus: Status = inquiry.status || 'pending';
                         return (
-                        <TableRow key={inquiry.id} className="h-8 text-[9px]">
+                        <TableRow key={inquiry.id} className="h-8">
                         <TableCell className="py-0 px-2 sm:px-4 font-mono font-bold">{inquiry.id.substring(0, 8)}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 capitalize">
-                            <Badge variant="secondary" className="font-normal text-[9px]">{inquiry.purpose.replace(/-/g, ' ')}</Badge>
+                            <Badge variant="secondary" className="font-normal">{inquiry.purpose.replace(/-/g, ' ')}</Badge>
                         </TableCell>
                         <TableCell className="py-0 px-2 sm:px-4">
-                            <Badge variant={statusBadgeVariant[effectiveStatus]} className="font-normal capitalize text-[9px]">
+                            <Badge variant={statusBadgeVariant[effectiveStatus]} className="font-normal capitalize">
                                 {statusText[effectiveStatus]}
                             </Badge>
                         </TableCell>
