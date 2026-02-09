@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/logo";
@@ -9,16 +8,14 @@ import { useLanguage } from '@/context/language-provider';
 type Language = 'en' | 'mr' | 'hi';
 
 export function LanguageSelector() {
-  const [isOpen, setIsOpen] = useState(true);
-  const { setLanguage } = useLanguage();
+  const { setLanguage, isLanguageSelected } = useLanguage();
 
   const handleSelectLanguage = (lang: Language) => {
     setLanguage(lang);
-    setIsOpen(false);
   };
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={!isLanguageSelected}>
       <DialogContent 
         className="sm:max-w-[425px]"
         onEscapeKeyDown={(e) => e.preventDefault()}
