@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect, useTransition } from 'react';
+import { useState, useEffect, useTransition, useRef } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/context/language-provider';
@@ -73,6 +73,7 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
     const [isMobileDialogOpen, setIsMobileDialogOpen] = useState(false);
     const [mobileNumber, setMobileNumber] = useState('');
     const [isSubmittingMobile, setIsSubmittingMobile] = useState(false);
+    const submissionTriggered = useRef(false);
 
     useEffect(() => {
         const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -139,6 +140,7 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
     const handleDialogSubmit = async () => {
         if (!user) return;
         setIsSubmittingMobile(true);
+        submissionTriggered.current = true;
         
         if (mobileNumber) {
             if (!/^\d{10}$/.test(mobileNumber)) {
@@ -148,6 +150,7 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
                     description: "Please enter a valid 10-digit mobile number.",
                 });
                 setIsSubmittingMobile(false);
+                submissionTriggered.current = false;
                 return;
             }
             const { error: updateError } = await supabase.auth.updateUser({ phone: mobileNumber });
@@ -174,10 +177,21 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
     };
 
     const handleDialogCancel = () => {
+        submissionTriggered.current = true;
         submitInquiry();
         setIsMobileDialogOpen(false);
         setMobileNumber('');
     }
+
+    const handleOpenChange = (open: boolean) => {
+        if (!open) {
+            if (!submissionTriggered.current) {
+                submitInquiry();
+            }
+            submissionTriggered.current = false;
+        }
+        setIsMobileDialogOpen(open);
+    };
 
     return (
         <div className="py-16 bg-muted/30">
@@ -229,8 +243,8 @@ export function GetStartedSection({ serviceTitle }: { serviceTitle?: string }) {
                     </CardContent>
                 </Card>
             </div>
-            <Dialog open={isMobileDialogOpen} onOpenChange={setIsMobileDialogOpen}>
-                <DialogContent>
+            <Dialog open={isMobileDialogOpen} onOpenChange={handleOpenChange}>
+                <DialogContent className="sm:top-8 sm:translate-y-0">
                     <DialogHeader>
                         <DialogTitle>Complete Your Request</DialogTitle>
                         <DialogDescription>
