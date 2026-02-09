@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -110,13 +111,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="flex flex-col">
-        <div className="relative flex items-center justify-center mb-4 p-4 sm:p-6 border-b">
-            <Button variant="ghost" asChild size="icon" className="absolute left-4">
-                <Link href="/">
-                    <ArrowLeft className="h-4 w-4" />
-                    <span className="sr-only">Back to Home</span>
-                </Link>
-            </Button>
+        <div className="relative flex items-center justify-center p-4 sm:p-6 border-b">
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
         </div>
         <div className="p-0">
@@ -133,13 +128,7 @@ export default function DashboardPage() {
   if (!user && !loading) {
      return (
       <div className="flex flex-col">
-        <div className="relative flex items-center justify-center mb-4 p-4 sm:p-6 border-b">
-            <Button variant="ghost" asChild size="icon" className="absolute left-4">
-                <Link href="/">
-                    <ArrowLeft className="h-4 w-4" />
-                    <span className="sr-only">Back to Home</span>
-                </Link>
-            </Button>
+        <div className="relative flex items-center justify-center p-4 sm:p-6 border-b">
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
         </div>
         <div className="p-0">
@@ -162,13 +151,7 @@ export default function DashboardPage() {
   if (error) {
      return (
       <div className="flex flex-col">
-        <div className="relative flex items-center justify-center mb-4 p-4 sm:p-6 border-b">
-            <Button variant="ghost" asChild size="icon" className="absolute left-4">
-                <Link href="/">
-                    <ArrowLeft className="h-4 w-4" />
-                    <span className="sr-only">Back to Home</span>
-                </Link>
-            </Button>
+        <div className="relative flex items-center justify-center p-4 sm:p-6 border-b">
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
         </div>
         <div className="p-0">
@@ -191,12 +174,6 @@ export default function DashboardPage() {
   return (
     <div className="flex flex-col">
        <div className="relative flex items-center justify-center p-4 sm:p-6 border-b">
-            <Button variant="ghost" asChild size="icon" className="absolute left-4">
-                <Link href="/">
-                    <ArrowLeft className="h-4 w-4" />
-                    <span className="sr-only">Back to Home</span>
-                </Link>
-            </Button>
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
         </div>
        <Card className="border-0 shadow-none rounded-none">
@@ -208,21 +185,21 @@ export default function DashboardPage() {
                  <Table className="text-xs">
                     <TableHeader>
                         <TableRow className="bg-muted/50 hover:bg-muted/50 h-8">
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Request ID</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Date</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Name</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Email</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Mobile</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Purpose</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Status</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right">Actions</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Request ID</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Date</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Name</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Email</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Mobile</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Purpose</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Status</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right text-[10px]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                     {inquiries.map((inquiry) => {
                         const effectiveStatus: Status = inquiry.status || 'pending';
                         return (
-                        <TableRow key={inquiry.id} className="h-8 text-[10px]">
+                        <TableRow key={inquiry.id} className="h-8 text-[9px]">
                         <TableCell className="py-0 px-2 sm:px-4 font-mono">{inquiry.id.substring(0, 8)}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 font-semibold">{inquiry.name}</TableCell>
