@@ -240,10 +240,10 @@ function DashboardUI({ children }: { children: ReactNode }) {
 
           <SidebarInset className="h-full overflow-y-auto no-scrollbar">
               <div className="p-4 sm:p-6">
-                <Button variant="ghost" asChild className="mb-4 -ml-4">
+                <Button variant="ghost" asChild size="icon" className="mb-4">
                   <Link href="/">
-                      <ArrowLeft className="mr-2 h-4 w-4" />
-                      Back to Home
+                      <ArrowLeft className="h-4 w-4" />
+                      <span className="sr-only">Back to Home</span>
                   </Link>
                 </Button>
                 {children}
