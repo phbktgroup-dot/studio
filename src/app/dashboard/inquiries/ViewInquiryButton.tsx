@@ -33,30 +33,30 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground text-xs">Name</Label>
-                        <div className="col-span-3 text-[9px]">{inquiry.name}</div>
+                        <div className="col-span-3 text-[8px]">{inquiry.name}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground text-xs">Email</Label>
-                        <div className="col-span-3 text-[9px]">{inquiry.email}</div>
+                        <div className="col-span-3 text-[8px]">{inquiry.email}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground text-xs">Mobile</Label>
-                        <div className="col-span-3 text-[9px]">{inquiry.mobile || 'N/A'}</div>
+                        <div className="col-span-3 text-[8px]">{inquiry.mobile || 'N/A'}</div>
                     </div>
                      <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground text-xs">Purpose</Label>
-                        <div className="col-span-3 capitalize text-[9px]">{inquiry.purpose.replace(/-/g, ' ')}</div>
+                        <div className="col-span-3 capitalize text-[8px]">{inquiry.purpose.replace(/-/g, ' ')}</div>
                     </div>
                      <div className="grid grid-cols-4 items-start gap-4">
                         <Label className="text-right text-muted-foreground mt-1 text-xs">Vision</Label>
-                        <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-[9px] whitespace-pre-wrap break-words">
+                        <div className="col-span-3 rounded-md border bg-muted/50 p-3 text-[8px] whitespace-pre-wrap break-words">
                             {inquiry.vision}
                         </div>
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label className="text-right text-muted-foreground text-xs">Status</Label>
                         <div className="col-span-3">
-                            <Badge variant={inquiry.status === 'completed' ? 'outline' : inquiry.status === 'in_process' ? 'default' : 'secondary'} className="font-normal capitalize text-[9px]">
+                            <Badge variant={inquiry.status === 'completed' ? 'outline' : inquiry.status === 'in_process' ? 'default' : 'secondary'} className="font-normal capitalize text-[8px]">
                                 {inquiry.status?.replace('_', ' ') || 'Pending'}
                             </Badge>
                         </div>
