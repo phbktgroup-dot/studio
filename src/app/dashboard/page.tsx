@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -110,7 +111,13 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="flex flex-col gap-4">
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center mb-4">
+            <Button variant="ghost" asChild size="icon" className="absolute left-0">
+                <Link href="/">
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Home</span>
+                </Link>
+            </Button>
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
         </div>
         <Card>
@@ -125,7 +132,7 @@ export default function DashboardPage() {
   if (!user && !loading) {
      return (
       <div className="flex flex-col gap-4">
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center mb-4">
             <Button variant="ghost" asChild size="icon" className="absolute left-0">
                 <Link href="/">
                     <ArrowLeft className="h-4 w-4" />
@@ -152,7 +159,7 @@ export default function DashboardPage() {
   if (error) {
      return (
       <div className="flex flex-col gap-4">
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center mb-4">
             <Button variant="ghost" asChild size="icon" className="absolute left-0">
                 <Link href="/">
                     <ArrowLeft className="h-4 w-4" />
@@ -189,7 +196,7 @@ export default function DashboardPage() {
         </div>
        <Card>
         <CardHeader>
-          <CardTitle className="text-base font-semibold">My Inquiries</CardTitle>
+          <CardTitle className="text-sm font-semibold">My Inquiries</CardTitle>
         </CardHeader>
         <CardContent>
             {inquiries && inquiries.length > 0 ? (
