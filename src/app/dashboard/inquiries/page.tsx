@@ -99,11 +99,11 @@ export default function InquiriesPage() {
 
   if (loading) {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
         <div className="relative flex items-center justify-center p-4 sm:p-6 border-b">
           <h1 className="text-lg font-bold font-headline">Inquiries</h1>
         </div>
-        <div className="p-4 sm:p-6">
+        <div className="p-0">
           <Card>
             <CardContent className="p-8 flex items-center justify-center">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -116,7 +116,7 @@ export default function InquiriesPage() {
 
   if (error) {
      return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
         <div className="relative flex items-center justify-center mb-4 p-4 sm:p-6 border-b">
           <Button variant="ghost" asChild size="icon" className="absolute left-4">
               <Link href="/">
@@ -126,7 +126,7 @@ export default function InquiriesPage() {
           </Button>
           <h1 className="text-lg font-bold font-headline">Inquiries</h1>
         </div>
-        <div className="p-4 sm:p-6">
+        <div className="p-0">
           <Card>
             <CardContent className="p-8">
               <Alert variant="destructive">
@@ -155,35 +155,35 @@ export default function InquiriesPage() {
           <h1 className="text-lg font-bold font-headline">Inquiries</h1>
       </div>
        <Card className="border-0 shadow-none rounded-none">
-        <CardHeader className="px-4 sm:px-6">
-          <CardTitle className="text-sm font-semibold">All Received Inquiries</CardTitle>
+        <CardHeader className="px-2 sm:px-4">
+          <CardTitle className="text-xs font-semibold">All Received Inquiries</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
             {inquiries && inquiries.length > 0 ? (
                  <Table className="text-xs">
                     <TableHeader>
                         <TableRow className="bg-muted/50 hover:bg-muted/50 h-8">
-                            <TableHead className="h-8 py-0 px-4 sm:px-6">Request ID</TableHead>
-                            <TableHead className="h-8 py-0 px-4 sm:px-6">Date</TableHead>
-                            <TableHead className="h-8 py-0 px-4 sm:px-6">Name</TableHead>
-                            <TableHead className="h-8 py-0 px-4 sm:px-6">Email</TableHead>
-                            <TableHead className="h-8 py-0 px-4 sm:px-6">Purpose</TableHead>
-                            <TableHead className="h-8 py-0 px-4 sm:px-6">Status</TableHead>
-                            <TableHead className="h-8 py-0 px-4 sm:px-6 text-right">Actions</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Request ID</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Date</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Name</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Email</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Purpose</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4">Status</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                     {inquiries.map((inquiry) => (
                         <TableRow key={inquiry.id} className="h-8">
-                        <TableCell className="py-0 px-4 sm:px-6 font-mono">{inquiry.id.substring(0, 8)}</TableCell>
-                        <TableCell className="py-0 px-4 sm:px-6">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
-                        <TableCell className="py-0 px-4 sm:px-6 font-semibold">{inquiry.name}</TableCell>
-                        <TableCell className="py-0 px-4 sm:px-6">{inquiry.email}</TableCell>
-                        <TableCell className="py-0 px-4 sm:px-6 capitalize">{inquiry.purpose}</TableCell>
-                        <TableCell className="py-0 px-4 sm:px-6">
+                        <TableCell className="py-0 px-2 sm:px-4 font-mono">{inquiry.id.substring(0, 8)}</TableCell>
+                        <TableCell className="py-0 px-2 sm:px-4">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
+                        <TableCell className="py-0 px-2 sm:px-4 font-semibold">{inquiry.name}</TableCell>
+                        <TableCell className="py-0 px-2 sm:px-4">{inquiry.email}</TableCell>
+                        <TableCell className="py-0 px-2 sm:px-4 capitalize">{inquiry.purpose}</TableCell>
+                        <TableCell className="py-0 px-2 sm:px-4">
                             <StatusSwitcher inquiryId={inquiry.id} currentStatus={inquiry.status} />
                         </TableCell>
-                        <TableCell className="py-0 px-4 sm:px-6 text-right">
+                        <TableCell className="py-0 px-2 sm:px-4 text-right">
                            <ViewInquiryButton inquiry={inquiry} />
                            <DeleteInquiryButton inquiryId={inquiry.id} />
                         </TableCell>
