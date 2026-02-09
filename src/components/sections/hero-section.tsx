@@ -14,19 +14,19 @@ const heroText = {
     h1: "तुमचा व्यवसाय डिजिटल बनवा. तुमचे यश, आमची जबाबदारी.",
     p: "शून्यातून सुरुवात करून मोठं स्वप्न उभं करणाऱ्या जिद्दी उद्योजकांसाठी — ही जागा खास तुमच्यासाठी.",
     ourServices: "आमच्या सेवा",
-    contactUs: "आमच्याशी संपर्क साधा",
+    contactUs: "इथे क्लिक करा",
   },
   en: {
     h1: "Digitize your business, your progress is our goal.",
     p: "For determined entrepreneurs who create a universe from nothing.",
     ourServices: "Our Services",
-    contactUs: "Contact Us",
+    contactUs: "Click Here",
   },
   hi: {
     h1: "अपने व्यवसाय को डिजिटल ताक़त दें। आपकी सफलता, हमारा संकल्प।",
     p: "जो उद्यमी शून्य से शुरुआत कर भविष्य का साम्राज्य बनाना चाहते हैं — यह मंच उन्हीं के लिए है।",
     ourServices: "हमारी सेवाएँ",
-    contactUs: "हमसे संपर्क करें",
+    contactUs: "यहां क्लिक करें",
   },
 };
 
@@ -106,7 +106,7 @@ export default function HeroSection() {
           <Button size="lg" asChild>
             <Link href="#services">{heroText[language].ourServices}</Link>
           </Button>
-          <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-primary hover:border-primary hover:text-primary-foreground" asChild>
+          <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-primary hover:border-primary hover:text-primary-foreground animate-pulse" asChild>
             <Link href="#contact">{heroText[language].contactUs}</Link>
           </Button>
         </div>
