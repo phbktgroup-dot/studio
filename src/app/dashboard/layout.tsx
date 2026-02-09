@@ -242,30 +242,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
                           </SidebarMenuButton>
                       </SidebarMenuItem>
                       <SidebarMenuItem>
-                      <SidebarMenuButton isActive={pathname === '/dashboard/services'} size="sm" tooltip="Services" disabled>
-                          <Briefcase />
-                          <span>Services</span>
-                      </SidebarMenuButton>
-                      </SidebarMenuItem>
-                      <SidebarMenuItem>
-                      <SidebarMenuButton isActive={pathname === '/dashboard/clients'} size="sm" tooltip="Clients" disabled>
-                          <Users />
-                          <span>Clients</span>
-                      </SidebarMenuButton>
-                      </SidebarMenuItem>
-                      <SidebarMenuItem>
-                      <SidebarMenuButton isActive={pathname === '/dashboard/invoices'} size="sm" tooltip="Invoices" disabled>
-                          <FileText />
-                          <span>Invoices</span>
-                      </SidebarMenuButton>
-                      </SidebarMenuItem>
-                      <SidebarMenuItem>
-                      <SidebarMenuButton isActive={pathname === '/dashboard/analytics'} size="sm" tooltip="Analytics" disabled>
-                          <LineChart />
-                          <span>Analytics</span>
-                      </SidebarMenuButton>
-                      </SidebarMenuItem>
-                      <SidebarMenuItem>
                         <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/settings')} size="sm" tooltip="Settings">
                           <Link href="/dashboard/settings">
                             <Settings />
