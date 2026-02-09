@@ -1,11 +1,21 @@
+
 import Link from 'next/link';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { UserCog, Paintbrush } from 'lucide-react';
+import { UserCog, Paintbrush, ArrowLeft } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function SettingsPage() {
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-lg font-bold font-headline">General Settings</h1>
+      <div className="relative flex items-center justify-center mb-4">
+            <Button variant="ghost" asChild size="icon" className="absolute left-0">
+                <Link href="/">
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Home</span>
+                </Link>
+            </Button>
+            <h1 className="text-lg font-bold font-headline">General Settings</h1>
+        </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Link href="/dashboard/users" className="block">
           <Card className="hover:border-primary transition-colors h-full">

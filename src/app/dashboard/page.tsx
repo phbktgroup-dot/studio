@@ -15,15 +15,16 @@ import {
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertTriangle, Mail, Loader2 } from "lucide-react";
+import { AlertTriangle, Mail, Loader2, ArrowLeft } from "lucide-react";
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { ViewInquiryButton } from './inquiries/ViewInquiryButton';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 type PageError = {
     title: string;
@@ -110,7 +111,9 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-xl font-bold font-headline">Dashboard</h1>
+        <div className="relative flex items-center justify-center">
+            <h1 className="text-lg font-bold font-headline">Dashboard</h1>
+        </div>
         <Card>
           <CardContent className="p-8 flex items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -123,7 +126,15 @@ export default function DashboardPage() {
   if (!user && !loading) {
      return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-xl font-bold font-headline">Dashboard</h1>
+        <div className="relative flex items-center justify-center">
+            <Button variant="ghost" asChild size="icon" className="absolute left-0">
+                <Link href="/">
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Home</span>
+                </Link>
+            </Button>
+            <h1 className="text-lg font-bold font-headline">Dashboard</h1>
+        </div>
         <Card>
           <CardContent className="p-8">
             <Alert variant="destructive">
@@ -142,7 +153,15 @@ export default function DashboardPage() {
   if (error) {
      return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-xl font-bold font-headline">Dashboard</h1>
+        <div className="relative flex items-center justify-center">
+            <Button variant="ghost" asChild size="icon" className="absolute left-0">
+                <Link href="/">
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Home</span>
+                </Link>
+            </Button>
+            <h1 className="text-lg font-bold font-headline">Dashboard</h1>
+        </div>
         <Card>
           <CardContent className="p-8">
             <Alert variant="destructive">
@@ -160,7 +179,15 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-4">
-       <h1 className="text-xl font-bold font-headline">Dashboard</h1>
+       <div className="relative flex items-center justify-center mb-4">
+            <Button variant="ghost" asChild size="icon" className="absolute left-0">
+                <Link href="/">
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Home</span>
+                </Link>
+            </Button>
+            <h1 className="text-lg font-bold font-headline">Dashboard</h1>
+        </div>
        <Card>
         <CardHeader>
           <CardTitle className="text-lg">My Inquiries</CardTitle>

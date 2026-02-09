@@ -1,3 +1,4 @@
+
 import { createClient } from '@supabase/supabase-js';
 import {
   Table,
@@ -12,10 +13,12 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, ArrowLeft } from "lucide-react";
 import { RoleSwitcher } from './role-switcher';
 import { Badge } from '@/components/ui/badge';
 import { DeleteUserButton } from './DeleteUserButton';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default async function UsersPage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -23,8 +26,16 @@ export default async function UsersPage() {
 
   if (!supabaseUrl || !serviceRoleKey || serviceRoleKey === 'YOUR_SERVICE_ROLE_KEY_HERE') {
     return (
-      <div className="flex flex-col gap-2 pt-2">
-        <h1 className="text-lg font-bold font-headline">Manage Users</h1>
+      <div className="flex flex-col gap-2">
+        <div className="relative flex items-center justify-center mb-4">
+            <Button variant="ghost" asChild size="icon" className="absolute left-0">
+                <Link href="/dashboard/settings">
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Settings</span>
+                </Link>
+            </Button>
+            <h1 className="text-lg font-bold font-headline">Manage Users</h1>
+        </div>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Configuration Error</AlertTitle>
@@ -47,8 +58,16 @@ export default async function UsersPage() {
 
   if (error) {
      return (
-      <div className="flex flex-col gap-2 pt-2">
-        <h1 className="text-lg font-bold font-headline">Manage Users</h1>
+      <div className="flex flex-col gap-2">
+        <div className="relative flex items-center justify-center mb-4">
+            <Button variant="ghost" asChild size="icon" className="absolute left-0">
+                <Link href="/dashboard/settings">
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Settings</span>
+                </Link>
+            </Button>
+            <h1 className="text-lg font-bold font-headline">Manage Users</h1>
+        </div>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Error Fetching Users</AlertTitle>
@@ -61,8 +80,16 @@ export default async function UsersPage() {
   }
 
   return (
-    <div className="flex flex-col gap-2 pt-2">
-      <h1 className="text-lg font-bold font-headline">Manage Users</h1>
+    <div className="flex flex-col gap-2">
+        <div className="relative flex items-center justify-center mb-4">
+            <Button variant="ghost" asChild size="icon" className="absolute left-0">
+                <Link href="/dashboard/settings">
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Settings</span>
+                </Link>
+            </Button>
+            <h1 className="text-lg font-bold font-headline">Manage Users</h1>
+        </div>
       <Card>
         <CardContent className="p-0">
           <Table className="text-xs">

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -7,8 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Trash2 } from 'lucide-react';
+import { Loader2, Trash2, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -388,7 +390,15 @@ export default function HeroSectionPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-lg font-bold font-headline">Site Customization</h1>
+      <div className="relative flex items-center justify-center mb-4">
+          <Button variant="ghost" asChild size="icon" className="absolute left-0">
+              <Link href="/dashboard/settings">
+                  <ArrowLeft className="h-4 w-4" />
+                  <span className="sr-only">Back to Settings</span>
+              </Link>
+          </Button>
+          <h1 className="text-lg font-bold font-headline">Site Customization</h1>
+      </div>
       
       {(isFetching || isFetchingLogo) ? (
         <div className="flex items-center justify-center p-8">
