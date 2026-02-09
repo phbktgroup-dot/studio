@@ -24,7 +24,7 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
                     <span className="sr-only">View Inquiry</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[625px]">
+            <DialogContent className="sm:max-w-[525px]">
                 <DialogHeader>
                     <DialogTitle className="text-sm">Inquiry Details</DialogTitle>
                     <DialogDescription className="text-xs">
