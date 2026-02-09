@@ -76,17 +76,18 @@ export default function Header() {
   const { language, setLanguage } = useLanguage();
   const pathname = usePathname();
 
+  const isHomePage = pathname === '/';
+
   const navLinks = useMemo(() => {
-    const isHomePage = pathname === '/';
     return [
-      { href: isHomePage ? "#services" : "/#services", label: text[language].services },
-      { href: isHomePage ? "#solutions" : "/#solutions", label: text[language].solutions },
-      { href: isHomePage ? "#work" : "/#work", label: text[language].work },
-      { href: isHomePage ? "#insights" : "/#insights", label: text[language].insights },
-      { href: isHomePage ? "#careers" : "/#careers", label: text[language].careers },
-      { href: isHomePage ? "#contact" : "/#contact", label: text[language].contact },
+      { id: 'services', href: isHomePage ? "#services" : "/#services", label: text[language].services },
+      { id: 'solutions', href: isHomePage ? "#solutions" : "/#solutions", label: text[language].solutions },
+      { id: 'work', href: isHomePage ? "#work" : "/#work", label: text[language].work },
+      { id: 'insights', href: isHomePage ? "#insights" : "/#insights", label: text[language].insights },
+      { id: 'careers', href: isHomePage ? "#careers" : "/#careers", label: text[language].careers },
+      { id: 'contact', href: isHomePage ? "#contact" : "/#contact", label: text[language].contact },
     ];
-  }, [language, pathname]);
+  }, [language, isHomePage]);
 
   useEffect(() => {
     setMounted(true);
@@ -137,26 +138,19 @@ export default function Header() {
   }, [router]);
   
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || !isHomePage) {
+        setActiveLink('');
+        return;
+    };
 
-    const sections = navLinks.map(link => {
-      try {
-        const selector = link.href.substring(link.href.indexOf('#'));
-        return document.querySelector(selector);
-      } catch (e) {
-        console.error(`Invalid selector from href: ${link.href}`);
-        return null;
-      }
-    }).filter((s): s is Element => s !== null);
+    const sections = navLinks.map(link => document.querySelector(`#${link.id}`)).filter(Boolean);
 
     if (sections.length === 0) return;
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const isHomePage = pathname === '/';
-                const hash = `#${entry.target.id}`;
-                setActiveLink(isHomePage ? hash : `/${hash}`);
+                setActiveLink(`#${entry.target.id}`);
             }
         });
     }, {
@@ -165,15 +159,15 @@ export default function Header() {
     });
 
     sections.forEach(section => {
-        observer.observe(section);
+        if (section) observer.observe(section);
     });
 
     return () => {
         sections.forEach(section => {
-            observer.unobserve(section);
+            if (section) observer.unobserve(section);
         });
     };
-  }, [navLinks, mounted, pathname]);
+  }, [navLinks, mounted, isHomePage]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
