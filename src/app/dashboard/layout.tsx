@@ -31,6 +31,7 @@ import {
   SidebarMenuButton,
   SidebarInset,
   useSidebar,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import {
@@ -193,13 +194,26 @@ function DashboardUI({ children }: { children: ReactNode }) {
               <SidebarContent>
               <SidebarMenu>
                   <SidebarMenuItem>
-                  <SidebarMenuButton asChild isActive={pathname === '/dashboard'} tooltip="Dashboard">
-                      <Link href="/dashboard">
-                      <Home />
-                      <span className="text-xs">Dashboard</span>
-                      </Link>
-                  </SidebarMenuButton>
+                    <SidebarMenuButton asChild isActive={pathname === '/dashboard'} tooltip="Dashboard">
+                        <Link href="/dashboard">
+                        <Home />
+                        <span className="text-xs">Dashboard</span>
+                        </Link>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
+                  {isAdmin && (
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} tooltip="Inquiries">
+                            <Link href="/dashboard/inquiries">
+                            <Mail />
+                            <span className="text-xs">Inquiries</span>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )}
+                  
+                  <SidebarSeparator className="my-2" />
+
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild tooltip="Services">
                         <Link href="/#services">
@@ -248,25 +262,16 @@ function DashboardUI({ children }: { children: ReactNode }) {
                         </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+                  
                   {isAdmin && (
-                    <>
-                      <SidebarMenuItem>
-                          <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} tooltip="Inquiries">
-                              <Link href="/dashboard/inquiries">
-                              <Mail />
-                              <span className="text-xs">Inquiries</span>
-                              </Link>
-                          </SidebarMenuButton>
-                      </SidebarMenuItem>
-                      <SidebarMenuItem>
-                        <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/settings')} tooltip="Settings">
-                          <Link href="/dashboard/settings">
-                            <Settings />
-                            <span className="text-xs">Settings</span>
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    </>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/settings')} tooltip="Settings">
+                        <Link href="/dashboard/settings">
+                          <Settings />
+                          <span className="text-xs">Settings</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
                   )}
               </SidebarMenu>
                {isMobile && (
