@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -190,7 +189,7 @@ export default function DashboardPage() {
         </div>
        <Card>
         <CardHeader>
-          <CardTitle className="text-lg">My Inquiries</CardTitle>
+          <CardTitle className="text-base font-semibold">My Inquiries</CardTitle>
         </CardHeader>
         <CardContent>
             {inquiries && inquiries.length > 0 ? (

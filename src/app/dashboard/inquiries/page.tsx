@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -152,7 +151,7 @@ export default function InquiriesPage() {
       </div>
        <Card>
         <CardHeader>
-          <CardTitle className="text-lg">All Received Inquiries</CardTitle>
+          <CardTitle className="text-base font-semibold">All Received Inquiries</CardTitle>
         </CardHeader>
         <CardContent>
             {inquiries && inquiries.length > 0 ? (
