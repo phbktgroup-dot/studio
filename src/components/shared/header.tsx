@@ -22,7 +22,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import type { User } from '@supabase/supabase-js';
 import { useLanguage } from "@/context/language-provider";
@@ -74,15 +74,19 @@ export default function Header() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const router = useRouter();
   const { language, setLanguage } = useLanguage();
+  const pathname = usePathname();
 
-  const navLinks = useMemo(() => [
-    { href: "/#services", label: text[language].services },
-    { href: "/#solutions", label: text[language].solutions },
-    { href: "/#work", label: text[language].work },
-    { href: "/#insights", label: text[language].insights },
-    { href: "/#careers", label: text[language].careers },
-    { href: "/#contact", label: text[language].contact },
-  ], [language]);
+  const navLinks = useMemo(() => {
+    const isHomePage = pathname === '/';
+    return [
+      { href: isHomePage ? "#services" : "/#services", label: text[language].services },
+      { href: isHomePage ? "#solutions" : "/#solutions", label: text[language].solutions },
+      { href: isHomePage ? "#work" : "/#work", label: text[language].work },
+      { href: isHomePage ? "#insights" : "/#insights", label: text[language].insights },
+      { href: isHomePage ? "#careers" : "/#careers", label: text[language].careers },
+      { href: isHomePage ? "#contact" : "/#contact", label: text[language].contact },
+    ];
+  }, [language, pathname]);
 
   useEffect(() => {
     setMounted(true);
@@ -150,7 +154,9 @@ export default function Header() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setActiveLink(`/#${entry.target.id}`);
+                const isHomePage = pathname === '/';
+                const hash = `#${entry.target.id}`;
+                setActiveLink(isHomePage ? hash : `/${hash}`);
             }
         });
     }, {
@@ -167,7 +173,7 @@ export default function Header() {
             observer.unobserve(section);
         });
     };
-  }, [navLinks, mounted]);
+  }, [navLinks, mounted, pathname]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
