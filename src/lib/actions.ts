@@ -6,6 +6,7 @@ import { generateRoadmapContent } from "@/ai/flows/generate-roadmap-content";
 import { z } from "zod";
 import { createClient } from '@supabase/supabase-js';
 import { revalidatePath } from 'next/cache';
+import * as XLSX from 'xlsx';
 
 const RoadmapSchema = z.object({
   topic: z.string().min(3, { message: "Topic must be at least 3 characters long." }),
@@ -371,4 +372,104 @@ export async function deleteInquiry(inquiryId: string): Promise<{ error?: string
   revalidatePath('/dashboard/inquiries');
   revalidatePath('/dashboard');
   return { success: true };
+}
+
+export type ReportState = {
+  error?: string;
+  success?: boolean;
+  data?: string; // base64 encoded excel file
+};
+
+export async function generateUserReport(filters: { role?: string }): Promise<ReportState> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    return { error: 'Supabase admin credentials are not configured.' };
+  }
+
+  const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+
+  const { data: { users }, error } = await supabaseAdmin.auth.admin.listUsers();
+  
+  if (error) {
+    return { error: `Failed to fetch users: ${error.message}` };
+  }
+
+  let filteredUsers = users;
+  if (filters.role && filters.role !== 'all') {
+    filteredUsers = users.filter(u => (u.user_metadata?.role || 'user') === filters.role);
+  }
+
+  const dataToExport = filteredUsers.map(user => ({
+    'User ID': user.id,
+    'Full Name': user.user_metadata?.full_name || 'N/A',
+    'Email': user.email,
+    'Mobile Number': user.phone || 'N/A',
+    'Role': user.user_metadata?.role || 'user',
+    'Created At': new Date(user.created_at).toLocaleString(),
+    'Last Sign In': user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : 'Never',
+  }));
+
+  if (dataToExport.length === 0) {
+    return { error: "No users found matching the selected criteria." };
+  }
+
+  const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Users');
+  const buffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
+  
+  return { success: true, data: buffer.toString('base64') };
+}
+
+export async function generateInquiryReport(filters: { status?: string, dateRange?: { from?: Date, to?: Date } }): Promise<ReportState> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    return { error: 'Supabase admin credentials are not configured.' };
+  }
+
+  const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+  
+  let query = supabaseAdmin.from('inquiries').select('*').order('created_at', { ascending: false });
+
+  if (filters.status && filters.status !== 'all') {
+    query = query.eq('status', filters.status);
+  }
+  if (filters.dateRange?.from) {
+    query = query.gte('created_at', filters.dateRange.from.toISOString());
+  }
+  if (filters.dateRange?.to) {
+    query = query.lte('created_at', filters.dateRange.to.toISOString());
+  }
+
+  const { data: inquiries, error } = await query;
+
+  if (error) {
+    return { error: `Failed to fetch inquiries: ${error.message}` };
+  }
+  
+  if (!inquiries || inquiries.length === 0) {
+    return { error: "No inquiries found matching the selected criteria." };
+  }
+
+  const dataToExport = inquiries.map(inquiry => ({
+    'Request ID': inquiry.id.substring(0, 8),
+    'Date': new Date(inquiry.created_at).toLocaleDateString(),
+    'Name': inquiry.name,
+    'Email': inquiry.email,
+    'Mobile': inquiry.mobile || 'N/A',
+    'Purpose': inquiry.purpose,
+    'Status': inquiry.status || 'pending',
+    'Vision': inquiry.vision,
+  }));
+    
+  const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Inquiries');
+  const buffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
+
+  return { success: true, data: buffer.toString('base64') };
 }

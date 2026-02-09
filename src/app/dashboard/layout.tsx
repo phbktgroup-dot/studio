@@ -99,7 +99,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
     }
 
     const isAdmin = user.user_metadata?.role === 'admin' || user.email === 'hari.garad@phbkt.com';
-    const isAdminRoute = pathname.startsWith('/dashboard/users') || pathname.startsWith('/dashboard/hero-section') || pathname.startsWith('/dashboard/inquiries') || pathname.startsWith('/dashboard/settings') || pathname.startsWith('/dashboard/msme-startup-section');
+    const isAdminRoute = pathname.startsWith('/dashboard/users') || pathname.startsWith('/dashboard/hero-section') || pathname.startsWith('/dashboard/inquiries') || pathname.startsWith('/dashboard/settings') || pathname.startsWith('/dashboard/msme-startup-section') || pathname.startsWith('/dashboard/reports');
     if (isAdminRoute && !isAdmin) {
       router.push('/dashboard');
     }
@@ -192,14 +192,24 @@ function DashboardUI({ children }: { children: ReactNode }) {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   {isAdmin && (
-                    <SidebarMenuItem>
-                        <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} tooltip="All Inquiries">
-                            <Link href="/dashboard/inquiries">
-                            <Mail />
-                            <span className="text-xs">All Inquiries</span>
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
+                    <>
+                      <SidebarMenuItem>
+                          <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} tooltip="All Inquiries">
+                              <Link href="/dashboard/inquiries">
+                              <Mail />
+                              <span className="text-xs">All Inquiries</span>
+                              </Link>
+                          </SidebarMenuButton>
+                      </SidebarMenuItem>
+                      <SidebarMenuItem>
+                          <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/reports')} tooltip="Reports">
+                              <Link href="/dashboard/reports">
+                              <FileText />
+                              <span className="text-xs">Reports</span>
+                              </Link>
+                          </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    </>
                   )}
                   
                   <SidebarSeparator className="my-2" />
