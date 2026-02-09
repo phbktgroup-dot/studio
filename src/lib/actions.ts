@@ -384,7 +384,7 @@ export async function generateUserReport(filters: { role?: string }): Promise<Re
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  if (!supabaseUrl || !serviceRoleKey) {
+  if (!supabaseUrl || !serviceRoleKey || serviceRoleKey === 'YOUR_SERVICE_ROLE_KEY_HERE') {
     return { error: 'Supabase admin credentials are not configured.' };
   }
 
@@ -472,4 +472,37 @@ export async function generateInquiryReport(filters: { status?: string, dateRang
   const buffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
 
   return { success: true, data: buffer.toString('base64') };
+}
+
+export async function getUsersForReport(filters: { role?: string }): Promise<{ error?: string; users?: any[] }> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey || serviceRoleKey === 'YOUR_SERVICE_ROLE_KEY_HERE') {
+    return { error: 'Supabase admin credentials are not configured correctly.' };
+  }
+
+  const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+
+  const { data: { users }, error } = await supabaseAdmin.auth.admin.listUsers();
+  
+  if (error) {
+    return { error: `Failed to fetch users: ${error.message}` };
+  }
+
+  let filteredUsers = users;
+  if (filters.role && filters.role !== 'all') {
+    filteredUsers = users.filter(u => (u.user_metadata?.role || 'user') === filters.role);
+  }
+
+  const serializableUsers = filteredUsers.map(user => ({
+    id: user.id,
+    user_metadata: user.user_metadata,
+    email: user.email,
+    phone: user.phone,
+    created_at: user.created_at,
+    last_sign_in_at: user.last_sign_in_at,
+  }));
+
+  return { users: serializableUsers };
 }

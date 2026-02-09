@@ -8,21 +8,27 @@ import { ArrowLeft, Download, Loader2, AlertTriangle, Filter } from 'lucide-reac
 import Link from 'next/link';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { generateUserReport } from '@/lib/actions';
+import { generateUserReport, getUsersForReport } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import { createClient } from '@supabase/supabase-js';
-import type { User } from '@supabase/supabase-js';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 
+type ReportUser = {
+    id: string;
+    user_metadata: { [key: string]: any; };
+    email?: string;
+    phone?: string | null;
+    created_at: string;
+    last_sign_in_at?: string | null;
+  }
 
 export default function UserReportsPage() {
     const { toast } = useToast();
     const [generating, setGenerating] = useState(false);
     const [fetching, setFetching] = useState(true);
-    const [users, setUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<ReportUser[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     // Filters state
@@ -33,29 +39,12 @@ export default function UserReportsPage() {
             setFetching(true);
             setError(null);
             
-            const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-            const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+            const result = await getUsersForReport({ role: roleFilter });
 
-            if (!supabaseUrl || !serviceRoleKey || serviceRoleKey === 'YOUR_SERVICE_ROLE_KEY_HERE') {
-                setError("Supabase admin credentials are not configured correctly.");
-                setFetching(false);
-                return;
-            }
-
-            const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey, {
-                auth: { autoRefreshToken: false, persistSession: false }
-            });
-
-            const { data, error: queryError } = await supabaseAdmin.auth.admin.listUsers();
-
-            if (queryError) {
-                setError(queryError.message);
-            } else {
-                let filteredUsers = data.users;
-                if (roleFilter !== 'all') {
-                    filteredUsers = data.users.filter(u => (u.user_metadata?.role || 'user') === roleFilter);
-                }
-                setUsers(filteredUsers || []);
+            if (result.error) {
+                setError(result.error);
+            } else if (result.users) {
+                setUsers(result.users);
             }
 
             setFetching(false);
