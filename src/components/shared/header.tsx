@@ -76,12 +76,12 @@ export default function Header() {
   const { language, setLanguage } = useLanguage();
 
   const navLinks = useMemo(() => [
-    { href: "#services", label: text[language].services },
-    { href: "#solutions", label: text[language].solutions },
-    { href: "#work", label: text[language].work },
-    { href: "#insights", label: text[language].insights },
-    { href: "#careers", label: text[language].careers },
-    { href: "#contact", label: text[language].contact },
+    { href: "/#services", label: text[language].services },
+    { href: "/#solutions", label: text[language].solutions },
+    { href: "/#work", label: text[language].work },
+    { href: "/#insights", label: text[language].insights },
+    { href: "/#careers", label: text[language].careers },
+    { href: "/#contact", label: text[language].contact },
   ], [language]);
 
   useEffect(() => {
@@ -137,10 +137,10 @@ export default function Header() {
 
     const sections = navLinks.map(link => {
       try {
-        // querySelector needs a valid CSS selector. Hash needs to be escaped in some cases, but here it's simple.
-        return document.querySelector(link.href);
+        const selector = link.href.substring(link.href.indexOf('#'));
+        return document.querySelector(selector);
       } catch (e) {
-        console.error(`Invalid selector: ${link.href}`);
+        console.error(`Invalid selector from href: ${link.href}`);
         return null;
       }
     }).filter((s): s is Element => s !== null);
@@ -150,7 +150,7 @@ export default function Header() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setActiveLink(`#${entry.target.id}`);
+                setActiveLink(`/#${entry.target.id}`);
             }
         });
     }, {
