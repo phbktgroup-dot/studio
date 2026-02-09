@@ -26,7 +26,7 @@ export function ViewInquiryButton({ inquiry }: { inquiry: any }) {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[625px]">
                 <DialogHeader>
-                    <DialogTitle className="text-xs">Inquiry Details</DialogTitle>
+                    <DialogTitle className="text-sm">Inquiry Details</DialogTitle>
                     <DialogDescription className="text-xs">
                         Submitted on {format(new Date(inquiry.created_at), 'PPP p')}
                     </DialogDescription>
