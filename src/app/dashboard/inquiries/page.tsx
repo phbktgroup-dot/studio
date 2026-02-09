@@ -163,13 +163,13 @@ export default function InquiriesPage() {
                  <Table className="text-xs">
                     <TableHeader>
                         <TableRow className="bg-muted/50 hover:bg-muted/50 h-8">
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Request ID</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Date</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Name</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Email</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Purpose</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4">Status</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right">Actions</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[11px]">Request ID</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[11px]">Date</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[11px]">Name</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[11px]">Email</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[11px]">Purpose</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[11px]">Status</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right text-[11px]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
