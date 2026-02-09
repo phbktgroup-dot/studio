@@ -13,19 +13,19 @@ const text = {
   mr: {
     p_large: "चला, मिळून यशाचे नवे शिखर गाठूया.",
     p_small: "तुमची दृष्टी प्रत्यक्षात आणूया. तुमचा डिजिटल प्रवास सुरू करण्यासाठी आमच्याशी संपर्क साधा.",
-    contactUs: "संपर्क साधा",
+    contactUs: "इथे क्लिक करा",
     footerDescription: "नाविन्यपूर्ण आर्थिक आणि तांत्रिक उपायांसह तुमच्या व्यवसायाला बळकटी देणारे.",
   },
   en: {
     p_large: "Let's build the next peak together.",
     p_small: "Let's turn your vision into a reality. Get in touch to start your digital journey.",
-    contactUs: "Contact Us",
+    contactUs: "Click Here",
     footerDescription: "Empowering your business with innovative financial and technological solutions.",
   },
   hi: {
     p_large: "आइए, मिलकर सफलता का नया शिखर छुएँ।",
     p_small: "आइए आपकी दृष्टि को वास्तविकता में बदलें। अपनी डिजिटल यात्रा शुरू करने के लिए संपर्क करें।",
-    contactUs: "संपर्क करें",
+    contactUs: "यहां क्लिक करें",
     footerDescription: "नवोन्मेषी वित्तीय और तकनीकी समाधानों के साथ आपके व्यवसाय को सशक्त बनाना।",
   },
 };
@@ -87,7 +87,7 @@ export default function Footer() {
             {t.p_small}
           </p>
           <div className="mt-4 flex flex-col items-center justify-center gap-2">
-            <Button asChild size="sm">
+            <Button asChild size="sm" className="animate-pulse">
               <Link href="/contact">{t.contactUs}</Link>
             </Button>
             <div className="flex flex-row items-center gap-2 text-xs">

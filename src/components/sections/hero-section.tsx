@@ -14,19 +14,19 @@ const heroText = {
     h1: "तुमचा व्यवसाय डिजिटल बनवा. तुमचे यश, आमची जबाबदारी.",
     p: "शून्यातून सुरुवात करून मोठं स्वप्न उभं करणाऱ्या जिद्दी उद्योजकांसाठी — ही जागा खास तुमच्यासाठी.",
     ourServices: "आमच्या सेवा",
-    contactUs: "इथे क्लिक करा",
+    contactUs: "संपर्क साधा",
   },
   en: {
     h1: "Digitize your business, your progress is our goal.",
     p: "For determined entrepreneurs who create a universe from nothing.",
     ourServices: "Our Services",
-    contactUs: "Click Here",
+    contactUs: "Contact Us",
   },
   hi: {
     h1: "अपने व्यवसाय को डिजिटल ताक़त दें। आपकी सफलता, हमारा संकल्प।",
     p: "जो उद्यमी शून्य से शुरुआत कर भविष्य का साम्राज्य बनाना चाहते हैं — यह मंच उन्हीं के लिए है।",
     ourServices: "हमारी सेवाएँ",
-    contactUs: "यहां क्लिक करें",
+    contactUs: "संपर्क करें",
   },
 };
 
