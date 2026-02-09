@@ -4,8 +4,9 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowLeft, Download, Loader2, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Download, Loader2, AlertTriangle, Filter } from 'lucide-react';
 import Link from 'next/link';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { generateUserReport } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
@@ -14,6 +15,7 @@ import type { User } from '@supabase/supabase-js';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from '@/components/ui/badge';
+import { Label } from '@/components/ui/label';
 
 
 export default function UserReportsPage() {
@@ -94,21 +96,6 @@ export default function UserReportsPage() {
         }
     };
 
-    const renderFilters = () => (
-        <div className="flex gap-2">
-            <Select value={roleFilter} onValueChange={setRoleFilter}>
-                <SelectTrigger id="role" className="h-8 w-[150px]">
-                    <SelectValue placeholder="Select role" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="all">All Roles</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                    <SelectItem value="user">User</SelectItem>
-                </SelectContent>
-            </Select>
-        </div>
-    );
-
     return (
         <div className="flex flex-col gap-4">
             <div className="relative flex items-center justify-between mb-4">
@@ -122,7 +109,32 @@ export default function UserReportsPage() {
                     <h1 className="text-lg font-bold font-headline">User Reports</h1>
                 </div>
                 <div className="flex items-center gap-4">
-                    {renderFilters()}
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button variant="outline" size="icon" className="h-8 w-8">
+                                <Filter className="h-4 w-4" />
+                                <span className="sr-only">Open filters</span>
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-4" align="end">
+                           <div className="flex flex-col gap-4">
+                                <h4 className="font-medium leading-none">Filters</h4>
+                                <div className="space-y-2">
+                                    <Label htmlFor="role">Role</Label>
+                                    <Select value={roleFilter} onValueChange={setRoleFilter}>
+                                        <SelectTrigger id="role" className="h-8 w-[180px]">
+                                            <SelectValue placeholder="Select role" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="all">All Roles</SelectItem>
+                                            <SelectItem value="admin">Admin</SelectItem>
+                                            <SelectItem value="user">User</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+                        </PopoverContent>
+                    </Popover>
                     <Button onClick={handleGenerateReport} disabled={generating || fetching || users.length === 0}>
                         {generating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-4 w-4" />}
                         Generate Report

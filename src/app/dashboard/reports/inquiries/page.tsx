@@ -6,7 +6,7 @@ import { addDays, format } from "date-fns";
 import type { DateRange } from "react-day-picker";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowLeft, Download, Loader2, Calendar as CalendarIcon, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Download, Loader2, Calendar as CalendarIcon, AlertTriangle, Filter } from 'lucide-react';
 import Link from 'next/link';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -18,6 +18,7 @@ import { supabase } from '@/lib/supabase';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from '@/components/ui/badge';
+import { Label } from '@/components/ui/label';
 
 type Status = 'in_process' | 'completed' | 'pending';
 
@@ -118,58 +119,6 @@ export default function InquiryReportsPage() {
         }
     };
 
-    const renderFilters = () => (
-        <div className="flex gap-2">
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger id="status" className="h-8 w-[150px]">
-                    <SelectValue placeholder="Select status" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="all">All Statuses</SelectItem>
-                    <SelectItem value="pending">Pending</SelectItem>
-                    <SelectItem value="in_process">In Process</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
-                </SelectContent>
-            </Select>
-            <Popover>
-                <PopoverTrigger asChild>
-                <Button
-                    id="date"
-                    variant={"outline"}
-                    className={cn(
-                        "w-[250px] justify-start text-left font-normal h-8",
-                        !date && "text-muted-foreground"
-                    )}
-                >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date?.from ? (
-                    date.to ? (
-                        <>
-                        {format(date.from, "LLL dd, y")} -{" "}
-                        {format(date.to, "LLL dd, y")}
-                        </>
-                    ) : (
-                        format(date.from, "LLL dd, y")
-                    )
-                    ) : (
-                    <span>Pick a date</span>
-                    )}
-                </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="end">
-                <Calendar
-                    initialFocus
-                    mode="range"
-                    defaultMonth={date?.from}
-                    selected={date}
-                    onSelect={setDate}
-                    numberOfMonths={2}
-                />
-                </PopoverContent>
-            </Popover>
-        </div>
-    );
-
     return (
         <div className="flex flex-col gap-4">
             <div className="relative flex items-center justify-between mb-4">
@@ -183,7 +132,72 @@ export default function InquiryReportsPage() {
                     <h1 className="text-lg font-bold font-headline">Request Reports</h1>
                 </div>
                 <div className="flex items-center gap-4">
-                    {renderFilters()}
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button variant="outline" size="icon" className="h-8 w-8">
+                                <Filter className="h-4 w-4" />
+                                <span className="sr-only">Open filters</span>
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-4" align="end">
+                           <div className="flex flex-col gap-4">
+                                <h4 className="font-medium leading-none">Filters</h4>
+                                <div className="space-y-2">
+                                    <Label htmlFor="status">Status</Label>
+                                    <Select value={statusFilter} onValueChange={setStatusFilter}>
+                                        <SelectTrigger id="status" className="h-8 w-[180px]">
+                                            <SelectValue placeholder="Select status" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="all">All Statuses</SelectItem>
+                                            <SelectItem value="pending">Pending</SelectItem>
+                                            <SelectItem value="in_process">In Process</SelectItem>
+                                            <SelectItem value="completed">Completed</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Date range</Label>
+                                    <Popover>
+                                        <PopoverTrigger asChild>
+                                        <Button
+                                            id="date"
+                                            variant={"outline"}
+                                            className={cn(
+                                                "w-[250px] justify-start text-left font-normal h-8",
+                                                !date && "text-muted-foreground"
+                                            )}
+                                        >
+                                            <CalendarIcon className="mr-2 h-4 w-4" />
+                                            {date?.from ? (
+                                            date.to ? (
+                                                <>
+                                                {format(date.from, "LLL dd, y")} -{" "}
+                                                {format(date.to, "LLL dd, y")}
+                                                </>
+                                            ) : (
+                                                format(date.from, "LLL dd, y")
+                                            )
+                                            ) : (
+                                            <span>Pick a date</span>
+                                            )}
+                                        </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-auto p-0" align="end">
+                                        <Calendar
+                                            initialFocus
+                                            mode="range"
+                                            defaultMonth={date?.from}
+                                            selected={date}
+                                            onSelect={setDate}
+                                            numberOfMonths={2}
+                                        />
+                                        </PopoverContent>
+                                    </Popover>
+                                </div>
+                            </div>
+                        </PopoverContent>
+                    </Popover>
                     <Button onClick={handleGenerateReport} disabled={generating || fetching || inquiries.length === 0}>
                         {generating ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Download className="mr-2 h-4 w-4" />}
                         Generate Report
