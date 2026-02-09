@@ -4,18 +4,28 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/logo";
 import { useLanguage } from '@/context/language-provider';
+import { useEffect, useState } from 'react';
 
 type Language = 'en' | 'mr' | 'hi';
 
 export function LanguageSelector() {
-  const { setLanguage, isLanguageSelected } = useLanguage();
+  const { setLanguage } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem('phbkt_lang');
+    if (!storedLang) {
+      setIsOpen(true);
+    }
+  }, []);
 
   const handleSelectLanguage = (lang: Language) => {
     setLanguage(lang);
+    setIsOpen(false);
   };
 
   return (
-    <Dialog open={!isLanguageSelected}>
+    <Dialog open={isOpen}>
       <DialogContent 
         className="sm:max-w-[425px]"
         onEscapeKeyDown={(e) => e.preventDefault()}
