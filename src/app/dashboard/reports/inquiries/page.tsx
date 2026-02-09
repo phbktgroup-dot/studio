@@ -190,7 +190,7 @@ export default function InquiryReportsPage() {
                                             defaultMonth={date?.from}
                                             selected={date}
                                             onSelect={setDate}
-                                            numberOfMonths={2}
+                                            numberOfMonths={1}
                                         />
                                         </PopoverContent>
                                     </Popover>
