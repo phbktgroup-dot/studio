@@ -1,3 +1,4 @@
+
 'use client';
 
 import type { ReactNode } from "react";
@@ -176,7 +177,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
               <SidebarContent>
               <SidebarMenu>
                   <SidebarMenuItem>
-                  <SidebarMenuButton asChild isActive={pathname === '/dashboard'} size="sm" tooltip="Dashboard">
+                  <SidebarMenuButton asChild isActive={pathname === '/dashboard'} tooltip="Dashboard">
                       <Link href="/dashboard">
                       <Home />
                       <span>Dashboard</span>
@@ -184,7 +185,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
                   </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild size="sm" tooltip="Services">
+                    <SidebarMenuButton asChild tooltip="Services">
                         <Link href="/#services">
                         <Briefcase />
                         <span>Services</span>
@@ -192,7 +193,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild size="sm" tooltip="Solutions">
+                    <SidebarMenuButton asChild tooltip="Solutions">
                         <Link href="/#solutions">
                         <Lightbulb />
                         <span>Solutions</span>
@@ -200,7 +201,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild size="sm" tooltip="Our Work">
+                    <SidebarMenuButton asChild tooltip="Our Work">
                         <Link href="/#work">
                         <GalleryVertical />
                         <span>Our Work</span>
@@ -208,7 +209,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild size="sm" tooltip="Insights">
+                    <SidebarMenuButton asChild tooltip="Insights">
                         <Link href="/#insights">
                         <BookOpen />
                         <span>Insights</span>
@@ -216,7 +217,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild size="sm" tooltip="Careers">
+                    <SidebarMenuButton asChild tooltip="Careers">
                         <Link href="/#careers">
                         <Users />
                         <span>Careers</span>
@@ -224,7 +225,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild size="sm" tooltip="Contact">
+                    <SidebarMenuButton asChild tooltip="Contact">
                         <Link href="/#contact">
                         <Phone />
                         <span>Contact</span>
@@ -234,7 +235,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
                   {isAdmin && (
                     <>
                       <SidebarMenuItem>
-                          <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} size="sm" tooltip="Inquiries">
+                          <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/inquiries')} tooltip="Inquiries">
                               <Link href="/dashboard/inquiries">
                               <Mail />
                               <span>Inquiries</span>
@@ -242,7 +243,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
                           </SidebarMenuButton>
                       </SidebarMenuItem>
                       <SidebarMenuItem>
-                        <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/settings')} size="sm" tooltip="Settings">
+                        <SidebarMenuButton asChild isActive={pathname.startsWith('/dashboard/settings')} tooltip="Settings">
                           <Link href="/dashboard/settings">
                             <Settings />
                             <span>Settings</span>
@@ -255,7 +256,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
                {isMobile && (
                 <SidebarMenu className="mt-auto">
                   <SidebarMenuItem>
-                    <SidebarMenuButton onClick={handleLogout} size="sm">
+                    <SidebarMenuButton onClick={handleLogout}>
                       <LogOut />
                       <span>Logout</span>
                     </SidebarMenuButton>
