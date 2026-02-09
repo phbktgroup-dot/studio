@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -223,7 +222,7 @@ export default function DashboardPage() {
                     {inquiries.map((inquiry) => {
                         const effectiveStatus: Status = inquiry.status || 'pending';
                         return (
-                        <TableRow key={inquiry.id} className="h-8">
+                        <TableRow key={inquiry.id} className="h-8 text-[10px]">
                         <TableCell className="py-0 px-2 sm:px-4 font-mono">{inquiry.id.substring(0, 8)}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 font-semibold">{inquiry.name}</TableCell>
