@@ -9,9 +9,9 @@ export default function SettingsPage() {
     <div className="flex flex-col gap-4">
       <div className="relative flex items-center justify-center mb-4">
             <Button variant="ghost" asChild size="icon" className="absolute left-0">
-                <Link href="/">
+                <Link href="/dashboard">
                     <ArrowLeft className="h-4 w-4" />
-                    <span className="sr-only">Back to Home</span>
+                    <span className="sr-only">Back to Dashboard</span>
                 </Link>
             </Button>
             <h1 className="text-lg font-bold font-headline">General Settings</h1>

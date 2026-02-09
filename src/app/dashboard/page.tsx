@@ -114,6 +114,7 @@ export default function DashboardPage() {
             <Button variant="ghost" asChild size="icon" className="absolute left-4">
                 <Link href="/">
                     <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Home</span>
                 </Link>
             </Button>
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
@@ -136,6 +137,7 @@ export default function DashboardPage() {
              <Button variant="ghost" asChild size="icon" className="absolute left-4">
                 <Link href="/">
                     <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Home</span>
                 </Link>
             </Button>
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
@@ -164,6 +166,7 @@ export default function DashboardPage() {
              <Button variant="ghost" asChild size="icon" className="absolute left-4">
                 <Link href="/">
                     <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Home</span>
                 </Link>
             </Button>
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
@@ -191,6 +194,7 @@ export default function DashboardPage() {
              <Button variant="ghost" asChild size="icon" className="absolute left-4">
                 <Link href="/">
                     <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back to Home</span>
                 </Link>
             </Button>
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
@@ -216,7 +220,7 @@ export default function DashboardPage() {
                         const effectiveStatus: Status = inquiry.status || 'pending';
                         return (
                         <TableRow key={inquiry.id} className="h-8">
-                        <TableCell className="py-0 px-2 sm:px-4 font-mono font-bold">{inquiry.id.substring(0, 8)}</TableCell>
+                        <TableCell className="font-bold py-0 px-2 sm:px-4 font-mono">{inquiry.id.substring(0, 8)}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 capitalize">
                             <Badge variant="secondary" className="font-normal text-[8px] sm:text-xs">{inquiry.purpose.replace(/-/g, ' ')}</Badge>
