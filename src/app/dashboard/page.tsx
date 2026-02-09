@@ -112,6 +112,11 @@ export default function DashboardPage() {
     return (
       <div className="flex flex-col">
         <div className="relative flex items-center justify-center p-4 sm:p-6 border-b">
+            <Button variant="ghost" asChild size="icon" className="absolute left-4">
+                <Link href="/">
+                    <ArrowLeft className="h-4 w-4" />
+                </Link>
+            </Button>
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
         </div>
         <div className="p-0">
@@ -129,6 +134,11 @@ export default function DashboardPage() {
      return (
       <div className="flex flex-col">
         <div className="relative flex items-center justify-center p-4 sm:p-6 border-b">
+             <Button variant="ghost" asChild size="icon" className="absolute left-4">
+                <Link href="/">
+                    <ArrowLeft className="h-4 w-4" />
+                </Link>
+            </Button>
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
         </div>
         <div className="p-0">
@@ -152,6 +162,11 @@ export default function DashboardPage() {
      return (
       <div className="flex flex-col">
         <div className="relative flex items-center justify-center p-4 sm:p-6 border-b">
+             <Button variant="ghost" asChild size="icon" className="absolute left-4">
+                <Link href="/">
+                    <ArrowLeft className="h-4 w-4" />
+                </Link>
+            </Button>
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
         </div>
         <div className="p-0">
@@ -174,6 +189,11 @@ export default function DashboardPage() {
   return (
     <div className="flex flex-col">
        <div className="relative flex items-center justify-center p-4 sm:p-6 border-b">
+             <Button variant="ghost" asChild size="icon" className="absolute left-4">
+                <Link href="/">
+                    <ArrowLeft className="h-4 w-4" />
+                </Link>
+            </Button>
             <h1 className="text-lg font-bold font-headline">Dashboard</h1>
         </div>
        <Card className="border-0 shadow-none rounded-none">
@@ -185,14 +205,11 @@ export default function DashboardPage() {
                  <Table className="text-xs">
                     <TableHeader>
                         <TableRow className="bg-muted/50 hover:bg-muted/50 h-8">
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Request ID</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Date</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Name</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Email</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Mobile</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Purpose</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[10px]">Status</TableHead>
-                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right text-[10px]">Actions</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[9px]">Request ID</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[9px]">Date</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[9px]">Purpose</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-[9px]">Status</TableHead>
+                            <TableHead className="h-8 py-0 px-2 sm:px-4 text-right text-[9px]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -202,9 +219,6 @@ export default function DashboardPage() {
                         <TableRow key={inquiry.id} className="h-8 text-[9px]">
                         <TableCell className="py-0 px-2 sm:px-4 font-mono">{inquiry.id.substring(0, 8)}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4">{format(new Date(inquiry.created_at), 'MMM d, yyyy')}</TableCell>
-                        <TableCell className="py-0 px-2 sm:px-4 font-semibold">{inquiry.name}</TableCell>
-                        <TableCell className="py-0 px-2 sm:px-4">{inquiry.email}</TableCell>
-                        <TableCell className="py-0 px-2 sm:px-4">{inquiry.mobile || 'N/A'}</TableCell>
                         <TableCell className="py-0 px-2 sm:px-4 capitalize">
                             <Badge variant="secondary" className="font-normal">{inquiry.purpose.replace(/-/g, ' ')}</Badge>
                         </TableCell>
