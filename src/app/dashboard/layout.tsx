@@ -98,16 +98,6 @@ function DashboardUI({ children }: { children: ReactNode }) {
       return;
     }
 
-    if (!user.phone && pathname !== '/complete-profile') {
-      router.push('/complete-profile');
-      return;
-    }
-
-    if (user.phone && pathname === '/complete-profile') {
-        router.push('/dashboard');
-        return;
-    }
-
     const isAdmin = user.user_metadata?.role === 'admin' || user.email === 'hari.garad@phbkt.com';
     const isAdminRoute = pathname.startsWith('/dashboard/users') || pathname.startsWith('/dashboard/hero-section') || pathname.startsWith('/dashboard/inquiries') || pathname.startsWith('/dashboard/settings') || pathname.startsWith('/dashboard/msme-startup-section');
     if (isAdminRoute && !isAdmin) {
@@ -127,7 +117,7 @@ function DashboardUI({ children }: { children: ReactNode }) {
     );
   }
 
-  if (!user || (!user.phone && pathname !== '/complete-profile')) {
+  if (!user) {
     return (
         <div className="flex h-screen w-full items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
