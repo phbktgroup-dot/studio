@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/logo";
@@ -9,19 +9,11 @@ import { useLanguage } from '@/context/language-provider';
 type Language = 'en' | 'mr' | 'hi';
 
 export function LanguageSelector() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const { setLanguage } = useLanguage();
-
-  useEffect(() => {
-    const languageSelected = localStorage.getItem('language_selected');
-    if (!languageSelected) {
-      setIsOpen(true);
-    }
-  }, []);
 
   const handleSelectLanguage = (lang: Language) => {
     setLanguage(lang);
-    localStorage.setItem('language_selected', 'true');
     setIsOpen(false);
   };
 
