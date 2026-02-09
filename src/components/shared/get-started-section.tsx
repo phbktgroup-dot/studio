@@ -1,10 +1,13 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import type { User } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/context/language-provider';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { LogIn, Mail } from 'lucide-react';
+import { LogIn, Mail, Loader2, Send } from 'lucide-react';
 
 const content = {
   en: {
@@ -12,21 +15,24 @@ const content = {
     description: "Ready to turn your vision into reality? Choose how you'd like to connect with us.",
     google: "Sign in with Google",
     email: "Sign in with Email",
-    form: "Fill The Inquiry Form"
+    form: "Fill The Inquiry Form",
+    requestService: "Request This Service"
   },
   hi: {
     title: "चलिए शुरू करते हैं",
     description: "अपने दृष्टिकोण को वास्तविकता में बदलने के लिए तैयार हैं? चुनें कि आप हमसे कैसे जुड़ना चाहेंगे।",
     google: "Google से साइन इन करें",
     email: "ईमेल से साइन इन करें",
-    form: "पूछताछ फ़ॉर्म भरें"
+    form: "पूछताछ फ़ॉर्म भरें",
+    requestService: "इस सेवा का अनुरोध करें"
   },
   mr: {
     title: "चला, सुरुवात करूया",
     description: "तुमची दृष्टी प्रत्यक्षात आणण्यास तयार आहात? तुम्ही आमच्याशी कसे संपर्क साधू इच्छिता ते निवडा.",
     google: "Google ने साइन इन करा",
     email: "ईमेलने साइन इन करा",
-    form: "चौकशी अर्ज भरा"
+    form: "चौकशी अर्ज भरा",
+    requestService: "या सेवेसाठी विनंती करा"
   }
 };
 
@@ -44,6 +50,19 @@ const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export function GetStartedSection() {
     const { language } = useLanguage();
     const t = content[language];
+    const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+          setUser(session?.user ?? null);
+          setLoading(false);
+        });
+    
+        return () => {
+          authListener.subscription.unsubscribe();
+        };
+      }, []);
 
     return (
         <div className="py-16 bg-muted/30">
@@ -54,24 +73,37 @@ export function GetStartedSection() {
                         <CardDescription className="max-w-xl mx-auto">{t.description}</CardDescription>
                     </CardHeader>
                     <CardContent className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                         <Button asChild size="lg" className="w-full sm:w-auto">
-                            <Link href="/login">
-                                <GoogleIcon className="mr-2 h-5 w-5" />
-                                {t.google}
-                            </Link>
-                        </Button>
-                        <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
-                            <Link href="/login">
-                                <LogIn className="mr-2 h-5 w-5" />
-                                {t.email}
-                            </Link>
-                        </Button>
-                        <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto">
-                            <Link href="/contact">
-                                <Mail className="mr-2 h-5 w-5" />
-                                {t.form}
-                            </Link>
-                        </Button>
+                        {loading ? (
+                            <Loader2 className="h-8 w-8 animate-spin" />
+                        ) : user ? (
+                            <Button asChild size="lg" className="w-full sm:w-auto">
+                                <Link href="/contact">
+                                    <Send className="mr-2 h-5 w-5" />
+                                    {t.requestService}
+                                </Link>
+                            </Button>
+                        ) : (
+                            <>
+                                <Button asChild size="lg" className="w-full sm:w-auto">
+                                    <Link href="/login">
+                                        <GoogleIcon className="mr-2 h-5 w-5" />
+                                        {t.google}
+                                    </Link>
+                                </Button>
+                                <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
+                                    <Link href="/login">
+                                        <LogIn className="mr-2 h-5 w-5" />
+                                        {t.email}
+                                    </Link>
+                                </Button>
+                                <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto">
+                                    <Link href="/contact">
+                                        <Mail className="mr-2 h-5 w-5" />
+                                        {t.form}
+                                    </Link>
+                                </Button>
+                            </>
+                        )}
                     </CardContent>
                 </Card>
             </div>
