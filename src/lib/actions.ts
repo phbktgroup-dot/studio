@@ -142,6 +142,7 @@ export async function handleSignup(prevState: SignupState, formData: FormData): 
     return { errors: { _form: [`Signup failed: ${error.message}`] } };
   }
   
+  revalidatePath('/dashboard/users');
   const successMessage = 'Signup successful! Please log in.';
 
   return { isSuccess: true, message: successMessage };
